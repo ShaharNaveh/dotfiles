@@ -110,6 +110,7 @@ keys = [
     EzKey("M-C-x", lazy.hide_show_bar("bottom"), desc="toggle bottom bar"),
     EzKey("M-C-r", lazy.restart()),
     EzKey("M-C-f", lazy.window.toggle_floating()),
+    EzKey("M-f", lazy.window.toggle_fullscreen()),
     EzKey("M-C-v", lazy.validate_config()),
     EzKey("M-S-<Return>", lazy.spawn("rofi -show run")),
 ]
