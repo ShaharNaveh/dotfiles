@@ -64,6 +64,11 @@ keys = [
     EzKey("A-j", lazy.layout.down()),
     EzKey("A-k", lazy.layout.up()),
     EzKey("A-l", lazy.layout.right()),
+
+    EzKey("A-<Left>", lazy.layout.left()),
+    EzKey("A-<Down>", lazy.layout.down()),
+    EzKey("A-<Up>", lazy.layout.up()),
+    EzKey("A-<Right>", lazy.layout.right()),
     # Move windows
     EzKey("M-S-h", lazy.layout.shuffle_left()),
     EzKey("M-S-j", lazy.layout.shuffle_down()),
