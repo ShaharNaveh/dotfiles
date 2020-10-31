@@ -1,8 +1,8 @@
 # C
 alias cat="bat"
 alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'
-alias cp="cp -i"
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias cp="cp -i"
 
 # E
 alias egrep="egrep --color=auto"
