@@ -64,11 +64,6 @@ keys = [
     EzKey("A-j", lazy.layout.down()),
     EzKey("A-k", lazy.layout.up()),
     EzKey("A-l", lazy.layout.right()),
-
-    EzKey("A-<Left>", lazy.layout.left()),
-    EzKey("A-<Down>", lazy.layout.down()),
-    EzKey("A-<Up>", lazy.layout.up()),
-    EzKey("A-<Right>", lazy.layout.right()),
     # Move windows
     EzKey("M-S-h", lazy.layout.shuffle_left()),
     EzKey("M-S-j", lazy.layout.shuffle_down()),
@@ -113,6 +108,7 @@ keys = [
     EzKey("M-f", lazy.window.toggle_fullscreen()),
     EzKey("M-C-v", lazy.validate_config()),
     EzKey("M-S-<Return>", lazy.spawn("rofi -show run")),
+    EzKey("M-C-<Return>", lazy.spawn("rofi -show")),
 ]
 
 """

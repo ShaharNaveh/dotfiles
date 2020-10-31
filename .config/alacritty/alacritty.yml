@@ -1,63 +1,64 @@
-background_opacity: 1.0
+#background_opacity: 1.0
 
 colors:
-  # Bright colors
-  bright:
-    black:   '0x928374'
-    blue:    '0x83a598'
-    cyan:    '0x8ec07c'
-    green:   '0xb8bb26'
-    magenta: '0xd3869b'
-    red:     '0xfb4934'
-    white:   '0xebdbb2'
-    yellow:  '0xfabd2f'
-
+  # Default colors
+  primary:
+    # hard contrast: background = '#1d2021'
+    background: '#282828'
+    # soft contrast: background = '#32302f'
+    foreground: '#ebdbb2'
 
   # Normal colors
   normal:
-    black:   '0x282828'
-    blue:    '0x458588'
-    cyan:    '0x689d6a'
-    green:   '0x98971a'
-    magenta: '0xb16286'
-    red:     '0xcc241d'
-    white:   '0xa89984'
-    yellow:  '0xd79921'
+    black:   '#282828'
+    red:     '#cc241d'
+    green:   '#98971a'
+    yellow:  '#d79921'
+    blue:    '#458588'
+    magenta: '#b16286'
+    cyan:    '#689d6a'
+    white:   '#a89984'
 
-  primary:
-    background: '0x1d2021'
-    #background: '0x282828' # Default
-    # soft contrast: background = '0x32302f'
-    foreground: '0xebdbb2'
+  # Bright colors
+  bright:
+    black:   '#928374'
+    red:     '#fb4934'
+    green:   '#b8bb26'
+    yellow:  '#fabd2f'
+    blue:    '#83a598'
+    magenta: '#d3869b'
+    cyan:    '#8ec07c'
+    white:   '#ebdbb2'
 
-  selection:
-    text: '0xbbc2cf'
-    background: '0x282c34'
 
-
-draw_bold_text_with_bright_colors: true
+#draw_bold_text_with_bright_colors: true
 
 env:
   TERM: xterm-256color
 
 font:
   bold:
+    #family: Source Code Pro
     style: Bold
 
   bold_italic:
+    #family: Source Code Pro
     style: Bold Italic
 
   italic:
+    #family: Source Code Pro
     style: Italic
 
   normal:
+    family: Source Code Pro
+    #family: mononoki Nerd Font
     style: Regular
 
   offset:
     x: 0
     y: 1
 
-  size: 11.0
+  size: 10.0
 
 
 scrolling:
@@ -68,10 +69,10 @@ window:
     general: Alacritty
     instance: Alacritty
 
-  padding:
-    x: 6
-    y: 6
-    
+    padding:
+      x: 6
+      y: 6
+
   title: Alacritty
 
 
