@@ -131,11 +131,12 @@ for i, (name, kwargs) in enumerate(GROUP_NAMES, start=1):
 GROUP_NAMES = ["SYS", "DEV", "DOC"]
 groups = [Group(group_name, layout="monadtall") for group_name in GROUP_NAMES]
 
-for index, group in enumerate(GROUP_NAMES, start=1):
+for index, group in enumerate(groups, start=1):
+    group_name = group.name
     keys.extend(
         [
-            EzKey(f"M-{index}", lazy.group[str(index)].toscreen(toggle=True)),
-            EzKey(f"M-S-{index}", lazy.window.togroup(str(index))),
+            EzKey(f"M-{index}", lazy.group[group_name].toscreen(toggle=True)),
+            EzKey(f"M-S-{index}", lazy.window.togroup(group_name)),
         ]
     )
 
