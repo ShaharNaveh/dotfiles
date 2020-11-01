@@ -12,6 +12,8 @@ Plug 'mengelbrecht/lightline-bufferline'
 Plug 'cespare/vim-toml'
 Plug 'davidhalter/jedi-vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'zchee/deoplete-jedi'
+Plug 'sbdchd/neoformat'
 
 
 "Plug 'vim-airline/vim-airline'
@@ -24,12 +26,18 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 call plug#end()
 
+source $HOME/.config/nvim/settings/plugins/deoplete.vim
+source $HOME/.config/nvim/settings/plugins/jedi-vim.vim
+source $HOME/.config/nvim/settings/plugins/neoformat.vim
+
 source $HOME/.config/nvim/settings/general.vim
 source $HOME/.config/nvim/settings/color.vim
 source $HOME/.config/nvim/settings/ftplugin.vim
-source $HOME/.config/nvim/settings/plugins/nerdtree.vim
 source $HOME/.config/nvim/settings/keymap.vim
+
+source $HOME/.config/nvim/settings/plugins/nerdtree.vim
+
 source $HOME/.config/nvim/settings/plugins/fzf.vim
-"source $HOME/.config/nvim/settings/plugins/coc.vim
 source $HOME/.config/nvim/settings/plugins/lightline.vim
-source $HOME/.config/nvim/settings/plugins/deoplete.vim
+
+"source $HOME/.config/nvim/settings/plugins/coc.vim
