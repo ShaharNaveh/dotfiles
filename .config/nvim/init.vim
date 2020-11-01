@@ -4,7 +4,7 @@ call plug#begin(stdpath('data') . '/plugged')
 Plug 'morhetz/gruvbox' " Color scheme
 Plug 'davidhalter/jedi-vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'zchee/deoplete-jedi'
+Plug 'deoplete-plugins/deoplete-jedi'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
