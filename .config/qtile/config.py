@@ -126,8 +126,22 @@ for i, (name, kwargs) in enumerate(GROUP_NAMES, start=1):
     )  # Switch to another group
 """
 
-groups = [Group(i) for i in "1234567890"]
+#groups = [Group(i) for i in "1234567890"]
 
+GROUP_NAMES = ["SYS", "DEV", "DOC"]
+groups = [Group(group_name, layout="monadtall") for group_name in GROUP_NAMES]
+
+for index, group in enumerate(GROUP_NAMES, start=1):
+    keys.extend(
+        [
+            EzKey(f"M-{index}", lazy.group[str(index)].toscreen(toggle=True)),
+            EzKey(f"M-S-{index}", lazy.window.togroup(str(index))),
+        ]
+    )
+
+
+
+'''
 for i in groups:
     group_name = i.name
     keys.extend(
@@ -136,6 +150,7 @@ for i in groups:
             EzKey(f"M-S-{group_name}", lazy.window.togroup(group_name)),
         ]
     )
+'''
 
 """
 for i in groups:
