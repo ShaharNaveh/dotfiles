@@ -3,7 +3,7 @@
 #
 
 ### EXPORT
-export TERM="xterm-256color"
+export TERM="screen-256color"
 export HISTCONTROL=ignoredups:erasedups
 
 # If not running interactively, don't do anything

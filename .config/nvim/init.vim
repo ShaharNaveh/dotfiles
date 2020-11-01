@@ -10,6 +10,8 @@ Plug 'rust-lang/rust.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
 Plug 'cespare/vim-toml'
+Plug 'davidhalter/jedi-vim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 
 "Plug 'vim-airline/vim-airline'
@@ -30,3 +32,4 @@ source $HOME/.config/nvim/settings/keymap.vim
 source $HOME/.config/nvim/settings/plugins/fzf.vim
 "source $HOME/.config/nvim/settings/plugins/coc.vim
 source $HOME/.config/nvim/settings/plugins/lightline.vim
+source $HOME/.config/nvim/settings/plugins/deoplete.vim
