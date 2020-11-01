@@ -6,14 +6,15 @@ call plug#begin(stdpath('data') . '/plugged')
 
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'morhetz/gruvbox' " Color scheme
-Plug 'rust-lang/rust.vim'
-Plug 'itchyny/lightline.vim'
-Plug 'mengelbrecht/lightline-bufferline'
-Plug 'cespare/vim-toml'
+"Plug 'rust-lang/rust.vim'
+"Plug 'itchyny/lightline.vim'
+"Plug 'mengelbrecht/lightline-bufferline'
+"Plug 'cespare/vim-toml'
 Plug 'davidhalter/jedi-vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-jedi'
 Plug 'sbdchd/neoformat'
+Plug 'neomake/neomake'
 
 
 "Plug 'vim-airline/vim-airline'
