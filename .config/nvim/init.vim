@@ -1,10 +1,18 @@
 let mapleader = "\<Space>"
 
 call plug#begin(stdpath('data') . '/plugged')
-Plug 'morhetz/gruvbox' " Color scheme
-Plug 'davidhalter/jedi-vim'
+" Color scheme
+Plug 'morhetz/gruvbox'
+
+" Autocompletion related plugins
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'deoplete-plugins/deoplete-jedi'
+
+" Python source for deoplete
+Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' }
+
+" Python completion, goto definition etc.
+Plug 'davidhalter/jedi-vim', { 'for': 'python' }
+
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'preservim/nerdtree'
@@ -25,6 +33,8 @@ call plug#end()
 
 source $HOME/.config/nvim/settings/plugins/jedi-vim.vim
 source $HOME/.config/nvim/settings/plugins/deoplete.vim
+source $HOME/.config/nvim/settings/plugins/deoplete-jedi.vim
+
 source $HOME/.config/nvim/settings/plugins/airline-themes.vim
 source $HOME/.config/nvim/settings/plugins/nerdtree.vim
 source $HOME/.config/nvim/settings/general.vim
