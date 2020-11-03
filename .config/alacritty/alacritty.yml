@@ -1,4 +1,4 @@
-background_opacity: 0.3
+background_opacity: 0.5
 
 colors:
   # Default colors
@@ -74,5 +74,3 @@ window:
       y: 6
 
   title: Alacritty
-
-
