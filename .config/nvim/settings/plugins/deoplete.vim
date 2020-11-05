@@ -3,8 +3,6 @@ let g:deoplete#enable_at_startup = 1
 
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
-call deoplete#custom#option('ignore_sources', {'_': ['around', 'buffer']})
-
 " Maximum candidate window width
 call deoplete#custom#source('_', 'max_menu_width', 80)
 
@@ -23,7 +21,7 @@ call deoplete#custom#option('ignore_sources', {
    \ })
 
 " Candidate list item number limit
-call deoplete#custom#option('max_list', 30)
+"call deoplete#custom#option('max_list', 30)
 
 " The number of processes used for the deoplete parallel feature.
 call deoplete#custom#option('num_processes', 16)
