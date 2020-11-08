@@ -20,12 +20,13 @@ alias ls="exa -a -l --color=always --group-directories-first"
 alias lt="exa -a -T --color=always --group-directories-first"
 
 # M
-alias mirror="sudo reflector -p https --fastest 30 --latest 30 --number 10 --sort score --verbose --save /etc/pacman.d/mirrorlist"
+alias mirror="sudo reflector -p https --fastest 30 --latest 30 --number 10 --sort rate --verbose --save /etc/pacman.d/mirrorlist"
 alias mv="mv -i"
 
 # P
 alias pacsyu="sudo pacman -Syyu"
-alias pip_base_env_upgrade="python -m pip install --upgrade pip && python -m pip install --upgrade setuptools && python -m pip install --upgrade wheel"
+alias pip_env_base_upgrade="python -m pip install --upgrade pip && python -m pip install --upgrade setuptools && python -m pip install --upgrade wheel"
+alias pip_env_req_upgrade="python -m pip install --upgrade -r"
 alias poweroff="systemctl poweroff"
 
 # R
