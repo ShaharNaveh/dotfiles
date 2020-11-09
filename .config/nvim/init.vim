@@ -15,7 +15,10 @@ Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+
 Plug 'preservim/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ryanoasis/vim-devicons'
 
 "Plug 'neomake/neomake'
 "Plug 'sbdchd/neoformat'
@@ -34,6 +37,7 @@ call plug#end()
 source $HOME/.config/nvim/settings/plugins/jedi-vim.vim
 source $HOME/.config/nvim/settings/plugins/deoplete.vim
 source $HOME/.config/nvim/settings/plugins/deoplete-jedi.vim
+source $HOME/.config/nvim/settings/plugins/nerdtree-git.vim
 
 source $HOME/.config/nvim/settings/plugins/airline-themes.vim
 source $HOME/.config/nvim/settings/plugins/nerdtree.vim

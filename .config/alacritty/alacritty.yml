@@ -39,19 +39,22 @@ env:
 font:
   bold:
     #family: Source Code Pro
+    family: DroidSansMono Nerd Font
     style: Bold
 
   bold_italic:
     #family: Source Code Pro
+    family: DroidSansMono Nerd Font
     style: Bold Italic
 
   italic:
     #family: Source Code Pro
+    family: DroidSansMono Nerd Font
     style: Italic
 
   normal:
-    family: Source Code Pro
-    #family: mononoki Nerd Font
+    #family: Source Code Pro
+    family: DroidSansMono Nerd Font
     style: Regular
 
   offset:
