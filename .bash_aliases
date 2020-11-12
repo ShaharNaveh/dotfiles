@@ -26,7 +26,7 @@ alias mv="mv -i"
 # P
 alias pacsyu="sudo pacman -Syyu"
 alias pip_env_base_upgrade="python -m pip install --upgrade pip && python -m pip install --upgrade setuptools && python -m pip install --upgrade wheel"
-alias pip_env_req_upgrade="python -m pip install --upgrade --upgrade-strategy 'eager' -r"
+alias pip_env_req_upgrade='python -m pip install --upgrade --upgrade-strategy "eager" -r'
 alias poweroff="systemctl poweroff"
 
 # R
