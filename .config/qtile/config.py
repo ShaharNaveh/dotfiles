@@ -128,7 +128,7 @@ for i, (name, kwargs) in enumerate(GROUP_NAMES, start=1):
 
 #groups = [Group(i) for i in "1234567890"]
 
-GROUP_NAMES = ["SYS", "DEV", "DOC"]
+GROUP_NAMES = ["SYS", "DEV", "DOC", "VB"]
 groups = [Group(group_name, layout="monadtall") for group_name in GROUP_NAMES]
 
 for index, group in enumerate(groups, start=1):
