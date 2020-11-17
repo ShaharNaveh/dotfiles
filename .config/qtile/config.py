@@ -106,7 +106,7 @@ layout_theme = {
     "single_margin": 0,
     "single_border_width": 0,
     "margin": 8,
-    "font=": FONT,
+    "font": FONT,
 }
 
 layouts = [
@@ -145,17 +145,9 @@ screens = [
                 ),
                 widget.Prompt(),
                 widget.Spacer(),
-                widget.CPU(
-                    format="{load_percent}%",
-                    foreground=white,
-                ),
-                widget.Memory(format="{MemUsed} MB", foreground=white),
+                #widget.CPU(format="{load_percent}%", foreground=white),
+                #widget.Memory(format="{MemUsed} MB", foreground=white),
                 widget.DF(visible_on_warn=False, format="{uf} {m}B", foreground=white),
-                widget.Backlight(
-                    foreground=yellow,
-                    backlight_name="intel_backlight",
-                    change_command="brightnessctl s {0}",
-                ),
                 widget.Clock(
                     format="%a %H:%M",
                     foreground=orange,
