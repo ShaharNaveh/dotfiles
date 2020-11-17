@@ -58,6 +58,7 @@ keys = [
     Key([MOD], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([MOD], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([MOD, "control"], "r", lazy.restart(), desc="Restart qtile"),
+    Key([MOD, "control"], "q", lazy.shutdown(), desc="Shutdown qtile"),
     Key(
         [MOD],
         "comma",
@@ -145,8 +146,8 @@ screens = [
                 ),
                 widget.Prompt(),
                 widget.Spacer(),
-                #widget.CPU(format="{load_percent}%", foreground=white),
-                #widget.Memory(format="{MemUsed} MB", foreground=white),
+                widget.CPU(format="{load_percent}%", foreground=white),
+                widget.Memory(format="{MemUsed} MB", foreground=white),
                 widget.DF(visible_on_warn=False, format="{uf} {m}B", foreground=white),
                 widget.Clock(
                     format="%a %H:%M",

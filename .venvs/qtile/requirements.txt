@@ -1,6 +1,0 @@
-cairocffi
-pip
-qtile
-setuptools
-wheel
-xcffib
