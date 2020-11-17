@@ -1,7 +1,5 @@
-from typing import List  # noqa: F401
-
 from libqtile import bar, layout, widget
-from libqtile.config import Click, Drag, Group, Key, Screen, EzKey
+from libqtile.config import Click, Drag, DropDown, Group, Key, ScratchPad, Screen
 from libqtile.lazy import lazy
 
 mod = "mod4"
@@ -9,124 +7,65 @@ MOD = "mod4"
 L_ALT = "mod1"
 TERMINAL = "alacritty"
 BROWSER = "firefox"
+FONT = "Noto Sans"
+FONT_SIZE = 14
 
-# monadtall extention to follow maximized window if we have only two
-@lazy.function
-def z_maximize(qtile):
-    layout = qtile.current_layout
-    group = qtile.current_group
-
-    if layout.name == "monadtall":
-        layout.cmd_maximize()
-        if len(group.windows) != 2:
-            return
-
-    if layout.name == "columns":
-        # developped for 2 windows...
-
-        if len(group.windows) < 2:
-            return
-
-        min_ratio = 0.25
-        layout_width = group.screen.dwidth
-        fw = qtile.current_window
-        if layout_width / 2 < fw.width:
-            # minimize
-            if fw.x == 0:
-                cmd = layout.cmd_grow_left
-            else:
-                cmd = layout.cmd_grow_right
-            while fw.width > layout_width * min_ratio:
-                cmd()
-        else:
-            # maximize
-            if fw.x == 0:
-                cmd = layout.cmd_grow_right
-            else:
-                cmd = layout.cmd_grow_left
-            while fw.width < layout_width * (1 - min_ratio):
-                cmd()
-
-    fw = qtile.current_window
-    ow = None
-    # get other window
-    for w in group.windows:
-        if w != fw:
-            ow = w
-
-    if ow and fw.info()["width"] < ow.info()["width"]:
-        layout.cmd_next()
-
+bgcolor = "2c2e34"
+bordercolor = "a49b80"
+gray = "404040"
+anothergray = "606060"
+finalgray = "757575"
+yellow = "e5c463"
+red = "f85e84"
+green = "9ecd6f"
+magenta = "ab9df2"
+blue = "7accd7"
+orange = "ef9062"
+white = "e3e1e4"
 
 keys = [
-    # Switch between windows
-    EzKey("A-h", lazy.layout.left()),
-    EzKey("A-j", lazy.layout.down()),
-    EzKey("A-k", lazy.layout.up()),
-    EzKey("A-l", lazy.layout.right()),
-    # Move windows
-    EzKey("M-S-h", lazy.layout.shuffle_left()),
-    EzKey("M-S-j", lazy.layout.shuffle_down()),
-    EzKey("M-S-k", lazy.layout.shuffle_up()),
-    EzKey("M-S-l", lazy.layout.shuffle_right()),
-    # Grow windows
-    EzKey("M-C-h", lazy.layout.grow_left()),
-    EzKey("M-C-j", lazy.layout.grow_down()),
-    EzKey("M-C-k", lazy.layout.grow_up()),
-    EzKey("M-C-l", lazy.layout.grow_right()),
-    # Flip windows
-    EzKey("M-A-h", lazy.layout.flip_left()),
-    EzKey("M-A-l", lazy.layout.flip_right()),
-    EzKey("M-A-j", lazy.layout.flip_down()),
-    EzKey("M-A-k", lazy.layout.flip_up()),
-    #EzKey("M-S-<Return>", lazy.layout.toggle_split()),
-    # Monadtall additional
-    EzKey("M-i", lazy.layout.grow()),
-    EzKey("M-m", lazy.layout.shrink()),
-    EzKey("M-o", z_maximize, desc="maximize window"),
-    EzKey("M-n", lazy.layout.normalize(), desc="reset layout"),
-    EzKey("M-S-<space>", lazy.layout.flip()),
-    # Switch window focus to other pane(s) of stack
-    EzKey("M-<space>", lazy.layout.next(), desc="next window"),
-    # Focus screen
-    EzKey("M-<comma>", lazy.prev_screen()),
-    EzKey("M-<period>", lazy.next_screen()),
-    EzKey("M-<Return>", lazy.spawn(TERMINAL)),
-    EzKey("M-A-<Return>", lazy.spawn(f"{TERMINAL} -e tmux")),
-    EzKey(
-        "A-S-<space>",
-        lazy.widget["keyboardlayout"].next_keyboard(),
-        desc="switch keyboard layout",
+    Key([MOD], "j", lazy.layout.down(), desc="Move focus down in stack pane"),
+    Key([MOD], "k", lazy.layout.up(), desc="Move focus up in stack pane"),
+    Key([MOD], "h", lazy.layout.shrink_main()),
+    Key([MOD], "l", lazy.layout.grow_main()),
+    Key(
+        [MOD, "control"],
+        "j",
+        lazy.layout.shuffle_down(),
+        desc="Move window down in current stack",
     ),
-    EzKey("M-<Tab>", lazy.next_layout()),
-    EzKey("M-S-w", lazy.window.kill(), desc="close window"),
-    EzKey("M-C-w", lazy.spawn("xkill"), desc="kill window"),
-    EzKey("M-S-x", lazy.hide_show_bar("top"), desc="toggle top bar"),
-    EzKey("M-C-x", lazy.hide_show_bar("bottom"), desc="toggle bottom bar"),
-    EzKey("M-C-r", lazy.restart()),
-    EzKey("M-C-f", lazy.window.toggle_floating()),
-    EzKey("M-f", lazy.window.toggle_fullscreen()),
-    EzKey("M-C-v", lazy.validate_config()),
-    EzKey("M-S-<Return>", lazy.spawn("rofi -show run")),
-    EzKey("M-C-<Return>", lazy.spawn("rofi -show")),
+    Key(
+        [MOD, "control"],
+        "k",
+        lazy.layout.shuffle_up(),
+        desc="Move window up in current stack",
+    ),
+    Key([MOD], "n", lazy.layout.normalize()),
+    Key([MOD], "o", lazy.layout.maximize()),
+    Key([MOD], "g", lazy.window.toggle_fullscreen()),
+    Key([MOD], "p", lazy.layout.flip()),
+    Key(
+        [MOD],
+        "space",
+        lazy.layout.next(),
+        desc="Switch window focus to other pane(s) of stack",
+    ),
+    # Swap panes of split stack
+    Key(
+        [MOD, "shift"], "space", lazy.layout.rotate(), desc="Swap panes of split stack"
+    ),
+    Key([MOD], "Return", lazy.spawn(f"{TERMINAL} -e tmux"), desc="Launch terminal"),
+    Key([MOD], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
+    Key([MOD], "q", lazy.window.kill(), desc="Kill focused window"),
+    Key([MOD, "control"], "r", lazy.restart(), desc="Restart qtile"),
+    Key(
+        [MOD],
+        "comma",
+        lazy.spawn("/usr/bin/rofi -combi-modi window,drun -show combi -modi combi"),
+        desc="Launch rofi",
+    ),
+    Key([MOD], "b", lazy.spawn(BROWSER), desc=f"Launch {BROWSER}"),
 ]
-
-"""
-# GROUPS
-GROUP_NAMES = [
-    ("SYS", {"layout": "monadtall"}),
-    ("DEV", {"layout": "monadtall"}),
-]
-
-groups = [Group(name, **kwargs) for name, kwargs in GROUP_NAMES]
-
-for i, (name, kwargs) in enumerate(GROUP_NAMES, start=1):
-    keys.append(
-        Key([mod], str(i), lazy.group[name].toscreen())
-    )  # Switch to another group
-"""
-
-#groups = [Group(i) for i in "1234567890"]
 
 GROUP_NAMES = ["SYS", "DEV", "DOC", "VB"]
 groups = [Group(group_name, layout="monadtall") for group_name in GROUP_NAMES]
@@ -135,119 +74,124 @@ for index, group in enumerate(groups, start=1):
     group_name = group.name
     keys.extend(
         [
-            EzKey(f"M-{index}", lazy.group[group_name].toscreen(toggle=True)),
-            EzKey(f"M-S-{index}", lazy.window.togroup(group_name)),
+            Key([MOD], str(index), lazy.group[group_name].toscreen(toggle=True)),
+            Key([MOD, "shift"], str(index), lazy.window.togroup(group_name)),
         ]
     )
 
-
-
-'''
-for i in groups:
-    group_name = i.name
-    keys.extend(
+groups.append(
+    ScratchPad(
+        "scratchpad",
         [
-            EzKey(f"M-{group_name}", lazy.group[group_name].toscreen(toggle=True)),
-            EzKey(f"M-S-{group_name}", lazy.window.togroup(group_name)),
-        ]
+            DropDown(
+                "term",
+                TERMINAL,
+                opacity=1,
+                height=0.50,
+                width=0.60,
+                x=0.23,
+                y=0.32,
+            )
+        ],
     )
-'''
+)
 
-"""
-for i in groups:
-    keys.extend(
-        [
-            # mod1 + letter of group = switch to group
-            Key(
-                [mod],
-                i.name,
-                lazy.group[i.name].toscreen(),
-                desc="Switch to group {}".format(i.name),
-            ),
-            # mod1 + shift + letter of group = switch to & move focused window to group
-            Key(
-                [mod, "shift"],
-                i.name,
-                lazy.window.togroup(i.name, switch_group=True),
-                desc="Switch to & move focused window to group {}".format(i.name),
-            ),
-            # Or, use below if you prefer not to switch to that group.
-            # # mod1 + shift + letter of group = move focused window to group
-            # Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
-            #     desc="move focused window to group {}".format(i.name)),
-        ]
-    )
-"""
 
-# layout.Bsp(),
-# layout.Columns(),
-# layout.Matrix(),
-# layout.MonadWide(),
-# layout.RatioTile(),
-# layout.Tile(),
-# layout.TreeTab(),
-# layout.VerticalTile(),
-# layout.Zoomy(),
-# layout.Stack(num_stacks=2),
+keys.extend([Key([MOD], "minus", lazy.group["scratchpad"].dropdown_toggle("term"))])
+
+layout_theme = {
+    "border_width": 2,
+    "border_focus": bordercolor,
+    "border_normal": bgcolor,
+    "single_margin": 0,
+    "single_border_width": 0,
+    "margin": 8,
+    "font=": FONT,
+}
+
 layouts = [
-    layout.Max(),
-    layout.Floating(),
-    layout.MonadTall(),
+    # layout.Max(),
+    # layout.Floating(),
+    layout.MonadTall(**layout_theme, ratio=0.63),
 ]
 
-widget_defaults = dict(
-    font="sans",
-    fontsize=12,
-    padding=3,
-)
+widget_defaults = {
+    "font": FONT,
+    "fontsize": FONT_SIZE,
+    "padding": 9,
+    "background": bgcolor,
+    "highlight_method": "text",
+}
+
+
 extension_defaults = widget_defaults.copy()
 
 screens = [
     Screen(
         bottom=bar.Bar(
             [
-                widget.CurrentLayout(),
-                widget.GroupBox(),
-                widget.Prompt(),
-                widget.WindowName(),
-                widget.Chord(
-                    chords_colors={
-                        "launch": ("#ff0000", "#ffffff"),
-                    },
-                    name_transform=lambda name: name.upper(),
+                widget.GroupBox(
+                    margin_y=3,
+                    margin_x=0,
+                    borderwidth=0,
+                    rounded=False,
+                    active=anothergray,
+                    inactive=bgcolor,
+                    highlight_color=red,
+                    this_current_screen_border=yellow,
+                    this_screen_border=anothergray,
+                    foreground=white,
+                    background=bgcolor,
                 ),
-                #widget.TextBox("default config", name="default"),
-                #widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
-                widget.Systray(),
-                widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
-                #widget.QuickExit(),
+                widget.Prompt(),
+                widget.Spacer(),
+                widget.CPU(
+                    format="{load_percent}%",
+                    foreground=white,
+                ),
+                widget.Memory(format="{MemUsed} MB", foreground=white),
+                widget.DF(visible_on_warn=False, format="{uf} {m}B", foreground=white),
+                widget.Backlight(
+                    foreground=yellow,
+                    backlight_name="intel_backlight",
+                    change_command="brightnessctl s {0}",
+                ),
+                widget.Clock(
+                    format="%a %H:%M",
+                    foreground=orange,
+                ),
             ],
             24,
+            opacity=1,
         ),
     ),
 ]
 
+
 # Drag floating layouts.
 mouse = [
     Drag(
-        [mod],
+        [MOD],
         "Button1",
         lazy.window.set_position_floating(),
         start=lazy.window.get_position(),
     ),
     Drag(
-        [mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()
+        [MOD], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()
     ),
-    Click([mod], "Button2", lazy.window.bring_to_front()),
+    Click([MOD], "Button2", lazy.window.bring_to_front()),
 ]
 
 dgroups_key_binder = None
-dgroups_app_rules = []  # type: List
-main = None  # WARNING: this is deprecated and will be removed soon
-follow_mouse_focus = True
+dgroups_app_rules = []
+follow_mouse_focus = False
 bring_front_click = False
 cursor_warp = False
+auto_fullscreen = True
+focus_on_window_activation = "smart"
+
 floating_layout = layout.Floating(
+    **layout_theme,
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
         {"wmclass": "confirm"},
@@ -264,10 +208,8 @@ floating_layout = layout.Floating(
         {"wname": "branchdialog"},  # gitk
         {"wname": "pinentry"},  # GPG key password entry
         {"wmclass": "ssh-askpass"},  # ssh-askpass
-    ]
+    ],
 )
-auto_fullscreen = True
-focus_on_window_activation = "smart"
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the

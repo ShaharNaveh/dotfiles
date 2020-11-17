@@ -1,4 +1,4 @@
-background_opacity: 0.5
+background_opacity: 0.95
 
 colors:
   # Default colors
@@ -30,8 +30,13 @@ colors:
     cyan:    '#8ec07c'
     white:   '#ebdbb2'
 
+cursor:
+  syle: Block
 
 #draw_bold_text_with_bright_colors: true
+dpi:
+  x: 96
+  y: 96
 
 env:
   TERM: screen-256color
@@ -57,15 +62,20 @@ font:
     family: DroidSansMono Nerd Font
     style: Regular
 
-  offset:
-    x: 0
-    y: 1
+  #offset:
+    #x: 0
+    #y: 1
 
   size: 10.0
 
+mouse:
+  double_click: { threshold: 300 }
+  triple_click: { threshold: 300 }
 
 scrolling:
   history: 5000
+
+unfocused_hollow: true
 
 window:
   class:
@@ -75,5 +85,9 @@ window:
     padding:
       x: 6
       y: 6
+
+  dimensions:
+    columns: 120
+    lines: 80
 
   title: Alacritty
