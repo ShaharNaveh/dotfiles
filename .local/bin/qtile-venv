@@ -1,0 +1,5 @@
+#!/bin/bash
+
+source $HOME/.venvs/qtile/.venv/bin/activate
+python3 $HOME/.venvs/qtile/.venv/bin/qtile $*
+

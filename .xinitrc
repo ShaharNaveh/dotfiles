@@ -48,4 +48,4 @@ fi
 
 nitrogen --restore &
 picom -b --config $HOME/.config/picom/picom.conf
-exec qtile
+exec qtile-venv
