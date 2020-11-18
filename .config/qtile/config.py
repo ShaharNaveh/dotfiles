@@ -68,8 +68,15 @@ keys = [
     Key([MOD], "b", lazy.spawn(BROWSER), desc=f"Launch {BROWSER}"),
 ]
 
-GROUP_NAMES = ["SYS", "DEV", "DOC", "VB"]
-groups = [Group(group_name, layout="monadtall") for group_name in GROUP_NAMES]
+#GROUP_NAMES = ["SYS", "DEV", "DOC", "VB"]
+
+group_names = [
+        ("WWW", {"layout": "monadtall"}),
+        ("DEV", {"layout": "monadtall"}),
+        ("VBOX", {"layout": "monadtall"}),
+        ("SYS", {"layout": "monadtall"}),
+        ]
+groups = [Group(name, **kwargs) for name, kwargs in group_names]
 
 for index, group in enumerate(groups, start=1):
     group_name = group.name
