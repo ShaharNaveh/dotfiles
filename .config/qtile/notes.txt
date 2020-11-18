@@ -1,0 +1,6 @@
+Needs to be installed:
+
+htop
+noto-fonts
+python-psutil
+ttf-ubuntu-font-family
