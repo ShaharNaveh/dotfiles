@@ -10,18 +10,26 @@ BROWSER = "firefox"
 FONT = "Noto Sans"
 FONT_SIZE = 14
 
-bgcolor = "2c2e34"
-bordercolor = "a49b80"
-gray = "404040"
-anothergray = "606060"
-finalgray = "757575"
-yellow = "e5c463"
-red = "f85e84"
-green = "9ecd6f"
-magenta = "ab9df2"
-blue = "7accd7"
-orange = "ef9062"
-white = "e3e1e4"
+bgcolor = "#2c2e34"
+bordercolor = "#a49b80"
+gray = "#404040"
+anothergray = "#606060"
+finalgray = "#757575"
+yellow = "#e5c463"
+red = "#f85e84"
+green = "#9ecd6f"
+magenta = "#ab9df2"
+blue = "#7accd7"
+orange = "#ef9062"
+white = "#e3e1e4"
+
+COLOR_0 = ["#272827", "#272827"]
+COLOR_1 = ["#434758", "#434758"]
+COLOR_2 = ["#ffffff", "#ffffff"]
+COLOR_3 = ["#272827", "#272827"]
+COLOR_4 = ["#F4883C", "#F4883C"]
+COLOR_5 = ["#A44A29", "#A44A29"]
+COLOR_6 = ["#F4883C", "#F4883C"]
 
 keys = [
     Key([MOD], "j", lazy.layout.down(), desc="Move focus down in stack pane"),
@@ -54,7 +62,7 @@ keys = [
     Key(
         [MOD, "shift"], "space", lazy.layout.rotate(), desc="Swap panes of split stack"
     ),
-    Key([MOD], "Return", lazy.spawn(f"{TERMINAL} -e tmux"), desc="Launch terminal"),
+    Key([MOD], "Return", lazy.spawn(TERMINAL), desc="Launch terminal"),
     Key([MOD], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([MOD], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([MOD, "control"], "r", lazy.restart(), desc="Restart qtile"),
@@ -68,14 +76,12 @@ keys = [
     Key([MOD], "b", lazy.spawn(BROWSER), desc=f"Launch {BROWSER}"),
 ]
 
-#GROUP_NAMES = ["SYS", "DEV", "DOC", "VB"]
-
 group_names = [
-        ("WWW", {"layout": "monadtall"}),
-        ("DEV", {"layout": "monadtall"}),
-        ("VBOX", {"layout": "monadtall"}),
-        ("SYS", {"layout": "monadtall"}),
-        ]
+    ("WWW", {"layout": "monadtall"}),
+    ("DEV", {"layout": "monadtall"}),
+    ("VBOX", {"layout": "monadtall"}),
+    ("SYS", {"layout": "monadtall"}),
+]
 groups = [Group(name, **kwargs) for name, kwargs in group_names]
 
 for index, group in enumerate(groups, start=1):
@@ -103,8 +109,6 @@ groups.append(
         ],
     )
 )
-
-
 keys.extend([Key([MOD], "minus", lazy.group["scratchpad"].dropdown_toggle("term"))])
 
 layout_theme = {
@@ -124,49 +128,162 @@ layouts = [
 ]
 
 widget_defaults = {
-    "font": FONT,
-    "fontsize": FONT_SIZE,
-    "padding": 9,
-    "background": bgcolor,
+    "font": "Ubuntu Mono",
+    "fontsize": 12,
+    "padding": 2,
+    "background": COLOR_0,
     "highlight_method": "text",
 }
 
 
 extension_defaults = widget_defaults.copy()
 
+
 screens = [
     Screen(
-        bottom=bar.Bar(
+        top=bar.Bar(
             [
+                widget.Image(
+                    scale=True,
+                    filename="~/.config/qtile/Images/me.jpg",
+                    background=COLOR_6,
+                ),
+                widget.Sep(
+                    linewidth=0,
+                    padding=6,
+                    foreground=COLOR_2,
+                    background=COLOR_0,
+                ),
+                widget.Clock(
+                    foreground=COLOR_2, background=COLOR_5, format="%A, %B, %d [ %H:%M ]"
+                ),
+                widget.Sep(
+                    linewidth=0,
+                    padding=6,
+                    foreground=COLOR_2,
+                    background=COLOR_0,
+                ),
                 widget.GroupBox(
+                    font="Ubuntu Bold",
+                    fontsize=9,
                     margin_y=3,
                     margin_x=0,
-                    borderwidth=0,
+                    padding_y=5,
+                    padding_x=3,
+                    borderwidth=3,
+                    active=COLOR_2,
+                    inactive=COLOR_2,
                     rounded=False,
-                    active=anothergray,
-                    inactive=bgcolor,
-                    highlight_color=red,
-                    this_current_screen_border=yellow,
-                    this_screen_border=anothergray,
-                    foreground=white,
-                    background=bgcolor,
+                    highlight_color=COLOR_1,
+                    highlight_method="line",
+                    this_current_screen_border=COLOR_3,
+                    this_screen_border=COLOR_4,
+                    other_current_screen_border=COLOR_0,
+                    other_screen_border=COLOR_0,
+                    foreground=COLOR_2,
+                    background=COLOR_0,
                 ),
-                widget.Prompt(),
-                widget.Spacer(),
-                widget.CPU(format="{load_percent}%", foreground=white),
-                widget.Memory(format="{MemUsed} MB", foreground=white),
-                widget.DF(visible_on_warn=False, format="{uf} {m}B", foreground=white),
-                widget.Clock(
-                    format="%a %H:%M",
-                    foreground=orange,
+                widget.Prompt(
+                    font="Ubuntu Mono",
+                    padding=10,
+                    foreground=COLOR_3,
+                    background=COLOR_1,
+                ),
+                widget.Sep(
+                    linewidth=0,
+                    padding=40,
+                    foreground=COLOR_2,
+                    background=COLOR_0,
+                ),
+                widget.WindowName(foreground=COLOR_0, background=COLOR_0, padding=0),
+                widget.Image(
+                    scale=True,
+                    filename="~/.config/qtile/Images/bar03.png",
+                    background=COLOR_6,
+                ),
+                widget.TextBox(
+                    text=" 🌡",
+                    padding=2,
+                    foreground=COLOR_2,
+                    background=COLOR_5,
+                    fontsize=11,
+                ),
+                widget.ThermalSensor(
+                    foreground=COLOR_2, background=COLOR_5, threshold=90, padding=5
+                ),
+                widget.Image(
+                    scale=True,
+                    filename="~/.config/qtile/Images/bar01.png",
+                    background=COLOR_6,
+                ),
+                widget.TextBox(
+                    text="",
+                    foreground=COLOR_2,
+                    background=COLOR_4,
+                    padding=0,
+                    fontsize=14,
+                ),
+                widget.CPU(
+                    foreground=COLOR_2,
+                    background=COLOR_4,
+                    padding=5,
+                    format='  {load_percent}%  '
+                        ),
+                widget.Image(
+                    scale=True,
+                    filename="~/.config/qtile/Images/bar02.png",
+                    background=COLOR_6,
+                ),
+                widget.TextBox(
+                    text=" 🖬",
+                    foreground=COLOR_2,
+                    background=COLOR_5,
+                    padding=0,
+                    fontsize=14,
+                ),
+                widget.Memory(
+                    foreground=COLOR_2,
+                    background=COLOR_5,
+                    mouse_callbacks={
+                        "Button1": lambda qtile: qtile.cmd_spawn(f"{TERMINAL} -e htop")
+                    },
+                    padding=5,
+                ),
+                widget.Image(
+                    scale=True,
+                    filename="~/.config/qtile/Images/bar01.png",
+                    background=COLOR_6,
+                ),
+                widget.TextBox(
+                    text=" Vol:", foreground=COLOR_2, background=COLOR_4, padding=0
+                ),
+                widget.Volume(foreground=COLOR_2, background=COLOR_4, padding=5),
+                widget.Image(
+                    scale=True,
+                    filename="~/.config/qtile/Images/bar02.png",
+                    background=COLOR_6,
+                ),
+                widget.CurrentLayout(foreground=COLOR_2, background=COLOR_5, padding=5),
+                widget.Image(
+                    scale=True,
+                    filename="~/.config/qtile/Images/bar01.png",
+                    background=COLOR_6,
+                ),
+                widget.Net(
+                    format="{down} ↓↑ {up}",
+                    foreground=COLOR_2,
+                    background=COLOR_4,
+                    padding=1,
+                    update_interval=1,
+                ),
+                widget.Sep(
+                    linewidth=0, padding=10, foreground=COLOR_0, background=COLOR_5
                 ),
             ],
             24,
-            opacity=1,
         ),
     ),
 ]
-
 
 # Drag floating layouts.
 mouse = [
