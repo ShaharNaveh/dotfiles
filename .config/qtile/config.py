@@ -1,4 +1,4 @@
-from libqtile import bar, layout, widget
+from libqtile import bar, hook, layout, widget
 from libqtile.config import Click, Drag, DropDown, Group, Key, ScratchPad, Screen
 from libqtile.lazy import lazy
 
@@ -155,7 +155,9 @@ screens = [
                     background=COLOR_0,
                 ),
                 widget.Clock(
-                    foreground=COLOR_2, background=COLOR_5, format="%A, %B, %d [ %H:%M ]"
+                    foreground=COLOR_2,
+                    background=COLOR_5,
+                    format="%A, %B, %d [ %H:%M ]",
                 ),
                 widget.Sep(
                     linewidth=0,
@@ -227,8 +229,8 @@ screens = [
                     foreground=COLOR_2,
                     background=COLOR_4,
                     padding=5,
-                    format='  {load_percent}%  '
-                        ),
+                    format="  {load_percent}%  ",
+                ),
                 widget.Image(
                     scale=True,
                     filename="~/.config/qtile/Images/bar02.png",
@@ -299,6 +301,18 @@ mouse = [
     Click([MOD], "Button2", lazy.window.bring_to_front()),
 ]
 
+floating_types = ["notification", "toolbar", "splash", "dialog"]
+
+
+@hook.subscribe.client_new
+def set_floating(window):
+    if (
+        window.window.get_wm_transient_for()
+        or window.window.get_wm_type() in floating_types
+    ):
+        window.floating = True
+
+
 dgroups_key_binder = None
 dgroups_app_rules = []
 follow_mouse_focus = False
@@ -308,7 +322,8 @@ auto_fullscreen = True
 focus_on_window_activation = "smart"
 
 floating_layout = layout.Floating(
-    **layout_theme,
+    fullscreen_border_width=0,
+    border_width=0,
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
         {"wmclass": "confirm"},
@@ -325,6 +340,8 @@ floating_layout = layout.Floating(
         {"wname": "branchdialog"},  # gitk
         {"wname": "pinentry"},  # GPG key password entry
         {"wmclass": "ssh-askpass"},  # ssh-askpass
+        {"wname": "Open File"},
+        # {"wmclass": "VirtualBox"}, # Virtualbox
     ],
 )
 
