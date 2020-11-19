@@ -1,5 +1,5 @@
 # C
-alias cat="bat"
+alias cat="batcat"
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias cp="cp -i"
 
