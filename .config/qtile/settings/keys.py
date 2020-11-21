@@ -42,7 +42,13 @@ keys = [
     Key(
         [mod],
         "comma",
-        lazy.spawn("/usr/bin/rofi -combi-modi window,drun -show combi -modi combi"),
+        lazy.spawn("/usr/bin/rofi -show drun"),
+        desc="Launch rofi",
+    ),
+    Key(
+        [mod, "shift"],
+        "comma",
+        lazy.spawn("/usr/bin/rofi -show"),
         desc="Launch rofi",
     ),
     Key([mod], "b", lazy.spawn(browser), desc=f"Launch {browser}"),
