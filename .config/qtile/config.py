@@ -70,7 +70,7 @@ screens = [
             [
                 widget.Image(
                     scale=True,
-                    filename="~/.config/qtile/Images/me.jpg",
+                    filename="~/.config/qtile/images/me.jpg",
                     background=COLOR_6,
                 ),
                 widget.Sep(
@@ -125,7 +125,7 @@ screens = [
                 widget.WindowName(foreground=COLOR_0, background=COLOR_0, padding=0),
                 widget.Image(
                     scale=True,
-                    filename="~/.config/qtile/Images/bar03.png",
+                    filename="~/.config/qtile/images/bar03.png",
                     background=COLOR_6,
                 ),
                 widget.TextBox(
@@ -140,7 +140,7 @@ screens = [
                 ),
                 widget.Image(
                     scale=True,
-                    filename="~/.config/qtile/Images/bar01.png",
+                    filename="~/.config/qtile/images/bar01.png",
                     background=COLOR_6,
                 ),
                 widget.TextBox(
@@ -158,7 +158,7 @@ screens = [
                 ),
                 widget.Image(
                     scale=True,
-                    filename="~/.config/qtile/Images/bar02.png",
+                    filename="~/.config/qtile/images/bar02.png",
                     background=COLOR_6,
                 ),
                 widget.TextBox(
@@ -178,7 +178,7 @@ screens = [
                 ),
                 widget.Image(
                     scale=True,
-                    filename="~/.config/qtile/Images/bar01.png",
+                    filename="~/.config/qtile/images/bar01.png",
                     background=COLOR_6,
                 ),
                 widget.TextBox(
@@ -187,13 +187,13 @@ screens = [
                 #widget.Volume(foreground=COLOR_2, background=COLOR_4, padding=5),
                 widget.Image(
                     scale=True,
-                    filename="~/.config/qtile/Images/bar02.png",
+                    filename="~/.config/qtile/images/bar02.png",
                     background=COLOR_6,
                 ),
                 widget.CurrentLayout(foreground=COLOR_2, background=COLOR_5, padding=5),
                 widget.Image(
                     scale=True,
-                    filename="~/.config/qtile/Images/bar01.png",
+                    filename="~/.config/qtile/images/bar01.png",
                     background=COLOR_6,
                 ),
                 widget.Net(
