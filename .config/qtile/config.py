@@ -7,7 +7,6 @@ from settings.keys import keys
 from settings.groups import groups
 
 L_ALT = "mod1"
-#FONT = "Noto Sans"
 FONT = "DroidSansMono Nerd Font"
 FONT_SIZE = 14
 
@@ -92,7 +91,7 @@ screens = [
                 ),
                 widget.GroupBox(
                     font="Ubuntu Bold",
-                    fontsize=9,
+                    fontsize=12,
                     margin_y=3,
                     margin_x=0,
                     padding_y=5,
