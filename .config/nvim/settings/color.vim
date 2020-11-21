@@ -6,5 +6,5 @@ if exists('+termguicolors')
 endif
 
 colorscheme gruvbox
-source $HOME/.config/nvim/settings/plugins/gruvbox.vim
+source $HOME/.config/nvim/plug-config/gruvbox.vim
 set background=dark
