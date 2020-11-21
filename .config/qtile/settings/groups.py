@@ -20,7 +20,6 @@ from settings.keys import keys
 
 groups = [
     Group("  "),
-    Group("   "),
     Group("   "),
     Group("   "),
     Group("   "),
