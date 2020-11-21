@@ -1,14 +1,13 @@
-from libqtile import bar, hook, layout, widget
-from libqtile.config import Click, Drag, DropDown, Group, Key, ScratchPad, Screen
-from libqtile.lazy import lazy
+from libqtile import bar, widget
+from libqtile.config import DropDown, ScratchPad, Screen
 
-from settings.constants import mod, terminal
-from settings.keys import keys
-from settings.groups import groups
-from settings.mouse import mouse
+from settings.constants import mod  # noqa: F401
+from settings.constants import terminal
+from settings.keys import keys  # noqa: F401
+from settings.groups import groups  # noqa: F401
+from settings.layouts import floating_layout, layouts  # noqa: F401
+from settings.mouse import mouse  # noqa: F401
 
-L_ALT = "mod1"
-FONT = "DroidSansMono Nerd Font"
 FONT_SIZE = 14
 
 bgcolor = "#2c2e34"
@@ -32,25 +31,6 @@ COLOR_4 = ["#F4883C", "#F4883C"]
 COLOR_5 = ["#A44A29", "#A44A29"]
 COLOR_6 = ["#F4883C", "#F4883C"]
 
-
-
-
-
-layout_theme = {
-    "border_width": 2,
-    "border_focus": bordercolor,
-    "border_normal": bgcolor,
-    "single_margin": 0,
-    "single_border_width": 0,
-    "margin": 8,
-    "font": FONT,
-}
-
-layouts = [
-    # layout.Max(),
-    # layout.Floating(),
-    layout.MonadTall(**layout_theme, ratio=0.63),
-]
 
 widget_defaults = {
     "font": "Ubuntu Mono",
@@ -184,7 +164,7 @@ screens = [
                 widget.TextBox(
                     text=" Vol:", foreground=COLOR_2, background=COLOR_4, padding=0
                 ),
-                #widget.Volume(foreground=COLOR_2, background=COLOR_4, padding=5),
+                # widget.Volume(foreground=COLOR_2, background=COLOR_4, padding=5),
                 widget.Image(
                     scale=True,
                     filename="~/.config/qtile/images/bar02.png",
@@ -213,18 +193,6 @@ screens = [
 ]
 
 
-floating_types = ["notification", "toolbar", "splash", "dialog"]
-
-
-@hook.subscribe.client_new
-def set_floating(window):
-    if (
-        window.window.get_wm_transient_for()
-        or window.window.get_wm_type() in floating_types
-    ):
-        window.floating = True
-
-
 dgroups_key_binder = None
 dgroups_app_rules = []
 follow_mouse_focus = False
@@ -233,29 +201,6 @@ cursor_warp = False
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 
-floating_layout = layout.Floating(
-    fullscreen_border_width=0,
-    border_width=0,
-    float_rules=[
-        # Run the utility of `xprop` to see the wm class and name of an X client.
-        {"wmclass": "confirm"},
-        {"wmclass": "dialog"},
-        {"wmclass": "download"},
-        {"wmclass": "error"},
-        {"wmclass": "file_progress"},
-        {"wmclass": "notification"},
-        {"wmclass": "splash"},
-        {"wmclass": "toolbar"},
-        {"wmclass": "confirmreset"},  # gitk
-        {"wmclass": "makebranch"},  # gitk
-        {"wmclass": "maketag"},  # gitk
-        {"wname": "branchdialog"},  # gitk
-        {"wname": "pinentry"},  # GPG key password entry
-        {"wmclass": "ssh-askpass"},  # ssh-askpass
-        {"wname": "Open File"},
-        # {"wmclass": "VirtualBox"}, # Virtualbox
-    ],
-)
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the
