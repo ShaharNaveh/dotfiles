@@ -3,30 +3,57 @@ Icons from https://www.nerdfonts.com/cheat-sheet
 
 Icons used, ATM:
 nf-fa-firefox
-nf-fae-python
 nf-dev-terminal
 nf-fa-code
 nf-seti-config
 nf-mdi-folder
-nf-mdi-image
 nf-fa-video_camera
 nf-mdi-layers
 """
 from libqtile.command import lazy
-from libqtile.config import DropDown, Group, Key, ScratchPad
+from libqtile.config import DropDown, Group, Key, Match, ScratchPad
 
 from settings.constants import mod, terminal
+
 from settings.keys import keys
 
 groups = [
-    Group("  "),
-    Group("   "),
-    Group("   "),
-    Group("   "),
-    Group("   "),
-    Group("   "),
-    Group("   "),
-    Group("   "),
+    Group(
+        "WWW",
+        label="  ",
+        layout="monadtall",
+    ),
+    Group(
+        "SYS",
+        label="   ",
+        layout="monadtall",
+    ),
+    Group(
+        "CODE",
+        label="   ",
+        layout="monadtall",
+    ),
+    Group(
+        "CONFIG",
+        layout="monadtall",
+        label="   ",
+    ),
+    Group(
+        "DIRS",
+        label="   ",
+        layout="monadtall",
+    ),
+    Group(
+        "ZOOM",
+        label="   ",
+        layout="monadtall",
+    ),
+    Group(
+        "VBOX",
+        label="  ",
+        layout="monadtall",
+        matches=[Match(wm_class=["VirtualBox Manager", "VirtualBox Machine"])],
+    ),
 ]
 
 for index, group in enumerate(groups, start=1):
