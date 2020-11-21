@@ -3,10 +3,12 @@ from libqtile.config import DropDown, ScratchPad, Screen
 
 from settings.constants import mod  # noqa: F401
 from settings.constants import terminal
-from settings.keys import keys  # noqa: F401
-from settings.groups import groups  # noqa: F401
 from settings.layouts import floating_layout, layouts  # noqa: F401
 from settings.mouse import mouse  # noqa: F401
+
+from settings.keys import keys  # noqa: F401
+
+from settings.groups import groups  # noqa: F401
 
 FONT_SIZE = 14
 
