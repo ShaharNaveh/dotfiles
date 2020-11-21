@@ -5,6 +5,7 @@ from libqtile.lazy import lazy
 from settings.constants import mod, terminal
 from settings.keys import keys
 from settings.groups import groups
+from settings.mouse import mouse
 
 L_ALT = "mod1"
 FONT = "DroidSansMono Nerd Font"
@@ -211,19 +212,6 @@ screens = [
     ),
 ]
 
-# Drag floating layouts.
-mouse = [
-    Drag(
-        [mod],
-        "Button1",
-        lazy.window.set_position_floating(),
-        start=lazy.window.get_position(),
-    ),
-    Drag(
-        [mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()
-    ),
-    Click([mod], "Button2", lazy.window.bring_to_front()),
-]
 
 floating_types = ["notification", "toolbar", "splash", "dialog"]
 
