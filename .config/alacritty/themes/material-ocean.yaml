@@ -1,10 +1,8 @@
 colors:
-  # Default colors
   primary:
     background: '0x0f101a'
     foreground: '0xc5c9de'
 
-  # Normal colors
   normal:
     black:   '0x181a29'
     red:     '0xF07178'
@@ -15,7 +13,6 @@ colors:
     cyan:    '0x98e4ff'
     white:   '0xbfd5de'
 
-  # Bright colors
   bright:
     black:   '0x282a40'
     red:     '0xeb7f84'
