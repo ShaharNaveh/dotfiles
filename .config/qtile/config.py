@@ -2,12 +2,13 @@ from libqtile import bar, hook, layout, widget
 from libqtile.config import Click, Drag, DropDown, Group, Key, ScratchPad, Screen
 from libqtile.lazy import lazy
 
-mod = "mod4"
-MOD = "mod4"
+from settings.constants import mod, terminal
+from settings.keys import keys
+from settings.groups import groups
+
 L_ALT = "mod1"
-TERMINAL = "alacritty"
-BROWSER = "firefox"
-FONT = "Noto Sans"
+#FONT = "Noto Sans"
+FONT = "DroidSansMono Nerd Font"
 FONT_SIZE = 14
 
 bgcolor = "#2c2e34"
@@ -31,85 +32,9 @@ COLOR_4 = ["#F4883C", "#F4883C"]
 COLOR_5 = ["#A44A29", "#A44A29"]
 COLOR_6 = ["#F4883C", "#F4883C"]
 
-keys = [
-    Key([MOD], "j", lazy.layout.down(), desc="Move focus down in stack pane"),
-    Key([MOD], "k", lazy.layout.up(), desc="Move focus up in stack pane"),
-    Key([MOD], "h", lazy.layout.shrink_main()),
-    Key([MOD], "l", lazy.layout.grow_main()),
-    Key(
-        [MOD, "control"],
-        "j",
-        lazy.layout.shuffle_down(),
-        desc="Move window down in current stack",
-    ),
-    Key(
-        [MOD, "control"],
-        "k",
-        lazy.layout.shuffle_up(),
-        desc="Move window up in current stack",
-    ),
-    Key([MOD], "n", lazy.layout.normalize()),
-    Key([MOD], "o", lazy.layout.maximize()),
-    Key([MOD], "g", lazy.window.toggle_fullscreen()),
-    Key([MOD], "p", lazy.layout.flip()),
-    Key(
-        [MOD],
-        "space",
-        lazy.layout.next(),
-        desc="Switch window focus to other pane(s) of stack",
-    ),
-    # Swap panes of split stack
-    Key(
-        [MOD, "shift"], "space", lazy.layout.rotate(), desc="Swap panes of split stack"
-    ),
-    Key([MOD], "Return", lazy.spawn(f"{TERMINAL} -e tmux"), desc="Launch terminal"),
-    Key([MOD], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-    Key([MOD], "q", lazy.window.kill(), desc="Kill focused window"),
-    Key([MOD, "control"], "r", lazy.restart(), desc="Restart qtile"),
-    Key([MOD, "control"], "q", lazy.shutdown(), desc="Shutdown qtile"),
-    Key(
-        [MOD],
-        "comma",
-        lazy.spawn("/usr/bin/rofi -combi-modi window,drun -show combi -modi combi"),
-        desc="Launch rofi",
-    ),
-    Key([MOD], "b", lazy.spawn(BROWSER), desc=f"Launch {BROWSER}"),
-]
 
-group_names = [
-    ("WWW", {"layout": "monadtall"}),
-    ("DEV", {"layout": "monadtall"}),
-    ("VBOX", {"layout": "monadtall"}),
-    ("SYS", {"layout": "monadtall"}),
-]
-groups = [Group(name, **kwargs) for name, kwargs in group_names]
 
-for index, group in enumerate(groups, start=1):
-    group_name = group.name
-    keys.extend(
-        [
-            Key([MOD], str(index), lazy.group[group_name].toscreen(toggle=True)),
-            Key([MOD, "shift"], str(index), lazy.window.togroup(group_name)),
-        ]
-    )
 
-groups.append(
-    ScratchPad(
-        "scratchpad",
-        [
-            DropDown(
-                "term",
-                TERMINAL,
-                opacity=1,
-                height=0.50,
-                width=0.60,
-                x=0.23,
-                y=0.32,
-            )
-        ],
-    )
-)
-keys.extend([Key([MOD], "minus", lazy.group["scratchpad"].dropdown_toggle("term"))])
 
 layout_theme = {
     "border_width": 2,
@@ -247,7 +172,7 @@ screens = [
                     foreground=COLOR_2,
                     background=COLOR_5,
                     mouse_callbacks={
-                        "Button1": lambda qtile: qtile.cmd_spawn(f"{TERMINAL} -e htop")
+                        "Button1": lambda qtile: qtile.cmd_spawn(f"{terminal} -e htop")
                     },
                     padding=5,
                 ),
@@ -259,7 +184,7 @@ screens = [
                 widget.TextBox(
                     text=" Vol:", foreground=COLOR_2, background=COLOR_4, padding=0
                 ),
-                widget.Volume(foreground=COLOR_2, background=COLOR_4, padding=5),
+                #widget.Volume(foreground=COLOR_2, background=COLOR_4, padding=5),
                 widget.Image(
                     scale=True,
                     filename="~/.config/qtile/Images/bar02.png",
@@ -290,15 +215,15 @@ screens = [
 # Drag floating layouts.
 mouse = [
     Drag(
-        [MOD],
+        [mod],
         "Button1",
         lazy.window.set_position_floating(),
         start=lazy.window.get_position(),
     ),
     Drag(
-        [MOD], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()
+        [mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()
     ),
-    Click([MOD], "Button2", lazy.window.bring_to_front()),
+    Click([mod], "Button2", lazy.window.bring_to_front()),
 ]
 
 floating_types = ["notification", "toolbar", "splash", "dialog"]
