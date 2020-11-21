@@ -1,6 +1,7 @@
-from libqtile.config import Drag, Click
-from settings.constants import mod
+from libqtile.config import Click, Drag
 from libqtile.lazy import lazy
+
+from settings.constants import mod
 
 # Drag floating layouts.
 mouse = [

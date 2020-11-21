@@ -1,7 +1,7 @@
-from libqtile.config import Key
 from libqtile.command import lazy
+from libqtile.config import Key
 
-from settings.constants import mod, terminal, browser
+from settings.constants import browser, mod, terminal
 
 keys = [
     Key([mod], "j", lazy.layout.down(), desc="Move focus down in stack pane"),
