@@ -52,4 +52,7 @@ keys = [
         desc="Launch rofi",
     ),
     Key([mod], "b", lazy.spawn(browser), desc=f"Launch {browser}"),
+    Key([], "XF86AudioMute", lazy.spawn("amixer -c 0 set Speaker toggle")),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -c 0 -q set Speaker 2dB+")),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -c 0 -q set Speaker 2dB-")),
 ]

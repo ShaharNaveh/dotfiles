@@ -13,7 +13,10 @@ layout_configuration = {
 }
 
 
-layouts = [layout.MonadTall(**layout_configuration, ratio=0.63)]
+layouts = [
+    layout.Matrix(**layout_configuration),
+    layout.MonadTall(**layout_configuration, ratio=0.63),
+]
 
 floating_layout = layout.Floating(
     float_rules=[
