@@ -14,6 +14,7 @@ layout_configuration = {
 
 
 layouts = [
+    layout.Max(**layout_configuration),
     layout.Matrix(**layout_configuration),
     layout.MonadTall(**layout_configuration, ratio=0.63),
 ]
@@ -36,7 +37,6 @@ floating_layout = layout.Floating(
         {"wname": "pinentry"},  # GPG key password entry
         {"wmclass": "ssh-askpass"},  # ssh-askpass
         {"wname": "Open File"},
-        # {"wmclass": "VirtualBox"}, # Virtualbox
     ],
     fullscreen_border_width=0,
     border_width=0,
