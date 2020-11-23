@@ -45,7 +45,17 @@ floating_layout = layout.Floating(
 )
 
 
-floating_types = ["notification", "toolbar", "splash", "dialog"]
+floating_types = [
+    "notification",
+    "toolbar",
+    "splash",
+    "dialog",
+    "utility",
+    "menu",
+    "dropdown_menu",
+    "popup_menu",
+    "tooltip,dock",
+]
 
 
 @hook.subscribe.client_new
