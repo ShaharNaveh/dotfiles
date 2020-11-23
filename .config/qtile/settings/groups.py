@@ -22,8 +22,7 @@ groups = [
         "WWW",
         label="  ",
         layout="max",
-        # layout="monadtall",
-        matches=[Match(wm_class=["Firefox", "Tor Browser"])],
+        matches=[Match(wm_class=["firefox", "Tor Browser"])],
     ),
     Group(
         "SYS",
@@ -41,12 +40,16 @@ groups = [
         label="   ",
     ),
     Group(
-        "DIRS", label="   ", layout="monadtall", matches=[Match(wm_class=["Pacmanfm"])]
+        "DIRS",
+        label="   ",
+        layout="monadtall",
+        matches=[Match(wm_class=["Pacmanfm"])],
     ),
     Group(
         "ZOOM",
         label="   ",
-        layout="monadtall",
+        layout="max",
+        matches=[Match(wm_class=["zoom"])],
     ),
     Group(
         "VBOX",
