@@ -15,7 +15,8 @@ layout_configuration = {
 
 layouts = [
     layout.Max(**layout_configuration),
-    layout.Matrix(**layout_configuration),
+    # layout.Matrix(**layout_configuration),
+    layout.Tile(**layout_configuration),
     layout.MonadTall(**layout_configuration, ratio=0.63),
 ]
 
