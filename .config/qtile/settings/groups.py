@@ -22,6 +22,7 @@ groups = [
         "WWW",
         label="  ",
         layout="monadtall",
+        Matches=[Match(wm_class=["Firefox", "Tor Browser"])],
     ),
     Group(
         "SYS",
@@ -42,6 +43,13 @@ groups = [
         "DIRS",
         label="   ",
         layout="monadtall",
+        Matches=[
+            Match(
+                wm_class=[
+                    "Pacmanfm",
+                ]
+            )
+        ],
     ),
     Group(
         "ZOOM",
@@ -52,7 +60,9 @@ groups = [
         "VBOX",
         label="  ",
         layout="monadtall",
-        matches=[Match(wm_class=["VirtualBox Manager", "VirtualBox Machine"])],
+        matches=[
+            Match(wm_class=["VirtualBox", "VirtualBox Machine", "VirtualBox Manager"])
+        ],
     ),
 ]
 
