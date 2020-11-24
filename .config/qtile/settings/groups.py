@@ -5,7 +5,7 @@ from settings.constants import mod, terminal
 
 from settings.keys import keys
 
-# The icons are from https://www.nerdfonts.com/cheat-sheet
+# NOTE: The icons are from https://www.nerdfonts.com/cheat-sheet
 groups = [
     Group(
         "WWW",
