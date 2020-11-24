@@ -8,34 +8,40 @@ from settings.keys import keys
 # NOTE: The icons are from https://www.nerdfonts.com/cheat-sheet
 groups = [
     Group(
+        "SYS",
+        label=" ",  # ICON: nf-dev-terminal
+        layout="monadtall",
+    ),
+    Group(
         "WWW",
-        label="  ",  # ICON: nf-fa-firefox
+        label=" ",  # ICON: nf-fa-firefox
         layout="max",
         matches=[Match(wm_class=["firefox", "Tor Browser"])],
     ),
     Group(
-        "SYS",
-        label="   ",  # ICON: nf-dev-terminal
-        layout="monadtall",
-    ),
-    Group(
         "CODE",
-        label="   ",  # ICON: nf-fa-code
+        label=" ",  # ICON: nf-fa-code
         layout="monadtall",
-    ),
-    Group(
-        "ZOOM",
-        label="   ",  # ICON: nf-fa-video_camera
-        layout="max",
-        matches=[Match(wm_class=["zoom"])],
     ),
     Group(
         "VBOX",
-        label="  ",  # ICON: nf-mdi-layers
+        label=" ",  # ICON: nf-mdi-layers
         layout="monadtall",
         matches=[
             Match(wm_class=["VirtualBox", "VirtualBox Machine", "VirtualBox Manager"])
         ],
+    ),
+    Group(
+        "ZOOM",
+        label=" ",  # ICON: nf-fa-video_camera
+        layout="max",
+        matches=[Match(wm_class=["zoom"])],
+    ),
+    Group(
+        "TELEGRAM",
+        label=" ",  # ICON: nf-fae-telegram
+        layout="max",
+        matches=[Match(wm_class=["TelegramDesktop", "telegram-desktop"])],
     ),
 ]
 
