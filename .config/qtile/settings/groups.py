@@ -24,17 +24,6 @@ groups = [
         layout="monadtall",
     ),
     Group(
-        "CONFIG",
-        label="   ",  # ICON: nf-seti-config
-        layout="monadtall",
-    ),
-    Group(
-        "DIRS",
-        label="   ",  # ICON: nf-mdi-folder
-        layout="monadtall",
-        matches=[Match(wm_class=["Pacmanfm"])],
-    ),
-    Group(
         "ZOOM",
         label="   ",  # ICON: nf-fa-video_camera
         layout="max",
