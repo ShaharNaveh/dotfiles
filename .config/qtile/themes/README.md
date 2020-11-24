@@ -6,51 +6,55 @@ A template will look like this:
 {
     "dark": [
         "#ffffff",
-        "#ffffff",
+        "#ffffff"
     ],
     "grey": [
         "#ffffff",
-        "#ffffff",
+        "#ffffff"
     ],
     "light": [
         "#ffffff",
-        "#ffffff",
+        "#ffffff"
     ],
     "text": [
         "#ffffff",
-        "#ffffff",
+        "#ffffff"
     ],
     "focus": [
         "#ffffff",
-        "#ffffff",
+        "#ffffff"
     ],
     "active": [
         "#ffffff",
-        "#ffffff",
+        "#ffffff"
     ],
     "inactive": [
         "#ffffff",
-        "#ffffff",
+        "#ffffff"
     ],
     "urgent": [
         "#ffffff",
-        "#ffffff",
+        "#ffffff"
     ],
     "color1": [
         "#ffffff",
-        "#ffffff",
+        "#ffffff"
     ],
     "color2": [
         "#ffffff",
-        "#ffffff",
+        "#ffffff"
     ],
     "color3": [
         "#ffffff",
-        "#ffffff",
+        "#ffffff"
     ],
     "color4": [
         "#ffffff",
+        "#ffffff"
+    ],
+    "color5": [
         "#ffffff",
+        "#ffffff"
     ]
 }
 
