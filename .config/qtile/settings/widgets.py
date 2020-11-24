@@ -9,8 +9,8 @@ def base(background: str = "dark", foreground: str = "text") -> dict:
     return {"background": colors[background], "foreground": colors[foreground]}
 
 
-def separator(linewidth: int = 0, padding: int = 5):
-    return widget.Sep(**base(), linewidth=linewidth, padding=padding)
+def separator():
+    return widget.Sep(**base(), linewidth=0, padding=5)
 
 
 # TODO: `text` maybe optinal?
@@ -33,7 +33,7 @@ def powerline(background: str = "dark", foreground: str = "light"):
         **base(background=background, foreground=foreground),
         text="",  # ICON: nf-oct-triangle_left
         fontsize=37,
-        padding=-2,
+        padding=-4,
     )
 
 
@@ -45,7 +45,7 @@ def workspaces() -> list:
             active=colors["active"],
             borderwidth=1,
             disable_drag=True,
-            font="Ubuntu Mono",
+            font="UbuntuMono Nerd Font",
             fontsize=19,
             highlight_method="block",
             inactive=colors["inactive"],
@@ -70,12 +70,12 @@ def workspaces() -> list:
 primary_widgets = [
     *workspaces(),
     separator(),
-    powerline(background="dark", foreground="color4"),
+    powerline(background="dark", foreground="color3"),
     icon(
-        background="color4",
-        text="  ",  # ICON: nf-fa-download
+        background="color3",
+        text=" ﯱ ",  # ICON: nf-mdi-network
     ),
-    widget.Net(**base(background="color3")),
+    widget.Net(**base(background="color3"), format="{down} ↓↑ {up}"),
     powerline(background="color3", foreground="color2"),
     widget.CurrentLayoutIcon(**base(background="color2"), scale=0.65),
     widget.CurrentLayout(**base(background="color2"), padding=5),
@@ -100,7 +100,7 @@ secondary_widgets = [
 
 
 widget_defaults = {
-    "font": "Ubuntu Mono",
+    "font": "UbuntuMono Nerd Font Bold",
     "fontsize": 14,
     "padding": 1,
 }
