@@ -1,15 +1,3 @@
-"""
-Icons from https://www.nerdfonts.com/cheat-sheet
-
-Icons used, ATM:
-nf-fa-firefox
-nf-dev-terminal
-nf-fa-code
-nf-seti-config
-nf-mdi-folder
-nf-fa-video_camera
-nf-mdi-layers
-"""
 from libqtile.command import lazy
 from libqtile.config import DropDown, Group, Key, Match, ScratchPad
 
@@ -17,43 +5,44 @@ from settings.constants import mod, terminal
 
 from settings.keys import keys
 
+# The icons are from https://www.nerdfonts.com/cheat-sheet
 groups = [
     Group(
         "WWW",
-        label="  ",
+        label="  ", # ICON: nf-fa-firefox
         layout="max",
         matches=[Match(wm_class=["firefox", "Tor Browser"])],
     ),
     Group(
         "SYS",
-        label="   ",
+        label="   ", # ICON: nf-dev-terminal
         layout="monadtall",
     ),
     Group(
         "CODE",
-        label="   ",
+        label="   ", # ICON: nf-fa-code
         layout="monadtall",
     ),
     Group(
         "CONFIG",
+        label="   ", # ICON: nf-seti-config
         layout="monadtall",
-        label="   ",
     ),
     Group(
         "DIRS",
-        label="   ",
+        label="   ", # ICON: nf-mdi-folder
         layout="monadtall",
         matches=[Match(wm_class=["Pacmanfm"])],
     ),
     Group(
         "ZOOM",
-        label="   ",
+        label="   ", # ICON: nf-fa-video_camera
         layout="max",
         matches=[Match(wm_class=["zoom"])],
     ),
     Group(
         "VBOX",
-        label="  ",
+        label="  ", # ICON: nf-mdi-layers
         layout="monadtall",
         matches=[
             Match(wm_class=["VirtualBox", "VirtualBox Machine", "VirtualBox Manager"])
