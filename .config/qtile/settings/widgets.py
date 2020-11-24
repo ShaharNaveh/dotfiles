@@ -45,7 +45,7 @@ def workspaces() -> list:
             active=colors["active"],
             borderwidth=1,
             disable_drag=True,
-            font="UbuntuMono Nerd Font",
+            font="Ubuntu Mono",
             fontsize=19,
             highlight_method="block",
             inactive=colors["inactive"],
@@ -73,7 +73,7 @@ primary_widgets = [
     powerline(background="dark", foreground="color4"),
     icon(
         background="color4",
-        text="",  # ICON: nf-fa-download
+        text="  ",  # ICON: nf-fa-download
     ),
     widget.Net(**base(background="color3")),
     powerline(background="color3", foreground="color2"),
@@ -83,11 +83,11 @@ primary_widgets = [
     icon(
         background="color1",
         fontsize=17,
-        text="",  # ICON: nf-mdi-calendar_clock
+        text="  ",  # ICON: nf-mdi-calendar_clock
     ),
     widget.Clock(**base(background="color1"), format="%d/%m/%Y - %H:%M "),
     powerline(background="color1", foreground="dark"),
-    # widget.Systray(background=colors['dark'], padding=5),
+    widget.Systray(background=colors["dark"], padding=5),
 ]
 
 secondary_widgets = [
