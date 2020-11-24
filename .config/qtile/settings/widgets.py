@@ -13,7 +13,6 @@ def separator():
     return widget.Sep(**base(), linewidth=0, padding=5)
 
 
-# TODO: `text` maybe optinal?
 def icon(
     background: str = "dark",
     fontsize: int = 16,
@@ -87,7 +86,9 @@ primary_widgets = [
     ),
     widget.Clock(**base(background="color1"), format="%d/%m/%Y - %H:%M "),
     powerline(background="color1", foreground="dark"),
-    widget.Systray(background=colors["dark"], padding=5),
+    widget.KeyboardLayout(
+        background=colors["dark"], configured_keyboards=["us", "il"], padding=5
+    ),
 ]
 
 secondary_widgets = [
