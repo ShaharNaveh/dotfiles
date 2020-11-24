@@ -169,8 +169,8 @@ screens = [
                 ),
                 # widget.Volume(foreground=COLOR_2, background=COLOR_4, padding=5),
                 widget.KeyboardLayout(
-                        configured_keyboards=["us", "il"],
-                        ),
+                    configured_keyboards=["us", "il"],
+                ),
                 widget.Image(
                     scale=True,
                     filename="~/.config/qtile/images/bar02.png",
