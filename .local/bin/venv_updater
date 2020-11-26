@@ -101,6 +101,8 @@ def main() -> None:
 
         requirements_file_path = pub_dir / CONFIG["requirements_file"]
 
+        print(f"Updating: {pub_dir.stem}")
+
         upgrade_venv_req(
             venv_path=venv_dir_path, requirements_path=requirements_file_path
         )
