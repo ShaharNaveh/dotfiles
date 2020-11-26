@@ -1,0 +1,110 @@
+#!/usr/bin/env python3
+import pathlib
+import shlex
+import string
+import subprocess
+from typing import Dict, Iterable, Union
+
+CONFIG: Dict[str, Union[str, string.Template]] = {
+    "command": string.Template(
+        "$python_path -m pip install"
+        " --upgrade --upgrade-strategy 'eager'"
+        " --requirement $requirements_file_path"
+    ),
+    "requirements_file": "requirements.txt",
+    "venvs_dir": ".venvs",
+    "venv_dir": ".venv",
+}
+
+
+def iter_pubdir(path: pathlib.Path) -> Iterable[pathlib.Path]:
+    """
+    Iterate only over public directories.
+
+    Parameters
+    ----------
+    path : pathlib.Path
+        The directory path to iterate over.
+
+    Yields
+    ------
+    pathlib.Path
+        Path of a public directory.
+    """
+    for child in path.iterdir():
+        if child.is_file():
+            continue
+        if child.stem.startswith("."):
+            continue
+        if not child.is_dir():
+            continue
+        yield child
+
+
+def is_comply(path: pathlib.Path) -> bool:
+    """
+    Check if a directory complies with a fixed file structure.
+
+    In order to be returned ``True``,
+    the directory needs to have the following structure.
+
+        - .venv (directory)
+        - requirements.txt (file)
+
+    Parameters
+    ----------
+    path : pathlib.Path
+        Path that should have a .venv folder and a requirements.txt file.
+    """
+    venv_dir_path = path / CONFIG["venv_dir"]
+    if not venv_dir_path.exists() or not venv_dir_path.is_dir():
+        return False
+
+    requirements_file_path = path / CONFIG["requirements_file"]
+    if not requirements_file_path.exists() or not requirements_file_path.is_file():
+        return False
+
+    return True
+
+
+def upgrade_venv_req(venv_path: pathlib.Path, requirements_path: pathlib.Path) -> None:
+    """
+    Upgrade a venv with a requirements file.
+
+    Parameters
+    ----------
+    venv_path : pathlib.Path
+        Path to the virtual environment directory.
+    requirements_path : pathlib.Path
+        Path to the requirements file.
+    """
+    python_path = venv_path / "bin" / "python3"
+
+    full_command = CONFIG["command"].substitute(
+        python_path=str(python_path),
+        requirements_file_path=str(requirements_path.resolve()),
+    )
+
+    args = shlex.split(full_command)
+
+    subprocess.run(args, capture_output=True)
+
+
+def main() -> None:
+    ROOT_VENVS_PATH = pathlib.Path.home() / CONFIG["venvs_dir"]
+
+    for pub_dir in iter_pubdir(ROOT_VENVS_PATH):
+        if not is_comply(path=pub_dir):
+            continue
+
+        venv_dir_path = pub_dir / CONFIG["venv_dir"]
+
+        requirements_file_path = pub_dir / CONFIG["requirements_file"]
+
+        upgrade_venv_req(
+            venv_path=venv_dir_path, requirements_path=requirements_file_path
+        )
+
+
+if __name__ == "__main__":
+    main()
