@@ -31,7 +31,7 @@ def iter_pubdir(path: pathlib.Path) -> Iterable[pathlib.Path]:
     pathlib.Path
         Path of a public directory.
     """
-    for child in path.iterdir():
+    for child in sorted(path.iterdir()):
         if child.is_file():
             continue
         if child.stem.startswith("."):
