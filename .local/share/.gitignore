@@ -3,11 +3,4 @@
 !.gitignore
 
 # Except for the files and folders we to track
-!.config
-!.local
-!.asoundrc
-!.bash_aliases
-!.bashrc
-!.tmux.conf
-!.xinitrc
-!.venvs
+!fonts
