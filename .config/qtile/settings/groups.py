@@ -6,50 +6,72 @@ from settings.constants import mod, terminal
 from settings.keys import keys
 
 # NOTE: The icons are from https://www.nerdfonts.com/cheat-sheet
-groups = [
-    Group(
+group_names = [
+    (
         "SYS",
-        label="1",  # ICON: nf-dev-terminal
-        layout="monadtall",
+        {
+            "label": "",  # ICON: nf-dev-terminal
+            "layout": "monadtall",
+        },
     ),
-    Group(
+    (
         "WWW",
-        label="2",  # ICON: nf-fa-firefox
-        layout="max",
-        matches=[Match(wm_class=["firefox", "Tor Browser"])],
+        {
+            "label": "",  # ICON: nf-fa-firefox
+            "layout": "max",
+            "matches": [Match(wm_class=["firefox", "Tor Browser"])],
+        },
     ),
-    Group(
+    (
         "CODE",
-        label="3",  # ICON: nf-fa-code
-        layout="monadtall",
+        {
+            "label": "",  # ICON: nf-fa-code
+            "layout": "monadtall",
+        },
     ),
-    Group(
+    (
         "DOC",
-        label="4",  # ICON: nf-mdi-file_document
-        layout="monadtall",
-        matches=[Match(wm_class=["libreoffice", "libreoffice-startcenter"])],
+        {
+            "label": "",  # ICON: nf-mdi-file_document
+            "layout": "monadtall",
+            "matches": [Match(wm_class=["libreoffice", "libreoffice-startcenter"])],
+        },
     ),
-    Group(
+    (
         "VBOX",
-        label="5",  # ICON: nf-mdi-layers
-        layout="monadtall",
-        matches=[
-            Match(wm_class=["VirtualBox", "VirtualBox Machine", "VirtualBox Manager"])
-        ],
+        {
+            "label": "",  # ICON: nf-mdi-layers
+            "layout": "monadtall",
+            "matches": [
+                Match(
+                    wm_class=["VirtualBox", "VirtualBox Machine", "VirtualBox Manager"]
+                )
+            ],
+        },
     ),
-    Group(
+    (
         "ZOOM",
-        label="6",  # ICON: nf-fa-video_camera
-        layout="max",
-        matches=[Match(wm_class=["zoom"])],
+        {
+            "label": "",  # ICON: nf-fa-video_camera
+            "layout": "max",
+            "matches": [Match(wm_class=["zoom"])],
+        },
     ),
-    Group(
+    (
         "TELEGRAM",
-        label="7",  # ICON: nf-fae-telegram
-        layout="max",
-        matches=[Match(wm_class=["TelegramDesktop", "telegram-desktop"])],
+        {
+            "label": "",  # ICON: nf-fae-telegram
+            "layout": "max",
+            "matches": [Match(wm_class=["TelegramDesktop", "telegram-desktop"])],
+        },
     ),
 ]
+
+groups = []
+
+for index, (name, kwargs) in enumerate(group_names, start=1):
+    kwargs["label"] = f"{index}{kwargs['label']}"
+    groups.append(Group(name, **kwargs))
 
 for index, group in enumerate(groups, start=1):
     group_key = str(index)
