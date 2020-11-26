@@ -27,6 +27,7 @@ groups = [
         "DOC",
         label="",  # ICON: nf-mdi-file_document
         layout="monadtall",
+        matches=[Match(wm_class=["libreoffice", "libreoffice-startcenter"])],
     ),
     Group(
         "VBOX",
