@@ -1,0 +1,12 @@
+# Ignore everything
+/*
+!.gitignore
+
+# Except for the files and folders we to track
+!.config
+!.asoundrc
+!.bash_aliases
+!.bashrc
+!.tmux.conf
+!.xinitrc
+!.venvs
