@@ -9,23 +9,28 @@ from settings.keys import keys
 groups = [
     Group(
         "SYS",
-        label=" ",  # ICON: nf-dev-terminal
+        label="",  # ICON: nf-dev-terminal
         layout="monadtall",
     ),
     Group(
         "WWW",
-        label=" ",  # ICON: nf-fa-firefox
+        label="",  # ICON: nf-fa-firefox
         layout="max",
         matches=[Match(wm_class=["firefox", "Tor Browser"])],
     ),
     Group(
         "CODE",
-        label=" ",  # ICON: nf-fa-code
+        label="",  # ICON: nf-fa-code
+        layout="monadtall",
+    ),
+    Group(
+        "DOC",
+        label="",  # ICON: nf-mdi-file_document
         layout="monadtall",
     ),
     Group(
         "VBOX",
-        label=" ",  # ICON: nf-mdi-layers
+        label="",  # ICON: nf-mdi-layers
         layout="monadtall",
         matches=[
             Match(wm_class=["VirtualBox", "VirtualBox Machine", "VirtualBox Manager"])
@@ -33,13 +38,13 @@ groups = [
     ),
     Group(
         "ZOOM",
-        label=" ",  # ICON: nf-fa-video_camera
+        label="",  # ICON: nf-fa-video_camera
         layout="max",
         matches=[Match(wm_class=["zoom"])],
     ),
     Group(
         "TELEGRAM",
-        label=" ",  # ICON: nf-fae-telegram
+        label="",  # ICON: nf-fae-telegram
         layout="max",
         matches=[Match(wm_class=["TelegramDesktop", "telegram-desktop"])],
     ),
