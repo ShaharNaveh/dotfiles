@@ -1,4 +1,0 @@
-ipython
-pip
-setuptools
-wheel
