@@ -19,6 +19,8 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
 
 "Plug 'neomake/neomake'
+
+Plug 'neomake/neomake', { 'for': ['python', 'rust'] }
 "Plug 'sbdchd/neoformat'
 "Plug 'rust-lang/rust.vim'
 "Plug 'itchyny/lightline.vim'
@@ -28,6 +30,4 @@ Plug 'ryanoasis/vim-devicons'
 "Plug 'tpope/vim-fugitive'
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 "Plug 'junegunn/fzf.vim'
-"Plug 'preservim/nerdtree'
-"Plug 'ryanoasis/vim-devicons'
 call plug#end()
