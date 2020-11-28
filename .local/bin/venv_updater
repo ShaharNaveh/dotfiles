@@ -87,7 +87,14 @@ def upgrade_venv_req(venv_path: pathlib.Path, requirements_path: pathlib.Path) -
 
     args = shlex.split(full_command)
 
-    subprocess.run(args, capture_output=True)
+    with subprocess.Popen(
+        args, stdout=subprocess.PIPE, bufsize=1, universal_newlines=True
+    ) as subp:
+        for line in subp.stdout:
+            print(line, end="")
+
+    if subp.returncode != 0:
+        print(f"Command: {full_command} WAS NOT EXECECUTED SUCCESFULLY")
 
 
 def main() -> None:
