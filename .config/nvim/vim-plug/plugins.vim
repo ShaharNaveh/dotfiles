@@ -19,8 +19,6 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
 
 "Plug 'neomake/neomake'
-
-Plug 'neomake/neomake', { 'for': ['python', 'rust'] }
 "Plug 'sbdchd/neoformat'
 "Plug 'rust-lang/rust.vim'
 "Plug 'itchyny/lightline.vim'
