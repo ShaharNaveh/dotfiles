@@ -1,5 +1,6 @@
 jedi
+msgpack>=1.0.0
 pip
-pynvim
+pynvim>=0.3.0
 setuptools
 wheel
