@@ -34,7 +34,7 @@ group_names = [
         {
             "label": "",  # ICON: nf-mdi-file_document
             "layout": "monadtall",
-            "matches": [Match(wm_class=["libreoffice", "libreoffice-startcenter"])],
+            "matches": [Match(wm_class=["libreoffice"])],
         },
     ),
     (
