@@ -18,12 +18,16 @@ Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
 
-"Plug 'neomake/neomake'
+
+Plug 'cespare/vim-toml'
+
+if executable('rustc')
+  Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+  "Plug 'racer-rust/vim-racer', { 'for': 'rust' }
+endif
 "Plug 'sbdchd/neoformat'
-"Plug 'rust-lang/rust.vim'
 "Plug 'itchyny/lightline.vim'
 "Plug 'mengelbrecht/lightline-bufferline'
-"Plug 'cespare/vim-toml'
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'tpope/vim-fugitive'
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
