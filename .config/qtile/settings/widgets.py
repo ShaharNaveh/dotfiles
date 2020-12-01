@@ -69,6 +69,12 @@ def workspaces() -> list:
 primary_widgets = [
     *workspaces(),
     separator(),
+    #powerline(background="dark", foreground="color4"),
+    #icon(
+        #background="color4",
+        #text=" ", # ICON: nf-fa-download
+        #),
+    #widget.Pacman(**base(background="color4"), update_interval=1800),
     powerline(background="dark", foreground="color3"),
     icon(
         background="color3",
