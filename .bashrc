@@ -47,5 +47,5 @@ if ! shopt -oq posix; then
 fi
 
 if [ -d "$HOME/Documents/Studies" ]; then
-	export STUDY="$HOME/Documents/Studies"
+	export study="$HOME/Documents/Studies"
 fi
