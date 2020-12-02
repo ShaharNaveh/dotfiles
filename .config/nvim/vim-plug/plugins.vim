@@ -28,6 +28,8 @@ endif
 
 Plug 'ap/vim-css-color'
 
+"Plug 'tpope/vim-markdown', { 'for': 'markdown' }
+
 "Plug 'sbdchd/neoformat'
 "Plug 'itchyny/lightline.vim'
 "Plug 'mengelbrecht/lightline-bufferline'
