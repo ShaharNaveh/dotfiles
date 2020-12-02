@@ -45,3 +45,7 @@ if ! shopt -oq posix; then
 		. /etc/bash_completion
 	fi
 fi
+
+if [ -d "$HOME/Documents/Studies" ]; then
+	export STUDY="$HOME/Documents/Studies"
+fi
