@@ -25,6 +25,9 @@ if executable('rustc')
   Plug 'rust-lang/rust.vim', { 'for': 'rust' }
   "Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 endif
+
+Plug 'ap/vim-css-color'
+
 "Plug 'sbdchd/neoformat'
 "Plug 'itchyny/lightline.vim'
 "Plug 'mengelbrecht/lightline-bufferline'
