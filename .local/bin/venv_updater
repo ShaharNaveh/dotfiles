@@ -3,7 +3,7 @@ import pathlib
 import shlex
 import string
 import subprocess
-from typing import Dict, Iterable, Union
+from typing import Dict, Iterable, List, Union
 
 CONFIG: Dict[str, Union[str, string.Template]] = {
     "command": string.Template(
@@ -15,6 +15,12 @@ CONFIG: Dict[str, Union[str, string.Template]] = {
     "venvs_dir": ".venvs",
     "venv_dir": ".venv",
 }
+
+BASE_COMMANDS: List[string.Template] = [
+    string.Template("$python_path -m pip install --upgrade wheel"),
+    string.Template("$python_path -m pip install --upgrade setuptools"),
+    string.Template("$python_path -m pip install --upgrade pip"),
+]
 
 
 def iter_pubdir(path: pathlib.Path) -> Iterable[pathlib.Path]:
@@ -79,6 +85,25 @@ def upgrade_venv_req(venv_path: pathlib.Path, requirements_path: pathlib.Path) -
         Path to the requirements file.
     """
     python_path = venv_path / "bin" / "python3"
+
+    for base_command_template in BASE_COMMANDS:
+        base_command = base_command_template.substitute(python_path=str(python_path))
+        base_commands_args = shlex.split(base_command)
+        base_upgrade_proccess = subprocess.Popen(
+            base_commands_args,
+            stdout=subprocess.PIPE,
+            bufsize=1,
+            universal_newlines=True,
+        )
+
+        for line in base_upgrade_proccess.stdout:
+            print(line, end="")
+
+        print(f"Waiting for {base_command} to finish")
+        base_upgrade_proccess.wait()
+
+        if base_upgrade_proccess.returncode != 0:
+            print(f"Command: {base_command} WAS NOT EXECECUTED SUCCESFULLY")
 
     full_command = CONFIG["command"].substitute(
         python_path=str(python_path),
