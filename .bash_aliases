@@ -20,7 +20,7 @@ alias ls="exa -a -l --color=always --group-directories-first"
 alias lt="exa -a -T --color=always --group-directories-first"
 
 # M
-alias mirror="sudo reflector -p https --fastest 30 --latest 30 --number 10 --sort rate --verbose --save /etc/pacman.d/mirrorlist"
+alias mirror="sudo reflector --protocol https --age 6 --fastest 10 --latest 10 --number 10 --sort rate --verbose --save /etc/pacman.d/mirrorlist"
 alias mv="mv -i"
 
 # P
