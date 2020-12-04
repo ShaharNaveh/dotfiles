@@ -4,3 +4,5 @@
 
 # Except for the files and folders we to track
 !venv_updater
+!.flake8
+!.isort.cfg
