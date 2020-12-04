@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
+import logging
 import pathlib
 import shlex
 import string
 import subprocess
 from typing import Dict, Iterable, List, Union
+
+logging.basicConfig(format="[%(levelname)s]\t%(message)s", level=logging.DEBUG)
 
 CONFIG: Dict[str, Union[str, string.Template]] = {
     "command": string.Template(
@@ -21,6 +24,15 @@ BASE_COMMANDS: List[string.Template] = [
     string.Template("$python_path -m pip install --upgrade setuptools"),
     string.Template("$python_path -m pip install --upgrade pip"),
 ]
+
+
+class Colors:
+    OKBLUE = "\033[94m"
+    OKCYAN = "\033[96m"
+    OKGREEN = "\033[92m"
+    WARNING = "\033[93m"
+    FAIL = "\033[91m"
+    ENDC = "\033[0m"
 
 
 def iter_pubdir(path: pathlib.Path) -> Iterable[pathlib.Path]:
@@ -89,21 +101,22 @@ def upgrade_venv_req(venv_path: pathlib.Path, requirements_path: pathlib.Path) -
     for base_command_template in BASE_COMMANDS:
         base_command = base_command_template.substitute(python_path=str(python_path))
         base_commands_args = shlex.split(base_command)
+        logging.info(f"{Colors.OKCYAN}Executing: {base_command}{Colors.ENDC}")
         base_upgrade_proccess = subprocess.Popen(
             base_commands_args,
             stdout=subprocess.PIPE,
             bufsize=1,
             universal_newlines=True,
         )
-
         for line in base_upgrade_proccess.stdout:
             print(line, end="")
-
-        print(f"Waiting for {base_command} to finish")
         base_upgrade_proccess.wait()
 
         if base_upgrade_proccess.returncode != 0:
-            print(f"Command: {base_command} WAS NOT EXECECUTED SUCCESFULLY")
+            logging.warning(
+                f"{Colors.WARNING}Command: {base_command}"
+                f" WAS NOT EXECECUTED SUCCESFULLY{Colors.ENDC}"
+            )
 
     full_command = CONFIG["command"].substitute(
         python_path=str(python_path),
@@ -112,6 +125,7 @@ def upgrade_venv_req(venv_path: pathlib.Path, requirements_path: pathlib.Path) -
 
     args = shlex.split(full_command)
 
+    logging.info(f"{Colors.OKBLUE}Executing: {full_command}{Colors.ENDC}")
     with subprocess.Popen(
         args, stdout=subprocess.PIPE, bufsize=1, universal_newlines=True
     ) as subp:
@@ -119,7 +133,10 @@ def upgrade_venv_req(venv_path: pathlib.Path, requirements_path: pathlib.Path) -
             print(line, end="")
 
     if subp.returncode != 0:
-        print(f"Command: {full_command} WAS NOT EXECECUTED SUCCESFULLY")
+        logging.warning(
+            f"{Colors.WARNING}Command: {full_command}"
+            f" WAS NOT EXECECUTED SUCCESFULLY{Colors.ENDC}"
+        )
 
 
 def main() -> None:
@@ -133,7 +150,7 @@ def main() -> None:
 
         requirements_file_path = pub_dir / CONFIG["requirements_file"]
 
-        print(f"Updating: {pub_dir.stem}")
+        logging.info(f"{Colors.OKGREEN}Updating: {pub_dir.stem}{Colors.ENDC}")
 
         upgrade_venv_req(
             venv_path=venv_dir_path, requirements_path=requirements_file_path
