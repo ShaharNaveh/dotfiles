@@ -5,6 +5,9 @@
 ### EXPORT
 export TERM="screen-256color"
 export HISTCONTROL=ignoredups:erasedups
+export HISTTIMEFORMAT="%h %d %H:%M:%S "
+export HISTSIZE=1000000
+export HISTFILESIZE=1000000
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
@@ -31,6 +34,7 @@ esac
 ### SHOPT
 shopt -s histappend
 shopt -s checkwinsize
+#shopt -s cmdhist
 
 ### ALIASES
 if [ -f ~/.bash_aliases ]; then
