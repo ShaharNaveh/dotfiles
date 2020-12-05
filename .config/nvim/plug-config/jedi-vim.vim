@@ -2,7 +2,7 @@
 let g:jedi#completions_enabled = 0
 
 " Whether to show function call signature
-let g:jedi#show_call_signatures = '0'
+let g:jedi#show_call_signatures = '1'
 
 let g:jedi#use_splits_not_buffers = "right"
 
