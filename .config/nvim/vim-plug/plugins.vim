@@ -2,6 +2,7 @@ call plug#begin(stdpath('data') . '/plugged')
 " Color scheme
 Plug 'morhetz/gruvbox'
 
+
 " Autocompletion related plugins
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
@@ -28,12 +29,12 @@ endif
 
 Plug 'ap/vim-css-color'
 
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'tpope/vim-markdown', { 'for': 'markdown' }
 
 "Plug 'sbdchd/neoformat'
 "Plug 'itchyny/lightline.vim'
 "Plug 'mengelbrecht/lightline-bufferline'
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'tpope/vim-fugitive'
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 "Plug 'junegunn/fzf.vim'
