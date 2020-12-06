@@ -53,3 +53,8 @@ fi
 if [ -d "$HOME/Documents/Studies" ]; then
 	export study="$HOME/Documents/Studies"
 fi
+
+if [ -f "$HOME/.local/bin/starship" ]; then
+	eval "$(starship init bash)"
+fi
+
