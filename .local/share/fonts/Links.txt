@@ -1,3 +1,4 @@
 Fira Code:
-	https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/FiraCode/Bold/complete/Fira%20Code%20Bold%20Nerd%20Font%20Complete.ttf
-	https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/FiraCode/Bold/complete/Fira%20Code%20Bold%20Nerd%20Font%20Complete.ttf
+	https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
+Mononoki:
+	https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Mononoki.zip

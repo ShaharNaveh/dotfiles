@@ -30,14 +30,17 @@ env:
 
 font:
   bold:
+    #family: mononoki Nerd Font
     family: FiraCode Nerd Font
 
   italic:
+    #family: mononoki Nerd Font
     family: FiraCode Nerd Font
 
   normal:
+    #family: UbuntuMono Nerd Font
+    #family: mononoki Nerd Font
     family: FiraCode Nerd Font
-    style: Regular
 
 mouse:
   double_click: { threshold: 300 }
