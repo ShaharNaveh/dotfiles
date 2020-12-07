@@ -11,7 +11,7 @@ alias egrep="egrep --color=auto"
 alias fgrep="fgrep --color=auto"
 
 # G
-alias grep="grep --color=auto"
+alias grep="rg"
 
 # L
 alias la="exa -a --color=always --group-directories-first"
