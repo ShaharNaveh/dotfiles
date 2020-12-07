@@ -127,7 +127,6 @@ def update_git_dir(path: pathlib.Path) -> None:
         pull_command = COMMAND_TEMPLATE["git"]["pull"].substitute(
             git_dir=str(git_dir), repo_path=repo_path, branch_name=branch_name
         )
-        print(pull_command)
         pull_command_args = shlex.split(pull_command)
         pull_command_proccess = subprocess.Popen(
             pull_command_args,
