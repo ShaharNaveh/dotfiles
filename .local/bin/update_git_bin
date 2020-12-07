@@ -4,12 +4,12 @@ If somehow someone finds this code to be even mildy intresting,
 or even considring using this for personal use, not to mention production use.
 Please re-think about your life choices.
 """
-import pathlib
-import string
 import logging
-import shelx
+import os
+import pathlib
+import shlex
+import string
 import subprocess
-from pprint import pprint as print
 
 logging.basicConfig(format="[%(levelname)s]\t%(message)s", level=logging.DEBUG)
 
@@ -26,7 +26,8 @@ COMMAND_TEMPLATE = {
             " --work-tree=$repo_path"
             " reset --hard origin $branch_name"
         ),
-    }
+    },
+    "rust": {"build": "cargo build --release", "update": "cargo update"},
 }
 
 OPT_PATH = pathlib.Path.home() / CONFIG["rel_opt_path"]
@@ -49,6 +50,53 @@ def main():
 
         if is_git_dir(child):
             update_git_dir(child)
+
+        if is_rust_repo(child):
+            update_rust_repo(child)
+
+
+def update_rust_repo(path: pathlib.Path):
+    """
+    Update a rust repository.
+
+    Parameters
+    ----------
+    path : pathlib.Path
+        The path of the directory to update.
+    """
+    os.chdir(str(path))
+
+    update_command = COMMAND_TEMPLATE["rust"]["update"]
+    update_command_args = shlex.split(update_command)
+    update_command_proccess = subprocess.Popen(
+        update_command_args, stdout=subprocess.PIPE, bufsize=1, universal_newlines=True
+    )
+    for line in update_command_proccess.stdout:
+        print(line, end="")
+    update_command_proccess.wait()
+
+    if update_command_proccess.returncode != 0:
+        logging.warning(
+            f"{Colors.FAIL}Updating project deps of:{Colors.ENDC}"
+            f" {Colors.CVIOLET}{path.name}{Colors.ENDC}"
+            f" {Colors.FAIL}Failed!{Colors.ENDC}"
+        )
+
+    build_command = COMMAND_TEMPLATE["rust"]["build"]
+    build_command_args = shlex.split(build_command)
+    build_command_proccess = subprocess.Popen(
+        build_command_args, stdout=subprocess.PIPE, bufsize=1, universal_newlines=True
+    )
+    for line in build_command_proccess.stdout:
+        print(line, end="")
+    build_command_proccess.wait()
+
+    if build_command_proccess.returncode != 0:
+        logging.warning(
+            f"{Colors.FAIL}Building the binary in{Colors.ENDC}"
+            f" {Colors.CVIOLET}{path.name}{Colors.ENDC}"
+            f" {Colors.FAIL}Failed!{Colors.ENDC}"
+        )
 
 
 def update_git_dir(path: pathlib.Path) -> None:
@@ -80,15 +128,15 @@ def update_git_dir(path: pathlib.Path) -> None:
             git_dir=str(git_dir), repo_path=repo_path, branch_name=branch_name
         )
         pull_command_args = shlex.split(pull_command)
-
-        with subprocess.Popen(
+        pull_command_proccess = subprocess.Popen(
             pull_command_args,
             stdout=subprocess.PIPE,
             bufsize=1,
             universal_newlines=True,
-        ) as pull_command_proccess:
-            for line in pull_command_proccess.stdout:
-                print(line, end="")
+        )
+        for line in pull_command_proccess.stdout:
+            print(line, end="")
+        pull_command_proccess.wait()
 
         if pull_command_proccess.returncode != 0:
             logging.warning(
@@ -96,7 +144,6 @@ def update_git_dir(path: pathlib.Path) -> None:
                 f" {Colors.CVIOLET}{path.name}{Colors.ENDC}"
                 f" {Colors.FAIL}Failed!{Colors.ENDC}"
             )
-
 
     else:
         logging.warning(
@@ -123,6 +170,23 @@ def is_git_dir(path: pathlib.Path) -> bool:
         if child.name == ".git" and child.is_dir():
             return True
     return False
+
+
+def is_rust_repo(path: pathlib.Path) -> bool:
+    """
+    Checks if the directory is a rust repository.
+
+    Parameters
+    ----------
+    path : pathlib.Path
+        The path of the directory to check.
+
+    Returns
+    -------
+    Whether or not the directory is a rust repository.
+    """
+    cargo_toml = path / "Cargo.toml"
+    return cargo_toml.exists() and cargo_toml.is_file()
 
 
 if __name__ == "__main__":
