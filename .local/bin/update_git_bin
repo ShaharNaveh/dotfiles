@@ -45,7 +45,7 @@ class Colors:
 
 def main():
     for child in OPT_PATH.iterdir():
-        if child.is_file:
+        if child.is_file():
             continue
 
         if is_git_dir(child):
