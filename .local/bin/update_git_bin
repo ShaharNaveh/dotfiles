@@ -54,6 +54,24 @@ def main():
         if is_rust_repo(child):
             update_rust_repo(child)
 
+def run_n_wait(command: str, *, print_output: bool = False) -> int:
+    """
+
+    Returns
+    -------
+    The command's exit code.
+    """
+    command_args = shlex.split(command)
+    command_proccess = subprocess.Popen(
+        command_args, stdout=subprocess.PIPE, bufsize=1, universal_newlines=True
+    )
+    if print_output:
+        for line in command_proccess.stdout:
+            print(line, end="")
+
+    command_proccess.wait()
+
+    return command_proccess.returncode
 
 def update_rust_repo(path: pathlib.Path):
     """
@@ -67,15 +85,9 @@ def update_rust_repo(path: pathlib.Path):
     os.chdir(str(path))
 
     update_command = COMMAND_TEMPLATE["rust"]["update"]
-    update_command_args = shlex.split(update_command)
-    update_command_proccess = subprocess.Popen(
-        update_command_args, stdout=subprocess.PIPE, bufsize=1, universal_newlines=True
-    )
-    for line in update_command_proccess.stdout:
-        print(line, end="")
-    update_command_proccess.wait()
+    update_command_exit_status = run_n_wait(command=update_command, print_output=True)
 
-    if update_command_proccess.returncode != 0:
+    if update_command_exit_status != 0:
         logging.warning(
             f"{Colors.FAIL}Updating project deps of:{Colors.ENDC}"
             f" {Colors.CVIOLET}{path.name}{Colors.ENDC}"
@@ -83,15 +95,8 @@ def update_rust_repo(path: pathlib.Path):
         )
 
     build_command = COMMAND_TEMPLATE["rust"]["build"]
-    build_command_args = shlex.split(build_command)
-    build_command_proccess = subprocess.Popen(
-        build_command_args, stdout=subprocess.PIPE, bufsize=1, universal_newlines=True
-    )
-    for line in build_command_proccess.stdout:
-        print(line, end="")
-    build_command_proccess.wait()
-
-    if build_command_proccess.returncode != 0:
+    build_command_exit_status = run_n_wait(command=build_command, print_output=True)
+    if build_command_exit_status != 0:
         logging.warning(
             f"{Colors.FAIL}Building the binary in{Colors.ENDC}"
             f" {Colors.CVIOLET}{path.name}{Colors.ENDC}"
@@ -113,32 +118,18 @@ def update_git_dir(path: pathlib.Path) -> None:
     # "git --git-dir=$git_dir --work-tree=$repo_path fetch origin"
     fetch_command = COMMAND_TEMPLATE["git"]["fetch"].substitute(
         git_dir=str(git_dir), repo_path=repo_path
-    )
-    fetch_command_args = shlex.split(fetch_command)
-    fetch_command_proccess = subprocess.Popen(
-        fetch_command_args, stdout=subprocess.PIPE, bufsize=1, universal_newlines=True
-    )
-    for line in fetch_command_proccess.stdout:
-        print(line, end="")
-    fetch_command_proccess.wait()
+        )
 
-    if fetch_command_proccess.returncode == 0:
+    fetch_command_exit_status = run_n_wait(command=fetch_command, print_output=True)
+
+    if fetch_command_exit_status == 0:
         branch_name = REPOS_MAIN_BRANCH[path.name]
         pull_command = COMMAND_TEMPLATE["git"]["pull"].substitute(
             git_dir=str(git_dir), repo_path=repo_path, branch_name=branch_name
         )
-        pull_command_args = shlex.split(pull_command)
-        pull_command_proccess = subprocess.Popen(
-            pull_command_args,
-            stdout=subprocess.PIPE,
-            bufsize=1,
-            universal_newlines=True,
-        )
-        for line in pull_command_proccess.stdout:
-            print(line, end="")
-        pull_command_proccess.wait()
+        pull_command_exit_status = run_n_wait(command=pull_command, print_output=True)
 
-        if pull_command_proccess.returncode != 0:
+        if pull_command_exit_status != 0:
             logging.warning(
                 f"{Colors.FAIL}Pulling:{Colors.ENDC}"
                 f" {Colors.CVIOLET}{path.name}{Colors.ENDC}"
