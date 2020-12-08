@@ -27,8 +27,10 @@ if executable('rustc')
   "Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 endif
 
+
 Plug 'ap/vim-css-color'
 
+"Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'tpope/vim-markdown', { 'for': 'markdown' }
 
