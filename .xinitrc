@@ -50,5 +50,5 @@ nitrogen --restore &
 
 picom -b --config $HOME/.config/picom/picom.conf
 
-#exec qtile
-exec xmonad
+exec qtile
+#exec xmonad
