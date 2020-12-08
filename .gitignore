@@ -9,6 +9,7 @@
 !.bash_aliases
 !.bashrc
 !.tmux.conf
+!.xmonad
 !.xinitrc
 !.xprofile
 !.venvs
