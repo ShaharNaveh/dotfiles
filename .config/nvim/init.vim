@@ -10,7 +10,6 @@ source $HOME/.config/nvim/plug-config/nerdtree-git.vim
 source $HOME/.config/nvim/plug-config/airline-themes.vim
 source $HOME/.config/nvim/plug-config/nerdtree.vim
 
-
 source $HOME/.config/nvim/settings/general.vim
 source $HOME/.config/nvim/settings/color.vim
 source $HOME/.config/nvim/settings/keymap.vim
