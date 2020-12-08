@@ -10,25 +10,33 @@ import pathlib
 import shlex
 import string
 import subprocess
+import sys
+from typing import Optional, Tuple
 
 logging.basicConfig(format="[%(levelname)s]\t%(message)s", level=logging.DEBUG)
 
 CONFIG = {"rel_opt_path": pathlib.Path(".local/opt/")}
 REPOS_MAIN_BRANCH = {"bottom": "master", "starship": "master"}
+GIT_BASE_COMMAND_TEMPLATE = string.Template(
+    "git --git-dir=$git_dir --work-tree=$repo_path $git_command"
+)
 COMMAND_TEMPLATE = {
     "git": {
-        "fetch": string.Template(
-            "git --git-dir=$git_dir --work-tree=$repo_path fetch origin"
+        "checkout": string.Template(
+            GIT_BASE_COMMAND_TEMPLATE.safe_substitute(git_command="checkout $target")
         ),
-        "pull": string.Template(
-            "git"
-            " --git-dir=$git_dir"
-            " --work-tree=$repo_path"
-            " reset --hard origin/$branch_name"
+        "fetch": string.Template(
+            GIT_BASE_COMMAND_TEMPLATE.safe_substitute(git_command="fetch origin --tags")
+        ),
+        "latest_tag": string.Template(
+            GIT_BASE_COMMAND_TEMPLATE.safe_substitute(
+                git_command="describe --tags $$(git rev-list --tags --max-count=1)"
+            )
         ),
     },
     "rust": {"build": "cargo build --release", "update": "cargo update"},
 }
+
 
 OPT_PATH = pathlib.Path.home() / CONFIG["rel_opt_path"]
 
@@ -44,104 +52,133 @@ class Colors:
 
 
 def main():
-    for child in OPT_PATH.iterdir():
+    for child in sorted(OPT_PATH.iterdir()):
         if child.is_file():
             continue
 
+        logging.info(f"Updating: {Colors.OKCYAN}{child.name}{Colors.ENDC}")
         if is_git_dir(child):
-            update_git_dir(child)
+            # update_git_dir(child)
+            fetch_origin(child)
+            tag = latest_tag(child)
+            if tag is None:
+                target = ""
+            else:
+                target = tag
+
+            git_checkout(path=child, target=target)
 
         if is_rust_repo(child):
             update_rust_repo(child)
 
-def run_n_wait(command: str, *, print_output: bool = False) -> int:
+
+def git_dir_repo(path: pathlib.Path) -> Tuple[str, str]:
     """
+    Returns the git directory and the .git path of a git repository.
+
+    Parameters
+    ----------
+    path : pathlib.Path
+        The git repository path.
 
     Returns
     -------
-    The command's exit code.
-    """
-    command_args = shlex.split(command)
-    command_proccess = subprocess.Popen(
-        command_args, stdout=subprocess.PIPE, bufsize=1, universal_newlines=True
-    )
-    if print_output:
-        for line in command_proccess.stdout:
-            print(line, end="")
-
-    command_proccess.wait()
-
-    return command_proccess.returncode
-
-def update_rust_repo(path: pathlib.Path):
-    """
-    Update a rust repository.
-
-    Parameters
-    ----------
-    path : pathlib.Path
-        The path of the directory to update.
-    """
-    os.chdir(str(path))
-
-    update_command = COMMAND_TEMPLATE["rust"]["update"]
-    update_command_exit_status = run_n_wait(command=update_command, print_output=True)
-
-    if update_command_exit_status != 0:
-        logging.warning(
-            f"{Colors.FAIL}Updating project deps of:{Colors.ENDC}"
-            f" {Colors.CVIOLET}{path.name}{Colors.ENDC}"
-            f" {Colors.FAIL}Failed!{Colors.ENDC}"
-        )
-
-    build_command = COMMAND_TEMPLATE["rust"]["build"]
-    build_command_exit_status = run_n_wait(command=build_command, print_output=True)
-    if build_command_exit_status != 0:
-        logging.warning(
-            f"{Colors.FAIL}Building the binary in{Colors.ENDC}"
-            f" {Colors.CVIOLET}{path.name}{Colors.ENDC}"
-            f" {Colors.FAIL}Failed!{Colors.ENDC}"
-        )
-
-
-def update_git_dir(path: pathlib.Path) -> None:
-    """
-    Update a remote git dir.
-
-    Parameters
-    ----------
-    path : pathlib.Path
-        The path of the directory to update.
+    str
+        The .git directory path of a git repository.
+    str
+        The path of the git repository.
     """
     git_dir = str(path / ".git")
     repo_path = str(path)
-    # "git --git-dir=$git_dir --work-tree=$repo_path fetch origin"
+
+    return (git_dir, repo_path)
+
+
+def git_checkout(path: pathlib.Path, target: str):
+    """
+    Performs a 'git checkout' on a git repository.
+
+    Parameters
+    ----------
+    path : pathlib.Path
+        The path of the git repository to perform the checkout on.
+    target : str
+        The branch/tag to checkout.
+    """
+    git_dir, repo_path = git_dir_repo(path)
+    checkout_command = COMMAND_TEMPLATE["git"]["checkout"].substitute(
+        git_dir=str(git_dir), repo_path=repo_path, target=target
+    )
+
+    logging.debug(f"Performing checkout on: {path.name} with the target of {target}")
+    checkout_command_exit_status = run_n_wait(command=checkout_command)
+
+    if checkout_command_exit_status != 0:
+        logging.warning(
+            f"{Colors.FAIL}Performing checkout for:{Colors.ENDC}"
+            f" {Colors.CVIOLET}{path.name}{Colors.ENDC}"
+            f" with the target of {Colors.CVIOLET}{target}{Colors.ENDC}"
+            f" {Colors.FAIL}Failed!{Colors.ENDC}"
+        )
+
+
+def fetch_origin(path: pathlib.Path):
+    """
+    Fetch the origin of a git dir.
+
+    Parameters
+    ----------
+    path : pathlib.Path
+        The git repository path to fetch it's origin.
+    """
+    git_dir, repo_path = git_dir_repo(path)
+
     fetch_command = COMMAND_TEMPLATE["git"]["fetch"].substitute(
         git_dir=str(git_dir), repo_path=repo_path
-        )
+    )
 
-    fetch_command_exit_status = run_n_wait(command=fetch_command, print_output=True)
+    logging.info(f"{Colors.OKBLUE}Fetching origin{Colors.ENDC}")
+    fetch_command_exit_status = run_n_wait(command=fetch_command)
 
-    if fetch_command_exit_status == 0:
-        branch_name = REPOS_MAIN_BRANCH[path.name]
-        pull_command = COMMAND_TEMPLATE["git"]["pull"].substitute(
-            git_dir=str(git_dir), repo_path=repo_path, branch_name=branch_name
-        )
-        pull_command_exit_status = run_n_wait(command=pull_command, print_output=True)
-
-        if pull_command_exit_status != 0:
-            logging.warning(
-                f"{Colors.FAIL}Pulling:{Colors.ENDC}"
-                f" {Colors.CVIOLET}{path.name}{Colors.ENDC}"
-                f" {Colors.FAIL}Failed!{Colors.ENDC}"
-            )
-
-    else:
+    if fetch_command_exit_status != 0:
         logging.warning(
             f"{Colors.FAIL}Fetching HEAD for:{Colors.ENDC}"
             f" {Colors.CVIOLET}{path.name}{Colors.ENDC}"
             f" {Colors.FAIL}Failed!{Colors.ENDC}"
         )
+
+
+def latest_tag(path: pathlib.Path) -> Optional[str]:
+    """
+    Get the latest tag of a git repository.
+
+    Parameters
+    ----------
+    path : pathlib.Path
+        The git repository path to check.
+
+    Returns
+    -------
+    str or None
+        The latest tag, if there is no tags, None is returned.
+    """
+    git_dir, repo_path = git_dir_repo(path)
+
+    command = COMMAND_TEMPLATE["git"]["latest_tag"].substitute(
+        git_dir=git_dir, repo_path=repo_path
+    )
+
+    try:
+        process_output = subprocess.check_output(
+            command, shell=True, stderr=subprocess.STDOUT
+        )
+        output = process_output.decode().strip()
+    except subprocess.CalledProcessError:
+        output = "fatal: not a git repository (or any parent up to mount point /)"
+
+    if "fatal" in output:
+        return None
+    return output
 
 
 def is_git_dir(path: pathlib.Path) -> bool:
@@ -178,6 +215,72 @@ def is_rust_repo(path: pathlib.Path) -> bool:
     """
     cargo_toml = path / "Cargo.toml"
     return cargo_toml.exists() and cargo_toml.is_file()
+
+
+def run_n_wait(command: str, *, print_output: bool = False) -> int:
+    """
+    Run a command and wait for it to finish.
+
+    Parameters
+    ----------
+    command : str
+        The command to run.
+    print_output : bool, default False
+        Whether print the command output to the screen.
+
+    Returns
+    -------
+    int
+        Exit code of the command.
+    """
+    command_args = shlex.split(command)
+    try:
+        command_process = subprocess.Popen(
+            command_args,
+            stdout=subprocess.PIPE,
+            bufsize=1,
+            universal_newlines=True,
+        )
+        if print_output:
+            for line in command_process.stdout:
+                print(line, end="")
+
+        command_process.wait()
+
+        return command_process.returncode
+    except subprocess.CalledProcessError:
+        logging.error(f"{Colors.FAIL}Failed!{Colors.ENDC}")
+
+
+def update_rust_repo(path: pathlib.Path):
+    """
+    Update a rust repository.
+
+    Parameters
+    ----------
+    path : pathlib.Path
+        The path of the directory to update.
+    """
+    os.chdir(str(path))
+
+    update_command = COMMAND_TEMPLATE["rust"]["update"]
+    update_command_exit_status = run_n_wait(command=update_command, print_output=True)
+
+    if update_command_exit_status != 0:
+        logging.warning(
+            f"{Colors.FAIL}Updating project deps of:{Colors.ENDC}"
+            f" {Colors.CVIOLET}{path.name}{Colors.ENDC}"
+            f" {Colors.FAIL}Failed!{Colors.ENDC}"
+        )
+
+    build_command = COMMAND_TEMPLATE["rust"]["build"]
+    build_command_exit_status = run_n_wait(command=build_command, print_output=True)
+    if build_command_exit_status != 0:
+        logging.warning(
+            f"{Colors.FAIL}Building the binary in{Colors.ENDC}"
+            f" {Colors.CVIOLET}{path.name}{Colors.ENDC}"
+            f" {Colors.FAIL}Failed!{Colors.ENDC}"
+        )
 
 
 if __name__ == "__main__":
