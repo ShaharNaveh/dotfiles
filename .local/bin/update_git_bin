@@ -10,7 +10,6 @@ import pathlib
 import shlex
 import string
 import subprocess
-import sys
 from typing import Optional, Tuple
 
 logging.basicConfig(format="[%(levelname)s]\t%(message)s", level=logging.DEBUG)
@@ -23,7 +22,9 @@ GIT_BASE_COMMAND_TEMPLATE = string.Template(
 COMMAND_TEMPLATE = {
     "git": {
         "checkout": string.Template(
-            GIT_BASE_COMMAND_TEMPLATE.safe_substitute(git_command="checkout $target")
+            GIT_BASE_COMMAND_TEMPLATE.safe_substitute(
+                git_command="reset --hard $target"
+            )
         ),
         "fetch": string.Template(
             GIT_BASE_COMMAND_TEMPLATE.safe_substitute(git_command="fetch origin --tags")
@@ -173,12 +174,17 @@ def latest_tag(path: pathlib.Path) -> Optional[str]:
             command, shell=True, stderr=subprocess.STDOUT
         )
         output = process_output.decode().strip()
-    except subprocess.CalledProcessError:
-        output = "fatal: not a git repository (or any parent up to mount point /)"
+        failed = False
 
-    if "fatal" in output:
+    except subprocess.CalledProcessError:
+        logging.debug(f"{Colors.FAIL}Got subprocces.CalledProcessError{Colors.ENDC}")
+        failed = True
+
+    if failed:
         return None
-    return output
+
+    result = output.split("\n")[-1]
+    return result
 
 
 def is_git_dir(path: pathlib.Path) -> bool:
@@ -235,21 +241,19 @@ def run_n_wait(command: str, *, print_output: bool = False) -> int:
     """
     command_args = shlex.split(command)
     try:
-        command_process = subprocess.Popen(
-            command_args,
-            stdout=subprocess.PIPE,
-            bufsize=1,
-            universal_newlines=True,
-        )
-        if print_output:
-            for line in command_process.stdout:
-                print(line, end="")
-
-        command_process.wait()
+        with subprocess.Popen(
+            command_args, stdout=subprocess.PIPE, bufsize=1, universal_newlines=True
+        ) as command_process:
+            command_process.wait()
+            if print_output:
+                for line in command_process.stdout:
+                    print(line, end="")
 
         return command_process.returncode
     except subprocess.CalledProcessError:
         logging.error(f"{Colors.FAIL}Failed!{Colors.ENDC}")
+
+    return 1
 
 
 def update_rust_repo(path: pathlib.Path):
