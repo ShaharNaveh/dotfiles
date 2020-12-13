@@ -1,4 +1,4 @@
 pip
 setuptools
-spotdl<3
+spotdl
 wheel
