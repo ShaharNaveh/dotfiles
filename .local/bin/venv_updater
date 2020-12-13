@@ -104,16 +104,16 @@ def upgrade_venv_req(venv_path: pathlib.Path, requirements_path: pathlib.Path) -
         base_command = base_command_template.substitute(python_path=str(python_path))
         base_commands_args = shlex.split(base_command)
         logging.info(f"{Colors.OKCYAN}Executing: {base_command}{Colors.ENDC}")
-        base_upgrade_proccess = subprocess.Popen(
+        with subprocess.Popen(
             base_commands_args,
             stdout=subprocess.PIPE,
             bufsize=1,
             universal_newlines=True,
-        )
-        for line in base_upgrade_proccess.stdout:
-            if BORING_STRING not in line:
-                print(line, end="")
-        base_upgrade_proccess.wait()
+        ) as base_upgrade_proccess:
+            base_upgrade_proccess.wait()
+            for line in base_upgrade_proccess.stdout:
+                if BORING_STRING not in line:
+                    print(line, end="")
 
         if base_upgrade_proccess.returncode != 0:
             logging.warning(
