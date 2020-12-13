@@ -1,5 +1,6 @@
 from libqtile import widget
 
+from settings.constants import qtile_config_dir
 from settings.theme import colors
 
 # NOTE: The icons are from https://www.nerdfonts.com/cheat-sheet
@@ -107,6 +108,7 @@ secondary_widgets = [
 
 
 widget_defaults = {
+    #"background": colors["background"],
     "font": "UbuntuMono Nerd Font Bold",
     "fontsize": 14,
     "padding": 1,
