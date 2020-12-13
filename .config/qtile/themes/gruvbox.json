@@ -1,0 +1,122 @@
+{
+    "aqua_hard": [
+        "#689d6a",
+        "#689d6a"
+    ],
+    "aqua_soft": [
+        "#8ec07c",
+        "#8ec07c"
+    ],
+    "background": [
+        "#282828",
+        "#282828"
+    ],
+    "background_0": [
+        "#282828",
+        "#282828"
+    ],
+    "background_1": [
+        "#3c3836",
+        "#3c3836"
+    ],
+    "background_2": [
+        "#282828",
+        "#282828"
+    ],
+    "background_3": [
+        "#665c54",
+        "#665c54"
+    ],
+    "background_4": [
+        "#7c6f64",
+        "#7c6f64"
+    ],
+    "background_hard_0": [
+        "#1d2021",
+        "#1d2021"
+    ],
+    "background_soft_0": [
+        "#32302f",
+        "#32302f"
+    ],
+    "blue_hard": [
+        "#458588",
+        "#458588"
+    ],
+    "blue_soft": [
+        "#83a598",
+        "#83a598"
+    ],
+    "foreground": [
+        "#ebdbb2",
+        "#ebdbb2"
+    ],
+    "foreground_0": [
+        "#fbf1c7",
+        "#fbf1c7"
+    ],
+    "foreground_1": [
+        "#ebdbb2",
+        "#ebdbb2"
+    ],
+    "foreground_2": [
+        "#d5c4a1",
+        "#d5c4a1"
+    ],
+    "foreground_3": [
+        "#bdae93",
+        "#bdae93"
+    ],
+    "foreground_4": [
+        "#a89984",
+        "#a89984"
+    ],
+    "gray": [
+        "#a89984",
+        "#a89984"
+    ],
+    "gray_background": [
+        "#928374",
+        "#928374"
+    ],
+    "green_hard": [
+        "#98971a",
+        "#98971a"
+    ],
+    "green_soft": [
+        "#b8bb26",
+        "#b8bb26"
+    ],
+    "orange_hard": [
+        "#d65d0e",
+        "#d65d0e"
+    ],
+    "orange_soft": [
+        "#FE8019",
+        "#FE8019"
+    ],
+    "purple_hard": [
+        "#b16286",
+        "#b16286"
+    ],
+    "purple_soft": [
+        "#d3869b",
+        "#d3869b"
+    ],
+    "red_hard": [
+        "#cc241d",
+        "#cc241d"
+    ],
+    "red_soft": [
+        "#fb4934",
+        "#fb4934"
+    ],
+    "yellow_hard": [
+        "#d79921",
+        "#d79921"
+    ],
+    "yellow_soft": [
+        "#fabd2f",
+        "#fabd2f"
+    ]
+}
