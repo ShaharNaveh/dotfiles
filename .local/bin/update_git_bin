@@ -17,7 +17,7 @@ logging.basicConfig(format="[%(levelname)s]\t%(message)s", level=logging.DEBUG)
 CONFIG = {"rel_opt_path": pathlib.Path(".local/opt/")}
 REPOS_MAIN_BRANCH = {"bottom": "master", "starship": "master"}
 GIT_BASE_COMMAND_TEMPLATE = string.Template(
-    "git --git-dir=$git_dir --work-tree=$repo_path $git_command"
+    'git --git-dir="$git_dir" --work-tree="$repo_path" $git_command'
 )
 COMMAND_TEMPLATE = {
     "git": {
@@ -169,21 +169,31 @@ def latest_tag(path: pathlib.Path) -> Optional[str]:
         git_dir=git_dir, repo_path=repo_path
     )
 
+    output = ""
+    failed = False
     try:
-        process_output = subprocess.check_output(
-            command, shell=True, stderr=subprocess.STDOUT
-        )
-        output = process_output.decode().strip()
-        failed = False
+        with subprocess.Popen(
+            command,
+            shell=True,
+            stderr=subprocess.STDOUT,
+            stdout=subprocess.PIPE,
+            bufsize=1,
+            universal_newlines=True,
+        ) as subp:
+            subp.wait()
+            for line in subp.stdout:
+                output += line
 
     except subprocess.CalledProcessError:
         logging.debug(f"{Colors.FAIL}Got subprocces.CalledProcessError{Colors.ENDC}")
         failed = True
-
+    print("\n" * 5)
+    print(output)
+    print("\n" * 5)
     if failed:
         return None
 
-    result = output.split("\n")[-1]
+    result = output.strip().split("\n")[-1]
     return result
 
 
@@ -254,6 +264,50 @@ def run_n_wait(command: str, *, print_output: bool = False) -> int:
         logging.error(f"{Colors.FAIL}Failed!{Colors.ENDC}")
 
     return 1
+
+
+def cargo_update(path: pathlib.Path):
+    """
+    foo bar baz
+    """
+    os.chdir(str(path))
+    update_command = COMMAND_TEMPLATE["rust"]["update"]
+    update_command_args = shlex.split(update_command)
+
+    with subprocess.Popen(
+        command_args, stdout=subprocess.PIPE, bufsize=1, universal_newlines=True
+    ) as command_process:
+        command_process.wait()
+        for line in command_process.stdout:
+            print(line, end="")
+
+    if command_process.returncode != 0:
+        logging.warning(
+            f"{Colors.FAIL}Updating project deps of:{Colors.ENDC}"
+            f" {Colors.CVIOLET}{path.name}{Colors.ENDC}"
+            f" {Colors.FAIL}Failed!{Colors.ENDC}"
+        )
+
+
+def cargo_build(path: pathlib.Path):
+    """
+    foo bar baz
+    """
+    os.chdir(str(path))
+    build_command = COMMAND_TEMPLATE["rust"]["build"]
+    build_command_args = shlex.split(build_command)
+    with subprocess.Popen(
+        build_command_args, stdout=subprocess.PIPE, bufsize=1, universal_newlines=True
+    ) as command_process:
+        for line in command_process.stdout:
+            print(line, end="")
+
+    if command_process.returncode != 0:
+        logging.warning(
+            f"{Colors.FAIL}Building the binary in{Colors.ENDC}"
+            f" {Colors.CVIOLET}{path.name}{Colors.ENDC}"
+            f" {Colors.FAIL}Failed!{Colors.ENDC}"
+        )
 
 
 def update_rust_repo(path: pathlib.Path):
