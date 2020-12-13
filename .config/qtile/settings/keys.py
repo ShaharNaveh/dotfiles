@@ -75,7 +75,7 @@ keys = [
     Key(
         [mod, "shift"], "space", lazy.layout.rotate(), desc="Swap panes of split stack"
     ),
-    Key([mod], "Return", lazy.spawn(f"{terminal} -e tmux"), desc="Launch terminal"),
+    Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "control"], "r", lazy.restart(), desc="Restart qtile"),
