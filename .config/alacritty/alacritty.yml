@@ -1,9 +1,11 @@
-background_opacity: 1
+background_opacity: 0.85
 
 colors:
   primary:
-    background: '#282828'
-    foreground: '#ebdbb2'
+      hard contrast: background = '0x1d2021'
+      background: '0x282828'
+      soft contrast: background = '0x32302f'
+      foreground: '0xebdbb2'
 
   normal:
     black:   '#282828'
@@ -32,17 +34,31 @@ font:
   bold:
     #family: mononoki Nerd Font
     #family: UbuntuMono Nerd Font
-    family: FiraCode Nerd Font Mono
+    #family: FiraCode Nerd Font Mono
+    family: Operator Mono Book
+    style: Bold
+
+  bold_italic:
+    family: Operator Mono Book
+    style: Bold Italic
 
   italic:
     #family: mononoki Nerd Font
     #family: FiraCode Nerd Font Mono
-    family: UbuntuMono Nerd Font
+    #family: UbuntuMono Nerd Font
+    family: Operator Mono Book
+    style: Italic
 
   normal:
     #family: mononoki Nerd Font
     #family: UbuntuMono Nerd Font
-    family: FiraCode Nerd Font Mono
+    #family: FiraCode Nerd Font Mono
+    family: Operator Mono Book
+    style: Regular
+
+  offset:
+    x: 0
+    y: 0
 
 mouse:
   double_click: { threshold: 300 }
@@ -53,4 +69,14 @@ scrolling:
 
 window:
   padding:
-    x: 2
+    x: 0
+    y: 0
+
+  dynamic_padding: true
+  title: Alacritty
+  class:
+    # Application instance name
+    instance: Alacritty
+    # General application class
+    general: Alacritty
+
