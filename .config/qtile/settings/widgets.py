@@ -138,11 +138,12 @@ primary_widgets = [
         background=colors["background"],
         fontsize=14,
     ),
-    # widget.Pacman(
-    # update_interval=1800,
-    # foreground=colors["foreground"],
-    # background=colors["background"],
-    # ),
+    widget.CheckUpdates(
+        background=colors["background"],
+        distro="Arch",
+        foreground=colors["foreground"],
+        update_interval=1800,
+    ),
     widget.TextBox(
         text="Updates",
         foreground=colors["foreground"],
