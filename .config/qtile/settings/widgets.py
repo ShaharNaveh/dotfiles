@@ -12,17 +12,6 @@ primary_widgets = [
         linewidth=0,
         padding=2,
     ),
-    # widget.Image(
-    # background=colors["background"],
-    # filename=str(qtile_config_dir / "images" / "penguin.png"),
-    # scale=True,
-    # ),
-    # widget.Sep(  # Between image and group box
-    # background=colors["background"],
-    # foreground=colors["background_hard_0"],
-    # linewidth=0,
-    # padding=0,
-    # ),
     widget.GroupBox(
         active=colors["foreground"],
         background=colors["background"],
@@ -54,11 +43,11 @@ primary_widgets = [
         padding=5,
     ),
     widget.WindowName(
-        padding=5,
-        fontsize=14,
         background=colors["background"],
-        foreground=colors["foreground"],
         font="UbuntuMono Nerd Font",
+        fontsize=14,
+        foreground=colors["foreground"],
+        padding=5,
     ),
     widget.Sep(  # Between Window name and widgets.
         background=colors["background"],
