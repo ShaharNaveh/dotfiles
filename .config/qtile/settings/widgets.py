@@ -103,12 +103,12 @@ primary_widgets = [
         background=colors["background"],
         fontsize=14,
     ),
-     widget.CPU(
-     foreground=colors["foreground"],
-     background=colors["background"],
-     padding=5,
-     format="{load_percent}%",
-     ),
+    widget.CPU(
+        foreground=colors["foreground"],
+        background=colors["background"],
+        padding=5,
+        format="{load_percent}%",
+    ),
     widget.Image(
         scale=True,
         background=colors["background_1"],
@@ -155,14 +155,17 @@ primary_widgets = [
         filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg1.png"),
     ),
     widget.TextBox(
-        text=" ",
+        text="  ",  # ICON: nf-fa-keyboard_o
         foreground=colors["foreground"],
         background=colors["background_1"],
         padding=0,
     ),
-    # widget.Volume(
-    # foreground=colors["foreground"], background=colors["background_1"], padding=5
-    # ),
+    widget.KeyboardLayout(
+        background=colors["background_1"],
+        configured_keyboards=["us", "il"],
+        padding=5,
+        foreground=colors["foreground"],
+    ),
     widget.Image(
         scale=True,
         background=colors["background_1"],
