@@ -103,12 +103,12 @@ primary_widgets = [
         background=colors["background"],
         fontsize=14,
     ),
-    # widget.CPU(
-    # foreground=colors["foreground"],
-    # background=colors["background"],
-    # padding=5,
-    # format="{load_percent}%",
-    # ),
+     widget.CPU(
+     foreground=colors["foreground"],
+     background=colors["background"],
+     padding=5,
+     format="{load_percent}%",
+     ),
     widget.Image(
         scale=True,
         background=colors["background_1"],
