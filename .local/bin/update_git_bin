@@ -15,7 +15,6 @@ from typing import Optional, Tuple
 logging.basicConfig(format="[%(levelname)s]\t%(message)s", level=logging.DEBUG)
 
 CONFIG = {"rel_opt_path": pathlib.Path(".local/opt/")}
-REPOS_MAIN_BRANCH = {"bottom": "master", "starship": "master"}
 GIT_BASE_COMMAND_TEMPLATE = string.Template(
     'git --git-dir="$git_dir" --work-tree="$repo_path" $git_command'
 )
@@ -35,8 +34,8 @@ COMMAND_TEMPLATE = {
         "stash": string.Template(
             GIT_BASE_COMMAND_TEMPLATE.safe_substitute(git_command="stash")
         ),
-        "stash_clear": string.Template(
-            GIT_BASE_COMMAND_TEMPLATE.safe_substitute(git_command="stash clear")
+        "stash_apply": string.Template(
+            GIT_BASE_COMMAND_TEMPLATE.safe_substitute(git_command="stash apply")
         ),
     },
     "rust": {"build": "cargo build --release", "update": "cargo update"},
@@ -74,24 +73,24 @@ def main():
             if is_rust_repo(child):
                 git_stash(path=child)
             git_checkout(path=child, target=target)
+            git_stash_apply(path=child)
 
         if is_rust_repo(child):
             update_rust_repo(child)
-            git_stash_clear(path=child)
 
 
-def git_stash_clear(path: pathlib.Path):
+def git_stash_apply(path: pathlib.Path):
     git_dir, repo_path = git_dir_repo(path)
-    stash_clear_command = COMMAND_TEMPLATE["git"]["stash_clear"].substitute(
+    stash_apply_command = COMMAND_TEMPLATE["git"]["stash_apply"].substitute(
         git_dir=str(git_dir), repo_path=repo_path
     )
 
-    logging.debug(f"Clearing stash on: {path.name}")
-    stash_clear_command_exit_status = run_n_wait(command=stash_clear_command)
+    logging.debug(f"Applying stash on: {path.name}")
+    stash_apply_command_exit_status = run_n_wait(command=stash_apply_command)
 
-    if stash_clear_command_exit_status != 0:
+    if stash_apply_command_exit_status != 0:
         logging.warning(
-            f"{Colors.FAIL}Stashing changes for:{Colors.ENDC}"
+            f"{Colors.FAIL}Stashing apply for:{Colors.ENDC}"
             f" {Colors.CVIOLET}{path.name}{Colors.ENDC}"
             f" {Colors.FAIL}Failed!{Colors.ENDC}"
         )
