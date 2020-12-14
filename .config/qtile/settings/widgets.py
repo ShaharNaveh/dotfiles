@@ -97,7 +97,7 @@ primary_widgets = [
         filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg.png"),
     ),
     widget.TextBox(
-        # text=" ",
+        text=" ",
         padding=2,
         foreground=colors["foreground"],
         background=colors["background"],
