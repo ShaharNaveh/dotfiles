@@ -115,7 +115,7 @@ primary_widgets = [
         filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg1.png"),
     ),
     widget.TextBox(
-        # text=" ",
+        text=" ",
         foreground=colors["foreground"],
         background=colors["background_1"],
         padding=0,
@@ -132,7 +132,7 @@ primary_widgets = [
         filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg.png"),
     ),
     widget.TextBox(
-        # text="",
+        text="",
         padding=2,
         foreground=colors["foreground"],
         background=colors["background"],
@@ -155,7 +155,7 @@ primary_widgets = [
         filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg1.png"),
     ),
     widget.TextBox(
-        # text=" ",
+        text=" ",
         foreground=colors["foreground"],
         background=colors["background_1"],
         padding=0,
