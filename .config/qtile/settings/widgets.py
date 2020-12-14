@@ -79,18 +79,18 @@ primary_widgets = [
         scale=True,
     ),
     widget.TextBox(
-        #text=" ",
+        text=" ",
         padding=2,
         foreground=colors["foreground"],
         background=colors["background_1"],
         fontsize=12,
     ),
-    #widget.ThermalSensor(
-        #foreground=colors["foreground"],
-        #background=colors["background_1"],
-        #threshold=90,
-        #padding=5,
-   # ),
+    widget.ThermalSensor(
+        foreground=colors["foreground"],
+        background=colors["background_1"],
+        threshold=90,
+        padding=5,
+    ),
     widget.Image(
         scale=True,
         background=colors["background_1"],
