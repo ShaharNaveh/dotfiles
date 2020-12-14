@@ -22,9 +22,7 @@ GIT_BASE_COMMAND_TEMPLATE = string.Template(
 COMMAND_TEMPLATE = {
     "git": {
         "checkout": string.Template(
-            GIT_BASE_COMMAND_TEMPLATE.safe_substitute(
-                git_command="reset --hard $target"
-            )
+            GIT_BASE_COMMAND_TEMPLATE.safe_substitute(git_command="switch -c $target")
         ),
         "fetch": string.Template(
             GIT_BASE_COMMAND_TEMPLATE.safe_substitute(git_command="fetch origin --tags")
@@ -33,6 +31,12 @@ COMMAND_TEMPLATE = {
             GIT_BASE_COMMAND_TEMPLATE.safe_substitute(
                 git_command="describe --tags $$(git rev-list --tags --max-count=1)"
             )
+        ),
+        "stash": string.Template(
+            GIT_BASE_COMMAND_TEMPLATE.safe_substitute(git_command="stash")
+        ),
+        "stash_clear": string.Template(
+            GIT_BASE_COMMAND_TEMPLATE.safe_substitute(git_command="stash clear")
         ),
     },
     "rust": {"build": "cargo build --release", "update": "cargo update"},
@@ -67,10 +71,43 @@ def main():
             else:
                 target = tag
 
+            if is_rust_repo(child):
+                git_stash(path=child)
             git_checkout(path=child, target=target)
 
         if is_rust_repo(child):
             update_rust_repo(child)
+            git_stash_clear(path=child)
+
+def git_stash_clear(path: pathlib.Path):
+    git_dir, repo_path = git_dir_repo(path)
+    stash_clear_command = COMMAND_TEMPLATE["git"]["stash_clear"].substitute(
+            git_dir=str(git_dir), repo_path=repo_path)
+
+    logging.debug(f"Clearing stash on: {path.name}")
+    stash_clear_command_exit_status = run_n_wait(command=stash_clear_command)
+
+    if stash_clear_command_exit_status != 0:
+        logging.warning(
+            f"{Colors.FAIL}Stashing changes for:{Colors.ENDC}"
+            f" {Colors.CVIOLET}{path.name}{Colors.ENDC}"
+            f" {Colors.FAIL}Failed!{Colors.ENDC}"
+        )
+
+def git_stash(path: pathlib.Path):
+    git_dir, repo_path = git_dir_repo(path)
+    stash_command = COMMAND_TEMPLATE["git"]["stash"].substitute(
+            git_dir=str(git_dir), repo_path=repo_path)
+
+    logging.debug(f"Stashing changes on: {path.name}")
+    stash_command_exit_status = run_n_wait(command=stash_command)
+
+    if stash_command_exit_status != 0:
+        logging.warning(
+            f"{Colors.FAIL}Stashing changes for:{Colors.ENDC}"
+            f" {Colors.CVIOLET}{path.name}{Colors.ENDC}"
+            f" {Colors.FAIL}Failed!{Colors.ENDC}"
+        )
 
 
 def git_dir_repo(path: pathlib.Path) -> Tuple[str, str]:
@@ -189,10 +226,8 @@ def latest_tag(path: pathlib.Path) -> Optional[str]:
         failed = True
     if failed:
         return None
-    print("\n" * 5)
-    print(output.strip().split("\n"))
-    print("\n" * 5)
-    result = output.strip().split("\n")[-1]
+
+    result = output.strip().split("\n")[0]
     return result
 
 
