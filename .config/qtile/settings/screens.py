@@ -3,8 +3,9 @@ import subprocess
 from libqtile import bar
 from libqtile.config import Screen
 
-#from settings.widgets import secondary_widgets
+# from settings.widgets import secondary_widgets
 from settings.widgets import primary_widgets
+
 
 def status_bar(widgets):
     return bar.Bar(widgets, 24)
