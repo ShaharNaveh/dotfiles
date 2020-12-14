@@ -3,10 +3,4 @@
 !.gitignore
 
 # Except for the files and folders we want to track
-!alacritty
-!fish
-!nvim
-!picom
-!qtile
-!rofi
-!starship.toml
+!config.fish

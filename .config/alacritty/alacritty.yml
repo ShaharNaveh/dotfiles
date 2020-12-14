@@ -64,6 +64,9 @@ mouse:
   double_click: { threshold: 300 }
   triple_click: { threshold: 300 }
 
+shell:
+  program: /usr/bin/fish
+
 scrolling:
   history: 5000
 
