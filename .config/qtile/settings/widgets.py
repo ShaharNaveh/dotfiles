@@ -171,17 +171,6 @@ primary_widgets = [
         foreground=colors["foreground"],
         scale=True,
     ),
-    # widget.Sep(
-    # linewidth=0,
-    # padding=10,
-    # foreground=colors["foreground"],
-    # background=colors["background_1"],
-    # ),
-    # widget.Image(
-    # scale=True,
-    # background=colors["background_1"],
-    # filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg.png"),
-    # ),
 ]
 
 
