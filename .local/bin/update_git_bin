@@ -79,10 +79,12 @@ def main():
             update_rust_repo(child)
             git_stash_clear(path=child)
 
+
 def git_stash_clear(path: pathlib.Path):
     git_dir, repo_path = git_dir_repo(path)
     stash_clear_command = COMMAND_TEMPLATE["git"]["stash_clear"].substitute(
-            git_dir=str(git_dir), repo_path=repo_path)
+        git_dir=str(git_dir), repo_path=repo_path
+    )
 
     logging.debug(f"Clearing stash on: {path.name}")
     stash_clear_command_exit_status = run_n_wait(command=stash_clear_command)
@@ -94,10 +96,12 @@ def git_stash_clear(path: pathlib.Path):
             f" {Colors.FAIL}Failed!{Colors.ENDC}"
         )
 
+
 def git_stash(path: pathlib.Path):
     git_dir, repo_path = git_dir_repo(path)
     stash_command = COMMAND_TEMPLATE["git"]["stash"].substitute(
-            git_dir=str(git_dir), repo_path=repo_path)
+        git_dir=str(git_dir), repo_path=repo_path
+    )
 
     logging.debug(f"Stashing changes on: {path.name}")
     stash_command_exit_status = run_n_wait(command=stash_command)
@@ -147,11 +151,31 @@ def git_checkout(path: pathlib.Path, target: str):
     checkout_command = COMMAND_TEMPLATE["git"]["checkout"].substitute(
         git_dir=str(git_dir), repo_path=repo_path, target=target
     )
+    checkout_command_args = shlex.split(checkout_command)
 
     logging.debug(f"Performing checkout on: {path.name} with the target of {target}")
-    checkout_command_exit_status = run_n_wait(command=checkout_command)
 
-    if checkout_command_exit_status != 0:
+    output = ""
+    with subprocess.Popen(
+        checkout_command_args,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        bufsize=1,
+        universal_newlines=True,
+    ) as checkout_command_process:
+        checkout_command_process.wait()
+        for line in checkout_command_process.stdout:
+            output += line
+
+    checkout_command_exit_status = checkout_command_process.returncode
+
+    if output != f"fatal: A branch named '{target}' already exists.":
+        pass
+        # print(output)
+
+    if (
+        checkout_command_exit_status != 0 and checkout_command_exit_status != 128
+    ):  # 128 = branch exist
         logging.warning(
             f"{Colors.FAIL}Performing checkout for:{Colors.ENDC}"
             f" {Colors.CVIOLET}{path.name}{Colors.ENDC}"
