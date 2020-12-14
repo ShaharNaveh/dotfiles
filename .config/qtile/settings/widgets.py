@@ -111,11 +111,11 @@ primary_widgets = [
         linewidth=0,
         padding=2,
     ),
-    #widget.Image(
-       # background=colors["background"],
-       # file_name=str(qtile_config_dir / "images" / "penguin.png"),
-       # scale=True,
-  #),
+    widget.Image(
+        background=colors["background"],
+        filename=str(qtile_config_dir / "images" / "penguin.png"),
+       scale=True,
+  ),
     widget.Sep(  # Between image and group box
         background=colors["background"],
         foreground=colors["background_hard_0"],
@@ -172,11 +172,11 @@ primary_widgets = [
         linewidth=0,
         padding=20,
     ),
-    #widget.Image(
-        #background=colors["background"],
-        #file_name=str(qtile_config_dir / "images" / "arrowleft-trans-bg1.png"),
-        #scale=True,
-    #),
+    widget.Image(
+        background=colors["background"],
+        filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg1.png"),
+        scale=True,
+    ),
     widget.TextBox(
         #text=" ",
         padding=2,
@@ -190,11 +190,11 @@ primary_widgets = [
         #threshold=90,
         #padding=5,
    # ),
-    #widget.Image(
-        #scale=True,
-        #background=colors["background_1"],
-        #file_name=str(qtile_config_dir / "images" / "arrowleft-trans-bg.png"),
-    #),
+    widget.Image(
+        scale=True,
+        background=colors["background_1"],
+        filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg.png"),
+    ),
     widget.TextBox(
        # text=" ",
         padding=2,
@@ -208,11 +208,11 @@ primary_widgets = [
         #padding=5,
         #format="{load_percent}%",
     #),
-    #widget.Image(
-        #scale=True,
-        #background=colors["background_1"],
-        #file_name=str(qtile_config_dir / "images" / "arrowleft-trans-bg1.png"),
-    #),
+    widget.Image(
+        scale=True,
+        background=colors["background_1"],
+        filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg1.png"),
+    ),
     widget.TextBox(
         #text=" ",
         foreground=colors["foreground"],
@@ -225,11 +225,11 @@ primary_widgets = [
         foreground=colors["foreground"],
         padding=4,
     ),
-    #widget.Image(
-        #scale=True,
-        #background=colors["background_1"],
-        #file_name=str(qtile_config_dir / "images" / "arrowleft-trans-bg.png"),
-    #),
+    widget.Image(
+        scale=True,
+        background=colors["background_1"],
+        filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg.png"),
+    ),
     widget.TextBox(
         #text="",
         padding=2,
@@ -249,11 +249,11 @@ primary_widgets = [
         background=colors["background"],
         padding=5,
     ),
-    #widget.Image(
-        #scale=True,
-        #background=colors["background"],
-        #file_name=str(qtile_config_dir / "images" / "arrowleft-trans-bg1.png"),
-    #),
+    widget.Image(
+        scale=True,
+        background=colors["background"],
+        filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg1.png"),
+    ),
     widget.TextBox(
         #text=" ",
         foreground=colors["foreground"],
@@ -263,21 +263,21 @@ primary_widgets = [
     #widget.Volume(
         #foreground=colors["foreground"], background=colors["background_1"], padding=5
     #),
-    #widget.Image(
-        #scale=True,
-        #background=colors["background_1"],
-        #file_name=str(qtile_config_dir / "images" / "arrowleft-trans-bg.png"),
-    #),
+    widget.Image(
+        scale=True,
+        background=colors["background_1"],
+        filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg.png"),
+    ),
     widget.Clock(
         foreground=colors["foreground"],
         background=colors["background"],
         format=" %a, %b %d %H:%M ",
     ),
-    #widget.Image(
-        #scale=True,
-        #background=colors["background"],
-        #file_name=str(qtile_config_dir / "images" / "arrowleft-trans-bg1.png"),
-    #),
+    widget.Image(
+        scale=True,
+        background=colors["background"],
+        filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg1.png"),
+    ),
     # systray (background=colors["background_1"])
     # TODO: ADD HERE THE KEYBOARD SWITCH
     widget.Sep(
@@ -286,11 +286,11 @@ primary_widgets = [
         foreground=colors["foreground"],
         background=colors["background_1"],
     ),
-    #widget.Image(
-        #scale=True,
-        #background=colors["background_1"],
-        #file_name=str(qtile_config_dir / "images" / "arrowleft-trans-bg.png"),
-    #),
+    widget.Image(
+        scale=True,
+        background=colors["background_1"],
+        filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg.png"),
+    ),
     #widget.CurrentLayoutIcon(
         #background=colors["background"],
         #foreground=colors["foreground"],
