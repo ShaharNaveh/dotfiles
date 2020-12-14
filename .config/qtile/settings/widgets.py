@@ -132,6 +132,8 @@ primary_widgets = [
     ),
     widget.CheckUpdates(
         background=colors["background"],
+        colour_have_updates=colors["aqua_hard"],
+        display_format="{updates}",
         distro="Arch",
         foreground=colors["foreground"],
         update_interval=1800,
