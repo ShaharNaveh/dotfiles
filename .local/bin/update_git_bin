@@ -59,7 +59,7 @@ def main():
 
         logging.info(f"Updating: {Colors.OKCYAN}{child.name}{Colors.ENDC}")
         if is_git_dir(child):
-            # update_git_dir(child)
+            os.chdir(str(child))
             fetch_origin(child)
             tag = latest_tag(child)
             if tag is None:
@@ -187,12 +187,11 @@ def latest_tag(path: pathlib.Path) -> Optional[str]:
     except subprocess.CalledProcessError:
         logging.debug(f"{Colors.FAIL}Got subprocces.CalledProcessError{Colors.ENDC}")
         failed = True
-    print("\n" * 5)
-    print(output)
-    print("\n" * 5)
     if failed:
         return None
-
+    print("\n" * 5)
+    print(output.strip().split("\n"))
+    print("\n" * 5)
     result = output.strip().split("\n")[-1]
     return result
 
