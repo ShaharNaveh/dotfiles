@@ -61,47 +61,47 @@ primary_widgets = [
         scale=True,
     ),
     widget.TextBox(
-        text=" ",  # ICON: nf-fa-thermometer_3
-        padding=2,
-        foreground=colors["foreground"],
         background=colors["background_1"],
         fontsize=12,
+        foreground=colors["foreground"],
+        padding=2,
+        text=" ",  # ICON: nf-fa-thermometer_3
     ),
     widget.ThermalSensor(
-        foreground=colors["foreground"],
         background=colors["background_1"],
-        threshold=90,
+        foreground=colors["foreground"],
         padding=5,
+        threshold=90,
     ),
     widget.Image(
-        scale=True,
         background=colors["background_1"],
         filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg.png"),
+        scale=True,
     ),
     widget.TextBox(
-        text=" ",  # ICON: nf-fa-microchip
-        padding=2,
-        foreground=colors["foreground"],
         background=colors["background"],
         fontsize=14,
+        foreground=colors["foreground"],
+        padding=2,
+        text=" ",  # ICON: nf-fa-microchip
     ),
     widget.CPU(
-        foreground=colors["foreground"],
         background=colors["background"],
-        padding=5,
+        foreground=colors["foreground"],
         format="{load_percent}%",
+        padding=5,
     ),
     widget.Image(
-        scale=True,
         background=colors["background"],
         filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg1.png"),
+        scale=True,
     ),
     widget.TextBox(
-        text=" ",  # ICON: nf-mdi-memory
-        foreground=colors["foreground"],
         background=colors["background_1"],
-        padding=0,
         fontsize=14,
+        foreground=colors["foreground"],
+        padding=0,
+        text=" ",  # ICON: nf-mdi-memory
     ),
     widget.Memory(
         background=colors["background_1"],
@@ -109,16 +109,16 @@ primary_widgets = [
         padding=4,
     ),
     widget.Image(
-        scale=True,
         background=colors["background_1"],
         filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg.png"),
+        scale=True,
     ),
     widget.TextBox(
-        text=" ",  # ICON: nf-mdi-package_up
-        padding=2,
-        foreground=colors["foreground"],
         background=colors["background"],
         fontsize=14,
+        foreground=colors["foreground"],
+        padding=2,
+        text=" ",  # ICON: nf-mdi-package_up
     ),
     widget.CheckUpdates(
         background=colors["background"],
@@ -129,42 +129,42 @@ primary_widgets = [
         update_interval=1800,
     ),
     widget.TextBox(
-        text="Updates",
-        foreground=colors["foreground"],
         background=colors["background"],
+        foreground=colors["foreground"],
         padding=5,
+        text="Updates",
     ),
     widget.Image(
-        scale=True,
         background=colors["background"],
         filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg1.png"),
+        scale=True,
     ),
     widget.TextBox(
-        text=" ",  # ICON: nf-mdi-keyboard
-        foreground=colors["foreground"],
         background=colors["background_1"],
+        foreground=colors["foreground"],
         padding=0,
+        text=" ",  # ICON: nf-mdi-keyboard
     ),
     widget.KeyboardLayout(
         background=colors["background_1"],
         configured_keyboards=["us", "il"],
-        padding=5,
         foreground=colors["foreground"],
+        padding=5,
     ),
     widget.Image(
-        scale=True,
         background=colors["background_1"],
         filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg.png"),
+        scale=True,
     ),
     widget.Clock(
-        foreground=colors["foreground"],
         background=colors["background"],
+        foreground=colors["foreground"],
         format=" %a, %b %d %H:%M ",
     ),
     widget.Image(
-        scale=True,
         background=colors["background"],
         filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg1.png"),
+        scale=True,
     ),
     widget.CurrentLayoutIcon(
         background=colors["background_1"],
