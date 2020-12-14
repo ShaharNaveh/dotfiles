@@ -79,7 +79,7 @@ primary_widgets = [
         scale=True,
     ),
     widget.TextBox(
-        text=" ",
+        text=" ",  # ICON: nf-fa-thermometer_3
         padding=2,
         foreground=colors["foreground"],
         background=colors["background_1"],
@@ -97,7 +97,7 @@ primary_widgets = [
         filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg.png"),
     ),
     widget.TextBox(
-        text=" ",
+        text=" ",  # ICON: nf-fa-microchip
         padding=2,
         foreground=colors["foreground"],
         background=colors["background"],
@@ -111,11 +111,11 @@ primary_widgets = [
     ),
     widget.Image(
         scale=True,
-        background=colors["background_1"],
+        background=colors["background"],
         filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg1.png"),
     ),
     widget.TextBox(
-        text=" ",
+        text=" ",  # ICON: nf-mdi-memory
         foreground=colors["foreground"],
         background=colors["background_1"],
         padding=0,
@@ -132,7 +132,7 @@ primary_widgets = [
         filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg.png"),
     ),
     widget.TextBox(
-        text="",
+        text=" ",  # ICON: nf-mdi-package_up
         padding=2,
         foreground=colors["foreground"],
         background=colors["background"],
@@ -156,7 +156,7 @@ primary_widgets = [
         filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg1.png"),
     ),
     widget.TextBox(
-        text="  ",  # ICON: nf-fa-keyboard_o
+        text=" ",  # ICON: nf-mdi-keyboard
         foreground=colors["foreground"],
         background=colors["background_1"],
         padding=0,
@@ -182,23 +182,21 @@ primary_widgets = [
         background=colors["background"],
         filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg1.png"),
     ),
-    # systray (background=colors["background_1"])
-    # TODO: ADD HERE THE KEYBOARD SWITCH
-    widget.Sep(
-        linewidth=0,
-        padding=10,
+    widget.CurrentLayoutIcon(
+        background=colors["background_1"],
         foreground=colors["foreground"],
-        background=colors["background_1"],
-    ),
-    widget.Image(
         scale=True,
-        background=colors["background_1"],
-        filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg.png"),
     ),
-    # widget.CurrentLayoutIcon(
-    # background=colors["background"],
+    # widget.Sep(
+    # linewidth=0,
+    # padding=10,
     # foreground=colors["foreground"],
+    # background=colors["background_1"],
+    # ),
+    # widget.Image(
     # scale=True,
+    # background=colors["background_1"],
+    # filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg.png"),
     # ),
 ]
 
