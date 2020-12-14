@@ -333,6 +333,7 @@ def cargo_build(path: pathlib.Path):
     with subprocess.Popen(
         build_command_args, stdout=subprocess.PIPE, bufsize=1, universal_newlines=True
     ) as command_process:
+        command_process.wait()
         for line in command_process.stdout:
             print(line, end="")
 
