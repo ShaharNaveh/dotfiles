@@ -8,7 +8,7 @@ layout_configuration = {
     "single_margin": 0,
     "single_border_width": 0,
     "margin": 8,
-    "border_focus": colors["focus"][0],
+    "border_focus": colors["background_2"][0],
     "font": font,
 }
 
@@ -42,7 +42,7 @@ floating_layout = layout.Floating(
     ],
     fullscreen_border_width=0,
     border_width=0,
-    border_focus=colors["color4"][0],
+    border_focus=colors["background_2"][0],
 )
 
 
