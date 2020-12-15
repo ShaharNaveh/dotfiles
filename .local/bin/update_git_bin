@@ -73,11 +73,12 @@ def main():
             if is_rust_repo(child):
                 git_stash(path=child)
             git_checkout(path=child, target=target)
-            git_stash_apply(path=child)
 
         if is_rust_repo(child):
             update_rust_repo(child)
 
+        if is_git_dir(child):
+            git_stash_apply(path=child)
 
 def git_stash_apply(path: pathlib.Path):
     git_dir, repo_path = git_dir_repo(path)
