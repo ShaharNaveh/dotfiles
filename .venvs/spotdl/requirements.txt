@@ -1,4 +1,1 @@
-pip
-setuptools
 spotdl<3
-wheel

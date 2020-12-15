@@ -1,4 +1,1 @@
 black
-pip
-setuptools
-wheel

@@ -1,4 +1,1 @@
 isort
-pip
-setuptools
-wheel
