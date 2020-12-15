@@ -40,7 +40,7 @@ for git_dir in $git_dirs ; do
 	MSG="Changing dir to $project_full_path" ; echo $MSG
 	cd $project_full_path
 	MSG="Checkout to $latest_tag" ; echo $MSG
-	git checkout -b $latest_tag
+	git checkout -b $latest_tag 2>/dev/null
 	MSG="Checking if it is a Rust repository..." ; echo -n $MSG
 	is_rust_repo_res=$(is_rust_repo)
 	MSG=" $is_rust_repo_res" ; echo $MSG
