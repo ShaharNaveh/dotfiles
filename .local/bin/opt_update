@@ -1,0 +1,34 @@
+#!/bin/bash
+PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl"
+
+OPT_DIR="$HOME/.local/opt"
+
+function git_subdirs {
+	find $1 -name ".git" -type d
+}
+
+function git_fetch {
+	git --git-dir=$1 fetch --tags
+}
+
+function git_latest_tag {
+	git --git-dir=$1 describe --tags $(git --git-dir=$1 rev-list --tags --max-count=1)
+}
+
+MSG="Iterating over all subdirs in: $OPT_DIR" ; echo $MSG
+git_dirs=$(git_subdirs $OPT_DIR)
+MSG="" ; echo $MSG
+
+for git_dir in $git_dirs
+do
+	project_full_path=$(dirname $git_dir)
+	project_name=$(basename $project_full_path)
+	MSG="Target: $project_name" ; echo $MSG
+	MSG="Fetching origin..." ; echo $MSG
+	#git_fetch $git_dir #ENABLE
+	MSG="Getting the latest tag..." ; echo $MSG
+	latest_tag=$(git_latest_tag $git_dir)
+	MSG="The latest tag is: $latest_tag" ; echo $MSG
+
+	MSG="" ; echo $MSG
+done
