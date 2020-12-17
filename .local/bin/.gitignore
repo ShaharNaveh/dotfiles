@@ -4,7 +4,7 @@
 
 # Except for the files and folders we to track
 !js-beautify
-!opt_update
+!opt_updater
 !venv_updater
 !update_git_bin
 !.flake8
