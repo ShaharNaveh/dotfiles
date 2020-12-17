@@ -43,7 +43,7 @@ for git_dir in $git_dirs ; do
 	git checkout -b $latest_tag 2>/dev/null
 	MSG="Checking if it is a Rust repository..." ; echo -n $MSG
 	is_rust_repo_res=$(is_rust_repo)
-	MSG=" $is_rust_repo_res" ; echo $MSG
+	MSG="\t$is_rust_repo_res" ; echo -e $MSG
 	if [ $is_rust_repo_res = "True" ] ; then
 		MSG="Updating deps..." ; echo $MSG
 		cargo update
