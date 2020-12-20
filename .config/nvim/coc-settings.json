@@ -1,0 +1,6 @@
+{
+  "python.linting.enabled": false,
+  "python.formatting.provider": "black",
+  "python.linting.mypyEnabled": true,
+  "python.analysis.useLibraryCodeForTypes": true
+}
