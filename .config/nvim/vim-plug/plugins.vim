@@ -5,6 +5,7 @@ Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
 Plug 'ap/vim-css-color' " View css colors when editing
+Plug 'preservim/tagbar'
 
 
 
