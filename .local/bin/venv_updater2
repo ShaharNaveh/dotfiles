@@ -1,0 +1,142 @@
+#!/usr/bin/env python3
+import concurrent.futures
+import json
+import multiprocessing as mp
+import pathlib
+import shlex
+import string
+import subprocess
+import time
+from typing import Iterable
+
+BASE_UPDATE_TEMPLATE = string.Template("$python_bin_path -m pip install --upgrade $dep")
+
+
+def _gen_base_commands(template: string.Template, *, python_bin_path) -> Iterable[str]:
+    """
+    foo bar baz
+    """
+    for dep in ["wheel", "setuptools", "pip"]:
+        yield template.substitute(python_bin_path=python_bin_path, dep=dep)
+
+
+def _settings() -> dict:
+    settings = {
+        "settings_file": "settings.json",
+        "requirements_directory": ".requirements",
+        "venvs_data": {},
+        "venvs_dir": pathlib.Path.home() / ".venvs",
+    }
+    settings["settings_file"] = settings["venvs_dir"] / settings["settings_file"]
+
+    with settings["settings_file"].open(mode="r") as json_file:
+        settings["venvs_data"] = json.load(json_file)
+
+    return settings
+
+
+def write_req(requirements_dir: pathlib.Path, target: str) -> None:
+    """
+    requirements_dir : pathlib.Path
+        Location of the `requirements.txt` files will get stored in.
+    target : str
+        The virtual environment target.
+    venv_data : dict
+        Data of the virtual environment.
+    """
+    req_file = requirements_dir / f"{target}_requirements.txt"
+    reqs = "\n".join(
+        req for req in sorted(settings["venvs_data"][target]["requirements"])
+    )
+    with req_file.open(mode="w") as requirements_file:
+        requirements_file.write(reqs)
+
+
+def create_venv(target: str, path: pathlib.Path) -> None:
+    """
+    foo bar baz
+    """
+    path = settings["venvs_dir"]
+    target = target.replace("-", "_")
+    name = f"{target}-venv"
+    full_path = path / name
+
+    if full_path.exists():
+        return None
+
+    command = f'/usr/bin/python3 -m venv --prompt "{target}" {full_path}'
+    command = shlex.split(command)
+    subprocess.run(command, close_fds=True)
+
+    return None
+
+
+def setup():
+    """
+    foo bar baz
+    """
+    (settings["venvs_dir"] / settings["requirements_directory"]).mkdir(exist_ok=True)
+
+    with concurrent.futures.ProcessPoolExecutor() as executor:
+        for dir_name in settings["venvs_data"]:
+            executor.submit(write_req, dir_name)
+            executor.submit(create_venv, dir_name)
+
+
+def req_file(venv_path: pathlib.Path) -> pathlib.Path:
+    """
+    Get the requirements file path of a virtual environment.
+    """
+    requirements_dir = settings["requirements_directory"]
+    target = venv_path.name.removesuffix("-venv").replace("_", "-")
+    return settings["venvs_dir"] / requirements_dir / f"{target}_requirements.txt"
+
+
+def update_venv(venv_path: pathlib.Path) -> None:
+    """
+    foo bar baz
+    """
+    python_bin_path = venv_path / "bin" / "python3"
+    requirements_file_path = req_file(venv_path)
+    base_update_command = " && ".join(
+        command
+        for command in _gen_base_commands(
+            template=BASE_UPDATE_TEMPLATE, python_bin_path=python_bin_path
+        )
+    )
+    requirements_update_command = f"{python_bin_path} -m pip install --upgrade --upgrade-strategy 'eager' --requirement {requirements_file_path}"
+    full_update_command = f"{base_update_command} && {requirements_update_command}"
+    subprocess.call(full_update_command, close_fds=True, shell=True)
+
+
+def iter_venv_dirs(path: pathlib.Path) -> Iterable[pathlib.Path]:
+    """
+    foo bar baz
+    """
+    for venv_path in sorted(path.iterdir()):
+        if not venv_path.is_dir():
+            continue
+        if venv_path.name.startswith("."):
+            continue
+        yield venv_path
+
+
+def update_venvs() -> None:
+    """
+    foo bar baz.
+    """
+    with mp.Pool(processes=4) as pool:
+        pool.map(update_venv, iter_venv_dirs(path=settings["venvs_dir"]))
+
+
+def main():
+    """
+    foo bar baz
+    """
+    setup()
+    update_venvs()
+
+
+if __name__ == "__main__":
+    settings = _settings()
+    main()
