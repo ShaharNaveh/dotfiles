@@ -1,4 +1,5 @@
-let g:python3_host_prog = expand('$HOME') . '/.venvs/neovim/.venv/bin/python'
+let g:python3_host_prog = expand('$HOME') . '/.venvs/neovim-venv/bin/python3' " Set python3 path
+let g:loaded_python_provider = 0
 let g:deoplete#enable_at_startup = 1
 
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
