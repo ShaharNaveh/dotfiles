@@ -2,7 +2,8 @@
     "black": {
         "requirements": [
             "black"
-        ]
+        ],
+		"bin": "black"
     },
     "flake8": {
         "requirements": [
@@ -12,26 +13,25 @@
     "isort": {
         "requirements": [
             "isort"
-        ]
-    },
-    "mypy": {
-        "requirements": [
-            "mypy"
-        ]
+        ],
+		"bin": "flake8"
     },
     "neovim": {
         "requirements": [
+			"jedi",
             "pynvim"
         ]
     },
     "spotdl": {
         "requirements": [
             "spotdl<3"
-        ]
+        ],
+		"bin": "spotdl"
     },
     "youtube-dl": {
         "requirements": [
             "youtube-dl"
-        ]
+        ],
+		"bin": "youtube-dl"
     }
 }
