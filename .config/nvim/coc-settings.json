@@ -6,5 +6,6 @@
   "python.analysis.typeCheckingMode": "basic",
   "python.linting.flake8Enabled": true,
   "python.analysis.diagnosticMode": "workspace",
-  "python.formatting.blackPath": "~/.local/bin/black"
+  "python.formatting.blackPath": "~/.local/bin/black",
+  "coc.preferences.formatOnSaveFiletypes": ["python"]
 }
