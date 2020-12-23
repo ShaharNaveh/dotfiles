@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# TODO:
+# Refactor the hell out of this
+# Use clearer names, like "venv_name" instead of dirname and such
 import concurrent.futures
 import json
 import multiprocessing as mp
@@ -12,12 +15,14 @@ from typing import Iterable
 
 logging.basicConfig(format="[%(levelname)s]\t%(message)s", level=logging.DEBUG)
 
-BASE_UPDATE_TEMPLATE = string.Template("$python_bin_path -m pip install --upgrade $dep")
-# TODO:
-# Refactor the hell out of this
-# Use clearer names, like "venv_name" instead of dirname and such
-
-PROCESSES_NUM = 7
+CONFIG = {
+    "command_template": {
+        "base_update": string.Template(
+            "$python_bin_path -m pip install --upgrade $dep"
+        ),
+    },
+    "processes": 7,
+}
 
 
 def _gen_base_commands(template: string.Template, *, python_bin_path) -> Iterable[str]:
@@ -89,7 +94,7 @@ def setup():
     req_dir_full_path = settings["venvs_dir"] / settings["requirements_directory"]
     with concurrent.futures.ProcessPoolExecutor() as executor:
         for dir_name in settings["venvs_data"]:
-            executor.submit(write_req,  req_dir_full_path, dir_name)
+            executor.submit(write_req, req_dir_full_path, dir_name)
             executor.submit(create_venv, dir_name)
 
 
@@ -111,7 +116,8 @@ def update_venv(venv_path: pathlib.Path) -> None:
     base_update_command = " && ".join(
         command
         for command in _gen_base_commands(
-            template=BASE_UPDATE_TEMPLATE, python_bin_path=python_bin_path
+            template=CONFIG["command_template"]["base_update"],
+            python_bin_path=python_bin_path,
         )
     )
     requirements_update_command = f"{python_bin_path} -m pip install --upgrade --upgrade-strategy 'eager' --requirement {requirements_file_path}"
@@ -135,7 +141,7 @@ def update_venvs() -> None:
     """
     foo bar baz.
     """
-    with mp.Pool(processes=PROCESSES_NUM) as pool:
+    with mp.Pool(processes=CONFIG["processes"]) as pool:
         pool.map(update_venv, iter_venv_dirs(path=settings["venvs_dir"]))
 
 
