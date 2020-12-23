@@ -1,0 +1,54 @@
+#!/bin/bash
+PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl"
+
+function is_file_empty {
+	# $1 - File path
+	if [ -s $1 ] ; then
+		MSG="False" ; echo $MSG
+	else
+		MSG="True" ; echo $MSG
+	fi
+}
+
+function note_template {
+	# $1 - Title name
+	today=$(date +%D)
+	MSG="# $1\n> Date: $today\n" ; echo -e $MSG
+}
+
+full_date=$(date +%d_%m_%Y)
+mkdir $full_date 2>/dev/null
+cd $full_date
+mkdir {Artifacts,Notes,Todo} 2>/dev/null
+touch Notes/Note.md
+touch Todo/{Classwork,Homework}.md
+
+cd Notes
+
+is_empty=$(is_file_empty "Note.md")
+if [ $is_empty = "True" ] ; then
+	data=$(note_template Note)
+	cat > Note.md << EOF
+$data
+EOF
+fi
+
+cd ../
+cd Todo
+
+is_empty=$(is_file_empty "Classwork.md")
+if [ $is_empty = "True" ] ; then
+	data=$(note_template Classwork)
+	cat > Classwork.md << EOF
+$data
+EOF
+fi
+
+is_empty=$(is_file_empty "Homework.md")
+if [ $is_empty = "True" ] ; then
+	data=$(note_template Homework)
+	cat > Homework.md << EOF
+$data
+EOF
+fi
+
