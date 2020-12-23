@@ -4,6 +4,7 @@
 
 # Except for the files and folders we to track
 !json_beautify
+!new_lesson
 !opt_updater
 !venv_updater
 !.flake8
