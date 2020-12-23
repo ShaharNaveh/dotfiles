@@ -5,6 +5,7 @@ set nobackup
 set noswapfile
 set nowritebackup
 set number
+set relativenumber
 set signcolumn=yes
 set title
 set nowrap
