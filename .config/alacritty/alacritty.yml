@@ -88,3 +88,8 @@ window:
     # General application class
     general: Alacritty
 
+key_bindings:
+  - { key: Paste,                                       action: Paste          }
+  - { key: Copy,                                        action: Copy           }
+  - { key: L,         mods: Control,                    action: ClearLogNotice }
+  - { key: N, mods: Control|Shift, action: SpawnNewInstance }
