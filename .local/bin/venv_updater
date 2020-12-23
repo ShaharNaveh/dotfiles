@@ -17,6 +17,8 @@ BASE_UPDATE_TEMPLATE = string.Template("$python_bin_path -m pip install --upgrad
 # Refactor the hell out of this
 # Use clearer names, like "venv_name" instead of dirname and such
 
+PROCESSES_NUM = 7
+
 
 def _gen_base_commands(template: string.Template, *, python_bin_path) -> Iterable[str]:
     """
@@ -133,7 +135,7 @@ def update_venvs() -> None:
     """
     foo bar baz.
     """
-    with mp.Pool(processes=4) as pool:
+    with mp.Pool(processes=PROCESSES_NUM) as pool:
         pool.map(update_venv, iter_venv_dirs(path=settings["venvs_dir"]))
 
 
