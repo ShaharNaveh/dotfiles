@@ -6,6 +6,5 @@
 !json_beautify
 !opt_updater
 !venv_updater
-!update_git_bin
 !.flake8
 !.isort.cfg
