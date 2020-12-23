@@ -1,165 +1,150 @@
 #!/usr/bin/env python3
-import logging
+import concurrent.futures
+import json
+import multiprocessing as mp
 import pathlib
+import logging
 import shlex
 import string
 import subprocess
-from typing import Dict, Iterable, List, Union
+import time
+from typing import Iterable
 
 logging.basicConfig(format="[%(levelname)s]\t%(message)s", level=logging.DEBUG)
 
-BORING_STRING = "Requirement already satisfied"
-
-CONFIG: Dict[str, Union[str, string.Template]] = {
-    "command": string.Template(
-        "$python_path -m pip install"
-        " --upgrade --upgrade-strategy 'eager'"
-        " --requirement $requirements_file_path"
-    ),
-    "requirements_file": "requirements.txt",
-    "venvs_dir": ".venvs",
-    "venv_dir": ".venv",
-}
-
-BASE_COMMANDS: List[string.Template] = [
-    string.Template("$python_path -m pip install --upgrade wheel"),
-    string.Template("$python_path -m pip install --upgrade setuptools"),
-    string.Template("$python_path -m pip install --upgrade pip"),
-]
+BASE_UPDATE_TEMPLATE = string.Template("$python_bin_path -m pip install --upgrade $dep")
+# TODO:
+# Refactor the hell out of this
+# Use clearer names, like "venv_name" instead of dirname and such
 
 
-class Colors:
-    OKBLUE = "\033[94m"
-    OKCYAN = "\033[96m"
-    OKGREEN = "\033[92m"
-    WARNING = "\033[93m"
-    FAIL = "\033[91m"
-    ENDC = "\033[0m"
-
-
-def iter_pubdir(path: pathlib.Path) -> Iterable[pathlib.Path]:
+def _gen_base_commands(template: string.Template, *, python_bin_path) -> Iterable[str]:
     """
-    Iterate only over public directories.
-
-    Parameters
-    ----------
-    path : pathlib.Path
-        The directory path to iterate over.
-
-    Yields
-    ------
-    pathlib.Path
-        Path of a public directory.
+    foo bar baz
     """
-    for child in sorted(path.iterdir()):
-        if child.is_file():
-            continue
-        if child.stem.startswith("."):
-            continue
-        if not child.is_dir():
-            continue
-        yield child
+    for dep in ["wheel", "setuptools", "pip"]:
+        yield template.substitute(python_bin_path=python_bin_path, dep=dep)
 
 
-def is_comply(path: pathlib.Path) -> bool:
+def _settings() -> dict:
+    settings = {
+        "settings_file": "settings.json",
+        "requirements_directory": ".requirements",
+        "venvs_data": {},
+        "venvs_dir": pathlib.Path.home() / ".venvs",
+    }
+    settings["settings_file"] = settings["venvs_dir"] / settings["settings_file"]
+
+    with settings["settings_file"].open(mode="r") as json_file:
+        settings["venvs_data"] = json.load(json_file)
+
+    return settings
+
+
+def write_req(requirements_dir: pathlib.Path, target: str) -> None:
     """
-    Check if a directory complies with a fixed file structure.
-
-    In order to be returned ``True``,
-    the directory needs to have the following structure.
-
-        - .venv (directory)
-        - requirements.txt (file)
-
-    Parameters
-    ----------
-    path : pathlib.Path
-        Path that should have a .venv folder and a requirements.txt file.
+    requirements_dir : pathlib.Path
+        Location of the `requirements.txt` files will get stored in.
+    target : str
+        The virtual environment target.
+    venv_data : dict
+        Data of the virtual environment.
     """
-    venv_dir_path = path / CONFIG["venv_dir"]
-    if not venv_dir_path.exists() or not venv_dir_path.is_dir():
-        return False
-
-    requirements_file_path = path / CONFIG["requirements_file"]
-    if not requirements_file_path.exists() or not requirements_file_path.is_file():
-        return False
-
-    return True
-
-
-def upgrade_venv_req(venv_path: pathlib.Path, requirements_path: pathlib.Path) -> None:
-    """
-    Upgrade a venv with a requirements file.
-
-    Parameters
-    ----------
-    venv_path : pathlib.Path
-        Path to the virtual environment directory.
-    requirements_path : pathlib.Path
-        Path to the requirements file.
-    """
-    python_path = venv_path / "bin" / "python3"
-
-    for base_command_template in BASE_COMMANDS:
-        base_command = base_command_template.substitute(python_path=str(python_path))
-        base_commands_args = shlex.split(base_command)
-        logging.info(f"{Colors.OKCYAN}Executing: {base_command}{Colors.ENDC}")
-        with subprocess.Popen(
-            base_commands_args,
-            stdout=subprocess.PIPE,
-            bufsize=1,
-            universal_newlines=True,
-        ) as base_upgrade_proccess:
-            base_upgrade_proccess.wait()
-            for line in base_upgrade_proccess.stdout:
-                if BORING_STRING not in line:
-                    print(line, end="")
-
-        if base_upgrade_proccess.returncode != 0:
-            logging.warning(
-                f"{Colors.WARNING}Command: {base_command}"
-                f" WAS NOT EXECECUTED SUCCESFULLY{Colors.ENDC}"
-            )
-
-    full_command = CONFIG["command"].substitute(
-        python_path=str(python_path),
-        requirements_file_path=str(requirements_path.resolve()),
+    req_file = requirements_dir / f"{target}_requirements.txt"
+    reqs = "\n".join(
+        req for req in sorted(settings["venvs_data"][target]["requirements"])
     )
 
-    args = shlex.split(full_command)
+    logging.debug(f"Writing {reqs} to {req_file}")
+    with req_file.open(mode="w") as requirements_file:
+        requirements_file.write(reqs)
 
-    logging.info(f"{Colors.OKBLUE}Executing: {full_command}{Colors.ENDC}")
-    with subprocess.Popen(
-        args, stdout=subprocess.PIPE, bufsize=1, universal_newlines=True
-    ) as subp:
-        for line in subp.stdout:
-            if BORING_STRING not in line:
-                print(line, end="")
 
-    if subp.returncode != 0:
-        logging.warning(
-            f"{Colors.WARNING}Command: {full_command}"
-            f" WAS NOT EXECECUTED SUCCESFULLY{Colors.ENDC}"
+def create_venv(target: str) -> None:
+    """
+    foo bar baz
+    """
+    path = settings["venvs_dir"]
+    target = target.replace("-", "_")
+    name = f"{target}-venv"
+    full_path = path / name
+
+    if full_path.exists():
+        return None
+
+    command = f'/usr/bin/python3 -m venv --prompt "{target}" {full_path}'
+    command = shlex.split(command)
+    subprocess.run(command, close_fds=True)
+
+    return None
+
+
+def setup():
+    """
+    foo bar baz
+    """
+    (settings["venvs_dir"] / settings["requirements_directory"]).mkdir(exist_ok=True)
+    req_dir_full_path = settings["venvs_dir"] / settings["requirements_directory"]
+    with concurrent.futures.ProcessPoolExecutor() as executor:
+        for dir_name in settings["venvs_data"]:
+            executor.submit(write_req,  req_dir_full_path, dir_name)
+            executor.submit(create_venv, dir_name)
+
+
+def req_file(venv_path: pathlib.Path) -> pathlib.Path:
+    """
+    Get the requirements file path of a virtual environment.
+    """
+    requirements_dir = settings["requirements_directory"]
+    target = venv_path.name.removesuffix("-venv").replace("_", "-")
+    return settings["venvs_dir"] / requirements_dir / f"{target}_requirements.txt"
+
+
+def update_venv(venv_path: pathlib.Path) -> None:
+    """
+    foo bar baz
+    """
+    python_bin_path = venv_path / "bin" / "python3"
+    requirements_file_path = req_file(venv_path)
+    base_update_command = " && ".join(
+        command
+        for command in _gen_base_commands(
+            template=BASE_UPDATE_TEMPLATE, python_bin_path=python_bin_path
         )
+    )
+    requirements_update_command = f"{python_bin_path} -m pip install --upgrade --upgrade-strategy 'eager' --requirement {requirements_file_path}"
+    full_update_command = f"{base_update_command} && {requirements_update_command}"
+    subprocess.call(full_update_command, close_fds=True, shell=True)
 
 
-def main() -> None:
-    ROOT_VENVS_PATH = pathlib.Path.home() / CONFIG["venvs_dir"]
-
-    for pub_dir in iter_pubdir(ROOT_VENVS_PATH):
-        if not is_comply(path=pub_dir):
+def iter_venv_dirs(path: pathlib.Path) -> Iterable[pathlib.Path]:
+    """
+    foo bar baz
+    """
+    for venv_path in sorted(path.iterdir()):
+        if not venv_path.is_dir():
             continue
+        if venv_path.name.startswith("."):
+            continue
+        yield venv_path
 
-        venv_dir_path = pub_dir / CONFIG["venv_dir"]
 
-        requirements_file_path = pub_dir / CONFIG["requirements_file"]
+def update_venvs() -> None:
+    """
+    foo bar baz.
+    """
+    with mp.Pool(processes=4) as pool:
+        pool.map(update_venv, iter_venv_dirs(path=settings["venvs_dir"]))
 
-        logging.info(f"{Colors.OKGREEN}Updating: {pub_dir.stem}{Colors.ENDC}")
 
-        upgrade_venv_req(
-            venv_path=venv_dir_path, requirements_path=requirements_file_path
-        )
+def main():
+    """
+    foo bar baz
+    """
+    setup()
+    update_venvs()
 
 
 if __name__ == "__main__":
+    settings = _settings()
     main()
