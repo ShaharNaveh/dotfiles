@@ -39,6 +39,7 @@ keys = [
         lazy.layout.grow(),
         lazy.layout.increase_ratio(),
         lazy.layout.delete(),
+        desc="Increase the window size to the right",
     ),
     Key(
         [mod, "control"],
@@ -47,6 +48,7 @@ keys = [
         lazy.layout.shrink(),
         lazy.layout.decrease_ratio(),
         lazy.layout.add(),
+        desc="Increase the window size to the left",
     ),
     Key(
         [mod, "control"],
@@ -54,6 +56,7 @@ keys = [
         lazy.layout.grow_up(),
         lazy.layout.grow(),
         lazy.layout.decrease_nmaster(),
+        desc="Increase the window size upward",
     ),
     Key(
         [mod, "control"],
@@ -61,6 +64,7 @@ keys = [
         lazy.layout.grow_down(),
         lazy.layout.shrink(),
         lazy.layout.increase_nmaster(),
+        desc="Increase the window size downward",
     ),
     Key([mod], "n", lazy.layout.normalize()),
     Key([mod], "o", lazy.layout.maximize()),
