@@ -1,37 +1,38 @@
 {
     "black": {
+        "bin": "black",
         "requirements": [
             "black"
-        ],
-		"bin": "black"
+        ]
     },
     "flake8": {
+        "bin": "flake8",
         "requirements": [
             "flake8"
         ]
     },
     "isort": {
+        "bin": "isort",
         "requirements": [
             "isort"
-        ],
-		"bin": "flake8"
+        ]
     },
     "neovim": {
         "requirements": [
-			"jedi",
+            "jedi",
             "pynvim"
         ]
     },
     "spotdl": {
+        "bin": "spotdl",
         "requirements": [
-            "spotdl<3"
-        ],
-		"bin": "spotdl"
+            "spotdl"
+        ]
     },
     "youtube-dl": {
+        "bin": "youtube-dl",
         "requirements": [
             "youtube-dl"
-        ],
-		"bin": "youtube-dl"
+        ]
     }
 }
