@@ -15,6 +15,7 @@ alias cat="bat"
 alias cleanup='sudo pacman -Rns (pacman -Qtdq)'
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias cp="cp -i"
+alias download_song='youtube-dl -f "bestaudio/best" -ciw -o "%(title)s.%(ext)s" --extract-audio --audio-quality 0 --audio-format mp3'
 alias egrep="egrep --color=auto"
 alias fgrep="fgrep --color=auto"
 alias grep="rg"
