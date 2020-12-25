@@ -4,6 +4,7 @@
 # Use clearer names, like "venv_name" instead of dirname and such
 import concurrent.futures
 import json
+import pprint
 import multiprocessing as mp
 import pathlib
 import logging
@@ -22,14 +23,22 @@ _CONFIG = {
         ),
     },
     "processes": 7,
+    "virtual_environments_requirements_directory_name": ".requirements",
+    "virtual_environments_directory_name": ".venvs",
+    "virtual_environments_metadata_file_name": "settings.json",
+    "virtual_environments_metadata": {},
 }
 
-CONFIG = _CONFIG.copy() # DELETE THIS!
+# CONFIG = _CONFIG.copy() # DELETE THIS!
 
 
-def _modify_settings(config: dict) -> dict:
+def _gen_config(config: dict) -> dict:
     """
-    Modify the settings for the application.
+    Generate a new config from the given configuration.
+
+    It will:
+    * Make all the paths absolute.
+    * Load the metadata of the virtual environments.
 
     Parameters
     ----------
@@ -41,8 +50,32 @@ def _modify_settings(config: dict) -> dict:
     dict
         The modified config.
     """
-    venvs_dir_name = config["venvs_dir_name"]
+    new_config = {}
 
+    venvs_dir_name = config["virtual_environments_directory_name"]
+    abs_venvs_dir_path = pathlib.Path.home() / venvs_dir_name
+    new_config["virtual_environments_directory_path"] = abs_venvs_dir_path.resolve()
+
+    reqs_dir_name = config["virtual_environments_requirements_directory_name"]
+    abs_reqs_dir_path = abs_venvs_dir_path / reqs_dir_name
+    new_config[
+        "virtual_environments_requirements_directory_path"
+    ] = abs_reqs_dir_path.resolve()
+
+    venvs_metadata_file_name = config["virtual_environments_metadata_file_name"]
+    abs_venvs_metadata_file_path = abs_venvs_dir_path / venvs_metadata_file_name
+    new_config[
+        "virtual_environments_metadata_file_path"
+    ] = abs_venvs_metadata_file_path.resolve()
+
+    with new_config["virtual_environments_metadata_file_path"].open(
+        mode="r"
+    ) as venvs_metadata_file_obj:
+        venvs_metadata = json.load(venvs_metadata_file_obj)
+
+    new_config["virtual_environments_metadata"] = venvs_metadata
+
+    return new_config
 
 def _settings() -> dict:
     settings = {
@@ -173,5 +206,7 @@ def main():
 
 
 if __name__ == "__main__":
-    settings = _settings()
-    main()
+    config = _gen_config(_CONFIG)
+    logging.debug(f"Config:\t{pprint.pformat(config)}")
+    # settings = _settings()
+    # main()
