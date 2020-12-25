@@ -138,16 +138,30 @@ def create_venv(target: str) -> None:
     return None
 
 
-def setup():
+def setup(config: dict) -> None:
     """
-    foo bar baz
+    Setup the venvs structure.
+
+    It will:
+        * Create the virtual environments requirements direcory.
+        * Populate the requirements directory with requirements files.
+        * Create virtual environments according to the venvs metadata.
+
+    Parameters
+    ----------
+    config : dict
+        Configuration for the application.
     """
-    (settings["venvs_dir"] / settings["requirements_directory"]).mkdir(exist_ok=True)
-    req_dir_full_path = settings["venvs_dir"] / settings["requirements_directory"]
+    config["virtual_environments_requirements_directory_path"].mkdir(exist_ok=True)
+
+    #req_dir_full_path = settings["venvs_dir"] / settings["requirements_directory"]
+
+    '''
     with concurrent.futures.ProcessPoolExecutor() as executor:
         for dir_name in settings["venvs_data"]:
             executor.submit(write_req, req_dir_full_path, dir_name)
             executor.submit(create_venv, dir_name)
+    '''
 
 
 def req_file(venv_path: pathlib.Path) -> pathlib.Path:
@@ -197,16 +211,20 @@ def update_venvs() -> None:
         pool.map(update_venv, iter_venv_dirs(path=settings["venvs_dir"]))
 
 
-def main():
+def main(config: dict) -> None:
     """
-    foo bar baz
+    the main entry point of the script.
+
+    parameters
+    ----------
+    config : dict
+        configuration for the application.
     """
-    setup()
-    update_venvs()
+    setup(config=config)
+    #update_venvs()
 
 
 if __name__ == "__main__":
     config = _gen_config(_CONFIG)
     logging.debug(f"Config:\t{pprint.pformat(config)}")
-    # settings = _settings()
-    # main()
+    main(config=config)
