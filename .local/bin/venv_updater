@@ -15,7 +15,7 @@ from typing import Iterable
 
 logging.basicConfig(format="[%(levelname)s]\t%(message)s", level=logging.DEBUG)
 
-CONFIG = {
+_CONFIG = {
     "command_template": {
         "base_update": string.Template(
             "$python_bin_path -m pip install --upgrade $dep"
@@ -24,13 +24,24 @@ CONFIG = {
     "processes": 7,
 }
 
+CONFIG = _CONFIG.copy() # DELETE THIS!
 
-def _gen_base_commands(template: string.Template, *, python_bin_path) -> Iterable[str]:
+
+def _modify_settings(config: dict) -> dict:
     """
-    foo bar baz
+    Modify the settings for the application.
+
+    Parameters
+    ----------
+    config : dict
+        The current config.
+
+    Returns
+    -------
+    dict
+        The modified config.
     """
-    for dep in ["wheel", "setuptools", "pip"]:
-        yield template.substitute(python_bin_path=python_bin_path, dep=dep)
+    venvs_dir_name = config["venvs_dir_name"]
 
 
 def _settings() -> dict:
@@ -46,6 +57,14 @@ def _settings() -> dict:
         settings["venvs_data"] = json.load(json_file)
 
     return settings
+
+
+def _gen_base_commands(template: string.Template, *, python_bin_path) -> Iterable[str]:
+    """
+    foo bar baz
+    """
+    for dep in ["wheel", "setuptools", "pip"]:
+        yield template.substitute(python_bin_path=python_bin_path, dep=dep)
 
 
 def write_req(requirements_dir: pathlib.Path, target: str) -> None:
