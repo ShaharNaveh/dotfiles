@@ -48,7 +48,11 @@ for git_dir in $git_dirs ; do
 		MSG="Updating deps..." ; echo $MSG
 		cargo update
 		MSG="Building the binary..." ; echo $MSG
-		cargo build --release
+		CARGO_BUILD_CMD="cargo build --release"
+		if [ $project_name = "starship" ] ; then
+			CARGO_BUILD_CMD="${CARGO_BUILD_CMD} --no-default-features"
+		fi
+		eval $CARGO_BUILD_CMD
 	fi
 	MSG="" ; echo $MSG
 done
