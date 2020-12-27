@@ -12,7 +12,7 @@ import shlex
 import string
 import subprocess
 import time
-from typing import Iterable, Optional
+from typing import Iterable, Optional, Tuple
 
 logging.basicConfig(format="[%(levelname)s]\t%(message)s", level=logging.DEBUG)
 
@@ -40,16 +40,14 @@ _CONFIG = {
     "virtual_environments_metadata": {},
 }
 
-# CONFIG = _CONFIG.copy() # DELETE THIS!
-
 
 def _gen_config(config: dict) -> dict:
     """
     Generate a new config from the given configuration.
 
     It will:
-    * Make all the paths absolute.
-    * Load the metadata of the virtual environments.
+        * Make all the paths absolute.
+        * Load the metadata of the virtual environments.
 
     Parameters
     ----------
@@ -112,9 +110,7 @@ def colored(text: str, color: str) -> str:
     return f"{selected_color}{text}{END_COLOR}"
 
 
-def create_venv(
-    config: dict, target: str, path: pathlib.Path, prompt: Optional[str] = None
-) -> None:
+def create_venv(config: dict, target: str, prompt: Optional[str] = None) -> None:
     """
     Create a virtual environment.
 
@@ -122,15 +118,14 @@ def create_venv(
     ----------
     config : dict
         Configuration for the function.
-    path : pathlib.Path
-        Location to where to store the virtual environmnet.
     prompt : str, optional
         Prompt for the virtual environment.
     target : str
         Target virtual environment.
     """
-    venv_name = f"{target}-venv"
-    venv_path = path / venv_name
+    virtual_environments_directory = config["virtual_environments_directory_path"]
+    _, venv_name = gen_venv_req_names(target)
+    venv_path = virtual_environments_directory / venv_name
 
     if venv_path.exists() and venv_path.is_dir():
         logging.debug(
@@ -143,29 +138,52 @@ def create_venv(
     if prompt is None:
         prompt = target.replace("_", "-")
 
-    create_venv_command_template = config["command_template"]["create_virtual_environment"]
-    create_venv_command = create_venv_command_template.substitute(python_bin_path="/usr/bin/python3", prompt=prompt, destination_path=venv_path)
+    create_venv_command_template = config["command_template"][
+        "create_virtual_environment"
+    ]
+    create_venv_command = create_venv_command_template.substitute(
+        python_bin_path="/usr/bin/python3", prompt=prompt, destination_path=venv_path
+    )
     logging.debug(f"Create virtual environment command: {create_venv_command}")
 
     escaped_command = shlex.split(create_venv_command)
     subprocess.call(escaped_command)
 
-def fix_name(name: str) -> str:
+
+def gen_venv_req_names(target: str) -> Tuple[str, str]:
     """
-    Fix name of a virtual environment.
+    The corresponding req and venv names.
 
     Parameters
     ----------
-    name : str
-        Name to fix.
+    target : str
+        Target name.
 
     Returns
     -------
     str
-        The new name.
+        requirements name.
+    str
+        Virtual environment name.
     """
-    new_name = name.replace("-", "_").lower()
-    return new_name
+    req_name = f"{target}_requirements.txt"
+    venv_name = target.replace("-", "_")
+    venv_name = f"{venv_name}-venv"
+
+    return (req_name, venv_name)
+
+
+def main(config: dict) -> None:
+    """
+    the main entry point of the script.
+
+    parameters
+    ----------
+    config : dict
+        configuration for the application.
+    """
+    setup(config=config)
+    # update_venvs()
 
 
 def setup(config: dict) -> None:
@@ -186,30 +204,32 @@ def setup(config: dict) -> None:
         "virtual_environments_requirements_directory_path"
     ]
     virtual_environments_requirements_directory.mkdir(exist_ok=True)
-
-    # req_dir_full_path = settings["venvs_dir"] / settings["requirements_directory"]
-
-    virtual_environments_directory = config["virtual_environments_directory_path"]
-
     with concurrent.futures.ProcessPoolExecutor() as executor:
         for desired_venv_name in sorted(config["virtual_environments_metadata"]):
-            fixed_name = fix_name(desired_venv_name)
-            executor.submit(create_venv, config, fixed_name, virtual_environments_directory)
-            # Also create the reqs files.
+            executor.submit(create_venv, config, desired_venv_name)
+            executor.submit(write_requirements_file, config, desired_venv_name)
 
-
-def main(config: dict) -> None:
+def write_requirements_file(config: dict, target: str) -> None:
     """
-    the main entry point of the script.
+    Write the requirements for the virtual environment.
 
-    parameters
+    Parameters
     ----------
     config : dict
-        configuration for the application.
+        Configuration for the function.
+    target : str
+        Virtual environmnet target.
     """
-    setup(config=config)
-    # update_venvs()
+    virtual_environments_requirements_directory = config[
+        "virtual_environments_requirements_directory_path"
+    ]
+    req_file_name, _ = gen_venv_req_names(target)
+    req_file_path = virtual_environments_requirements_directory / req_file_name
 
+    requirements = "\n".join(req for req in sorted(config["virtual_environments_metadata"][target]["requirements"]))
+
+    with req_file_path.open(mode="w") as requirements_file_obj:
+        requirements_file_obj.write(requirements)
 
 if __name__ == "__main__":
     config = _gen_config(_CONFIG)
@@ -229,7 +249,7 @@ if __name__ == "__main__":
 #################################################
 
 
-def old_req_file(venv_path: pathlib.Path) -> pathlib.Path:
+def __old_req_file(venv_path: pathlib.Path) -> pathlib.Path:
     """
     Get the requirements file path of a virtual environment.
     """
@@ -238,7 +258,7 @@ def old_req_file(venv_path: pathlib.Path) -> pathlib.Path:
     return settings["venvs_dir"] / requirements_dir / f"{target}_requirements.txt"
 
 
-def old_update_venv(venv_path: pathlib.Path) -> None:
+def __old_update_venv(venv_path: pathlib.Path) -> None:
     """
     foo bar baz
     """
@@ -256,7 +276,7 @@ def old_update_venv(venv_path: pathlib.Path) -> None:
     subprocess.call(full_update_command, close_fds=True, shell=True)
 
 
-def iter_venv_dirs(path: pathlib.Path) -> Iterable[pathlib.Path]:
+def __iter_venv_dirs(path: pathlib.Path) -> Iterable[pathlib.Path]:
     """
     foo bar baz
     """
@@ -268,7 +288,7 @@ def iter_venv_dirs(path: pathlib.Path) -> Iterable[pathlib.Path]:
         yield venv_path
 
 
-def _settings() -> dict:
+def __settings() -> dict:
     settings = {
         "settings_file": "settings.json",
         "requirements_directory": ".requirements",
@@ -283,7 +303,7 @@ def _settings() -> dict:
     return settings
 
 
-def _gen_base_commands(template: string.Template, *, python_bin_path) -> Iterable[str]:
+def __gen_base_commands(template: string.Template, *, python_bin_path) -> Iterable[str]:
     """
     foo bar baz
     """
@@ -291,7 +311,7 @@ def _gen_base_commands(template: string.Template, *, python_bin_path) -> Iterabl
         yield template.substitute(python_bin_path=python_bin_path, dep=dep)
 
 
-def old_write_req(requirements_dir: pathlib.Path, target: str) -> None:
+def __old_write_req(requirements_dir: pathlib.Path, target: str) -> None:
     """
     requirements_dir : pathlib.Path
         Location of the `requirements.txt` files will get stored in.
@@ -310,7 +330,7 @@ def old_write_req(requirements_dir: pathlib.Path, target: str) -> None:
         requirements_file.write(reqs)
 
 
-def old_create_venv(target: str) -> None:
+def __old_create_venv(target: str) -> None:
     """
     foo bar baz
     """
