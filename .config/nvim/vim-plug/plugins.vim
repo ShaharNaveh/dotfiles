@@ -16,6 +16,8 @@ Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' }
 " Python completion, goto definition etc.
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 
+Plug 'dense-analysis/ale'
+
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
