@@ -1,6 +1,6 @@
 filetype plugin on
 set completeopt=menuone
-set mouse=a
+set mouse=nvi
 set nobackup
 set noswapfile
 set nowritebackup
@@ -42,7 +42,8 @@ set shortmess+=c
 "set relativenumber
 "set nohlsearch
 "set noerrorbells
-set tabstop=4 softtabstop=4
+set tabstop=4
+set softtabstop=4
 set shiftwidth=4
 "set expandtab
 set smartindent
