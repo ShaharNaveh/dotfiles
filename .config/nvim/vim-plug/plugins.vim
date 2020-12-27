@@ -1,35 +1,24 @@
 call plug#begin(stdpath('data') . '/plugged')
 Plug 'morhetz/gruvbox' " Color scheme
-Plug 'preservim/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'ryanoasis/vim-devicons'
+Plug 'preservim/nerdtree' " File explorer
+Plug 'Xuyuanp/nerdtree-git-plugin' " Integrate git with file explorer
+Plug 'ryanoasis/vim-devicons' " Show icons for file types
 Plug 'ap/vim-css-color' " View css colors when editing
-
-" Autocompletion related plugins
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-
-" Python source for deoplete
-Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' }
-
-" Python completion, goto definition etc.
-Plug 'davidhalter/jedi-vim', { 'for': 'python' }
-
-Plug 'dense-analysis/ale'
-
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
-Plug 'preservim/tagbar'
-
-Plug 'cespare/vim-toml', { 'for': 'toml' }
+Plug 'vim-airline/vim-airline' " Show bottom toolbar
+Plug 'vim-airline/vim-airline-themes' " Themes for bottom toolbar
+Plug 'cespare/vim-toml', { 'for': 'toml' } " TOML syntax
+Plug 'dense-analysis/ale' " Syntax checker
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " Autocompletion
+Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' } " Jedi support for deoplete
+Plug 'davidhalter/jedi-vim', { 'for': 'python' } " Jedi for vim
+Plug 'preservim/tagbar' " Display information about functions and variables
 
 if executable('rustc')
-  Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+  Plug 'rust-lang/rust.vim', { 'for': 'rust' } " Rust syntax
   "Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 endif
 
 
-"Plug 'preservim/tagbar'
 "Plug 'neoclide/coc.nvim', {'branch': 'release'} " Remove [nodejs, npm, yarn] when deleting this.
 "Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 "Plug 'tpope/vim-markdown', { 'for': 'markdown' }
