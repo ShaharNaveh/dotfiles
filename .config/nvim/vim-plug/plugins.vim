@@ -22,6 +22,8 @@ Plug 'dense-analysis/ale'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+Plug 'preservim/tagbar'
+
 
 
 Plug 'cespare/vim-toml'
