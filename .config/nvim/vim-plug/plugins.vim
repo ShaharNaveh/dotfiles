@@ -21,7 +21,7 @@ Plug 'vim-airline/vim-airline-themes'
 
 Plug 'preservim/tagbar'
 
-Plug 'cespare/vim-toml'
+Plug 'cespare/vim-toml', { 'for': 'toml' }
 
 if executable('rustc')
   Plug 'rust-lang/rust.vim', { 'for': 'rust' }
