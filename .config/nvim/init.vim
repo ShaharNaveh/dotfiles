@@ -3,6 +3,10 @@ let mapleader = "\<Space>"
 source $HOME/.config/nvim/vim-plug/plugins.vim
 
 " Python
+source $HOME/.config/nvim/plug-config/ale.vim
+source $HOME/.config/nvim/plug-config/airline.vim
+source $HOME/.config/nvim/plug-config/airline-extensions.vim
+
 source $HOME/.config/nvim/plug-config/jedi-vim.vim
 source $HOME/.config/nvim/plug-config/deoplete.vim
 source $HOME/.config/nvim/plug-config/deoplete-jedi.vim
