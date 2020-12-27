@@ -5,8 +5,6 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
 Plug 'ap/vim-css-color' " View css colors when editing
 
-
-
 " Autocompletion related plugins
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
@@ -18,13 +16,10 @@ Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 
 Plug 'dense-analysis/ale'
 
-
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 Plug 'preservim/tagbar'
-
-
 
 Plug 'cespare/vim-toml'
 
