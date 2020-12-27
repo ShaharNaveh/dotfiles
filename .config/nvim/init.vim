@@ -19,3 +19,6 @@ source $HOME/.config/nvim/plug-config/nerdtree.vim
 source $HOME/.config/nvim/settings/general.vim
 source $HOME/.config/nvim/settings/color.vim
 source $HOME/.config/nvim/settings/keymap.vim
+
+source $HOME/.config/nvim/plug-config/tagbar.vim
+
