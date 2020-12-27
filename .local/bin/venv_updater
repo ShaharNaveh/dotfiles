@@ -1,7 +1,4 @@
 #!/usr/bin/env python3
-# TODO:
-# Refactor the hell out of this
-# Use clearer names, like "venv_name" instead of dirname and such
 import concurrent.futures
 import json
 import pprint
