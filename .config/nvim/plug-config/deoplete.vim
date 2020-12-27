@@ -29,3 +29,6 @@ call deoplete#custom#option('num_processes', 20)
 
 " The delay for completion after input, measured in milliseconds.
 call deoplete#custom#option('auto_complete_delay', 100)
+
+" For navigating the autocompletion with tab
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
