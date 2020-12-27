@@ -12,14 +12,25 @@ import shlex
 import string
 import subprocess
 import time
-from typing import Iterable
+from typing import Iterable, Optional
 
 logging.basicConfig(format="[%(levelname)s]\t%(message)s", level=logging.DEBUG)
+
+COLORS = {
+    "blue": "\033[94m",
+    "cyan": "\033[96m",
+    "green": "\033[92m",
+    "yellow": "\033[93m",
+    "red": "\033[91m",
+}
 
 _CONFIG = {
     "command_template": {
         "base_update": string.Template(
             "$python_bin_path -m pip install --upgrade $dep"
+        ),
+        "create_virtual_environment": string.Template(
+            '$python_bin_path -m venv --prompt "$prompt" $destination_path'
         ),
     },
     "processes": 7,
@@ -52,6 +63,8 @@ def _gen_config(config: dict) -> dict:
     """
     new_config = {}
 
+    new_config["command_template"] = config["command_template"]
+
     venvs_dir_name = config["virtual_environments_directory_name"]
     abs_venvs_dir_path = pathlib.Path.home() / venvs_dir_name
     new_config["virtual_environments_directory_path"] = abs_venvs_dir_path.resolve()
@@ -77,65 +90,82 @@ def _gen_config(config: dict) -> dict:
 
     return new_config
 
-def _settings() -> dict:
-    settings = {
-        "settings_file": "settings.json",
-        "requirements_directory": ".requirements",
-        "venvs_data": {},
-        "venvs_dir": pathlib.Path.home() / ".venvs",
-    }
-    settings["settings_file"] = settings["venvs_dir"] / settings["settings_file"]
 
-    with settings["settings_file"].open(mode="r") as json_file:
-        settings["venvs_data"] = json.load(json_file)
-
-    return settings
-
-
-def _gen_base_commands(template: string.Template, *, python_bin_path) -> Iterable[str]:
+def colored(text: str, color: str) -> str:
     """
-    foo bar baz
+    Format text with colors.
+
+    Parameters
+    ----------
+    text : str
+        Text to be formatted.
+    color : {blue, cyan, green, red, yellow}
+        Color to be formatted with
+
+    Returns
+    -------
+    str
+        Formmated text.
     """
-    for dep in ["wheel", "setuptools", "pip"]:
-        yield template.substitute(python_bin_path=python_bin_path, dep=dep)
+    END_COLOR = "\033[0m"
+    selected_color = COLORS[color.lower()]
+    return f"{selected_color}{text}{END_COLOR}"
 
 
-def write_req(requirements_dir: pathlib.Path, target: str) -> None:
+def create_venv(
+    config: dict, target: str, path: pathlib.Path, prompt: Optional[str] = None
+) -> None:
     """
-    requirements_dir : pathlib.Path
-        Location of the `requirements.txt` files will get stored in.
+    Create a virtual environment.
+
+    Parameters
+    ----------
+    config : dict
+        Configuration for the function.
+    path : pathlib.Path
+        Location to where to store the virtual environmnet.
+    prompt : str, optional
+        Prompt for the virtual environment.
     target : str
-        The virtual environment target.
-    venv_data : dict
-        Data of the virtual environment.
+        Target virtual environment.
     """
-    req_file = requirements_dir / f"{target}_requirements.txt"
-    reqs = "\n".join(
-        req for req in sorted(settings["venvs_data"][target]["requirements"])
-    )
+    venv_name = f"{target}-venv"
+    venv_path = path / venv_name
 
-    logging.debug(f"Writing {reqs} to {req_file}")
-    with req_file.open(mode="w") as requirements_file:
-        requirements_file.write(reqs)
-
-
-def create_venv(target: str) -> None:
-    """
-    foo bar baz
-    """
-    path = settings["venvs_dir"]
-    target = target.replace("-", "_")
-    name = f"{target}-venv"
-    full_path = path / name
-
-    if full_path.exists():
+    if venv_path.exists() and venv_path.is_dir():
+        logging.debug(
+            "Virtual environment for"
+            f" {colored(venv_name.removesuffix('-venv'), 'green')}"
+            " already exist!\tnot creating a virtual environment..."
+        )
         return None
 
-    command = f'/usr/bin/python3 -m venv --prompt "{target}" {full_path}'
-    command = shlex.split(command)
-    subprocess.run(command, close_fds=True)
+    if prompt is None:
+        prompt = target.replace("_", "-")
 
-    return None
+    create_venv_command_template = config["command_template"]["create_virtual_environment"]
+    create_venv_command = create_venv_command_template.substitute(python_bin_path="/usr/bin/python3", prompt=prompt, destination_path=venv_path)
+    logging.debug(f"Create virtual environment command: {create_venv_command}")
+
+    escaped_command = shlex.split(create_venv_command)
+    subprocess.call(escaped_command)
+
+def fix_name(name: str) -> str:
+    """
+    Fix name of a virtual environment.
+
+    Parameters
+    ----------
+    name : str
+        Name to fix.
+
+    Returns
+    -------
+    str
+        The new name.
+    """
+    new_name = name.replace("-", "_").lower()
+    return new_name
 
 
 def setup(config: dict) -> None:
@@ -152,19 +182,54 @@ def setup(config: dict) -> None:
     config : dict
         Configuration for the application.
     """
-    config["virtual_environments_requirements_directory_path"].mkdir(exist_ok=True)
+    virtual_environments_requirements_directory = config[
+        "virtual_environments_requirements_directory_path"
+    ]
+    virtual_environments_requirements_directory.mkdir(exist_ok=True)
 
-    #req_dir_full_path = settings["venvs_dir"] / settings["requirements_directory"]
+    # req_dir_full_path = settings["venvs_dir"] / settings["requirements_directory"]
 
-    '''
+    virtual_environments_directory = config["virtual_environments_directory_path"]
+
     with concurrent.futures.ProcessPoolExecutor() as executor:
-        for dir_name in settings["venvs_data"]:
-            executor.submit(write_req, req_dir_full_path, dir_name)
-            executor.submit(create_venv, dir_name)
-    '''
+        for desired_venv_name in sorted(config["virtual_environments_metadata"]):
+            fixed_name = fix_name(desired_venv_name)
+            executor.submit(create_venv, config, fixed_name, virtual_environments_directory)
+            # Also create the reqs files.
 
 
-def req_file(venv_path: pathlib.Path) -> pathlib.Path:
+def main(config: dict) -> None:
+    """
+    the main entry point of the script.
+
+    parameters
+    ----------
+    config : dict
+        configuration for the application.
+    """
+    setup(config=config)
+    # update_venvs()
+
+
+if __name__ == "__main__":
+    config = _gen_config(_CONFIG)
+    logging.debug(f"Config:\t{pprint.pformat(config)}")
+    main(config=config)
+
+
+#################################################
+#################################################
+#################################################
+#################################################
+#################################################
+#################################################
+#################################################
+#################################################
+#################################################
+#################################################
+
+
+def old_req_file(venv_path: pathlib.Path) -> pathlib.Path:
     """
     Get the requirements file path of a virtual environment.
     """
@@ -173,7 +238,7 @@ def req_file(venv_path: pathlib.Path) -> pathlib.Path:
     return settings["venvs_dir"] / requirements_dir / f"{target}_requirements.txt"
 
 
-def update_venv(venv_path: pathlib.Path) -> None:
+def old_update_venv(venv_path: pathlib.Path) -> None:
     """
     foo bar baz
     """
@@ -203,28 +268,62 @@ def iter_venv_dirs(path: pathlib.Path) -> Iterable[pathlib.Path]:
         yield venv_path
 
 
-def update_venvs() -> None:
+def _settings() -> dict:
+    settings = {
+        "settings_file": "settings.json",
+        "requirements_directory": ".requirements",
+        "venvs_data": {},
+        "venvs_dir": pathlib.Path.home() / ".venvs",
+    }
+    settings["settings_file"] = settings["venvs_dir"] / settings["settings_file"]
+
+    with settings["settings_file"].open(mode="r") as json_file:
+        settings["venvs_data"] = json.load(json_file)
+
+    return settings
+
+
+def _gen_base_commands(template: string.Template, *, python_bin_path) -> Iterable[str]:
     """
-    foo bar baz.
+    foo bar baz
     """
-    with mp.Pool(processes=CONFIG["processes"]) as pool:
-        pool.map(update_venv, iter_venv_dirs(path=settings["venvs_dir"]))
+    for dep in ["wheel", "setuptools", "pip"]:
+        yield template.substitute(python_bin_path=python_bin_path, dep=dep)
 
 
-def main(config: dict) -> None:
+def old_write_req(requirements_dir: pathlib.Path, target: str) -> None:
     """
-    the main entry point of the script.
-
-    parameters
-    ----------
-    config : dict
-        configuration for the application.
+    requirements_dir : pathlib.Path
+        Location of the `requirements.txt` files will get stored in.
+    target : str
+        The virtual environment target.
+    venv_data : dict
+        Data of the virtual environment.
     """
-    setup(config=config)
-    #update_venvs()
+    req_file = requirements_dir / f"{target}_requirements.txt"
+    reqs = "\n".join(
+        req for req in sorted(settings["venvs_data"][target]["requirements"])
+    )
+
+    logging.debug(f"Writing {reqs} to {req_file}")
+    with req_file.open(mode="w") as requirements_file:
+        requirements_file.write(reqs)
 
 
-if __name__ == "__main__":
-    config = _gen_config(_CONFIG)
-    logging.debug(f"Config:\t{pprint.pformat(config)}")
-    main(config=config)
+def old_create_venv(target: str) -> None:
+    """
+    foo bar baz
+    """
+    path = settings["venvs_dir"]
+    target = target.replace("-", "_")
+    name = f"{target}-venv"
+    full_path = path / name
+
+    if full_path.exists():
+        return None
+
+    command = f'/usr/bin/python3 -m venv --prompt "{target}" {full_path}'
+    command = shlex.split(command)
+    subprocess.run(command, close_fds=True)
+
+    return None
