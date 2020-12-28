@@ -314,12 +314,6 @@ def write_requirements_file(config: dict, target: str) -> None:
         requirements_file_obj.write(requirements)
 
 
-if __name__ == "__main__":
-    config = _gen_config(_CONFIG)
-    logging.debug(f"Config:\t{pprint.pformat(config)}")
-    main(config=config)
-
-
 def new_main(config: dict):
     """
     1. create .reqs
@@ -330,5 +324,112 @@ def new_main(config: dict):
         since we have the path of both, we can:
         1.upgrade venv
         1. link bin
+
+
+    ###############################
+
+    Or, put mappings of venv_path, name, req, deps, etc... in a dict.
+    and pass it through functions?
     """
+    config["virtual_environments_requirements_directory_path"].mkdir(exist_ok=True)
+    with mp.Pool(processes=config["processes"]) as pool:
+        pool.map(magic, config["virtual_environments_metadata"])
+
+
+def new_write_requirements_file(target: str) -> None:
+    """
+    Write the requirements for the virtual environment.
+
+    Parameters
+    ----------
+    target : str
+        Virtual environmnet target.
+    """
+    virtual_environments_requirements_directory = config[
+        "virtual_environments_requirements_directory_path"
+    ]
+    req_file_name, _ = gen_venv_req_names(target)
+    req_file_path = virtual_environments_requirements_directory / req_file_name
+
+    requirements = "\n".join(
+        req
+        for req in sorted(
+            config["virtual_environments_metadata"][target]["requirements"]
+        )
+    )
+
+    with req_file_path.open(mode="w") as requirements_file_obj:
+        requirements_file_obj.write(requirements)
+
+
+def new_create_venv(target: str) -> None:
+    """
+    Create a virtual environment.
+
+    Parameters
+    ----------
+    target : str
+        Target virtual environment.
+    """
+    virtual_environments_directory = config["virtual_environments_directory_path"]
+    _, venv_name = gen_venv_req_names(target)
+    venv_path = virtual_environments_directory / venv_name
+
+    if venv_path.exists() and venv_path.is_dir():
+        logging.debug(
+            "Virtual environment for"
+            f" {colored(venv_name.removesuffix('-venv'), 'green')}"
+            " already exist!\tnot creating a virtual environment..."
+        )
+        return None
+
+    prompt = target.replace("_", "-")
+
+    create_venv_command_template = config["command_template"][
+        "create_virtual_environment"
+    ]
+    create_venv_command = create_venv_command_template.substitute(
+        python_bin_path="/usr/bin/python3", prompt=prompt, destination_path=venv_path
+    )
+    logging.debug(f"Create virtual environment command: {create_venv_command}")
+
+    escaped_command = shlex.split(create_venv_command)
+    subprocess.call(escaped_command)
+
+
+def new_update_venv(target: str) -> None:
+    req_file_name, venv_dir_name = gen_venv_req_names(target)
+    req_path = (
+        config["virtual_environments_requirements_directory_path"] / req_file_name
+    )
+    venv_path = config["virtual_environments_directory_path"] / venv_dir_name
+
+    python_bin_path = venv_path / "bin" / "python3"
+    base_upgrade_command = " && ".join(
+        command
+        for command in gen_base_upgrade_commands(python_bin_path=python_bin_path)
+    )
+    requirements_update_command = config["command_template"][
+        "requirements_update_command"
+    ].substitute(python_bin_path=python_bin_path, requirements_file_path=req_path)
+
+    full_command = f"{base_upgrade_command} && {requirements_update_command}"
+    subprocess.call(full_command, close_fds=True, shell=True)
+
+
+def new_link_bin(target: str) -> None:
     pass
+
+
+def magic(target: str):
+    new_create_venv(target=target)
+    new_write_requirements_file(target=target)
+    new_update_venv(target=target)
+    new_link_bin(target=target)
+
+
+if __name__ == "__main__":
+    config = _gen_config(_CONFIG)
+    logging.debug(f"Config:\t{pprint.pformat(config)}")
+    # main(config=config)
+    new_main(config=config)
