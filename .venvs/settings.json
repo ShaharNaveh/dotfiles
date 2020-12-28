@@ -1,12 +1,12 @@
 {
     "black": {
-        "bin": "black",
+        "bins": ["black"],
         "requirements": [
             "black"
         ]
     },
     "flake8": {
-        "bin": "flake8",
+        "bins": ["flake8"],
         "requirements": [
             "flake8"
         ]
@@ -24,13 +24,13 @@
         ]
     },
     "spotdl": {
-        "bin": "spotdl",
+        "bins": ["spotdl"],
         "requirements": [
             "spotdl"
         ]
     },
     "youtube-dl": {
-        "bin": "youtube-dl",
+        "bins": ["youtube-dl"],
         "requirements": [
             "youtube-dl"
         ]
