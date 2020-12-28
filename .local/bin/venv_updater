@@ -8,7 +8,7 @@ import pprint
 import shlex
 import string
 import subprocess
-from typing import Iterable, Optional, Tuple
+from typing import Iterable, Tuple
 
 logging.basicConfig(format="[%(levelname)s]\t%(message)s", level=logging.DEBUG)
 
@@ -112,46 +112,6 @@ def colored(text: str, color: str) -> str:
     return f"{selected_color}{text}{END_COLOR}"
 
 
-def create_venv(config: dict, target: str, prompt: Optional[str] = None) -> None:
-    """
-    Create a virtual environment.
-
-    Parameters
-    ----------
-    config : dict
-        Configuration for the function.
-    prompt : str, optional
-        Prompt for the virtual environment.
-    target : str
-        Target virtual environment.
-    """
-    virtual_environments_directory = config["virtual_environments_directory_path"]
-    _, venv_name = gen_venv_req_names(target)
-    venv_path = virtual_environments_directory / venv_name
-
-    if venv_path.exists() and venv_path.is_dir():
-        logging.debug(
-            "Virtual environment for"
-            f" {colored(venv_name.removesuffix('-venv'), 'green')}"
-            " already exist!\tnot creating a virtual environment..."
-        )
-        return None
-
-    if prompt is None:
-        prompt = target.replace("_", "-")
-
-    create_venv_command_template = config["command_template"][
-        "create_virtual_environment"
-    ]
-    create_venv_command = create_venv_command_template.substitute(
-        python_bin_path="/usr/bin/python3", prompt=prompt, destination_path=venv_path
-    )
-    logging.debug(f"Create virtual environment command: {create_venv_command}")
-
-    escaped_command = shlex.split(create_venv_command)
-    subprocess.call(escaped_command)
-
-
 def gen_base_upgrade_commands(python_bin_path: str) -> Iterable[str]:
     """
     Generate base upgrade commands.
@@ -195,148 +155,11 @@ def gen_venv_req_names(target: str) -> Tuple[str, str]:
     return (req_name, venv_name)
 
 
-def iter_venv_dirs(config: dict) -> Iterable[pathlib.Path]:
-    """
-    Iterate over all the virtual environments directories.
-
-    Parameters
-    ----------
-    config : dict
-        Configuration for the application.
-
-    Yields
-    ------
-    pathlib.Path
-        Path to the virtual environment.
-    """
-    venvs_dir = config["virtual_environments_directory_path"]
-    for venv_path in sorted(venvs_dir.iterdir()):
-        if not venv_path.is_dir():
-            continue
-        if venv_path.name.startswith("."):
-            continue
-        if not venv_path.name.endswith("-venv"):
-            continue
-        yield venv_path
-
-
 def link_bins():
     pass
 
 
-def main(config: dict) -> None:
-    """
-    the main entry point of the script.
-
-    parameters
-    ----------
-    config : dict
-        configuration for the application.
-    """
-    setup(config=config)
-    update_virtual_environments(config=config)
-
-
-def setup(config: dict) -> None:
-    """
-    Setup the venvs structure.
-
-    It will:
-        * Create the virtual environments requirements direcory.
-        * Populate the requirements directory with requirements files.
-        * Create virtual environments according to the venvs metadata.
-
-    Parameters
-    ----------
-    config : dict
-        Configuration for the application.
-    """
-    virtual_environments_requirements_directory = config[
-        "virtual_environments_requirements_directory_path"
-    ]
-    virtual_environments_requirements_directory.mkdir(exist_ok=True)
-    with concurrent.futures.ProcessPoolExecutor() as executor:
-        for desired_venv_name in sorted(config["virtual_environments_metadata"]):
-            executor.submit(create_venv, config, desired_venv_name)
-            executor.submit(write_requirements_file, config, desired_venv_name)
-
-
-def update_venv(target: str) -> None:
-    req_file_name, venv_dir_name = gen_venv_req_names(target)
-    req_path = (
-        config["virtual_environments_requirements_directory_path"] / req_file_name
-    )
-    venv_path = config["virtual_environments_directory_path"] / venv_dir_name
-
-    python_bin_path = venv_path / "bin" / "python3"
-    base_upgrade_command = " && ".join(
-        command
-        for command in gen_base_upgrade_commands(python_bin_path=python_bin_path)
-    )
-    requirements_update_command = config["command_template"][
-        "requirements_update_command"
-    ].substitute(python_bin_path=python_bin_path, requirements_file_path=req_path)
-
-    full_command = f"{base_upgrade_command} && {requirements_update_command}"
-    subprocess.call(full_command, close_fds=True, shell=True)
-
-
-def update_virtual_environments(config: dict) -> None:
-    with mp.Pool(processes=config["processes"]) as pool:
-        pool.map(update_venv, config["virtual_environments_metadata"])
-
-
-def write_requirements_file(config: dict, target: str) -> None:
-    """
-    Write the requirements for the virtual environment.
-
-    Parameters
-    ----------
-    config : dict
-        Configuration for the function.
-    target : str
-        Virtual environmnet target.
-    """
-    virtual_environments_requirements_directory = config[
-        "virtual_environments_requirements_directory_path"
-    ]
-    req_file_name, _ = gen_venv_req_names(target)
-    req_file_path = virtual_environments_requirements_directory / req_file_name
-
-    requirements = "\n".join(
-        req
-        for req in sorted(
-            config["virtual_environments_metadata"][target]["requirements"]
-        )
-    )
-
-    with req_file_path.open(mode="w") as requirements_file_obj:
-        requirements_file_obj.write(requirements)
-
-
-def new_main(config: dict):
-    """
-    1. create .reqs
-    In the main we will have the mp.pool
-    iter over "virtual_environments_metadata" ('black, isort, flake8, etc..)
-        1. create venv with name
-        1. create reqs
-        since we have the path of both, we can:
-        1.upgrade venv
-        1. link bin
-
-
-    ###############################
-
-    Or, put mappings of venv_path, name, req, deps, etc... in a dict.
-    and pass it through functions?
-    """
-    config["virtual_environments_requirements_directory_path"].mkdir(exist_ok=True)
-    with mp.Pool(processes=config["processes"]) as pool:
-        pool.map(magic, config["virtual_environments_metadata"])
-
-
-def new_write_requirements_file(target: str) -> None:
+def write_reqs(target: str, path: pathlib.Path) -> None:
     """
     Write the requirements for the virtual environment.
 
@@ -344,13 +167,9 @@ def new_write_requirements_file(target: str) -> None:
     ----------
     target : str
         Virtual environmnet target.
+    path : pathlib.Path
+        Path to the requirements.txt file.
     """
-    virtual_environments_requirements_directory = config[
-        "virtual_environments_requirements_directory_path"
-    ]
-    req_file_name, _ = gen_venv_req_names(target)
-    req_file_path = virtual_environments_requirements_directory / req_file_name
-
     requirements = "\n".join(
         req
         for req in sorted(
@@ -358,38 +177,26 @@ def new_write_requirements_file(target: str) -> None:
         )
     )
 
-    with req_file_path.open(mode="w") as requirements_file_obj:
+    with path.open(mode="w") as requirements_file_obj:
         requirements_file_obj.write(requirements)
 
 
-def new_create_venv(target: str) -> None:
+def create_venv(path: pathlib.Path, prompt: str) -> None:
     """
     Create a virtual environment.
 
     Parameters
     ----------
-    target : str
-        Target virtual environment.
+    path : pathlib.Path
+        Path to the virtual environment dir.
+    prompt : str
+        Prompt for the new virtual environment.
     """
-    virtual_environments_directory = config["virtual_environments_directory_path"]
-    _, venv_name = gen_venv_req_names(target)
-    venv_path = virtual_environments_directory / venv_name
-
-    if venv_path.exists() and venv_path.is_dir():
-        logging.debug(
-            "Virtual environment for"
-            f" {colored(venv_name.removesuffix('-venv'), 'green')}"
-            " already exist!\tnot creating a virtual environment..."
-        )
-        return None
-
-    prompt = target.replace("_", "-")
-
     create_venv_command_template = config["command_template"][
         "create_virtual_environment"
     ]
     create_venv_command = create_venv_command_template.substitute(
-        python_bin_path="/usr/bin/python3", prompt=prompt, destination_path=venv_path
+        python_bin_path="/usr/bin/python3", prompt=prompt, destination_path=path
     )
     logging.debug(f"Create virtual environment command: {create_venv_command}")
 
@@ -397,39 +204,51 @@ def new_create_venv(target: str) -> None:
     subprocess.call(escaped_command)
 
 
-def new_update_venv(target: str) -> None:
-    req_file_name, venv_dir_name = gen_venv_req_names(target)
-    req_path = (
+def main(config: dict):
+    config["virtual_environments_requirements_directory_path"].mkdir(exist_ok=True)
+
+    with mp.Pool(processes=config["processes"]) as pool:
+        pool.map(magic, sorted(config["virtual_environments_metadata"]))
+
+
+def magic(target: str) -> None:
+    req_file_name, venv_dir_name = gen_venv_req_names(target=target)
+    req_file_path = (
         config["virtual_environments_requirements_directory_path"] / req_file_name
     )
-    venv_path = config["virtual_environments_directory_path"] / venv_dir_name
+    write_reqs(target=target, path=req_file_path)
+    venv_dir_path = config["virtual_environments_directory_path"] / venv_dir_name
+    if not venv_dir_path.is_dir():
+        create_venv(path=venv_dir_path, prompt=target)
+    update_venv(venv_dir_path=venv_dir_path, reqs_path=req_file_path)
+    # TODO: Link bin
 
-    python_bin_path = venv_path / "bin" / "python3"
+
+def update_venv(venv_dir_path: pathlib.Path, reqs_path: pathlib.Path) -> None:
+    """
+    Update a virtual environment.
+
+    Parameters
+    ----------
+    venv_dir_path : pathlib.Path
+        Path to the virtual environment directory.
+    reqs_path : pathlib.Path
+        Path to the reqs file.
+    """
+    python_bin_path = venv_dir_path / "bin" / "python3"
     base_upgrade_command = " && ".join(
         command
         for command in gen_base_upgrade_commands(python_bin_path=python_bin_path)
     )
     requirements_update_command = config["command_template"][
         "requirements_update_command"
-    ].substitute(python_bin_path=python_bin_path, requirements_file_path=req_path)
+    ].substitute(python_bin_path=python_bin_path, requirements_file_path=reqs_path)
 
     full_command = f"{base_upgrade_command} && {requirements_update_command}"
     subprocess.call(full_command, close_fds=True, shell=True)
 
 
-def new_link_bin(target: str) -> None:
-    pass
-
-
-def magic(target: str):
-    new_create_venv(target=target)
-    new_write_requirements_file(target=target)
-    new_update_venv(target=target)
-    new_link_bin(target=target)
-
-
 if __name__ == "__main__":
     config = _gen_config(_CONFIG)
     logging.debug(f"Config:\t{pprint.pformat(config)}")
-    # main(config=config)
-    new_main(config=config)
+    main(config=config)
