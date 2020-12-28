@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-import concurrent.futures
 import json
 import logging
 import multiprocessing as mp
@@ -21,6 +20,7 @@ COLORS = {
 }
 
 _CONFIG = {
+    "bin_dir": pathlib.Path.home() / ".local" / "bin",
     "command_template": {
         "base_update": string.Template(
             "$python_bin_path -m pip install --upgrade $dependency"
@@ -62,6 +62,7 @@ def _gen_config(config: dict) -> dict:
     """
     new_config = {}
 
+    new_config["bin_dir"] = config["bin_dir"]
     new_config["command_template"] = config["command_template"]
     new_config["processes"] = config["processes"]
 
@@ -112,6 +113,29 @@ def colored(text: str, color: str) -> str:
     return f"{selected_color}{text}{END_COLOR}"
 
 
+def create_venv(path: pathlib.Path, prompt: str) -> None:
+    """
+    Create a virtual environment.
+
+    Parameters
+    ----------
+    path : pathlib.Path
+        Path to the virtual environment dir.
+    prompt : str
+        Prompt for the new virtual environment.
+    """
+    create_venv_command_template = config["command_template"][
+        "create_virtual_environment"
+    ]
+    create_venv_command = create_venv_command_template.substitute(
+        python_bin_path="/usr/bin/python3", prompt=prompt, destination_path=path
+    )
+    logging.debug(f"Create virtual environment command: {create_venv_command}")
+
+    escaped_command = shlex.split(create_venv_command)
+    subprocess.call(escaped_command)
+
+
 def gen_base_upgrade_commands(python_bin_path: str) -> Iterable[str]:
     """
     Generate base upgrade commands.
@@ -155,60 +179,15 @@ def gen_venv_req_names(target: str) -> Tuple[str, str]:
     return (req_name, venv_name)
 
 
-def link_bins():
-    pass
-
-
-def write_reqs(target: str, path: pathlib.Path) -> None:
+def link_bin(venv_path: pathlib.Path, bin_name: str):
     """
-    Write the requirements for the virtual environment.
-
-    Parameters
-    ----------
-    target : str
-        Virtual environmnet target.
-    path : pathlib.Path
-        Path to the requirements.txt file.
+    foo bar baz.
     """
-    requirements = "\n".join(
-        req
-        for req in sorted(
-            config["virtual_environments_metadata"][target]["requirements"]
-        )
-    )
-
-    with path.open(mode="w") as requirements_file_obj:
-        requirements_file_obj.write(requirements)
-
-
-def create_venv(path: pathlib.Path, prompt: str) -> None:
-    """
-    Create a virtual environment.
-
-    Parameters
-    ----------
-    path : pathlib.Path
-        Path to the virtual environment dir.
-    prompt : str
-        Prompt for the new virtual environment.
-    """
-    create_venv_command_template = config["command_template"][
-        "create_virtual_environment"
-    ]
-    create_venv_command = create_venv_command_template.substitute(
-        python_bin_path="/usr/bin/python3", prompt=prompt, destination_path=path
-    )
-    logging.debug(f"Create virtual environment command: {create_venv_command}")
-
-    escaped_command = shlex.split(create_venv_command)
-    subprocess.call(escaped_command)
-
-
-def main(config: dict):
-    config["virtual_environments_requirements_directory_path"].mkdir(exist_ok=True)
-
-    with mp.Pool(processes=config["processes"]) as pool:
-        pool.map(magic, sorted(config["virtual_environments_metadata"]))
+    bin_path = venv_path / "bin" / bin_name
+    target_path = config["bin_dir"] / bin_name
+    if target_path.is_symlink():
+        return None
+    target_path.symlink_to(bin_path)
 
 
 def magic(target: str) -> None:
@@ -221,7 +200,22 @@ def magic(target: str) -> None:
     if not venv_dir_path.is_dir():
         create_venv(path=venv_dir_path, prompt=target)
     update_venv(venv_dir_path=venv_dir_path, reqs_path=req_file_path)
-    # TODO: Link bin
+
+    try:
+        bins = config["virtual_environments_metadata"][target]["bins"]
+    except KeyError:
+        bins = None
+
+    if bins is not None:
+        for bin_to_link in bins:
+            link_bin(venv_path=venv_dir_path, bin_name=bin_to_link)
+
+
+def main(config: dict):
+    config["virtual_environments_requirements_directory_path"].mkdir(exist_ok=True)
+
+    with mp.Pool(processes=config["processes"]) as pool:
+        pool.map(magic, sorted(config["virtual_environments_metadata"]))
 
 
 def update_venv(venv_dir_path: pathlib.Path, reqs_path: pathlib.Path) -> None:
@@ -246,6 +240,28 @@ def update_venv(venv_dir_path: pathlib.Path, reqs_path: pathlib.Path) -> None:
 
     full_command = f"{base_upgrade_command} && {requirements_update_command}"
     subprocess.call(full_command, close_fds=True, shell=True)
+
+
+def write_reqs(target: str, path: pathlib.Path) -> None:
+    """
+    Write the requirements for the virtual environment.
+
+    Parameters
+    ----------
+    target : str
+        Virtual environmnet target.
+    path : pathlib.Path
+        Path to the requirements.txt file.
+    """
+    requirements = "\n".join(
+        req
+        for req in sorted(
+            config["virtual_environments_metadata"][target]["requirements"]
+        )
+    )
+
+    with path.open(mode="w") as requirements_file_obj:
+        requirements_file_obj.write(requirements)
 
 
 if __name__ == "__main__":
