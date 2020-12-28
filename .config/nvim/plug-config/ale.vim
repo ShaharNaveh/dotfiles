@@ -9,8 +9,6 @@ let g:ale_linters = {
 \ 'rust': ['cargo', 'rls']
 \}
 let g:ale_fixers = {
-\ 'python': ['black']
+\ 'python': ['black', 'isort']
 \}
 
-" Python specific
-let g:ale_python_auto_pipenv = 0
