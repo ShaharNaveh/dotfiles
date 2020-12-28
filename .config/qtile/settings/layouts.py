@@ -4,10 +4,10 @@ from settings.constants import font
 from settings.theme import colors
 
 layout_configuration = {
-    "border_width": 2,
+    "border_width": 0,
     "single_margin": 0,
     "single_border_width": 0,
-    "margin": 8,
+    "margin": 2,
     "border_focus": colors["background_2"][0],
     "font": font,
 }
@@ -17,8 +17,8 @@ layouts = [
     layout.Max(**layout_configuration),
     # layout.Matrix(**layout_configuration),
     layout.Tile(**layout_configuration),
-    layout.MonadTall(**layout_configuration, ratio=0.63),
-    layout.MonadWide(**layout_configuration, ratio=0.63),
+    layout.MonadTall(**layout_configuration, ratio=0.60),
+    layout.MonadWide(**layout_configuration, ratio=0.60),
 ]
 
 floating_layout = layout.Floating(
