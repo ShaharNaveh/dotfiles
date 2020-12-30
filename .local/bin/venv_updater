@@ -10,7 +10,7 @@ import string
 import subprocess
 from typing import Iterable, Optional, Set, Tuple
 
-logging.basicConfig(format="[%(levelname)s]\t%(message)s", level=logging.DEBUG)
+logging.basicConfig(format="[%(levelname)s]\t%(message)s", level=logging.INFO)
 
 COLORS = {
     "blue": "\033[94m",
@@ -259,6 +259,8 @@ def update_venv(
 
     for filtered_output in filter_output(target=target, outs=outs, errs=errs):
         logging.info(filtered_output)
+
+    logging.info(f"Done upgrading virtual environment of:\t{colored(target, 'green')}")
 
 
 def filter_output(
