@@ -14,8 +14,12 @@ Plug 'davidhalter/jedi-vim', { 'for': 'python' } " Jedi for vim
 Plug 'preservim/tagbar' " Display information about functions and variables, Install [ctags]
 
 if executable('rustc')
-  Plug 'rust-lang/rust.vim', { 'for': 'rust' } " Rust syntax
-  "Plug 'racer-rust/vim-racer', { 'for': 'rust' }
+	Plug 'rust-lang/rust.vim', { 'for': 'rust' } " Rust syntax
+	"Plug 'racer-rust/vim-racer', { 'for': 'rust' }
+endif
+
+if executable('fish')
+	Plug 'dag/vim-fish', { 'for': 'fish' } " Fish syntax
 endif
 
 
