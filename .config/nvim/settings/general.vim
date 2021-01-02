@@ -1,4 +1,4 @@
-filetype plugin on
+filetype plugin indent on
 set completeopt=menuone
 set mouse=nvi
 set nobackup
@@ -15,7 +15,7 @@ set undofile
 set undodir=$HOME/.local/share/nvim/undodir
 
 
-syntax on
+syntax enable
 set cursorline
 set hidden
 set cmdheight=1
