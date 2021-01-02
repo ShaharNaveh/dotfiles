@@ -39,7 +39,7 @@ _CONFIG = {
         "boring_strings": {"Requirement already satisfied"},
         "upgraded_package_strings": {"Collecting", "Using cached"},
     },
-    "processes": 7,
+    "processes": 3,
     "virtual_environments_requirements_directory_name": ".requirements",
     "virtual_environments_directory_name": ".venvs",
     "virtual_environments_metadata_file_name": "settings.json",
