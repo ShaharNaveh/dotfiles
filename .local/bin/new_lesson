@@ -16,6 +16,11 @@ function note_template {
 	MSG="# $1\n> Date: $today\n" ; echo -e $MSG
 }
 
+function foo {
+	today=$(date +%D)
+	MSG="---\n\n> Date: $today\n\n---\n\n" ; echo -e $MSG
+}
+
 full_date=$(date +%d_%m_%Y)
 mkdir $full_date 2>/dev/null
 cd $full_date
@@ -23,6 +28,17 @@ mkdir {Artifacts,Notes,Todo} 2>/dev/null
 touch Notes/Note.md
 touch Todo/{Classwork,Homework}.md
 
+cd Notes
+
+is_empty=$(is_file_empty "Note.md")
+if [ $is_empty = "True" ] ; then
+	data=$(foo)
+	cat > Note.md << EOF
+$data
+EOF
+fi
+
+cd ../
 cd Todo
 
 is_empty=$(is_file_empty "Classwork.md")
