@@ -12,12 +12,12 @@ function is_file_empty {
 
 function note_template {
 	# $1 - Title name
-	today=$(date +%D)
+	today=$(date +%d/%m/%Y)
 	MSG="# $1\n> Date: $today\n" ; echo -e $MSG
 }
 
 function foo {
-	today=$(date +%D)
+	today=$(date +%d/%m/%Y)
 	MSG="---\n\n> Date: $today\n\n---\n\n" ; echo -e $MSG
 }
 
