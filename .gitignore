@@ -7,6 +7,7 @@
 !.local
 !.asoundrc
 !.bash_aliases
+!.bash_profile
 !.bashrc
 !.tmux.conf
 !.xmonad
