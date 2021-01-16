@@ -1,10 +1,12 @@
 #
 # ~/.bashrc
 #
-
-if [[ $(ps --no-header --pid=$PPID --format=cmd) != "fish" ]]
+if [ -n "$(builtin type -P 'fish')" ]
 then
-	exec fish
+	if [[ $(ps --no-header --pid=$PPID --format=cmd) != "fish" ]]
+	then
+		exec fish
+	fi
 fi
 
 ### EXPORT
