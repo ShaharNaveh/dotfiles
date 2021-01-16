@@ -2,6 +2,11 @@
 # ~/.bashrc
 #
 
+if [[ $(ps --no-header --pid=$PPID --format=cmd) != "fish" ]]
+then
+	exec fish
+fi
+
 ### EXPORT
 export TERM="screen-256color"
 export HISTCONTROL=ignoredups:erasedups
