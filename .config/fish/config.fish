@@ -11,14 +11,14 @@ set fish_color_param brcyan
 
 
 ### Aliases ###
-if type -q bat
+if command -s bat > /dev/null
 	alias cat="bat"
 end
 
 alias cleanup='sudo pacman -Rns (pacman -Qtdq)'
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
-if type -q rsync
+if command -s rsync > /dev/null
 	alias cp="rsync --archive --human-readable --progress --verbose --whole-file"
 else
 	alias cp="cp -v -i"
@@ -29,13 +29,13 @@ alias download_video='youtube-dl -f "bestaudio/best" -ciw -o "%(title)s.%(ext)s"
 alias egrep="egrep --color=auto"
 alias fgrep="fgrep --color=auto"
 
-if type -q rg
+if command -s rg > /dev/null
 	alias grep="rg"
 else
 	alias grep="grep --color=auto"
 end
 
-if type -q exa
+if command -s exa > /dev/null
 	alias la="exa -a --color=always --group-directories-first"
 	alias ll="exa -l --color=always --group-directories-first"
 	alias ls="exa -a -l --color=always --group-directories-first"
@@ -55,7 +55,7 @@ alias reboot="systemctl reboot"
 alias rm="rm -v -i"
 alias shutdown="systemctl poweroff"
 
-if type -q nvim
+if command -s nvim > /dev/null
 	alias vi="nvim"
 	alias vim="nvim"
 else
