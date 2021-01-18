@@ -1,13 +1,13 @@
 #
 # ~/.bashrc
 #
-if [ -n "$(builtin type -P 'fish')" ]
-then
-	if [[ $(ps --no-header --pid=$PPID --format=cmd) != "fish" ]]
-	then
-		exec fish
-	fi
-fi
+#if [ -n "$(builtin type -P 'fish')" ]
+#then
+#	if [[ $(ps --no-header --pid=$PPID --format=cmd) != "fish" ]]
+#	then
+#		exec fish
+#	fi
+#fi
 
 ### EXPORT
 export TERM="screen-256color"
