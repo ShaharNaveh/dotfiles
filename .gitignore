@@ -10,6 +10,7 @@
 !.bash_profile
 !.bashrc
 !.tmux.conf
-!.xmonad
 !.venvs
+!.xmonad
+!.xinitrc
 !Music/
