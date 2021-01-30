@@ -63,7 +63,7 @@ font:
     x: 0
     y: 0
 
-  size: 10
+  size: 11
 
 mouse:
   double_click: { threshold: 300 }
