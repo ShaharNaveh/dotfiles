@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 projects=(\
-	"https://github.com/BurntSushi/ripgrep.git" \
 	"https://github.com/ogham/exa.git" \
 	"https://github.com/starship/starship.git"\
 )
