@@ -25,7 +25,7 @@ call deoplete#custom#option('ignore_sources', {
 "call deoplete#custom#option('max_list', 30)
 
 " The number of processes used for the deoplete parallel feature.
-call deoplete#custom#option('num_processes', 20)
+call deoplete#custom#option('num_processes', 30)
 
 " The delay for completion after input, measured in milliseconds.
 call deoplete#custom#option('auto_complete_delay', 80)
