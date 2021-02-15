@@ -35,10 +35,6 @@ _CONFIG = {
             " --requirement $requirements_file_path"
         ),
     },
-    "filter_output": {
-        "boring_strings": {"Requirement already satisfied"},
-        "upgraded_package_strings": {"Collecting", "Using cached"},
-    },
     "processes": 5,
     "virtual_environments_requirements_directory_name": ".requirements",
     "virtual_environments_directory_name": ".venvs",
@@ -69,7 +65,6 @@ def _gen_config(config: dict) -> dict:
 
     new_config["bin_dir"] = config["bin_dir"]
     new_config["command_template"] = config["command_template"]
-    new_config["filter_output"] = config["filter_output"]
     new_config["processes"] = config["processes"]
 
     venvs_dir_name = config["virtual_environments_directory_name"]
@@ -257,97 +252,9 @@ def update_venv(
     ) as proc:
         outs, errs = proc.communicate()
 
-    for filtered_output in filter_output(target=target, outs=outs, errs=errs):
-        logging.info(filtered_output)
-
     logging.info(f"Done upgrading virtual environment of:\t{colored(target, 'green')}")
 
 
-def filter_output(
-    target: str, outs: Optional[bytes] = None, errs: Optional[bytes] = None
-) -> Iterable[str]:
-    """
-    foo bar baz
-    """
-
-    def old_new_versions(
-        package_name: str, text: Set[str]
-    ) -> Tuple[Optional[str], str]:
-        new_version, old_version = None, None
-        for line in text:
-            sline = line.strip()
-
-            if any(
-                boring_string in sline
-                for boring_string in config["filter_output"]["boring_strings"]
-            ):
-                continue
-
-            if new_version is None:
-                if f"Successfully installed {package_name}" in sline:
-                    new_version = sline.removeprefix(
-                        f"Successfully installed {package_name}-"
-                    ).strip()
-
-            if old_version is None:
-                if f"Found existing installation: {package_name}" in sline:
-                    old_version = sline.removeprefix(
-                        f"Found existing installation: {package_name} "
-                    ).strip()
-
-            # We can leave early if both versions are found
-            if new_version is not None and old_version is not None:
-                break
-
-        return (old_version, new_version)
-
-    checked_packages = set()
-    outs, errs = str(outs), str(errs)
-    splitted = set(outs.split("\\n"))
-    for line in splitted:
-        sline = line.strip()
-        if any(
-            boring_string in sline
-            for boring_string in config["filter_output"]["boring_strings"]
-        ):
-            continue
-        if not any(
-            upgraded_package_string in sline
-            for upgraded_package_string in config["filter_output"][
-                "upgraded_package_strings"
-            ]
-        ):
-            continue
-        if sline.startswith("Collecting"):
-            package_name = sline.split(" ")[1]
-        elif sline.startswith("Using cached"):
-            reg = "Using cached.+?(?=-)"
-            package_name = re.search(reg, sline).group(0).removeprefix("Using cached ")
-        else:
-            print("\n" * 3)
-            print("IDK")
-            print("\n" * 3)
-
-        if package_name in checked_packages:
-            continue
-
-        old_version, new_version = old_new_versions(
-            package_name=package_name, text=splitted
-        )
-        checked_packages.add(package_name)
-        if old_version is not None:
-            yield (
-                f"{colored(target, 'green')}:"
-                f"\tUpgrading {colored(package_name, 'blue')}"
-                f" from {colored(old_version, 'yellow')}"
-                f" to {colored(new_version, 'cyan')}"
-            )
-        else:
-            yield (
-                f"{colored(target, 'green')}:"
-                f"\tInstalling {colored(package_name, 'blue')}"
-                f" {colored(new_version, 'cyan')}"
-            )
 
 
 def write_reqs(target: str, path: pathlib.Path) -> None:
