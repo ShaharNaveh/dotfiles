@@ -65,6 +65,14 @@ group_names = [
             "matches": [Match(wm_class=["TelegramDesktop", "telegram-desktop"])],
         },
     ),
+    (
+        "TORRENT",
+        {
+            "label": "",  # ICON: nf-mdi-magnet
+            "layout": "max",
+            "matches": [Match(wm_class=["qbittorrent", "qBittorrent"])],
+        },
+    ),
 ]
 
 groups = []
