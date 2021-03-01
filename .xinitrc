@@ -50,7 +50,10 @@ nitrogen --restore &
 
 picom -b --config $HOME/.config/picom/picom.conf &
 
-xrandr -s 1280x1024 &
+#xrandr -s 1024x768 &
+xrandr -s 1152x864 &
+#xrandr -s 1280x1024 &
+#xrandr -s 1920x1080_60.00 &
 
 exec qtile
 #exec xmonad
