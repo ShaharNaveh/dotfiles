@@ -35,7 +35,7 @@ _CONFIG = {
             " --requirement $requirements_file_path"
         ),
     },
-    "processes": 5,
+    "processes": 6,
     "virtual_environments_requirements_directory_name": ".requirements",
     "virtual_environments_directory_name": ".venvs",
     "virtual_environments_metadata_file_name": "settings.json",
