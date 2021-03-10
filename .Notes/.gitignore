@@ -1,0 +1,7 @@
+# Ignore everything
+/*
+!.gitignore
+
+# Except for the files and folders we to track
+!.Commands/
+!.last_good_working_kernel.txt
