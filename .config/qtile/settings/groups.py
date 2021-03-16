@@ -27,6 +27,7 @@ group_names = [
         {
             "label": "",  # ICON: nf-fa-code
             "layout": "monadtall",
+            "matches": [Match(wm_class=["code-oss"])],
         },
     ),
     (
