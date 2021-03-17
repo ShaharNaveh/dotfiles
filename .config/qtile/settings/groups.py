@@ -35,7 +35,20 @@ group_names = [
         {
             "label": "",  # ICON: nf-mdi-file_document
             "layout": "monadtall",
-            "matches": [Match(wm_class=["libreoffice"])],
+            "matches": [
+                Match(
+                    wm_class=[
+                        "libreoffice",
+                        "libreoffice-calc",
+                        "libreoffice-draw",
+                        "libreoffice-impress",
+                        "libreoffice-math",
+                        "libreoffice-writer",
+                        "soffice",
+                        "Soffice",
+                    ]
+                )
+            ],
         },
     ),
     (
