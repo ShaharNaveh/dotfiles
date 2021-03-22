@@ -10,6 +10,7 @@ set fish_color_error '#ff6c6b'
 set fish_color_param brcyan
 
 
+source "$HOME/.config/fish/functions/builtins.fish"
 source "$HOME/.config/fish/functions/aliases.fish" # Load aliases
 
 ### Starship prompt ###
