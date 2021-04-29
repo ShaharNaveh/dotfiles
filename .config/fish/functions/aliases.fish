@@ -1,3 +1,7 @@
+if command -s btm > /dev/null
+	alias btm="btm --color gruvbox"
+end
+
 if command -s bat > /dev/null
 	alias cat="bat"
 end
