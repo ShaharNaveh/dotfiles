@@ -1,1 +1,1 @@
-Linux null 5.10.35-1-lts #1 SMP Fri, 07 May 2021 11:37:18 +0000 x86_64 GNU/Linux
+Linux null 5.10.37-1-lts #1 SMP Fri, 14 May 2021 13:37:05 +0000 x86_64 GNU/Linux
