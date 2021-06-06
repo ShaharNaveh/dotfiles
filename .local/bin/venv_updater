@@ -102,7 +102,7 @@ def colored(text: str, color: str) -> str:
     text : str
         Text to be formatted.
     color : {blue, cyan, green, red, yellow}
-        Color to be formatted with
+        Color to be formatted with.
 
     Returns
     -------
@@ -253,8 +253,6 @@ def update_venv(
         outs, errs = proc.communicate()
 
     logging.info(f"Done upgrading virtual environment of:\t{colored(target, 'green')}")
-
-
 
 
 def write_reqs(target: str, path: pathlib.Path) -> None:
