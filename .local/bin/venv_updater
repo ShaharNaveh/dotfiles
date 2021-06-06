@@ -2,6 +2,7 @@
 import json
 import logging
 import multiprocessing as mp
+import os
 import pathlib
 import pprint
 import re
@@ -35,7 +36,7 @@ _CONFIG = {
             " --requirement $requirements_file_path"
         ),
     },
-    "processes": 6,
+    "processes": os.cpu_count(),
     "virtual_environments_requirements_directory_name": ".requirements",
     "virtual_environments_directory_name": ".venvs",
     "virtual_environments_metadata_file_name": "settings.json",
