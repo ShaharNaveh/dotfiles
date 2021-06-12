@@ -3,7 +3,7 @@ import subprocess
 from libqtile import bar
 from libqtile.config import Screen
 
-from settings.widgets import primary_widgets
+from settings.widgets import primary_widgets, secondary_widgets
 
 
 def status_bar(widgets):
@@ -22,3 +22,7 @@ connected_monitors = (
     .split("\n")[:-1]
     .count("connected")
 )
+
+if connected_monitors > 1:
+    for _ in range(1, connected_monitors):
+        screens.append(Screen(top=status_bar(secondary_widgets)))
