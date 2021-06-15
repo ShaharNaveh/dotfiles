@@ -4,7 +4,7 @@ PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor
 OPT_DIR="$HOME/.local/opt"
 
 function git_fetch {
-	git --git-dir=$1 fetch --tags
+	git --git-dir=$1 fetch --tags --force
 }
 
 function git_latest_tag {
