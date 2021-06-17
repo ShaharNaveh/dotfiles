@@ -50,7 +50,7 @@ nitrogen --restore &
 
 picom -b --config $HOME/.config/picom/picom.conf &
 
-#xrandr -s 1024x768 -r 60.00 &
+xrandr -s 1024x768 -r 60.00 &
 #xrandr -s 1600x900 &
 #xrandr -s 1152x864 &
 #xrandr -s 1280x1024 &
