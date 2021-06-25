@@ -1,4 +1,5 @@
 from libqtile import hook, layout
+from libqtile.config import Match
 
 from settings.constants import font
 from settings.theme import colors
@@ -24,21 +25,20 @@ layouts = [
 floating_layout = layout.Floating(
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
-        {"wmclass": "confirm"},
-        {"wmclass": "dialog"},
-        {"wmclass": "download"},
-        {"wmclass": "error"},
-        {"wmclass": "file_progress"},
-        {"wmclass": "notification"},
-        {"wmclass": "splash"},
-        {"wmclass": "toolbar"},
-        {"wmclass": "confirmreset"},  # gitk
-        {"wmclass": "makebranch"},  # gitk
-        {"wmclass": "maketag"},  # gitk
-        {"wname": "branchdialog"},  # gitk
-        {"wname": "pinentry"},  # GPG key password entry
-        {"wmclass": "ssh-askpass"},  # ssh-askpass
-        {"wname": "Open File"},
+        Match(title="Open File"),
+        Match(title="pinentry"),  # GPG key password entry
+        Match(wm_class="confirm"),
+        Match(wm_class="confirmreset"),
+        Match(wm_class="dialog"),
+        Match(wm_class="download"),
+        Match(wm_class="error"),
+        Match(wm_class="file_progress"),
+        Match(wm_class="makebranch"),
+        Match(wm_class="maketag"),
+        Match(wm_class="notification"),
+        Match(wm_class="splash"),
+        Match(wm_class="ssh-askpass"),
+        Match(wm_class="toolbar"),
     ],
     fullscreen_border_width=0,
     border_width=0,
