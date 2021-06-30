@@ -8,7 +8,7 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 call deoplete#custom#source('_', 'max_menu_width', 80)
 
 " Minimum character length needed to activate auto-completion.
-call deoplete#custom#source('_', 'min_pattern_length', 1)
+call deoplete#custom#source('_', 'min_pattern_length', 0)
 
 " Whether to disable completion for certain syntax
 call deoplete#custom#source('_', {

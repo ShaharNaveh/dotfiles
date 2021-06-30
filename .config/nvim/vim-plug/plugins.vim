@@ -10,7 +10,7 @@ Plug 'cespare/vim-toml', { 'for': 'toml' } " TOML syntax
 Plug 'dense-analysis/ale' " Syntax checker
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " Autocompletion
 Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' } " Jedi support for deoplete
-Plug 'davidhalter/jedi-vim', { 'for': 'python' } " Jedi for vim
+" Plug 'davidhalter/jedi-vim', { 'for': 'python' } " Jedi for vim
 Plug 'preservim/tagbar' " Display information about functions and variables, Install [ctags]
 
 if executable('rustc')
