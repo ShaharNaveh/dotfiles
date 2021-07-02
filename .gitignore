@@ -3,14 +3,15 @@
 !.gitignore
 
 # Except for the files and folders we to track
-!.config
-!.local
+!.Notes/
 !.asoundrc
 !.bash_aliases
 !.bash_profile
 !.bashrc
+!.cargo/
+!.config/
+!.local/
 !.tmux.conf
-!.venvs
-!.xmonad
-!.Notes/
+!.venvs/
+!.xmonad/
 !Music/
