@@ -17,9 +17,9 @@ layout_configuration = {
 layouts = [
     layout.Max(**layout_configuration),
     # layout.Matrix(**layout_configuration),
-    layout.Tile(**layout_configuration),
     layout.MonadTall(**layout_configuration, ratio=0.60),
     layout.MonadWide(**layout_configuration, ratio=0.60),
+    layout.Tile(**layout_configuration),
 ]
 
 floating_layout = layout.Floating(
