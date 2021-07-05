@@ -12,6 +12,6 @@
 !.config/
 !.local/
 !.tmux.conf
-!.venvs/
+!.venvs
 !.xmonad/
 !Music/
