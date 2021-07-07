@@ -23,6 +23,12 @@
             "pynvim"
         ]
     },
+    "speedtest-cli": {
+        "bins": ["speedtest-cli"],
+        "requirements": [
+            "speedtest-cli"
+        ]
+    },
     "spotdl": {
         "bins": ["spotdl"],
         "requirements": [
