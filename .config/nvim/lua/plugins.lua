@@ -24,8 +24,10 @@ return require('packer').startup(
 		ft={'toml'}
 	}
 
+--	use 'hrsh7th/nvim-compe'
+
 	use 'neovim/nvim-lspconfig'
-	use 'nvim-lua/completion-nvim'
+--	use 'nvim-lua/completion-nvim'
 
 	end)
 
