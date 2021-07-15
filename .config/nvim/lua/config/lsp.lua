@@ -1,5 +1,4 @@
-local nvim_lsp = require('lspconfig')
-
+local nvim_lsp = require("lspconfig")
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -35,7 +34,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { "pyright" }
+local servers = { "pyright", "rust_analyzer", "tsserver", "pylsp" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
@@ -44,3 +43,41 @@ for _, lsp in ipairs(servers) do
     }
   }
 end
+
+
+nvim_lsp.pylsp.setup{
+  on_attach = on_attach,
+  settings = {
+    pylsp = {
+      plugins = {
+        pylint = {enabled = false },
+        pyflakes = {enabled = false},
+        pycodestyle = {enabled = false},
+        jedi_completion = {fuzzy = true},
+        pyls_isort = {enabled = true},
+        pylsp_mypy = {enabled = true}
+      }
+    }
+  },
+  flags = {
+    debounce_text_changes = 200,
+  }
+}
+
+-- The following settings works with the bleeding edge neovim.
+-- See https://github.com/neovim/neovim/pull/13998.
+-- [[
+--vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+--  vim.lsp.handlers.hover, {
+--    border = {
+--       {"┌", "Normal"},
+--       {"─", "Normal"},
+--       {"┐", "Normal"},
+--       {"│", "Normal"},
+--       {"┘", "Normal"},
+--       {"─", "Normal"},
+--       {"└", "Normal"},
+--       {"│", "Normal"}
+--     }
+--    }
+--)

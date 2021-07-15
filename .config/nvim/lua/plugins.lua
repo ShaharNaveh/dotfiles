@@ -4,9 +4,9 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 end
 
 -- vim.cmd [[packadd packer.nvim]]
-
 -- Running "PackerCompile" after every change to this file
 vim.cmd [[autocmd BufWritePost plugins.lua source  | PackerCompile]]
+
 
 -- local use = require('packer').use
 return require('packer').startup(
@@ -21,13 +21,18 @@ return require('packer').startup(
 	-- TOML support
 	use {
 		'cespare/vim-toml', 
-		ft={'toml'}
+		ft={'toml', }
 	}
 
---	use 'hrsh7th/nvim-compe'
+	use {'neovim/nvim-lspconfig', event = 'VimEnter', config = [[require('config.lsp')]]}
+	use { 'hrsh7th/nvim-compe', event = 'InsertEnter *', config = [[require('config.compe')]] }
 
-	use 'neovim/nvim-lspconfig'
---	use 'nvim-lua/completion-nvim'
+	-- colorful status line and theme
+    use {'vim-airline/vim-airline-themes', event = 'VimEnter'}
+    use {'vim-airline/vim-airline', after = 'vim-airline-themes'}
+
+-- use {'numirias/semshi', ft = {'python', } , config = 'vim.cmd [[UpdateRemotePlugins]]'}
+    use {'hrsh7th/vim-vsnip', event = {'InsertEnter'}}
 
 	end)
 
