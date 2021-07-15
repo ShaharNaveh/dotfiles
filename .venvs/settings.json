@@ -18,16 +18,18 @@
         ]
     },
     "neovim": {
-        "bins": ["pyls", "pylsp"],
+        "bins": ["pylsp"],
         "requirements": [
             "jedi",
-            "pyls-black",
+            "pyls-flake8",
             "pyls-isort",
-            "pyls-mypy",
+            "pylsp-mypy",
             "pynvim",
-            "python-language-server>=0.36.0",
-            "python-language-server[rope]",
-            "python-language-server[yapf]"
+            "python-lsp-black",
+            "python-lsp-server",
+            "python-lsp-server[flake8]",
+            "python-lsp-server[rope]",
+            "python-lsp-server[yapf]"
         ]
     },
     "speedtest-cli": {
