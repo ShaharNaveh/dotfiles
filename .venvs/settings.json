@@ -20,7 +20,13 @@
     "neovim": {
         "requirements": [
             "jedi",
-            "pynvim"
+            "pyls-black",
+            "pyls-isort",
+            "pyls-mypy",
+            "pynvim",
+            "python-language-server>=0.36.0",
+            "python-language-server[rope]",
+            "python-language-server[yapf]"
         ]
     },
     "speedtest-cli": {

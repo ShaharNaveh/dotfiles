@@ -12,6 +12,7 @@ set fish_color_param brcyan
 
 source "$HOME/.config/fish/functions/builtins.fish"
 source "$HOME/.config/fish/functions/aliases.fish" # Load aliases
+source "$HOME/.config/fish/functions/environment/init.fish"
 
 ### Starship prompt ###
 if type -q starship

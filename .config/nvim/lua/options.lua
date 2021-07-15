@@ -10,7 +10,7 @@ vim.bo.tabstop = 4
 
 vim.o.background = 'dark'
 vim.o.backup = false
-vim.o.completeopt = 'menuone,noinsert,noselect'
+vim.o.completeopt = "menuone,noselect"
 vim.o.hidden = true
 vim.o.listchars = 'tab:┆·,trail:·,precedes:,extends:'
 vim.o.mouse='nvica'
