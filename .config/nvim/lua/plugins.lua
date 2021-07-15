@@ -32,7 +32,8 @@ return require('packer').startup(
     use {'vim-airline/vim-airline', after = 'vim-airline-themes'}
 
 -- use {'numirias/semshi', ft = {'python', } , config = 'vim.cmd [[UpdateRemotePlugins]]'}
-    use {'hrsh7th/vim-vsnip', event = {'InsertEnter'}}
+    -- use {'hrsh7th/vim-vsnip', event = {'InsertEnter'}}
+	use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = [[require('config.treesitter')]]}
 
 	end)
 
