@@ -18,6 +18,7 @@
         ]
     },
     "neovim": {
+        "bins": ["pyls", "pylsp"],
         "requirements": [
             "jedi",
             "pyls-black",
