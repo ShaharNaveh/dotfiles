@@ -28,8 +28,7 @@
             "python-lsp-black",
             "python-lsp-server",
             "python-lsp-server[flake8]",
-            "python-lsp-server[rope]",
-            "python-lsp-server[yapf]"
+            "python-lsp-server[rope]"
         ]
     },
     "speedtest-cli": {
