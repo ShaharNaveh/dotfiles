@@ -34,6 +34,7 @@ return require('packer').startup(
 -- use {'numirias/semshi', ft = {'python', } , config = 'vim.cmd [[UpdateRemotePlugins]]'}
     -- use {'hrsh7th/vim-vsnip', event = {'InsertEnter'}}
 	use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = [[require('config.treesitter')]]}
+	use {'sbdchd/neoformat', cmd = {'Neoformat', }, config = [[require('config.neoformat')]]}
 
 	end)
 
