@@ -24,8 +24,8 @@ return require('packer').startup(
 		ft={'toml', }
 	}
 
-	use {'neovim/nvim-lspconfig', event = 'VimEnter', config = [[require('config.lsp')]]}
-	use { 'hrsh7th/nvim-compe', event = 'InsertEnter *', config = [[require('config.compe')]] }
+	use {'neovim/nvim-lspconfig', event = 'VimEnter', config = [[require('config.plugins.lsp')]]}
+	use { 'hrsh7th/nvim-compe', event = 'InsertEnter *', config = [[require('config.plugins.compe')]] }
 
 	-- colorful status line and theme
     use {'vim-airline/vim-airline-themes', event = 'VimEnter'}
@@ -33,8 +33,8 @@ return require('packer').startup(
 
 -- use {'numirias/semshi', ft = {'python', } , config = 'vim.cmd [[UpdateRemotePlugins]]'}
     -- use {'hrsh7th/vim-vsnip', event = {'InsertEnter'}}
-	use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = [[require('config.treesitter')]]}
-	use {'sbdchd/neoformat', cmd = {'Neoformat', }, config = [[require('config.neoformat')]]}
+	use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = [[require('config.plugins.treesitter')]]}
+	use {'sbdchd/neoformat', cmd = {'Neoformat', }, config = [[require('config.plugins.neoformat')]]}
 
 	end)
 
