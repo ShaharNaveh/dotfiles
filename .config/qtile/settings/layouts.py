@@ -1,4 +1,6 @@
-from libqtile import hook, layout
+from libqtile import layout
+
+# from libqtile import hook
 from libqtile.config import Match
 
 from settings.constants import font
@@ -45,17 +47,17 @@ floating_layout = layout.Floating(
     border_focus=colors["background_2"][0],
 )
 
-
+"""
 floating_types = [
-    "notification",
-    "toolbar",
-    "splash",
-    "dialog",
-    "utility",
-    "menu",
-    "dropdown_menu",
-    "popup_menu",
-    "tooltip,dock",
+    Match(wm_class="notification"),
+    #    "toolbar",
+    #    "splash",
+    #    "dialog",
+    #    "utility",
+    #    "menu",
+    #    "dropdown_menu",
+    #    "popup_menu",
+    #    "tooltip,dock",
 ]
 
 
@@ -66,3 +68,4 @@ def set_floating(window):
         or window.window.get_wm_type() in floating_types
     ):
         window.floating = True
+"""
