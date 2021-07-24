@@ -15,6 +15,9 @@ return require('packer').startup(
 	-- Packer can manage itself
 	use 'wbthomason/packer.nvim'
 
+	--use {'ap/vim-css-color', ft={'css', 'html',}}
+	use {'chrisbra/Colorizer', config=[[require('config.plugins.colorizer')]]}
+
 	-- Color scheme
 	use 'lifepillar/vim-gruvbox8'
 
@@ -35,6 +38,7 @@ return require('packer').startup(
 	use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = [[require('config.plugins.treesitter')]]}
 -- use {'sbdchd/neoformat', cmd = {'Neoformat', }, config = [[require('config.plugins.neoformat')]]}
 	use { 'dense-analysis/ale', config = [[require('config.plugins.ale')]]}
+
 
 
 	end)
