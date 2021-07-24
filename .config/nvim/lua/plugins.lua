@@ -16,7 +16,8 @@ return require('packer').startup(
 	use 'wbthomason/packer.nvim'
 
 	--use {'ap/vim-css-color', ft={'css', 'html',}}
-	use {'chrisbra/Colorizer', config=[[require('config.plugins.colorizer')]]}
+	--use {'chrisbra/Colorizer', config=[[require('config.plugins.colorizer')]]}
+	use {'norcalli/nvim-colorizer.lua', config=[[require('config.plugins.nvim-colorizer')]]}
 
 	-- Color scheme
 	use 'lifepillar/vim-gruvbox8'
