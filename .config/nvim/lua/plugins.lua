@@ -16,11 +16,11 @@ return require('packer').startup(
 	use 'wbthomason/packer.nvim'
 
 	-- Color scheme
-	use 'morhetz/gruvbox'
+	use 'lifepillar/vim-gruvbox8'
 
 	-- TOML support
 	use {
-		'cespare/vim-toml', 
+		'cespare/vim-toml',
 		ft={'toml', }
 	}
 
@@ -39,4 +39,3 @@ return require('packer').startup(
 
 
 	end)
-

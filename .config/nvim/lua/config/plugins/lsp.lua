@@ -67,7 +67,6 @@ nvim_lsp.pylsp.setup{
   }
 }
 
--- [[
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
   vim.lsp.handlers.hover, {
     border = {
