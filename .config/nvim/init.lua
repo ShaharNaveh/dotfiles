@@ -1,6 +1,6 @@
 require("plugins")
 
-vim.cmd ("colorscheme gruvbox8")
+vim.cmd ("colorscheme gruvbox8_hard")
 
 require("config/keymappings")
 require("config/settings")

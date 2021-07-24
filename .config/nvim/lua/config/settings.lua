@@ -21,6 +21,7 @@ vim.o.softtabstop = 4
 vim.o.swapfile = false
 vim.o.tabstop = 4
 vim.o.termguicolors = true
+vim.g.termguicolors = true
 vim.o.title = true
 vim.o.undodir = vim.fn.stdpath("data") .. "/nvim/undodir/"
 vim.o.undofile = true
