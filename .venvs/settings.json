@@ -43,6 +43,12 @@
             "spotdl"
         ]
     },
+    "weasyprint": {
+        "bins": ["weasyprint"],
+        "requirements": [
+            "weasyprint"
+        ]
+    },
     "youtube-dl": {
         "bins": ["youtube-dl"],
         "requirements": [
