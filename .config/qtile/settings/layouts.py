@@ -1,6 +1,4 @@
 from libqtile import layout
-
-# from libqtile import hook
 from libqtile.config import Match
 
 from settings.constants import font
@@ -27,6 +25,7 @@ layouts = [
 floating_layout = layout.Floating(
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
+        Match(role="Dialog"),  # Firefox "Download file"
         Match(title="Open File"),
         Match(title="pinentry"),  # GPG key password entry
         Match(wm_class="confirm"),
@@ -46,26 +45,3 @@ floating_layout = layout.Floating(
     border_width=0,
     border_focus=colors["background_2"][0],
 )
-
-"""
-floating_types = [
-    Match(wm_class="notification"),
-    #    "toolbar",
-    #    "splash",
-    #    "dialog",
-    #    "utility",
-    #    "menu",
-    #    "dropdown_menu",
-    #    "popup_menu",
-    #    "tooltip,dock",
-]
-
-
-@hook.subscribe.client_new
-def set_floating(window):
-    if (
-        window.window.get_wm_transient_for()
-        or window.window.get_wm_type() in floating_types
-    ):
-        window.floating = True
-"""
