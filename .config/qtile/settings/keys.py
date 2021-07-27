@@ -106,4 +106,10 @@ keys = [
     Key([], "XF86AudioMute", lazy.spawn("amixer -c 0 set Speaker toggle")),
     Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -c 0 -q set Speaker 2dB+")),
     Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -c 0 -q set Speaker 2dB-")),
+    Key(
+        ["mod1"],
+        "Shift_L",
+        lazy.widget["keyboardlayout"].next_keyboard(),
+        desc="Change language",
+    ),
 ]
