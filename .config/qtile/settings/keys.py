@@ -66,10 +66,16 @@ keys = [
         lazy.layout.increase_nmaster(),
         desc="Increase the window size downward",
     ),
+    Key([mod], "g", lazy.window.toggle_fullscreen()),
     Key([mod], "n", lazy.layout.normalize()),
     Key([mod], "o", lazy.layout.maximize()),
-    Key([mod], "g", lazy.window.toggle_fullscreen()),
     Key([mod], "p", lazy.layout.flip()),
+    Key(
+        [mod],
+        "f",
+        lazy.window.toggle_floating(),
+        desc="Toggle between floating and non-floating",
+    ),
     Key(
         [mod],
         "space",
