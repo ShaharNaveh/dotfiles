@@ -1,3 +1,6 @@
+-- Navigation
+vim.opt.ttyfast = true
+
 -- Path
 vim.opt.path:append('**')
 vim.opt.wildignore:append('**/.git/*')
@@ -25,7 +28,7 @@ vim.opt.expandtab = true
 
 -- Search
 vim.opt.smartcase = true
-vim.o.mat=2                      -- How many tenths of a second to blink matches
+vim.o.mat=2 -- How many tenths of a second to blink matches
 
 -- Line numbers
 vim.opt.number = true
@@ -69,3 +72,7 @@ vim.g.load_python_provider = false
 
 -- Set the python3 environment to be inside venv
 vim.g.python3_host_prog = os.getenv("HOME") .. "/.venvs/neovim-venv/bin/python3"
+
+if vim.fn.executable("rg") == 1 then
+    vim.g.rg_derive_root = "true"
+end
