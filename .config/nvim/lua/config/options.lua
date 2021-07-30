@@ -1,3 +1,12 @@
+-- Path
+vim.opt.path:append('**')
+vim.opt.wildignore:append('**/.git/*')
+vim.opt.wildignore:append('**/coverage/*')
+vim.opt.wildignore:append('*_build/*')
+vim.opt.wildignore:append('*.pyc')
+vim.opt.wildignore:append('**/__pycache__/*')
+vim.opt.wildignore:append('**/.mypy_cache/*')
+
 -- Use truecolors
 vim.opt.termguicolors = true
 
@@ -16,6 +25,7 @@ vim.opt.expandtab = true
 
 -- Search
 vim.opt.smartcase = true
+vim.o.mat=2                      -- How many tenths of a second to blink matches
 
 -- Line numbers
 vim.opt.number = true
