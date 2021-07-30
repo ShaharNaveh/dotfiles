@@ -1,4 +1,5 @@
 require'nvim-treesitter.configs'.setup {
+  autopairs = { enable = true },
   ensure_installed = {
       'bash',
       'css',
@@ -19,4 +20,6 @@ require'nvim-treesitter.configs'.setup {
     enable = true,  -- false will disable the whole extension
     disable = {},  -- list of language that will be disabled
   },
+  incremental_selection = {enable = true},
+  textobjects = {enable = true },
 }
