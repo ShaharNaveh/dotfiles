@@ -15,6 +15,9 @@ return require('packer').startup(
 	-- Packer can manage itself
 	use 'wbthomason/packer.nvim'
 
+	use {'preservim/nerdtree', on="VimEnter", config=[[require('config.plugins.nerdtree')]]}
+	use {'Xuyuanp/nerdtree-git-plugin', after="nerdtree", config=[[require('config.plugins.nerdtree-git')]]}
+
 	--use {'ap/vim-css-color', ft={'css', 'html',}}
 	--use {'chrisbra/Colorizer', config=[[require('config.plugins.colorizer')]]}
 	use {'norcalli/nvim-colorizer.lua', config=[[require('config.plugins.nvim-colorizer')]]}
