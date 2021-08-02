@@ -26,6 +26,7 @@ floating_layout = layout.Floating(
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
         Match(role="Dialog"),  # Firefox "Download file"
+        Match(title="Choose ONE of the audio conference options"),  # Zoom
         Match(title="Open File"),
         Match(title="pinentry"),  # GPG key password entry
         Match(wm_class="confirm"),
