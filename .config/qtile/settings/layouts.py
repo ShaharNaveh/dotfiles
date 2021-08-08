@@ -28,6 +28,7 @@ floating_layout = layout.Floating(
         Match(role="Dialog"),  # Firefox "Download file"
         Match(title="Choose ONE of the audio conference options"),  # Zoom
         Match(title="Open File"),
+        Match(title="Polls", wm_class="zoom"),
         Match(title="pinentry"),  # GPG key password entry
         Match(wm_class="confirm"),
         Match(wm_class="confirmreset"),

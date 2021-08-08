@@ -58,8 +58,7 @@ nvim_lsp.pylsp.setup{
         pycodestyle = {enabled = false},
         jedi_completion = {fuzzy = false},
         pyls_isort = {enabled = true},
-        --pylsp_mypy = {enabled = false}
-        pylsp_mypy = {enabled = true}
+        pylsp_mypy = {enabled = false}
       }
     }
   },
