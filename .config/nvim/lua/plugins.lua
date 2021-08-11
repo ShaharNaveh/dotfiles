@@ -75,4 +75,11 @@ return require('packer').startup(
         config=[[require('config.plugins.ale')]],
     }
 
+    use {
+        'kyazdani42/nvim-tree.lua',
+        config=[[require('config.plugins.nvim-tree')]],
+        requires={
+            'kyazdani42/nvim-web-devicons',
+        },
+}
     end)
