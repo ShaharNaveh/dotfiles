@@ -42,6 +42,7 @@ floating_layout = layout.Floating(
         Match(wm_class="splash"),
         Match(wm_class="ssh-askpass"),
         Match(wm_class="toolbar"),
+        Match(wm_class=["qBittorrent" "qbittorrent"], title="Download from URLs"),
         Match(wm_type="dialog"),
         Match(wm_type="notification"),
         Match(wm_type="splash"),
