@@ -1,25 +1,12 @@
-local disable_distribution_plugins = function()
-    vim.g.loaded_2html_plugin = false
-    vim.g.loaded_getscript = false
-    vim.g.loaded_getscriptPlugin = false
-    vim.g.loaded_gzip = false
-    vim.g.loaded_logiPat = false
-    vim.g.loaded_matchit = false
-    vim.g.loaded_matchparen = false
-    vim.g.loaded_matchparen = false
-    vim.g.loaded_netrw = false
-    vim.g.loaded_netrwFileHandlers = false
-    vim.g.loaded_netrwPlugin = false
-    vim.g.loaded_netrwSettings = false
-    vim.g.loaded_rrhelper = false
-    vim.g.loaded_spec = false
-    vim.g.loaded_tar = false
-    vim.g.loaded_tarPlugin = false
-    vim.g.loaded_vimball = false
-    vim.g.loaded_vimballPlugin = false
-    vim.g.loaded_zip = false
-    vim.g.loaded_zipPlugin = false
-end
+local opt = vim.opt
+local g = vim.g
+
+--don't write to the ShaDa file on startup
+opt.shadafile = "NONE"
+
+--fish slows things down
+opt.shell = "/bin/bash"
+
 
 --Remap space as leader key
 vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent = true })
@@ -86,10 +73,6 @@ vim.opt.timeoutlen = 600
 -- Taller command bar
 vim.opt.cmdheight = 2
 
--- Disable builtin vim plugins
-disable_distribution_plugins()
-vim.g.loaded_matchparen = true
-
 -- Disable python2 support
 vim.g.load_python_provider = false
 
@@ -98,4 +81,29 @@ vim.g.python3_host_prog = os.getenv("HOME") .. "/.venvs/neovim-venv/bin/python3"
 
 if vim.fn.executable("rg") == 1 then
     vim.g.rg_derive_root = "true"
+end
+
+local disabled_built_ins = {
+    "2html_plugin",
+    "getscript",
+    "getscriptPlugin",
+    "gzip",
+    "logipat",
+    "matchit",
+    "netrw",
+    "netrwFileHandlers",
+    "netrwPlugin",
+    "netrwSettings",
+    "rrhelper",
+    "spellfile_plugin",
+    "tar",
+    "tarPlugin",
+    "vimball",
+    "vimballPlugin",
+    "zip",
+    "zipPlugin",
+}
+
+for _, plugin in pairs(disabled_built_ins) do
+    vim.g["loaded_" .. plugin] = 1
 end
