@@ -4,10 +4,9 @@ local main_config = {
 	"options",
 	"mappings",
 	"utils",
+    "theme",
 }
 
 for _, config_file in ipairs(main_config) do
-    pcall(require, config_file)          
+    pcall(require, config_file)
  end
-
---vim.cmd ("colorscheme gruvbox8_hard")
