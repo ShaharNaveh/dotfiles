@@ -29,6 +29,7 @@ return packer.startup(
 
         use {
             'norcalli/nvim-colorizer.lua',
+            event = "BufRead",
             config= function()
 		    require "plugins.nvim-colorizer"
 	    end
@@ -52,7 +53,7 @@ return packer.startup(
         }
         use {
             'hrsh7th/nvim-compe',
-            event='InsertEnter *',
+            event='InsertEnter',
             config= function()
 		    require "plugins.compe"
 	    end
@@ -72,6 +73,7 @@ return packer.startup(
 
         use {
             'nvim-treesitter/nvim-treesitter',
+            event = "BufRead",
             run=':TSUpdate',
             config= function()
 		    require "plugins.nvim-treesitter"
