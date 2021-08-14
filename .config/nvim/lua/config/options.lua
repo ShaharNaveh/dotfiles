@@ -1,3 +1,8 @@
+--Remap space as leader key
+vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent = true })
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
 -- Navigation
 vim.opt.ttyfast = true
 
@@ -9,6 +14,9 @@ vim.opt.wildignore:append('*_build/*')
 vim.opt.wildignore:append('*.pyc')
 vim.opt.wildignore:append('**/__pycache__/*')
 vim.opt.wildignore:append('**/.mypy_cache/*')
+
+-- Swap
+vim.opt.swapfile = false
 
 -- Use truecolors
 vim.opt.termguicolors = true

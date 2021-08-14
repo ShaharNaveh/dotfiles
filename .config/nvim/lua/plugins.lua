@@ -1,18 +1,22 @@
-local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+-- Install packer
+local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    vim.cmd('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
+  vim.fn.execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
 end
 
-vim.cmd 'packadd packer.nvim'
+vim.api.nvim_exec(
+  [[
+  augroup Packer
+    autocmd!
+    autocmd BufWritePost plugins.lua PackerCompile
+  augroup end
+]],
+  false
+)
 
--- Running "PackerCompile" after every change to this file
-vim.cmd [[autocmd BufWritePost plugins.lua source  | PackerCompile]]
-
-
--- local use = require('packer').use
-return require('packer').startup(
-    function(use)
+local use = require('packer').use
+return require('packer').startup(function()
 
     -- Packer can manage itself
     use {
@@ -82,4 +86,4 @@ return require('packer').startup(
             'kyazdani42/nvim-web-devicons',
         },
 }
-    end)
+end)
