@@ -1,3 +1,26 @@
+local disable_distribution_plugins = function()
+    vim.g.loaded_2html_plugin = false
+    vim.g.loaded_getscript = false
+    vim.g.loaded_getscriptPlugin = false
+    vim.g.loaded_gzip = false
+    vim.g.loaded_logiPat = false
+    vim.g.loaded_matchit = false
+    vim.g.loaded_matchparen = false
+    vim.g.loaded_matchparen = false
+    vim.g.loaded_netrw = false
+    vim.g.loaded_netrwFileHandlers = false
+    vim.g.loaded_netrwPlugin = false
+    vim.g.loaded_netrwSettings = false
+    vim.g.loaded_rrhelper = false
+    vim.g.loaded_spec = false
+    vim.g.loaded_tar = false
+    vim.g.loaded_tarPlugin = false
+    vim.g.loaded_vimball = false
+    vim.g.loaded_vimballPlugin = false
+    vim.g.loaded_zip = false
+    vim.g.loaded_zipPlugin = false
+end
+
 --Remap space as leader key
 vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent = true })
 vim.g.mapleader = ' '
@@ -64,16 +87,8 @@ vim.opt.timeoutlen = 600
 vim.opt.cmdheight = 2
 
 -- Disable builtin vim plugins
-vim.g.loaded_2html_plugin = false
-vim.g.loaded_gzip = false
-vim.g.loaded_matchit = false
--- vim.g.loaded_matchparen = false
-vim.g.loaded_netrw = false
-vim.g.loaded_netrwPlugin = false
-vim.g.loaded_spec = false
-vim.g.loaded_tar = false
-vim.g.loaded_tarPlugin = false
-vim.g.loaded_zipPlugin = false
+disable_distribution_plugins()
+vim.g.loaded_matchparen = true
 
 -- Disable python2 support
 vim.g.load_python_provider = false
