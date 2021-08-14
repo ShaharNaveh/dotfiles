@@ -1,23 +1,17 @@
 local opt = vim.opt
 local g = vim.g
 
---don't write to the ShaDa file on startup
+-- Don't write to the ShaDa file on startup
 opt.shadafile = "NONE"
 
---fish slows things down
+-- Fish slows things down
 opt.shell = "/bin/bash"
 
-
---Remap space as leader key
-vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent = true })
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
 -- Navigation
-vim.opt.ttyfast = true
+opt.ttyfast = true
 
 -- Path
-vim.opt.path:append('**')
+opt.path:append('**')
 vim.opt.wildignore:append('**/.git/*')
 vim.opt.wildignore:append('**/coverage/*')
 vim.opt.wildignore:append('*_build/*')

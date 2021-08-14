@@ -9,11 +9,12 @@ end
 local cmd = vim.cmd
 local opt = {}
 
+-- Remap space as leader key
+map("", "<Space>", "<Nop>", { noremap = true, silent = true })
 vim.g.mapleader = " "
 
 -- [[ Toggle numbers
--- TODO: Fix with relativenumbers
-map("n", "<leader>n", [[ <Cmd> set nu!<CR>]], opt)
+map("n", "<leader>n", [[ <Cmd> set nu!<CR>]], opt) -- TODO: Fix with relativenumbers
 -- ]]
 
 -- [[ <C-{hjkl}> to navigate splits
@@ -28,14 +29,13 @@ map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", opts)
 -- ]]
 
 -- [[ Telescope
-
 map('n', '<Leader>ff',  '<cmd>Telescope find_files<CR>', {noremap = true, silent = true})
 map('n', '<Leader>fg', '<cmd>Telescope live_grep<CR>', {noremap = true, silent = true})
 map('n', '<Leader>fb', '<cmd>Telescope buffers<CR>', {noremap = true, silent = true})
 map('n', '<Leader>fh', '<cmd>Telescope help_tags<CR>', {noremap = true, silent = true})
 -- ]]
 
--- Packer commands till because we are not loading it at startup
+-- Packer commands here because we are not loading it at startup
 vim.cmd("silent! command PackerCompile lua require 'plugin_list' require('packer').compile()")
 vim.cmd("silent! command PackerInstall lua require 'plugin_list' require('packer').install()")
 vim.cmd("silent! command PackerStatus lua require 'plugin_list' require('packer').status()")
