@@ -27,6 +27,14 @@ map('n', '<c-l>', [[<Cmd>wincmd l<CR>]], opt)
 map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", opts)
 -- ]]
 
+-- [[ Telescope
+
+map('n', '<Leader>ff',  '<cmd>Telescope find_files<CR>', {noremap = true, silent = true})
+map('n', '<Leader>fg', '<cmd>Telescope live_grep<CR>', {noremap = true, silent = true})
+map('n', '<Leader>fb', '<cmd>Telescope buffers<CR>', {noremap = true, silent = true})
+map('n', '<Leader>fh', '<cmd>Telescope help_tags<CR>', {noremap = true, silent = true})
+-- ]]
+
 -- Packer commands till because we are not loading it at startup
 vim.cmd("silent! command PackerCompile lua require 'plugin_list' require('packer').compile()")
 vim.cmd("silent! command PackerInstall lua require 'plugin_list' require('packer').install()")
