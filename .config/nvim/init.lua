@@ -1,10 +1,9 @@
 
 local main_config = {
-    "plugin_list",
 	"options",
 	"mappings",
-	"utils",
     "theme",
+	"utils",
 }
 
 for _, config_file in ipairs(main_config) do
