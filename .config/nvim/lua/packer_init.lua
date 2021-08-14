@@ -29,6 +29,16 @@ if not present then
     end
 end
 
+vim.api.nvim_exec(
+  [[
+  augroup Packer
+    autocmd!
+    autocmd BufWritePost plugins.lua PackerCompile
+  augroup end
+]],
+  false
+)
+
 return packer.init {
     display = {
         open_fn = function()
