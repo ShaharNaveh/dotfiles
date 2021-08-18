@@ -28,7 +28,8 @@ return packer.startup(
         }
 
         use {
-            'norcalli/nvim-colorizer.lua',
+            "norcalli/nvim-colorizer.lua",
+            ft={"css", "html", "javascript",},
             event = "BufRead",
             config= function()
 		    require "plugins.nvim-colorizer"
@@ -36,7 +37,14 @@ return packer.startup(
         }
 
         -- Color scheme
-        use {'lifepillar/vim-gruvbox8'}
+        use {"lifepillar/vim-gruvbox8"}
+
+        --[[
+        use {
+            "npxbr/gruvbox.nvim",
+            requires = {"rktjmp/lush.nvim"}
+        }
+        --]]
 
         -- TOML support
         use {
