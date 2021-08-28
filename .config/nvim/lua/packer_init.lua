@@ -8,20 +8,17 @@ if not present then
     print("Cloning packer..")
     -- remove the dir before cloning
     vim.fn.delete(packer_path, "rf")
-    vim.fn.system(
-        {
+    vim.fn.system {
             "git",
             "clone",
             "https://github.com/wbthomason/packer.nvim",
             "--depth",
             "20",
-            packer_path
+            packer_path,
         }
-    )
 
     vim.cmd("packadd packer.nvim")
     present, packer = pcall(require, "packer")
-
     if present then
         print("Packer cloned successfully.")
     else
@@ -39,13 +36,18 @@ vim.api.nvim_exec(
   false
 )
 
-return packer.init {
+packer.init {
     display = {
         open_fn = function()
             return require("packer.util").float {border = "single"}
-        end
+        end,
+        prompt_border = "single",
     },
     git = {
-        clone_timeout = 600 -- Timeout, in seconds, for git clones
-    }
+        clone_timeout = 600, -- Timeout, in seconds, for git clones
+    },
+    -- auto_clean = true,
+    -- compile_on_sync = true,
 }
+
+return packer
