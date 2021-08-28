@@ -54,7 +54,7 @@ vim.g.backup = false
 vim.g.writebackup = false
 
 -- Undo files
-vim.o.undodir = vim.fn.stdpath("data") .. "/nvim/undodir/"
+vim.o.undodir = vim.fn.stdpath("data") .. "/undodir/"
 vim.o.undofile = true
 
 -- Update time
