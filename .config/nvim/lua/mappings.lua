@@ -39,5 +39,6 @@ map('n', '<Leader>fh', '<cmd>Telescope help_tags<CR>', {noremap = true, silent =
 vim.cmd("silent! command PackerCompile lua require 'plugin_list' require('packer').compile()")
 vim.cmd("silent! command PackerInstall lua require 'plugin_list' require('packer').install()")
 vim.cmd("silent! command PackerStatus lua require 'plugin_list' require('packer').status()")
+vim.cmd("silent! command PackerClean lua require 'plugin_list' require('packer').clean()")
 vim.cmd("silent! command PackerSync lua require 'plugin_list' require('packer').sync()")
 vim.cmd("silent! command PackerUpdate lua require 'plugin_list' require('packer').update()")

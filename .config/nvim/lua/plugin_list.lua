@@ -12,8 +12,9 @@ local use = packer.use
 return packer.startup(
     function()
         use {
-            'wbthomason/packer.nvim',
+            "wbthomason/packer.nvim",
             event = "VimEnter",
+            opt=true,
         }
 
         use {
@@ -39,13 +40,6 @@ return packer.startup(
         -- Color scheme
         use {"lifepillar/vim-gruvbox8"}
 
-        --[[
-        use {
-            "npxbr/gruvbox.nvim",
-            requires = {"rktjmp/lush.nvim"}
-        }
-        --]]
-
         -- TOML support
         use {
             'cespare/vim-toml',
@@ -69,14 +63,14 @@ return packer.startup(
 
         -- colorful status line and theme
         use {
-            'vim-airline/vim-airline-themes',
-            event='VimEnter'
-        }
-        use {
-            'vim-airline/vim-airline',
+            'hoob3rt/lualine.nvim',
+            requires = {
+                'kyazdani42/nvim-web-devicons',
+                opt=true,
+            },
             config= function()
-		    require "plugins.airline"
-	    end
+                require "plugins.lualine"
+            end
         }
 
         use {

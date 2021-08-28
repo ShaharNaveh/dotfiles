@@ -4,8 +4,9 @@ vim.opt.shadafile = "NONE"
 -- Fish slows things down
 vim.opt.shell = "/bin/bash"
 
--- Navigation
+-- Fast Navigation
 vim.opt.ttyfast = true
+vim.opt.lazyredraw = true
 
 -- Path
 vim.opt.wildignore = {
@@ -56,7 +57,7 @@ vim.g.backup = false
 vim.g.writebackup = false
 
 -- Undo files
-vim.o.undodir = vim.fn.stdpath("data") .. "/nvim/undodir/"
+vim.o.undodir = vim.fn.stdpath("data") .. "/undodir/"
 vim.o.undofile = true
 
 -- Update time
