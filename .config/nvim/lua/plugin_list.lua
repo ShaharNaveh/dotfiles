@@ -39,12 +39,6 @@ return packer.startup(
         -- Color scheme
         use {"lifepillar/vim-gruvbox8"}
 
-        --[[
-        use {
-            "npxbr/gruvbox.nvim",
-            requires = {"rktjmp/lush.nvim"}
-        }
-        --]]
 
         -- TOML support
         use {
@@ -69,15 +63,16 @@ return packer.startup(
 
         -- colorful status line and theme
         use {
-            'vim-airline/vim-airline-themes',
-            event='VimEnter'
-        }
-        use {
-            'vim-airline/vim-airline',
+  'hoob3rt/lualine.nvim',
+        event = "VimEnter",
+  requires = {
+      'kyazdani42/nvim-web-devicons',
+      opt = true,
+  },
             config= function()
-		    require "plugins.airline"
+		    require "plugins.lualine"
 	    end
-        }
+}
 
         use {
             'nvim-treesitter/nvim-treesitter',
