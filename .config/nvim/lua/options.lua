@@ -1,23 +1,23 @@
+local opt = vim.opt
+local g = vim.g
+
 -- Don't write to the ShaDa file on startup
-vim.opt.shadafile = "NONE"
+opt.shadafile = "NONE"
 
 -- Fish slows things down
-vim.opt.shell = "/bin/bash"
+opt.shell = "/bin/bash"
 
--- Fast Navigation
-vim.opt.ttyfast = true
-vim.opt.lazyredraw = true
+-- Navigation
+opt.ttyfast = true
 
 -- Path
-vim.opt.wildignore = {
-    '**',
-    '**/.git/*',
-    '**/coverage/*',
-    '*_build/*',
-    '*.pyc',
-    '**/__pycache__/*',
-    '**/.mypy_cache/*',
-}
+opt.path:append('**')
+vim.opt.wildignore:append('**/.git/*')
+vim.opt.wildignore:append('**/coverage/*')
+vim.opt.wildignore:append('*_build/*')
+vim.opt.wildignore:append('*.pyc')
+vim.opt.wildignore:append('**/__pycache__/*')
+vim.opt.wildignore:append('**/.mypy_cache/*')
 
 -- Swap
 vim.opt.swapfile = false
@@ -57,7 +57,7 @@ vim.g.backup = false
 vim.g.writebackup = false
 
 -- Undo files
-vim.o.undodir = vim.fn.stdpath("data") .. "/undodir/"
+vim.o.undodir = vim.fn.stdpath("data") .. "/nvim/undodir/"
 vim.o.undofile = true
 
 -- Update time
