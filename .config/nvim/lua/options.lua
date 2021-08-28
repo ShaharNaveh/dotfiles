@@ -1,23 +1,22 @@
-local opt = vim.opt
-local g = vim.g
-
 -- Don't write to the ShaDa file on startup
-opt.shadafile = "NONE"
+vim.opt.shadafile = "NONE"
 
 -- Fish slows things down
-opt.shell = "/bin/bash"
+vim.opt.shell = "/bin/bash"
 
 -- Navigation
-opt.ttyfast = true
+vim.opt.ttyfast = true
 
 -- Path
-opt.path:append('**')
-vim.opt.wildignore:append('**/.git/*')
-vim.opt.wildignore:append('**/coverage/*')
-vim.opt.wildignore:append('*_build/*')
-vim.opt.wildignore:append('*.pyc')
-vim.opt.wildignore:append('**/__pycache__/*')
-vim.opt.wildignore:append('**/.mypy_cache/*')
+vim.opt.wildignore = {
+    '**',
+    '**/.git/*',
+    '**/coverage/*',
+    '*_build/*',
+    '*.pyc',
+    '**/__pycache__/*',
+    '**/.mypy_cache/*',
+}
 
 -- Swap
 vim.opt.swapfile = false
