@@ -20,7 +20,6 @@
     "neovim": {
         "bins": ["pylsp"],
         "requirements": [
-            "jedi",
             "pyls-flake8",
             "pyls-isort",
             "pylsp-mypy",
