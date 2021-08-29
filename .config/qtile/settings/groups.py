@@ -68,7 +68,10 @@ group_names = [
         {
             "label": "",  # ICON: nf-fa-video_camera
             "layout": "max",
-            "matches": [Match(wm_class=["zoom"])],
+            "matches": [
+                Match(wm_class=["discord"]),
+                Match(wm_class=["zoom"]),
+            ],
         },
     ),
     (
