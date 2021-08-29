@@ -13,7 +13,7 @@ set -l red c94f6d
 set -l orange f4a261
 set -l yellow dbc074
 set -l green 81b29a
-set -l magenta 9d79d6
+set -l purple 9d79d6
 set -l cyan 63cdcf
 set -l pink d67ad2
 
