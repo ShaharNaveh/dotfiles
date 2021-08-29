@@ -158,8 +158,8 @@ symbol = " "
 [python]
 #disabled = true
 style = "bg:#192330 fg:#cdcecf"
-format = "($style)[](fg:#cdcecf)[${symbol}${pyenv_prefix}${version}($virtualenv)]($style)[](fg:#cdcecf)"
-symbol = " "
+format = "($style)[](fg:#cdcecf) [${symbol} ${pyenv_prefix}${version}($virtualenv)]($style) [](fg:#cdcecf)"
+symbol = ""
 
 [lua]
 #disabled = true
