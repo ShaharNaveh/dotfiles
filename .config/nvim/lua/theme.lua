@@ -1,4 +1,19 @@
 vim.o.background = "dark"
+local nightfox = require('nightfox')
 
--- vim.cmd([[colorscheme gruvbox]])
-vim.cmd ("colorscheme gruvbox8_hard")
+nightfox.setup(
+{
+
+    fox="nightfox", -- nightfox/nordfox/palefox/randfox
+    transparent = false,
+    styles = {
+    comments = "italic", -- change style of comments to be italic
+    keywords = "bold", -- change style of keywords to be bold
+    functions = "italic,bold" -- styles can be a comma separated list
+  },
+}
+)
+
+
+-- Load the configuration set above and apply the colorscheme
+nightfox.load()

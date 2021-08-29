@@ -37,7 +37,13 @@ return packer.startup(
         }
 
         -- Color scheme
-        use {"lifepillar/vim-gruvbox8"}
+        use {
+            'EdenEast/nightfox.nvim',
+            config= function()
+                require "theme"
+            end
+
+        }
 
 
         -- TOML support
@@ -63,16 +69,17 @@ return packer.startup(
 
         -- colorful status line and theme
         use {
-  'hoob3rt/lualine.nvim',
-        event = "VimEnter",
-  requires = {
-      'kyazdani42/nvim-web-devicons',
-      opt = true,
-  },
+            'hoob3rt/lualine.nvim',
+            event = "VimEnter",
+            requires = {
+                'kyazdani42/nvim-web-devicons',
+                opt = true,
+            },
+            after="nightfox.nvim",
             config= function()
-		    require "plugins.lualine"
-	    end
-}
+                require "plugins.lualine"
+            end
+        }
 
         use {
             'nvim-treesitter/nvim-treesitter',
