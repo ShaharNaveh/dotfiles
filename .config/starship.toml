@@ -164,8 +164,8 @@ symbol = " "
 [lua]
 #disabled = true
 style = "bg:#192330 fg:#cdcecf"
-format = "($style)[](fg:#cdcecf)[${symbol}${version}]($style)[](fg:#cdcecf)"
-symbol = " "
+format = "($style)[](fg:#cdcecf) [${symbol}${version}]($style) [](fg:#cdcecf)"
+symbol = ""
 
 [ruby]
 #disabled = true
