@@ -58,9 +58,9 @@ threshold = 0
 
 [git_branch]
 #disabled = true
-symbol = ""
+symbol = " "
 style = "bg:#192330 fg:#cdcecf"
-format = "[](fg:#cdcecf) [$symbol $branch]($style) [](fg:#cdcecf)"
+format = "[](fg:#cdcecf)[$symbol $branch]($style)[](fg:#cdcecf)"
 #format = "[$symbol$branch]($style)[](fg:#cdcecf)"
 
 [git_commit]
@@ -141,7 +141,7 @@ symbol = " "
 [nodejs]
 #disabled = true
 style = "bg:#192330 fg:#cdcecf"
-format = "($style)[](fg:#cdcecf)[$symbol$version]($style)[](fg:#cdcecf)"
+format = "($style)[](fg:#cdcecf) [$symbol$version]($style)[](fg:#cdcecf)"
 symbol = " "
 
 [package]
