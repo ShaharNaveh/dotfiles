@@ -1,5 +1,5 @@
 if command -s btm > /dev/null
-	alias btm="btm --color gruvbox --group"
+	alias btm="btm --color nord --group"
 end
 
 if command -s bat > /dev/null
