@@ -8,13 +8,13 @@ vim.opt.shell = "/bin/bash"
 vim.opt.ttyfast = true
 
 -- Path
-vim.opt.path:append('**')
-vim.opt.wildignore:append('**/.git/*')
-vim.opt.wildignore:append('**/coverage/*')
-vim.opt.wildignore:append('*_build/*')
-vim.opt.wildignore:append('*.pyc')
-vim.opt.wildignore:append('**/__pycache__/*')
-vim.opt.wildignore:append('**/.mypy_cache/*')
+vim.opt.path:append("**")
+vim.opt.wildignore:append("**/.git/*")
+vim.opt.wildignore:append("**/coverage/*")
+vim.opt.wildignore:append("*_build/*")
+vim.opt.wildignore:append("*.pyc")
+vim.opt.wildignore:append("**/__pycache__/*")
+vim.opt.wildignore:append("**/.mypy_cache/*")
 
 -- Swap
 vim.opt.swapfile = false
@@ -37,17 +37,17 @@ vim.opt.expandtab = true
 
 -- Search
 vim.opt.smartcase = true
-vim.o.mat=2 -- How many tenths of a second to blink matches
+vim.o.mat = 2 -- How many tenths of a second to blink matches
 
 -- Line numbers
 vim.opt.number = true
-vim.cmd [[
+vim.cmd([[
     augroup relativenumber
         autocmd!
         autocmd BufEnter,FocusGained,InsertLeave * setl relativenumber
         autocmd BufLeave,FocusLost,InsertEnter   * setl norelativenumber
     augroup END
-]]
+]])
 
 -- No backups
 vim.g.backup = false
@@ -71,30 +71,30 @@ vim.g.load_python_provider = false
 vim.g.python3_host_prog = os.getenv("HOME") .. "/.venvs/neovim-venv/bin/python3"
 
 if vim.fn.executable("rg") == 1 then
-    vim.g.rg_derive_root = "true"
+	vim.g.rg_derive_root = "true"
 end
 
 local disabled_built_ins = {
-    "2html_plugin",
-    "getscript",
-    "getscriptPlugin",
-    "gzip",
-    "logipat",
-    "matchit",
-    "netrw",
-    "netrwFileHandlers",
-    "netrwPlugin",
-    "netrwSettings",
-    "rrhelper",
-    "spellfile_plugin",
-    "tar",
-    "tarPlugin",
-    "vimball",
-    "vimballPlugin",
-    "zip",
-    "zipPlugin",
+	"2html_plugin",
+	"getscript",
+	"getscriptPlugin",
+	"gzip",
+	"logipat",
+	"matchit",
+	"netrw",
+	"netrwFileHandlers",
+	"netrwPlugin",
+	"netrwSettings",
+	"rrhelper",
+	"spellfile_plugin",
+	"tar",
+	"tarPlugin",
+	"vimball",
+	"vimballPlugin",
+	"zip",
+	"zipPlugin",
 }
 
 for _, plugin in pairs(disabled_built_ins) do
-    vim.g["loaded_" .. plugin] = 1
+	vim.g["loaded_" .. plugin] = 1
 end
