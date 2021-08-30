@@ -2,130 +2,125 @@ local present, _ = pcall(require, "packer_init")
 local packer
 
 if present then
-    packer = require "packer"
+	packer = require("packer")
 else
-    return false
+	return false
 end
 
 local use = packer.use
 
-return packer.startup(
-    function()
-        use {
-            'wbthomason/packer.nvim',
-            event = "VimEnter",
-        }
+return packer.startup(function()
+	use({
+		"wbthomason/packer.nvim",
+		event = "VimEnter",
+	})
 
-        use {
-            'nvim-telescope/telescope.nvim',
-            requires={
-                {'nvim-lua/popup.nvim'},
-                {'nvim-lua/plenary.nvim'},
-            },
-            config= function()
-		    require "plugins.telescope"
-	    end
-        }
+	use({
+		"nvim-telescope/telescope.nvim",
+		requires = {
+			{ "nvim-lua/popup.nvim" },
+			{ "nvim-lua/plenary.nvim" },
+		},
+		config = function()
+			require("plugins.telescope")
+		end,
+	})
 
-        use {
-            "norcalli/nvim-colorizer.lua",
-            ft={"css", "html", "javascript",},
-            event = "BufRead",
-            config= function()
-		    require "plugins.nvim-colorizer"
-	    end
-        }
+	use({
+		"norcalli/nvim-colorizer.lua",
+		ft = { "css", "html", "javascript" },
+		event = "BufRead",
+		config = function()
+			require("plugins.nvim-colorizer")
+		end,
+	})
 
-        -- Color scheme
-        use {
-            'EdenEast/nightfox.nvim',
-            config= function()
-                require "theme"
-            end
+	-- Color scheme
+	use({
+		"EdenEast/nightfox.nvim",
+		config = function()
+			require("theme")
+		end,
+	})
 
-        }
+	-- TOML support
+	use({
+		"cespare/vim-toml",
+		ft = { "toml" },
+	})
 
+	use({
+		"neovim/nvim-lspconfig",
+		event = "VimEnter",
+		config = function()
+			require("plugins.lsp")
+		end,
+	})
 
-        -- TOML support
-        use {
-            'cespare/vim-toml',
-            ft={'toml', },
-        }
+	use({
+		"hrsh7th/nvim-cmp",
+		--event="InsertEnter",
+		config = function()
+			require("plugins.nvim-cmp")
+		end,
 
-        use {
-            'neovim/nvim-lspconfig',
-            event='VimEnter',
-            config=function ()
-		    require "plugins.lsp"
-        end
-        }
+		wants = "LuaSnip",
 
-        use {
-          "hrsh7th/nvim-cmp",
-          --event="InsertEnter",
-          config=function()
-              require "plugins.nvim-cmp"
-          end,
+		requires = {
+			{
+				"L3MON4D3/LuaSnip",
+				--event = "InsertCharPre",
+			},
 
-          wants = "LuaSnip",
+			{
+				"hrsh7th/cmp-buffer",
+			},
 
-          requires = {
-              {
-                "L3MON4D3/LuaSnip",
-                --event = "InsertCharPre",
-        },
+			{
+				"hrsh7th/cmp-nvim-lua",
+			},
+			{
+				"hrsh7th/cmp-nvim-lsp",
+			},
+		},
+	})
 
-              {
-                  "hrsh7th/cmp-buffer",
-              },
+	-- colorful status line and theme
+	use({
+		"hoob3rt/lualine.nvim",
+		event = "VimEnter",
+		requires = {
+			"kyazdani42/nvim-web-devicons",
+			opt = true,
+		},
+		after = "nightfox.nvim",
+		config = function()
+			require("plugins.lualine")
+		end,
+	})
 
-              {
-                  "hrsh7th/cmp-nvim-lua",
-          },
-          {
-              "hrsh7th/cmp-nvim-lsp",
-          }
-          },
-}
+	use({
+		"nvim-treesitter/nvim-treesitter",
+		event = "BufRead",
+		run = ":TSUpdate",
+		config = function()
+			require("plugins.nvim-treesitter")
+		end,
+	})
+	use({
+		"dense-analysis/ale",
+		config = function()
+			require("plugins.ale")
+		end,
+	})
 
-
-        -- colorful status line and theme
-        use {
-            'hoob3rt/lualine.nvim',
-            event = "VimEnter",
-            requires = {
-                'kyazdani42/nvim-web-devicons',
-                opt = true,
-            },
-            after="nightfox.nvim",
-            config= function()
-                require "plugins.lualine"
-            end
-        }
-
-        use {
-            'nvim-treesitter/nvim-treesitter',
-            event = "BufRead",
-            run=':TSUpdate',
-            config= function()
-		    require "plugins.nvim-treesitter"
-	    end
-        }
-        use {
-            'dense-analysis/ale',
-            config=function ()
-		    require "plugins.ale"
-	    end
-        }
-
-        use {
-            'kyazdani42/nvim-tree.lua',
-            requires={
-                'kyazdani42/nvim-web-devicons',
-            },
-            config=function()
-		    require "plugins.nvim-tree"
-	    end
-        }
-    end
-)
+	use({
+		"kyazdani42/nvim-tree.lua",
+		requires = {
+			"kyazdani42/nvim-web-devicons",
+		},
+		config = function()
+			require("plugins.nvim-tree")
+		end,
+	})
+end)
