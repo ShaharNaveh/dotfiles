@@ -59,13 +59,35 @@ return packer.startup(
 		    require "plugins.lsp"
         end
         }
+
         use {
-            'hrsh7th/nvim-compe',
-            event='InsertEnter',
-            config= function()
-		    require "plugins.compe"
-	    end
-        }
+          "hrsh7th/nvim-cmp",
+          --event="InsertEnter",
+          config=function()
+              require "plugins.nvim-cmp"
+          end,
+
+          wants = "LuaSnip",
+
+          requires = {
+              {
+                "L3MON4D3/LuaSnip",
+                --event = "InsertCharPre",
+        },
+
+              {
+                  "hrsh7th/cmp-buffer",
+              },
+
+              {
+                  "hrsh7th/cmp-nvim-lua",
+          },
+          {
+              "hrsh7th/cmp-nvim-lsp",
+          }
+          },
+}
+
 
         -- colorful status line and theme
         use {
