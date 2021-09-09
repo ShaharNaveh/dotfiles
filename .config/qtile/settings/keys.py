@@ -1,6 +1,7 @@
 from libqtile.command import lazy
 from libqtile.config import Key
 
+from settings.compat import LAUNCHER_SHOW, LAUNCHER_SHOW_DRUN
 from settings.constants import browser, mod, terminal
 
 keys = [
@@ -91,16 +92,10 @@ keys = [
     Key([mod, "control"], "r", lazy.restart(), desc="Restart qtile"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown qtile"),
     Key(
-        [mod],
-        "comma",
-        lazy.spawn("/usr/bin/rofi -show drun"),
-        desc="Launch rofi",
+        [mod], "comma", lazy.spawn(LAUNCHER_SHOW_DRUN), desc="Display program launcher"
     ),
     Key(
-        [mod, "shift"],
-        "comma",
-        lazy.spawn("/usr/bin/rofi -show"),
-        desc="Launch rofi",
+        [mod, "shift"], "comma", lazy.spawn(LAUNCHER_SHOW), desc="Show running programs"
     ),
     Key([mod], "b", lazy.spawn(browser), desc=f"Launch {browser}"),
     Key([], "XF86AudioMute", lazy.spawn("amixer -c 0 set Speaker toggle")),
