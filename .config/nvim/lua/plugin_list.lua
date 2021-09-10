@@ -43,12 +43,6 @@ return packer.startup(function()
 		end,
 	})
 
-	-- TOML support
-	use({
-		"cespare/vim-toml",
-		ft = { "toml" },
-	})
-
 	use({
 		"neovim/nvim-lspconfig",
 		event = "VimEnter",
