@@ -60,7 +60,7 @@ end
 -- [[ Specific Language-Server settings ]] --
 
 -- [[ Pylsp
-require("lspconfig").pylsp.setup({
+nvim_lsp.pylsp.setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
 	settings = {
@@ -90,6 +90,11 @@ require("lspconfig").pylsp.setup({
 		},
 	},
 })
+
+
+nvim_lsp.rust_analyzer.setup({
+})
+
 -- ]]
 
 --[[

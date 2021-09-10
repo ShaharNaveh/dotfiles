@@ -16,6 +16,9 @@ export HISTTIMEFORMAT="%h %d %H:%M:%S "
 export HISTSIZE=1000000
 export HISTFILESIZE=1000000
 
+
+#export MOZ_ENABLE_WAYLAND=1
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
@@ -64,4 +67,3 @@ fi
 if [ -f "$HOME/.local/bin/starship" ]; then
 	eval "$(starship init bash)"
 fi
-
