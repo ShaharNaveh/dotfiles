@@ -1,0 +1,10 @@
+allow_markup=true
+show_all=true
+dynamic_lines=true
+width=25%
+fork=true
+allow_images=true
+layer=overlay
+display_generic=true
+location=top_right
+height=75%

@@ -9,6 +9,7 @@ vim.g.ale_completion_enabled = false
 vim.g.ale_set_highlights = false
 vim.g.ale_fix_on_save = true
 vim.g.ale_disable_lsp = true
+vim.g.ale_sign_column_always = true
 
 vim.g.ale_linters = {
 	["*"] = { "remove_trailing_lines", "trim_whitespace" },
@@ -18,5 +19,6 @@ vim.g.ale_linters = {
 
 vim.g.ale_fixers = {
 	["*"] = { "remove_trailing_lines", "trim_whitespace" },
+	lua = { "stylua" },
 	python = { "black", "isort" },
 }
