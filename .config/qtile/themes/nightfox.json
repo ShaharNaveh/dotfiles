@@ -1,105 +1,110 @@
-// Upstream: https://github.com/EdenEast/nightfox.nvim/blob/main/extra/nightfox/nightfox_windows_terminal.json
-
 {
-
-    "aqua_hard": [
-        "#689d6a",
-        "#689d6a"
-    ],
-    "aqua_soft": [
-        "#8ec07c",
-        "#8ec07c"
-    ],
     "background": [
         "#192330",
         "#192330"
     ],
-    "background_0": [
-        "#192330",
-        "#192330"
-    ],
-    "background_1": [
-        "#283648",
-        "#283648"
-    ],
-    "background_2": [
-        "#192330",
-        "#192330"
-    ],
-    "background_3": [
-        "#665c54",
-        "#665c54"
-    ],
-    "background_4": [
-        "#7c6f64",
-        "#7c6f64"
-    ],
-    "background_hard_0": [
-        "#1d2021",
-        "#1d2021"
-    ],
-    "background_soft_0": [
-        "#32302f",
-        "#32302f"
-    ],
-    "blue_hard": [
-        "#719cd6",
-        "#719cd6"
-    ],
-    "blue_soft": [
-        "#84cee4",
-        "#84cee4"
-    ],
+    "extra": {
+        "color_1": [
+            "#f4a261",
+            "#f4a261"
+        ],
+        "color_2": [
+            "#d67ad2",
+            "#d67ad2"
+        ]
+    },
     "foreground": [
         "#cdcecf",
         "#cdcecf"
     ],
-    "gray": [
-        "#a89984",
-        "#a89984"
-    ],
-    "gray_background": [
-        "#928374",
-        "#928374"
-    ],
-    "green_hard": [
-        "#81b29a",
-        "#81b29a"
-    ],
-    "green_soft": [
-        "#58cd8b",
-        "#58cd8b"
-    ],
-    "orange_hard": [
-        "#d65d0e",
-        "#d65d0e"
-    ],
-    "orange_soft": [
-        "#FE8019",
-        "#FE8019"
-    ],
-    "purple_hard": [
-        "#9d79d6",
-        "#9d79d6"
-    ],
-    "purple_soft": [
-        "#b8a1e3",
-        "#b8a1e3"
-    ],
-    "red_hard": [
-        "#c94f6d",
-        "#c94f6d"
-    ],
-    "red_soft": [
-        "#d6616b",
-        "#d6616b"
-    ],
-    "yellow_hard": [
-        "#dbc074",
-        "#dbc074"
-    ],
-    "yellow_soft": [
-        "#ffe37e",
-        "#ffe37e"
-    ]
+    "group": {
+        "active": {
+            "background": [
+                "#719cd6",
+                "#719cd6"
+            ],
+            "foreground": [
+                "#131A24",
+                "#131A24"
+            ]
+        },
+        "inactive": {
+            "background": [
+                "#283648",
+                "#283648"
+            ],
+            "foreground": [
+                "#526175",
+                "#526175"
+            ]
+        }
+    },
+    "hard": {
+        "black": [
+            "#393b44",
+            "#393b44"
+        ],
+        "blue": [
+            "#719cd6",
+            "#719cd6"
+        ],
+        "cyan": [
+            "#63cdcf",
+            "#63cdcf"
+        ],
+        "green": [
+            "#81b29a",
+            "#81b29a"
+        ],
+        "purple": [
+            "#9d79d6",
+            "#9d79d6"
+        ],
+        "red": [
+            "#c94f6d",
+            "#c94f6d"
+        ],
+        "white": [
+            "#dfdfe0",
+            "#dfdfe0"
+        ],
+        "yellow": [
+            "#dbc074",
+            "#dbc074"
+        ]
+    },
+    "soft": {
+        "black": [
+            "#7f8c98",
+            "#7f8c98"
+        ],
+        "blue": [
+            "#84cee4",
+            "#84cee4"
+        ],
+        "cyan": [
+            "#59f0ff",
+            "#59f0ff"
+        ],
+        "green": [
+            "#58cd8b",
+            "#58cd8b"
+        ],
+        "purple": [
+            "#b8a1e3",
+            "#b8a1e3"
+        ],
+        "red": [
+            "#d6616b",
+            "#d6616b"
+        ],
+        "white": [
+            "#f2f2f2",
+            "#f2f2f2"
+        ],
+        "yellow": [
+            "#ffe37e",
+            "#ffe37e"
+        ]
+    }
 }
