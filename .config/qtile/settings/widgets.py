@@ -19,7 +19,8 @@ primary_widgets = [
         disable_drag=True,
         font="UbuntuMono Nerd Font",
         foreground=colors["foreground"],
-        fontsize=14,
+        # fontsize=14,
+        # fontsize=12,
         highlight_color=colors["background_2"],
         highlight_method="block",
         inactive=colors["gray"],
@@ -45,7 +46,7 @@ primary_widgets = [
     widget.WindowName(
         background=colors["background"],
         font="UbuntuMono Nerd Font",
-        fontsize=14,
+        # fontsize=12,
         foreground=colors["foreground"],
         padding=5,
     ),
@@ -62,7 +63,7 @@ primary_widgets = [
     ),
     widget.TextBox(
         background=colors["background_1"],
-        fontsize=12,
+        # fontsize=12,
         foreground=colors["foreground"],
         padding=2,
         text=" ",  # ICON: nf-fa-thermometer_3
@@ -80,7 +81,7 @@ primary_widgets = [
     ),
     widget.TextBox(
         background=colors["background"],
-        fontsize=14,
+        # fontsize=14,
         foreground=colors["foreground"],
         padding=2,
         text=" ",  # ICON: nf-fa-microchip
@@ -98,7 +99,7 @@ primary_widgets = [
     ),
     widget.TextBox(
         background=colors["background_1"],
-        fontsize=14,
+        # fontsize=14,
         foreground=colors["foreground"],
         padding=0,
         text=" ",  # ICON: nf-mdi-memory
@@ -115,7 +116,7 @@ primary_widgets = [
     ),
     widget.TextBox(
         background=colors["background"],
-        fontsize=14,
+        # fontsize=14,
         foreground=colors["foreground"],
         padding=2,
         text=" ",  # ICON: nf-mdi-package_up
@@ -188,7 +189,7 @@ secondary_widgets = [
         disable_drag=True,
         font="UbuntuMono Nerd Font",
         foreground=colors["foreground"],
-        fontsize=14,
+        # fontsize=14,
         highlight_color=colors["background_2"],
         highlight_method="block",
         inactive=colors["gray"],
@@ -214,7 +215,7 @@ secondary_widgets = [
     widget.WindowName(
         background=colors["background"],
         font="UbuntuMono Nerd Font",
-        fontsize=14,
+        # fontsize=14,
         foreground=colors["foreground"],
         padding=5,
     ),
@@ -231,7 +232,7 @@ secondary_widgets = [
     ),
     widget.TextBox(
         background=colors["background_1"],
-        fontsize=12,
+        # fontsize=12,
         foreground=colors["foreground"],
         padding=2,
         text=" ",  # ICON: nf-fa-thermometer_3
@@ -249,7 +250,7 @@ secondary_widgets = [
     ),
     widget.TextBox(
         background=colors["background"],
-        fontsize=14,
+        # fontsize=14,
         foreground=colors["foreground"],
         padding=2,
         text=" ",  # ICON: nf-fa-microchip
@@ -267,7 +268,7 @@ secondary_widgets = [
     ),
     widget.TextBox(
         background=colors["background_1"],
-        fontsize=14,
+        # fontsize=14,
         foreground=colors["foreground"],
         padding=0,
         text=" ",  # ICON: nf-mdi-memory
@@ -284,7 +285,7 @@ secondary_widgets = [
     ),
     widget.TextBox(
         background=colors["background"],
-        fontsize=14,
+        # fontsize=14,
         foreground=colors["foreground"],
         padding=2,
         text=" ",  # ICON: nf-mdi-package_up
@@ -346,7 +347,7 @@ secondary_widgets = [
 widget_defaults = {
     "background": colors["background"],
     "font": "UbuntuMono Nerd Font Bold",
-    "fontsize": 14,
+    "fontsize": 12,
     "padding": 1,
 }
 
