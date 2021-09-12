@@ -7,7 +7,7 @@ from settings.widgets import primary_widgets, secondary_widgets
 
 
 def status_bar(widgets):
-    return bar.Bar(widgets, 24)
+    return bar.Bar(widgets=widgets, size=12)
 
 
 screens = [Screen(top=status_bar(primary_widgets))]
