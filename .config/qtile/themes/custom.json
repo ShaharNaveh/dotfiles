@@ -1,0 +1,62 @@
+{
+    "background": [
+        "#2e3440",
+        "#2e3440"
+    ],
+    "background_hard": [
+        "#242831",
+        "#242831"
+    ],
+    "background_soft": [
+        "#3b4252",
+        "#3b4252"
+    ],
+    "blue": [
+        "#81a1c1",
+        "#81a1c1"
+    ],
+    "blue_hard": [
+        "#5e81ac",
+        "#5e81ac"
+    ],
+    "cyan": [
+        "#88c0d0",
+        "#88c0d0"
+    ],
+    "cyan_hard": [
+        "#8fbcbb",
+        "#8fbcbb"
+    ],
+    "foreground": [
+        "#d8dee9",
+        "#d8dee9"
+    ],
+    "green": [
+        "#a3be8c",
+        "#a3be8c"
+    ],
+    "grey": [
+        "#4c566a",
+        "#4c566a"
+    ],
+    "magenta": [
+        "#b48ead",
+        "#b48ead"
+    ],
+    "orange": [
+        "#d08770",
+        "#d08770"
+    ],
+    "red": [
+        "#bf616a",
+        "#bf616a"
+    ],
+    "white": [
+        "#e5e9f0",
+        "#e5e9f0"
+    ],
+    "yellow": [
+        "#ebcb8b",
+        "#ebcb8b"
+    ]
+}
