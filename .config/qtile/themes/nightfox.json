@@ -1,110 +1,110 @@
 {
+    "active_group_background": [
+        "#719cd6",
+        "#719cd6"
+    ],
+    "active_group_foreground": [
+        "#131A24",
+        "#131A24"
+    ],
     "background": [
         "#192330",
         "#192330"
     ],
-    "extra": {
-        "color_1": [
-            "#f4a261",
-            "#f4a261"
-        ],
-        "color_2": [
-            "#d67ad2",
-            "#d67ad2"
-        ]
-    },
+    "color_0": [
+        "#393b44",
+        "#393b44"
+    ],
+    "color_1": [
+        "#c94f6d",
+        "#c94f6d"
+    ],
+    "color_10": [
+        "#58cd8b",
+        "#58cd8b"
+    ],
+    "color_11": [
+        "#ffe37e",
+        "#ffe37e"
+    ],
+    "color_12": [
+        "#84cee4",
+        "#84cee4"
+    ],
+    "color_13": [
+        "#b8a1e3",
+        "#b8a1e3"
+    ],
+    "color_14": [
+        "#59f0ff",
+        "#59f0ff"
+    ],
+    "color_15": [
+        "#f2f2f2",
+        "#f2f2f2"
+    ],
+    "color_16": [
+        "#f4a261",
+        "#f4a261"
+    ],
+    "color_17": [
+        "#d67ad2",
+        "#d67ad2"
+    ],
+    "color_2": [
+        "#81b29a",
+        "#81b29a"
+    ],
+    "color_3": [
+        "#dbc074",
+        "#dbc074"
+    ],
+    "color_4": [
+        "#719cd6",
+        "#719cd6"
+    ],
+    "color_5": [
+        "#9d79d6",
+        "#9d79d6"
+    ],
+    "color_6": [
+        "#63cdcf",
+        "#63cdcf"
+    ],
+    "color_7": [
+        "#f2f2f2",
+        "#f2f2f2"
+    ],
+    "color_8": [
+        "#7f8c98",
+        "#7f8c98"
+    ],
+    "color_9": [
+        "#d6616b",
+        "#d6616b"
+    ],
     "foreground": [
         "#cdcecf",
         "#cdcecf"
     ],
-    "group": {
-        "active": {
-            "background": [
-                "#719cd6",
-                "#719cd6"
-            ],
-            "foreground": [
-                "#131A24",
-                "#131A24"
-            ]
-        },
-        "inactive": {
-            "background": [
-                "#283648",
-                "#283648"
-            ],
-            "foreground": [
-                "#526175",
-                "#526175"
-            ]
-        }
-    },
-    "hard": {
-        "black": [
-            "#393b44",
-            "#393b44"
-        ],
-        "blue": [
-            "#719cd6",
-            "#719cd6"
-        ],
-        "cyan": [
-            "#63cdcf",
-            "#63cdcf"
-        ],
-        "green": [
-            "#81b29a",
-            "#81b29a"
-        ],
-        "purple": [
-            "#9d79d6",
-            "#9d79d6"
-        ],
-        "red": [
-            "#c94f6d",
-            "#c94f6d"
-        ],
-        "white": [
-            "#dfdfe0",
-            "#dfdfe0"
-        ],
-        "yellow": [
-            "#dbc074",
-            "#dbc074"
-        ]
-    },
-    "soft": {
-        "black": [
-            "#7f8c98",
-            "#7f8c98"
-        ],
-        "blue": [
-            "#84cee4",
-            "#84cee4"
-        ],
-        "cyan": [
-            "#59f0ff",
-            "#59f0ff"
-        ],
-        "green": [
-            "#58cd8b",
-            "#58cd8b"
-        ],
-        "purple": [
-            "#b8a1e3",
-            "#b8a1e3"
-        ],
-        "red": [
-            "#d6616b",
-            "#d6616b"
-        ],
-        "white": [
-            "#f2f2f2",
-            "#f2f2f2"
-        ],
-        "yellow": [
-            "#ffe37e",
-            "#ffe37e"
-        ]
-    }
+    "inactive_group_background": [
+        "#283648",
+        "#283648"
+    ],
+    "inactive_group_foreground": [
+        "#526175",
+        "#526175"
+    ],
+    "selection_background": [
+        "#283648",
+        "#283648"
+    ],
+    "selection_foreground": [
+        "#cdcecf",
+        "#cdcecf"
+    ],
+    "white": [
+        "#dfdfe0",
+        "#dfdfe0"
+    ]
 }
