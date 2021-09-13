@@ -32,13 +32,8 @@ widget_defaults = {
 
 extension_defaults = widget_defaults.copy()
 
+
 primary_widgets = [
-    # widget.Sep(
-    # background=colors["background"],
-    #  foreground=colors["blue_hard"],
-    #   padding=20,
-    #   fontsize=28,
-    # ),
     widget.TextBox(
         text="",
         foreground=colors["background_hard"],
@@ -53,7 +48,6 @@ primary_widgets = [
         **GROUPBOX_SETTINGS,
     ),
     widget.GroupBox(
-        # visible_groups=["", "", "", "", ""],
         visible_groups=["DOC", "CODE", "SYS", "MSG"],
         **GROUPBOX_SETTINGS,
     ),
@@ -107,18 +101,11 @@ primary_widgets = [
         fontsize=14,
         padding=0,
     ),
-    # widget.Sep(
-    #    linewidth=0,
-    #    foreground=colors["background_soft"],
-    #    padding=10,
-    #    size_percent=50,
-    # ),
     widget.Spacer(),
     widget.TextBox(
         text=" ",
         foreground=colors["cyan_hard"],
         background=colors["background"],
-        # fontsize=38,
         font="Font Awesome 5 Free Solid",
     ),
     widget.WindowName(
@@ -130,12 +117,6 @@ primary_widgets = [
         # mouse_callbacks={"Button2": kill_window},
     ),
     widget.Spacer(),
-    # widget.Sep(
-    #    linewidth=0,
-    #    foreground=colors["background_soft"],
-    #    padding=10,
-    #    size_percent=50,
-    # ),
     widget.TextBox(
         text="",
         foreground=colors["background_hard"],
@@ -176,8 +157,8 @@ primary_widgets = [
     ),
     widget.TextBox(
         text=" ",
-        # font="Font Awesome 5 Free Solid",
-        foreground=colors["yellow"],  # fontsize=38
+        font="Font Awesome 5 Free Solid",
+        foreground=colors["yellow"],
         background=colors["background_hard"],
     ),
     widget.Clock(
@@ -207,8 +188,8 @@ primary_widgets = [
     ),
     widget.TextBox(
         text=" ",
-        # font="Font Awesome 5 Free Solid",
-        foreground=colors["green"],  # fontsize=38
+        font="Font Awesome 5 Free Solid",
+        foreground=colors["green"],
         background=colors["background_hard"],
     ),
     widget.Clock(
