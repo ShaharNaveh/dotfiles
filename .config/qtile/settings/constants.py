@@ -5,6 +5,7 @@ font = "FiraCode Nerd Font"
 mod = "mod4"
 terminal = "alacritty"
 theme = "custom"
+keyboard_layouts = ["us", "il"]
 
 wallpaper = (
     pathlib.Path.home()
