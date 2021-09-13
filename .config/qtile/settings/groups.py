@@ -6,48 +6,51 @@ from settings.constants import mod, terminal
 from settings.keys import keys
 
 # NOTE: The icons are from https://www.nerdfonts.com/cheat-sheet
+
+
 group_names = [
-    (
-        "SYS",
-        {
-            "label": "",  # ICON: nf-dev-terminal
-            "layout": "monadtall",
-        },
-    ),
     (
         "WWW",
         {
             "label": "",  # ICON: nf-fa-firefox
-            "layout": "max",
             "matches": [Match(wm_class=["firefox", "Tor Browser"])],
-        },
-    ),
-    (
-        "CODE",
-        {
-            "label": "",  # ICON: nf-fa-code
-            "layout": "monadtall",
-            "matches": [Match(wm_class=["code-oss"])],
         },
     ),
     (
         "DOC",
         {
             "label": "",  # ICON: nf-mdi-file_document
-            "layout": "monadtall",
             "matches": [
-                Match(
-                    wm_class=[
-                        "libreoffice",
-                        "libreoffice-calc",
-                        "libreoffice-draw",
-                        "libreoffice-impress",
-                        "libreoffice-math",
-                        "libreoffice-writer",
-                        "soffice",
-                        "Soffice",
-                    ]
-                )
+                Match(wm_class=["libreoffice"]),
+                Match(wm_class=["libreoffice-calc"]),
+                Match(wm_class=["libreoffice-draw"]),
+                Match(wm_class=["libreoffice-impress"]),
+                Match(wm_class=["libreoffice-math"]),
+                Match(wm_class=["libreoffice-writer"]),
+                Match(wm_class=["soffice", "Soffice"]),
+            ],
+        },
+    ),
+    (
+        "CODE",
+        {
+            "label": "",  # ICON: nf-fa-code
+            "matches": [Match(wm_class=["code-oss"])],
+        },
+    ),
+    (
+        "SYS",
+        {
+            "label": "ﲵ",  # ICON: nf-mdi-console_line
+        },
+    ),
+    (
+        "MSG",
+        {
+            "label": "",  # ICON: nf-fa-comment
+            "matches": [
+                Match(wm_class=["TelegramDesktop", "telegram-desktop"]),
+                Match(wm_class=["discord"]),
             ],
         },
     ),
@@ -55,39 +58,19 @@ group_names = [
         "VBOX",
         {
             "label": "",  # ICON: nf-mdi-layers
-            "layout": "monadtall",
             "matches": [
-                Match(
-                    wm_class=["VirtualBox", "VirtualBox Machine", "VirtualBox Manager"]
-                )
+                Match(wm_class=["VirtualBox"]),
+                Match(wm_class=["VirtualBox Machine"]),
+                Match(wm_class=["VirtualBox Manager"]),
             ],
         },
     ),
     (
         "ZOOM",
         {
-            "label": "",  # ICON: nf-fa-video_camera
-            "layout": "max",
+            "label": "辶",  # ICON: nf-mdi-video
             "matches": [
                 Match(wm_class=["zoom"]),
-            ],
-        },
-    ),
-    (
-        "TELEGRAM",
-        {
-            "label": "",  # ICON: nf-fae-telegram
-            "layout": "max",
-            "matches": [Match(wm_class=["TelegramDesktop", "telegram-desktop"])],
-        },
-    ),
-    (
-        "DISCORD",
-        {
-            "label": "ﭮ",  # ICON: nf-mdi-discord
-            "layout": "max",
-            "matches": [
-                Match(wm_class=["discord"]),
             ],
         },
     ),
@@ -95,16 +78,21 @@ group_names = [
         "TORRENT",
         {
             "label": "",  # ICON: nf-mdi-magnet
-            "layout": "max",
             "matches": [Match(wm_class=["qbittorrent", "qBittorrent"])],
+        },
+    ),
+    (
+        "SETTINGS",
+        {
+            "label": "",
+            "matches": [Match(wm_class="pavucontrol")],
         },
     ),
 ]
 
 groups = []
 
-for index, (name, kwargs) in enumerate(group_names, start=1):
-    kwargs["label"] = f"{index}{kwargs['label']}"
+for (name, kwargs) in group_names:
     groups.append(Group(name, **kwargs))
 
 for index, group in enumerate(groups, start=1):

@@ -5,21 +5,34 @@ from settings.constants import font
 from settings.theme import colors
 
 layout_configuration = {
-    "border_width": 0,
+    "border_width": 3,
     "single_margin": 0,
     "single_border_width": 0,
-    "margin": 2,
-    "border_focus": colors["background_2"][0],
+    "margin": 9,
+    "border_focus": colors["background_soft"][0],
+    "border_normal": colors["background_soft"][0],
     "font": font,
+    # "grow_amount": 2,
 }
 
 
 layouts = [
+    layout.Columns(
+        border_on_single=True,
+        num_columns=2,
+        border_focus_stack=colors["background_soft"][0],
+        border_normal_stack=colors["background_soft"][0],
+        split=True,
+        wrap_focus_columns=True,
+        wrap_focus_rows=True,
+        wrap_focus_stacks=True,
+        **layout_configuration
+    ),
     layout.Max(**layout_configuration),
     # layout.Matrix(**layout_configuration),
     layout.MonadTall(**layout_configuration, ratio=0.60),
-    layout.MonadWide(**layout_configuration, ratio=0.60),
-    layout.Tile(**layout_configuration),
+    # layout.MonadWide(**layout_configuration, ratio=0.60),
+    # layout.Tile(**layout_configuration),
 ]
 
 floating_layout = layout.Floating(
@@ -49,7 +62,6 @@ floating_layout = layout.Floating(
         Match(wm_type="toolbar"),
         Match(wm_type="utility"),
     ],
-    fullscreen_border_width=0,
-    border_width=0,
-    border_focus=colors["background_2"][0],
+    fullscreen_border_width=3,
+    max_border_width=3,
 )

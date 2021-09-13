@@ -1,354 +1,230 @@
-from libqtile import widget
+from libqtile import bar, widget
 
-from settings.constants import qtile_config_dir
 from settings.theme import colors
 
 # NOTE: The icons are from https://www.nerdfonts.com/cheat-sheet
 
-primary_widgets = [
-    widget.Sep(
-        background=colors["background"],
-        foreground=colors["background_hard_0"],
-        linewidth=0,
-        padding=2,
-    ),
-    widget.GroupBox(
-        active=colors["foreground"],
-        background=colors["background"],
-        center_aligned=True,
-        disable_drag=True,
-        font="UbuntuMono Nerd Font",
-        foreground=colors["foreground"],
-        # fontsize=14,
-        # fontsize=12,
-        highlight_color=colors["background_2"],
-        highlight_method="block",
-        inactive=colors["gray"],
-        margix_x=1,
-        margin_y=3,
-        other_current_screen_border=colors["background_2"],
-        other_screen_border=colors["background_2"],
-        padding_y=8,
-        padding_x=5,
-        rounded=False,
-        spacing=0,
-        this_current_screen_border=colors["background_4"],
-        this_screen_border=colors["background_4"],
-        urgent_alert_method="block",
-        urgent_border=colors["red_hard"],
-    ),
-    widget.Sep(  # Between Groupbox and Window name.
-        background=colors["background"],
-        foreground=colors["background_hard_0"],
-        linewidth=0,
-        padding=5,
-    ),
-    widget.WindowName(
-        background=colors["background"],
-        font="UbuntuMono Nerd Font",
-        # fontsize=12,
-        foreground=colors["foreground"],
-        padding=5,
-    ),
-    widget.Sep(  # Between Window name and widgets.
-        background=colors["background"],
-        foreground=colors["background_hard_0"],
-        linewidth=0,
-        padding=20,
-    ),
-    widget.Image(
-        background=colors["background"],
-        filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg1.png"),
-        scale=True,
-    ),
-    widget.TextBox(
-        background=colors["background_1"],
-        # fontsize=12,
-        foreground=colors["foreground"],
-        padding=2,
-        text=" ",  # ICON: nf-fa-thermometer_3
-    ),
-    widget.ThermalSensor(
-        background=colors["background_1"],
-        foreground=colors["foreground"],
-        padding=5,
-        threshold=90,
-    ),
-    widget.Image(
-        background=colors["background_1"],
-        filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg.png"),
-        scale=True,
-    ),
-    widget.TextBox(
-        background=colors["background"],
-        # fontsize=14,
-        foreground=colors["foreground"],
-        padding=2,
-        text=" ",  # ICON: nf-fa-microchip
-    ),
-    widget.CPU(
-        background=colors["background"],
-        foreground=colors["foreground"],
-        format="{load_percent}%",
-        padding=5,
-    ),
-    widget.Image(
-        background=colors["background"],
-        filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg1.png"),
-        scale=True,
-    ),
-    widget.TextBox(
-        background=colors["background_1"],
-        # fontsize=14,
-        foreground=colors["foreground"],
-        padding=0,
-        text=" ",  # ICON: nf-mdi-memory
-    ),
-    widget.Memory(
-        background=colors["background_1"],
-        foreground=colors["foreground"],
-        padding=4,
-    ),
-    widget.Image(
-        background=colors["background_1"],
-        filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg.png"),
-        scale=True,
-    ),
-    widget.TextBox(
-        background=colors["background"],
-        # fontsize=14,
-        foreground=colors["foreground"],
-        padding=2,
-        text=" ",  # ICON: nf-mdi-package_up
-    ),
-    widget.CheckUpdates(
-        background=colors["background"],
-        colour_have_updates=colors["aqua_hard"],
-        display_format="{updates}",
-        distro="Arch",
-        foreground=colors["foreground"],
-        update_interval=1800,
-    ),
-    widget.TextBox(
-        background=colors["background"],
-        foreground=colors["foreground"],
-        padding=5,
-        text="Updates",
-    ),
-    widget.Image(
-        background=colors["background"],
-        filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg1.png"),
-        scale=True,
-    ),
-    widget.TextBox(
-        background=colors["background_1"],
-        foreground=colors["foreground"],
-        padding=0,
-        text=" ",  # ICON: nf-mdi-keyboard
-    ),
-    widget.KeyboardLayout(
-        background=colors["background_1"],
-        configured_keyboards=["us", "il"],
-        foreground=colors["foreground"],
-        padding=5,
-    ),
-    widget.Image(
-        background=colors["background_1"],
-        filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg.png"),
-        scale=True,
-    ),
-    widget.Clock(
-        background=colors["background"],
-        foreground=colors["foreground"],
-        format=" %a, %b %d %H:%M ",
-    ),
-    widget.Image(
-        background=colors["background"],
-        filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg1.png"),
-        scale=True,
-    ),
-    widget.CurrentLayoutIcon(
-        background=colors["background_1"],
-        foreground=colors["foreground"],
-        scale=True,
-    ),
-]
-
-
-secondary_widgets = [
-    widget.Sep(
-        background=colors["background"],
-        foreground=colors["background_hard_0"],
-        linewidth=0,
-        padding=2,
-    ),
-    widget.GroupBox(
-        active=colors["foreground"],
-        background=colors["background"],
-        center_aligned=True,
-        disable_drag=True,
-        font="UbuntuMono Nerd Font",
-        foreground=colors["foreground"],
-        # fontsize=14,
-        highlight_color=colors["background_2"],
-        highlight_method="block",
-        inactive=colors["gray"],
-        margix_x=1,
-        margin_y=3,
-        other_current_screen_border=colors["background_2"],
-        other_screen_border=colors["background_2"],
-        padding_y=8,
-        padding_x=5,
-        rounded=False,
-        spacing=0,
-        this_current_screen_border=colors["background_4"],
-        this_screen_border=colors["background_4"],
-        urgent_alert_method="block",
-        urgent_border=colors["red_hard"],
-    ),
-    widget.Sep(  # Between Groupbox and Window name.
-        background=colors["background"],
-        foreground=colors["background_hard_0"],
-        linewidth=0,
-        padding=5,
-    ),
-    widget.WindowName(
-        background=colors["background"],
-        font="UbuntuMono Nerd Font",
-        # fontsize=14,
-        foreground=colors["foreground"],
-        padding=5,
-    ),
-    widget.Sep(  # Between Window name and widgets.
-        background=colors["background"],
-        foreground=colors["background_hard_0"],
-        linewidth=0,
-        padding=20,
-    ),
-    widget.Image(
-        background=colors["background"],
-        filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg1.png"),
-        scale=True,
-    ),
-    widget.TextBox(
-        background=colors["background_1"],
-        # fontsize=12,
-        foreground=colors["foreground"],
-        padding=2,
-        text=" ",  # ICON: nf-fa-thermometer_3
-    ),
-    widget.ThermalSensor(
-        background=colors["background_1"],
-        foreground=colors["foreground"],
-        padding=5,
-        threshold=90,
-    ),
-    widget.Image(
-        background=colors["background_1"],
-        filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg.png"),
-        scale=True,
-    ),
-    widget.TextBox(
-        background=colors["background"],
-        # fontsize=14,
-        foreground=colors["foreground"],
-        padding=2,
-        text=" ",  # ICON: nf-fa-microchip
-    ),
-    widget.CPU(
-        background=colors["background"],
-        foreground=colors["foreground"],
-        format="{load_percent}%",
-        padding=5,
-    ),
-    widget.Image(
-        background=colors["background"],
-        filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg1.png"),
-        scale=True,
-    ),
-    widget.TextBox(
-        background=colors["background_1"],
-        # fontsize=14,
-        foreground=colors["foreground"],
-        padding=0,
-        text=" ",  # ICON: nf-mdi-memory
-    ),
-    widget.Memory(
-        background=colors["background_1"],
-        foreground=colors["foreground"],
-        padding=4,
-    ),
-    widget.Image(
-        background=colors["background_1"],
-        filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg.png"),
-        scale=True,
-    ),
-    widget.TextBox(
-        background=colors["background"],
-        # fontsize=14,
-        foreground=colors["foreground"],
-        padding=2,
-        text=" ",  # ICON: nf-mdi-package_up
-    ),
-    widget.CheckUpdates(
-        background=colors["background"],
-        colour_have_updates=colors["aqua_hard"],
-        display_format="{updates}",
-        distro="Arch",
-        foreground=colors["foreground"],
-        update_interval=1800,
-    ),
-    widget.TextBox(
-        background=colors["background"],
-        foreground=colors["foreground"],
-        padding=5,
-        text="Updates",
-    ),
-    widget.Image(
-        background=colors["background"],
-        filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg1.png"),
-        scale=True,
-    ),
-    widget.TextBox(
-        background=colors["background_1"],
-        foreground=colors["foreground"],
-        padding=0,
-        text=" ",  # ICON: nf-mdi-keyboard
-    ),
-    widget.KeyboardLayout(
-        background=colors["background_1"],
-        configured_keyboards=["us", "il"],
-        foreground=colors["foreground"],
-        padding=5,
-    ),
-    widget.Image(
-        background=colors["background_1"],
-        filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg.png"),
-        scale=True,
-    ),
-    widget.Clock(
-        background=colors["background"],
-        foreground=colors["foreground"],
-        format=" %a, %b %d %H:%M ",
-    ),
-    widget.Image(
-        background=colors["background"],
-        filename=str(qtile_config_dir / "images" / "arrowleft-trans-bg1.png"),
-        scale=True,
-    ),
-    widget.CurrentLayoutIcon(
-        background=colors["background_1"],
-        foreground=colors["foreground"],
-        scale=True,
-    ),
-]
-
+GROUPBOX_SETTINGS = {
+    "padding": 5,
+    "borderwidth": 4,
+    "active": colors["white"],
+    "inactive": colors["grey"],
+    "disable_drag": True,
+    "rounded": True,
+    "highlight_color": colors["background_soft"],
+    "block_highlight_text_color": colors["blue"],
+    "highlight_method": "block",
+    "this_current_screen_border": colors["background_hard"],
+    "this_screen_border": colors["magenta"],
+    "other_current_screen_border": colors["background_hard"],
+    "other_screen_border": colors["background_hard"],
+    "foreground": colors["foreground"],
+    "background": colors["background_hard"],
+    "urgent_border": colors["red"],
+}
 
 widget_defaults = {
     "background": colors["background"],
-    "font": "UbuntuMono Nerd Font Bold",
-    "fontsize": 12,
-    "padding": 1,
+    "font": "FiraCode Nerd Font",
+    "fontsize": 14,
+    "padding": 3,
 }
 
 extension_defaults = widget_defaults.copy()
+
+primary_widgets = [
+    # widget.Sep(
+    # background=colors["background"],
+    #  foreground=colors["blue_hard"],
+    #   padding=20,
+    #   fontsize=28,
+    # ),
+    widget.TextBox(
+        text="",
+        foreground=colors["background_hard"],
+        background=colors["background"],
+        fontsize=14,
+        padding=0,
+    ),
+    widget.GroupBox(
+        visible_groups=[
+            "WWW",
+        ],
+        **GROUPBOX_SETTINGS,
+    ),
+    widget.GroupBox(
+        # visible_groups=["", "", "", "", ""],
+        visible_groups=["DOC", "CODE", "SYS", "MSG"],
+        **GROUPBOX_SETTINGS,
+    ),
+    widget.GroupBox(
+        visible_groups=["VBOX"],
+        **GROUPBOX_SETTINGS,
+    ),
+    widget.GroupBox(
+        visible_groups=["ZOOM"],
+        **GROUPBOX_SETTINGS,
+    ),
+    widget.GroupBox(
+        visible_groups=["TORRENT"],
+        **GROUPBOX_SETTINGS,
+    ),
+    widget.GroupBox(
+        visible_groups=["SETTINGS"],
+        **GROUPBOX_SETTINGS,
+    ),
+    widget.TextBox(
+        text="",
+        foreground=colors["background_hard"],
+        background=colors["background"],
+        fontsize=14,
+        padding=0,
+    ),
+    widget.Sep(
+        linewidth=0,
+        foreground=colors["background_soft"],
+        background=colors["background"],
+        padding=10,
+        size_percent=40,
+    ),
+    widget.TextBox(
+        text="",
+        foreground=colors["background_hard"],
+        background=colors["background"],
+        fontsize=14,
+        padding=0,
+    ),
+    widget.CurrentLayoutIcon(
+        foreground=colors["background_soft"],
+        background=colors["background_hard"],
+        # padding=-10,
+        scale=0.40,
+    ),
+    widget.TextBox(
+        text="",
+        foreground=colors["background_hard"],
+        background=colors["background"],
+        fontsize=14,
+        padding=0,
+    ),
+    # widget.Sep(
+    #    linewidth=0,
+    #    foreground=colors["background_soft"],
+    #    padding=10,
+    #    size_percent=50,
+    # ),
+    widget.Spacer(),
+    widget.TextBox(
+        text=" ",
+        foreground=colors["cyan_hard"],
+        background=colors["background"],
+        # fontsize=38,
+        font="Font Awesome 5 Free Solid",
+    ),
+    widget.WindowName(
+        background=colors["background"],
+        foreground=colors["cyan_hard"],
+        width=bar.CALCULATED,
+        empty_group_string="Desktop",
+        max_chars=30,
+        # mouse_callbacks={"Button2": kill_window},
+    ),
+    widget.Spacer(),
+    # widget.Sep(
+    #    linewidth=0,
+    #    foreground=colors["background_soft"],
+    #    padding=10,
+    #    size_percent=50,
+    # ),
+    widget.TextBox(
+        text="",
+        foreground=colors["background_hard"],
+        background=colors["background"],
+        fontsize=14,
+        padding=0,
+    ),
+    widget.TextBox(
+        text=" ",
+        foreground=colors["cyan"],
+        background=colors["background_hard"],
+    ),
+    widget.PulseVolume(
+        foreground=colors["cyan"],
+        background=colors["background_hard"],
+        limit_max_volume="True",
+        # mouse_callbacks={"Button3": open_pavu},
+    ),
+    widget.TextBox(
+        text="",
+        foreground=colors["background_hard"],
+        background=colors["background"],
+        fontsize=14,
+        padding=0,
+    ),
+    widget.Sep(
+        linewidth=0,
+        foreground=colors["background_soft"],
+        padding=10,
+        size_percent=50,
+    ),
+    widget.TextBox(
+        text="",
+        foreground=colors["background_hard"],
+        background=colors["background"],
+        fontsize=14,
+        padding=0,
+    ),
+    widget.TextBox(
+        text=" ",
+        # font="Font Awesome 5 Free Solid",
+        foreground=colors["yellow"],  # fontsize=38
+        background=colors["background_hard"],
+    ),
+    widget.Clock(
+        format="%a, %b %d",
+        background=colors["background_hard"],
+        foreground=colors["yellow"],
+    ),
+    widget.TextBox(
+        text="",
+        foreground=colors["background_hard"],
+        background=colors["background"],
+        fontsize=14,
+        padding=0,
+    ),
+    widget.Sep(
+        linewidth=0,
+        foreground=colors["background_soft"],
+        padding=10,
+        size_percent=50,
+    ),
+    widget.TextBox(
+        text="",
+        foreground=colors["background_hard"],
+        background=colors["background"],
+        fontsize=14,
+        padding=0,
+    ),
+    widget.TextBox(
+        text=" ",
+        # font="Font Awesome 5 Free Solid",
+        foreground=colors["green"],  # fontsize=38
+        background=colors["background_hard"],
+    ),
+    widget.Clock(
+        format="%H:%M",
+        foreground=colors["green"],
+        background=colors["background_hard"],
+        #    mouse_callbacks={"Button1": todays_date},
+    ),
+    widget.TextBox(
+        text="",
+        foreground=colors["background_hard"],
+        background=colors["background"],
+        fontsize=14,
+        padding=0,
+    ),
+]
+
+
+secondary_widgets = []

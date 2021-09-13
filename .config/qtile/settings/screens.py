@@ -3,14 +3,28 @@ import subprocess
 from libqtile import bar
 from libqtile.config import Screen
 
+from settings.constants import wallpaper
 from settings.widgets import primary_widgets, secondary_widgets
 
 
 def status_bar(widgets):
-    return bar.Bar(widgets=widgets, size=12)
+    return bar.Bar(
+        widgets=widgets,
+        size=24,
+        margin=[0, 0, 0, 0],
+    )
 
 
-screens = [Screen(top=status_bar(primary_widgets))]
+screens = [
+    Screen(
+        wallpaper=wallpaper.as_posix(),
+        wallpaper_mode="fill",
+        top=status_bar(primary_widgets),
+        # bottom=bar.Gap(1),
+        # left=bar.Gap(1),
+        right=bar.Gap(1),
+    ),
+]
 
 connected_monitors = (
     subprocess.run(
