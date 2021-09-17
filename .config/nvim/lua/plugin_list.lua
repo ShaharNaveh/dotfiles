@@ -20,6 +20,14 @@ return packer.startup(function()
 		requires = {
 			{ "nvim-lua/popup.nvim" },
 			{ "nvim-lua/plenary.nvim" },
+			{
+				"nvim-treesitter/nvim-treesitter",
+				event = "BufRead",
+				run = ":TSUpdate",
+				config = function()
+					require("plugins.nvim-treesitter")
+				end,
+			},
 		},
 		config = function()
 			require("plugins.telescope")
