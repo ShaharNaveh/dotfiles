@@ -10,7 +10,7 @@ local cmd = vim.cmd
 local opt = {}
 
 -- Remap space as leader key
-map("", "<Space>", "<Nop>", { noremap = true, silent = true })
+--map("", "<Space>", "<Nop>", { noremap = true, silent = true })
 vim.g.mapleader = " "
 
 -- [[ Toggle numbers

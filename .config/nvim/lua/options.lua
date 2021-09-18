@@ -64,8 +64,10 @@ vim.opt.timeoutlen = 600
 -- Taller command bar
 vim.opt.cmdheight = 2
 
--- Disable python2 support
-vim.g.load_python_provider = false
+vim.g.loaded_python_provider = false -- Python2 only
+vim.g.loaded_ruby_provider = false
+vim.g.loaded_perl_provider = false
+vim.g.loaded_node_provider = false
 
 -- Set the python3 environment to be inside venv
 vim.g.python3_host_prog = os.getenv("HOME") .. "/.venvs/neovim-venv/bin/python3"

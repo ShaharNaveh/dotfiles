@@ -1,5 +1,4 @@
 require("nvim-treesitter.configs").setup({
-	autopairs = { enable = true },
 	ensure_installed = {
 		"bash",
 		"css",
@@ -12,6 +11,7 @@ require("nvim-treesitter.configs").setup({
 		"python",
 		"regex",
 		"rst",
+		"rust",
 		"toml",
 		"yaml",
 	},
@@ -20,6 +20,14 @@ require("nvim-treesitter.configs").setup({
 		enable = true, -- false will disable the whole extension
 		disable = {}, -- list of language that will be disabled
 	},
+	matchup = { enable = true },
+	autopairs = { enable = true },
 	incremental_selection = { enable = true },
-	textobjects = { enable = true },
+	textobjects = {
+		enable = true,
+		select = {
+			enable = true,
+			lookeahead = true,
+		},
+	},
 })

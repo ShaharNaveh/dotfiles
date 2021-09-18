@@ -20,14 +20,6 @@ return packer.startup(function()
 		requires = {
 			{ "nvim-lua/popup.nvim" },
 			{ "nvim-lua/plenary.nvim" },
-			{
-				"nvim-treesitter/nvim-treesitter",
-				event = "BufRead",
-				run = ":TSUpdate",
-				config = function()
-					require("plugins.nvim-treesitter")
-				end,
-			},
 		},
 		config = function()
 			require("plugins.telescope")
@@ -53,36 +45,31 @@ return packer.startup(function()
 
 	use({
 		"neovim/nvim-lspconfig",
-		event = "VimEnter",
+		--event = "VimEnter",
+		wants = "coq_nvim",
+		--after = "coq_nvim",
 		config = function()
 			require("plugins.lsp")
 		end,
 	})
 
 	use({
-		"hrsh7th/nvim-cmp",
-		--event="InsertEnter",
+		"ms-jpq/coq_nvim",
+		branch = "coq",
 		config = function()
-			require("plugins.nvim-cmp")
+			require("plugins.coq")
 		end,
-
-		wants = "LuaSnip",
-
+		run = ":COQdeps",
 		requires = {
 			{
-				"L3MON4D3/LuaSnip",
-				--event = "InsertCharPre",
+				"ms-jpq/coq.artifacts",
+				branch = "artifacts",
+				after = "coq_nvim",
 			},
 
 			{
-				"hrsh7th/cmp-buffer",
-			},
-
-			{
-				"hrsh7th/cmp-nvim-lua",
-			},
-			{
-				"hrsh7th/cmp-nvim-lsp",
+				"ms-jpq/coq.thirdparty",
+				branch = "3p",
 			},
 		},
 	})
