@@ -1,4 +1,5 @@
 local nvim_lsp = require("lspconfig")
+local coq = require("coq")
 
 local on_attach = function(_, bufnr)
 	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
@@ -40,29 +41,24 @@ local on_attach = function(_, bufnr)
 		[[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]],
 		opts
 	)
-	vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
+	--vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-local servers = { "pylsp", "rust_analyzer" } -- Enable these Language-Servers
-for _, lsp in ipairs(servers) do
-	nvim_lsp[lsp].setup({
-		capabilities = capabilities,
-		flags = {
-			debounce_text_changes = 150,
-		},
-		on_attach = on_attach,
-	})
-end
+capabilities.textDocument.completion.completionItem.snippetSupport = false
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+	properties = { "documentation", "detail", "additionalTextEdits" },
+}
 
 -- [[ Specific Language-Server settings ]] --
 
--- [[ Pylsp
-nvim_lsp.pylsp.setup({
+-- Pylsp
+nvim_lsp.pylsp.setup(coq.lsp_ensure_capabilities({
 	capabilities = capabilities,
 	on_attach = on_attach,
+	flags = {
+		debounce_text_changes = 150,
+	},
 	settings = {
 		pylsp = {
 			plugins = {
@@ -89,10 +85,13 @@ nvim_lsp.pylsp.setup({
 			},
 		},
 	},
-})
+}))
+nvim_lsp.rust_analyzer.setup(coq.lsp_ensure_capabilities({}))
 
-
-nvim_lsp.rust_analyzer.setup({
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+	virtual_text = true,
+	signs = true,
+	update_in_insert = true,
 })
 
 -- ]]
@@ -113,3 +112,17 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
     }
 )
 ]]
+
+-- Default config for those lsp
+--[[
+local servers = {}
+for _, lsp in ipairs(servers) do
+	nvim_lsp[lsp].setup({
+		capabilities = capabilities,
+		flags = {
+			debounce_text_changes = 150,
+		},
+		on_attach = on_attach,
+	})
+end
+--]]
