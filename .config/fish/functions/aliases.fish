@@ -2,10 +2,6 @@ if command -s btm > /dev/null
 	alias btm="btm --color nord --group"
 end
 
-if command -s bat > /dev/null
-	alias cat="bat"
-end
-
 if command -s rsync > /dev/null
 	alias cp="rsync --archive --human-readable --progress --verbose --whole-file"
 else
