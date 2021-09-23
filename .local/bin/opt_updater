@@ -12,7 +12,7 @@ function git_latest_tag {
 }
 
 function git_subdirs {
-	find $1 -name ".git" -type d
+    find $1 -name ".git" -type d -or -name ".git" -type f
 }
 
 function is_rust_repo {
