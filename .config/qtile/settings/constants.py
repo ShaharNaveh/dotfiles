@@ -15,3 +15,5 @@ wallpaper = (
 
 
 qtile_config_dir = pathlib.Path.home() / ".config" / "qtile"
+
+icons_dir = qtile_config_dir / "icons"
