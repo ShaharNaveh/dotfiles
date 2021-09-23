@@ -1,5 +1,6 @@
 from libqtile import bar, widget
 
+from settings.constants import icons_dir
 from settings.theme import colors
 
 # NOTE: The icons are from https://www.nerdfonts.com/cheat-sheet
@@ -89,10 +90,11 @@ primary_widgets = [
         padding=0,
     ),
     widget.CurrentLayoutIcon(
+        custom_icon_paths=[icons_dir.as_posix()],
         foreground=colors["background_soft"],
         background=colors["background_hard"],
         # padding=-10,
-        scale=0.40,
+        scale=0.50,
     ),
     widget.TextBox(
         text="",
