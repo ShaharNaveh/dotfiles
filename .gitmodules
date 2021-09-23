@@ -1,6 +1,0 @@
-[submodule ".local/opt/bottom"]
-	path = .local/opt/bottom
-	url = https://github.com/ClementTsang/bottom.git
-[submodule ".local/opt/stylua"]
-	path = .local/opt/stylua
-	url = https://github.com/johnnymorganz/stylua.git
