@@ -1,6 +1,7 @@
 # Ignore everything
 /*
 !.gitignore
+!.gitmodules
 
 # Except for the files and folders we to track
 !.Notes/
