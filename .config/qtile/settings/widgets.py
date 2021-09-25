@@ -210,4 +210,5 @@ primary_widgets = [
 ]
 
 
-secondary_widgets = []
+# secondary_widgets = []
+secondary_widgets = primary_widgets.copy()

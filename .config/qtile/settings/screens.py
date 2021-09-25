@@ -39,4 +39,12 @@ connected_monitors = (
 
 if connected_monitors > 1:
     for _ in range(1, connected_monitors):
-        screens.append(Screen(top=status_bar(secondary_widgets)))
+        screens.append(
+            Screen(
+                # top=status_bar(secondary_widgets),
+                top=bar.Bar(widgets=secondary_widgets, size=30),
+                wallpaper=wallpaper.as_posix(),
+                wallpaper_mode="fill",
+                right=bar.Gap(1),
+            )
+        )
