@@ -4,6 +4,7 @@ if not present then
 end
 
 local tree_cb = tree_c.nvim_tree_callback
+local nvim_tree = require("nvim-tree")
 
 vim.o.termguicolors = true
 
@@ -54,3 +55,5 @@ vim.g.nvim_tree_icons = {
 		error = "",
 	},
 }
+
+nvim_tree.setup()
