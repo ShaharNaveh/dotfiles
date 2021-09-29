@@ -9,18 +9,13 @@ local nvim_tree = require("nvim-tree")
 vim.o.termguicolors = true
 
 --nvimtree
-vim.g.nvim_tree_side = "left"
-vim.g.nvim_tree_width = 25
 vim.g.nvim_tree_ignore = { ".git", "node_modules", ".cache", "__pycache__" }
-vim.g.nvim_tree_auto_open = false
+--vim.g.nvim_tree_auto_open = false
 vim.g.nvim_tree_quit_on_open = 0
-vim.g.nvim_tree_follow = true
-vim.g.nvim_tree_auto_close = true
 vim.g.nvim_tree_indent_markers = true
 vim.g.nvim_tree_hide_dotfiles = true
 vim.g.nvim_tree_git_hl = true
 vim.g.nvim_tree_root_folder_modifier = ":~"
-vim.g.nvim_tree_allow_resize = true
 
 vim.g.nvim_tree_show_icons = {
 	git = 1,
@@ -56,4 +51,12 @@ vim.g.nvim_tree_icons = {
 	},
 }
 
-nvim_tree.setup()
+nvim_tree.setup({
+	auto_close = true,
+	disable_netrw = true,
+	view = {
+		allow_resize = true,
+		side = "left",
+		width = 25,
+	},
+})
