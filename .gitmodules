@@ -6,7 +6,3 @@
 	path = .local/opt/stylua
 	url = https://github.com/johnnymorganz/stylua.git
     ignore = dirty
-[submodule ".local/opt/leftwm"]
-	path = .local/opt/leftwm
-	url = https://github.com/leftwm/leftwm.git
-    ignore = dirty
