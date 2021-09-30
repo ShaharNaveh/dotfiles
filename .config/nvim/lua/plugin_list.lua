@@ -35,6 +35,14 @@ return packer.startup(function()
 		end,
 	})
 
+	use({
+		"akinsho/toggleterm.nvim",
+
+		config = function()
+			require("plugins.toggleterm")
+		end,
+	})
+
 	-- Color scheme
 	use({
 		"EdenEast/nightfox.nvim",
@@ -62,6 +70,7 @@ return packer.startup(function()
 		run = ":COQdeps",
 		requires = {
 			{
+				disable = true,
 				"ms-jpq/coq.artifacts",
 				branch = "artifacts",
 				after = "coq_nvim",

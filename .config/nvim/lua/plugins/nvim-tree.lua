@@ -55,8 +55,8 @@ nvim_tree.setup({
 	auto_close = true,
 	disable_netrw = true,
 	view = {
-		allow_resize = true,
+		auto_resize = true,
 		side = "left",
-		width = 25,
+		--width = 25,
 	},
 })
