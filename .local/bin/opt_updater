@@ -52,6 +52,11 @@ for git_dir in $git_dirs ; do
 		if [ $project_name = "starship" ] ; then
 			CARGO_BUILD_CMD="${CARGO_BUILD_CMD} --no-default-features"
 		fi
+
+        if [ $project_name = "leftwm" ] ; then
+			CARGO_BUILD_CMD="${CARGO_BUILD_CMD} --features=journald"
+        fi
+
 		eval $CARGO_BUILD_CMD
 	fi
 	MSG="" ; echo $MSG
