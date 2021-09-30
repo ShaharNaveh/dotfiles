@@ -45,7 +45,7 @@ vim.cmd([[
     augroup relativenumber
         autocmd!
         autocmd BufEnter,FocusGained,InsertLeave * setl relativenumber
-        autocmd BufLeave,FocusLost,InsertEnter   * setl norelativenumber
+        autocmd BufLeave,FocusLost,InsertEnter,ToggleTerm * setl norelativenumber
     augroup END
 ]])
 
