@@ -2,7 +2,3 @@
 	path = .local/opt/bottom
 	url = https://github.com/ClementTsang/bottom.git
     ignore = dirty
-[submodule ".local/opt/stylua"]
-	path = .local/opt/stylua
-	url = https://github.com/johnnymorganz/stylua.git
-    ignore = dirty
