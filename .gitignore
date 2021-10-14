@@ -5,6 +5,7 @@
 
 # Except for the files and folders we to track
 !.Notes/
+!.ssh/
 !.asoundrc
 !.bash_aliases
 !.bash_profile

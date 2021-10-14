@@ -9,6 +9,7 @@ keyboard_layouts = ["us", "il"]
 
 wallpaper = (
     pathlib.Path.home()
+    / "Pictures"
     / "Wallpapers"
     / "Unknown-Husky_Walks_Across_A_Frozen_Lake_After_Rain_1.jpg"
 )

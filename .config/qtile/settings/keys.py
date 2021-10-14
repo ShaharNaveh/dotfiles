@@ -3,7 +3,7 @@ from libqtile.config import Key
 
 from settings.compat import LAUNCHER_SHOW, LAUNCHER_SHOW_DRUN
 from settings.constants import browser, mod, terminal
-from settings.helpers import switch_language
+#from settings.helpers import switch_language
 
 keys = [
     Key([mod], "j", lazy.layout.down(), desc="Move focus down in stack pane"),
@@ -102,11 +102,11 @@ keys = [
     Key([], "XF86AudioMute", lazy.spawn("amixer -c 0 set Speaker toggle")),
     Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -c 0 -q set Speaker 2dB+")),
     Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -c 0 -q set Speaker 2dB-")),
-    Key(
-        ["mod1"],
-        "Shift_L",
+    #Key(
+    #    ["mod1"],
+    #    "Shift_L",
         # lazy.widget["keyboardlayout"].next_keyboard(),
-        switch_language(),
-        desc="Change language",
-    ),
+    #    switch_language(),
+    #    desc="Change language",
+    #),
 ]
