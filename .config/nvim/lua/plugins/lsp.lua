@@ -1,3 +1,12 @@
+vim.g.coq_settings = ({
+	auto_start = true,
+    clients ={
+        snippets = {
+            enabled = false,
+        }
+    }
+})
+
 local nvim_lsp = require("lspconfig")
 local coq = require("coq")
 
@@ -43,6 +52,7 @@ local on_attach = function(_, bufnr)
 	)
 	--vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
 end
+
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = false

@@ -52,6 +52,6 @@ alias pip_env_req_upgrade='python -m pip install --upgrade --upgrade-strategy "e
 alias poweroff="systemctl poweroff"
 
 alias reboot="systemctl reboot"
-alias rm="rm -v -i"
+alias rm="rm -v -I"
 
 alias shutdown="systemctl poweroff"

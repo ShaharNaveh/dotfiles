@@ -13,10 +13,8 @@ vim.g.nvim_tree_ignore = { ".git", "node_modules", ".cache", "__pycache__" }
 --vim.g.nvim_tree_auto_open = false
 vim.g.nvim_tree_quit_on_open = 0
 vim.g.nvim_tree_indent_markers = true
-vim.g.nvim_tree_hide_dotfiles = true
 vim.g.nvim_tree_git_hl = true
 vim.g.nvim_tree_root_folder_modifier = ":~"
-
 vim.g.nvim_tree_show_icons = {
 	git = 1,
 	folders = 1,
@@ -59,4 +57,7 @@ nvim_tree.setup({
 		side = "left",
 		--width = 25,
 	},
+    filters = {
+        dotfiles =false,
+    },
 })
