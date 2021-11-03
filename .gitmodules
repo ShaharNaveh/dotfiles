@@ -1,0 +1,3 @@
+[submodule "Pictures/Wallpapers"]
+	path = Pictures/Wallpapers
+	url = ssh://git@github.com/ShaharNaveh/Wallpapers.git
