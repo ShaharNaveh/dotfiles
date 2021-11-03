@@ -64,17 +64,19 @@ return packer.startup(function()
 	use({
 		"ms-jpq/coq_nvim",
 		branch = "coq",
-		config = function()
-			require("plugins.coq")
-		end,
+		--config = function()
+		--  require("plugins.coq")
+		--end,
 		run = ":COQdeps",
 		requires = {
+            --[[
 			{
 				disable = true,
 				"ms-jpq/coq.artifacts",
 				branch = "artifacts",
 				after = "coq_nvim",
 			},
+            --]]
 
 			{
 				"ms-jpq/coq.thirdparty",

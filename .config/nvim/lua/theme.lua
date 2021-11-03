@@ -4,7 +4,7 @@ local nightfox = require("nightfox")
 nightfox.setup({
 
 	fox = "nightfox", -- nightfox/nordfox/palefox/randfox
-	transparent = false,
+	transparent = true,
 	styles = {
 		comments = "italic", -- change style of comments to be italic
 		keywords = "bold", -- change style of keywords to be bold
