@@ -5,11 +5,10 @@ import multiprocessing as mp
 import os
 import pathlib
 import pprint
-import re
 import shlex
 import string
 import subprocess
-from typing import Iterable, Optional, Set, Tuple
+from typing import Iterable, Optional, Tuple
 
 logging.basicConfig(format="[%(levelname)s]\t%(message)s", level=logging.INFO)
 
@@ -38,7 +37,7 @@ _CONFIG = {
     },
     "processes": os.cpu_count(),
     "virtual_environments_requirements_directory_name": ".requirements",
-    "virtual_environments_directory_name": ".venvs",
+    "virtual_environments_directory_name": "venvs",
     "virtual_environments_metadata_file_name": "settings.json",
     "virtual_environments_metadata": {},
 }
@@ -69,7 +68,7 @@ def _gen_config(config: dict) -> dict:
     new_config["processes"] = config["processes"]
 
     venvs_dir_name = config["virtual_environments_directory_name"]
-    abs_venvs_dir_path = pathlib.Path.home() / venvs_dir_name
+    abs_venvs_dir_path = pathlib.Path.home() / ".local" / "opt" / venvs_dir_name
     new_config["virtual_environments_directory_path"] = abs_venvs_dir_path.resolve()
 
     reqs_dir_name = config["virtual_environments_requirements_directory_name"]
