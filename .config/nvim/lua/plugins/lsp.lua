@@ -1,14 +1,46 @@
+local nvim_lsp = require("lspconfig")
+local coq = require("coq")
+
 vim.g.coq_settings = ({
-	auto_start = true,
+	auto_start = "shut-up",
     clients ={
         snippets = {
             enabled = false,
         }
+    },
+    display = {
+        ghost_text = {
+            enabled=true,
+        },
+        icons= {
+            mode = "short",
+        },
+               pum = {
+            fast_close = false,
+            x_max_len = 128,
+            y_max_len = 64,
+            y_ratio = 0.9,
+            ellipsis = "...",
+            kind_context = { "", "" },
+            source_context = { "", "" },
+        },
+
+        preview = {
+            x_max_len = 128,
+            border = {
+                { "",  "NormalFloat" },
+                { "",  "NormalFloat" },
+                { "",  "NormalFloat" },
+                { " ", "NormalFloat" },
+                { "",  "NormalFloat" },
+                { "",  "NormalFloat" },
+                { "",  "NormalFloat" },
+                { " ", "NormalFloat" },
+            },
+        },
     }
 })
 
-local nvim_lsp = require("lspconfig")
-local coq = require("coq")
 
 local on_attach = function(_, bufnr)
 	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")

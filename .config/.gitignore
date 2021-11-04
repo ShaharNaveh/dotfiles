@@ -14,3 +14,6 @@
 !systemd
 !tmux
 !wofi
+!python
+!shell
+!x11

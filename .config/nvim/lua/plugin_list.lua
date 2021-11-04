@@ -54,19 +54,13 @@ return packer.startup(function()
 	use({
 		"neovim/nvim-lspconfig",
 		--event = "VimEnter",
-		wants = "coq_nvim",
 		--after = "coq_nvim",
 		config = function()
 			require("plugins.lsp")
 		end,
-	})
-
-	use({
+        requires = {
 		"ms-jpq/coq_nvim",
 		branch = "coq",
-		--config = function()
-		--  require("plugins.coq")
-		--end,
 		run = ":COQdeps",
 		requires = {
             --[[
@@ -83,6 +77,7 @@ return packer.startup(function()
 				branch = "3p",
 			},
 		},
+	}
 	})
 
 	-- colorful status line and theme

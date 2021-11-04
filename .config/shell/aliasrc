@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# Use neovim for vim if present.
+[ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
+
+# Use $XINITRC variable if file exists.
+[ -f "$XINITRC" ] && alias startx="startx $XINITRC"
+
+alias \
+	cp="cp -iv" \
+	mv="mv -iv" \
+	rm="rm -vI" \
+    mkdir="mkdir -v"
+
+alias la="exa -a --color=always --group-directories-first"
+alias ll="exa -l --color=always --group-directories-first"
+alias ls="exa -a -l --color=always --group-directories-first"
+alias lt="exa -a -T --color=always --group-directories-first"
