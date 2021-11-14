@@ -121,7 +121,7 @@ nvim_lsp.pylsp.setup(coq.lsp_ensure_capabilities({
 				},
 				pylsp_mypy = {
 					dmypy = true,
-					enabled = false,
+					enabled = true,
 					live_mode = false,
 				},
 			},

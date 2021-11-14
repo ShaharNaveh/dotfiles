@@ -14,6 +14,7 @@ require("nvim-treesitter.configs").setup({
 		"rust",
 		"toml",
 		"yaml",
+        "hcl",
 	},
 	ignore_install = {}, -- List of parsers to ignore installing
 	highlight = {
