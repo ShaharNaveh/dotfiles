@@ -1,5 +1,6 @@
 # Mypy
 .mypy_cache
+.dmypy.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
