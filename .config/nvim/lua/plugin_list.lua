@@ -63,15 +63,6 @@ return packer.startup(function()
 		branch = "coq",
 		run = ":COQdeps",
 		requires = {
-            --[[
-			{
-				disable = true,
-				"ms-jpq/coq.artifacts",
-				branch = "artifacts",
-				after = "coq_nvim",
-			},
-            --]]
-
 			{
 				"ms-jpq/coq.thirdparty",
 				branch = "3p",
