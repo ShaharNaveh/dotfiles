@@ -16,6 +16,9 @@ vim.opt.wildignore:append("*.pyc")
 vim.opt.wildignore:append("**/__pycache__/*")
 vim.opt.wildignore:append("**/.mypy_cache/*")
 
+-- Scrolloff
+vim.opt.scrolloff = 10
+
 -- Swap
 vim.opt.swapfile = false
 
@@ -37,6 +40,7 @@ vim.opt.expandtab = true
 
 -- Search
 vim.opt.smartcase = true
+vim.opt.ignorecase = true
 vim.o.mat = 2 -- How many tenths of a second to blink matches
 
 -- Line numbers

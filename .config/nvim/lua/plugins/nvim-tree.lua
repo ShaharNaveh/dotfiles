@@ -9,7 +9,6 @@ local nvim_tree = require("nvim-tree")
 vim.o.termguicolors = true
 
 --nvimtree
-vim.g.nvim_tree_ignore = { ".git", "node_modules", ".cache", "__pycache__" }
 --vim.g.nvim_tree_auto_open = false
 vim.g.nvim_tree_quit_on_open = 0
 vim.g.nvim_tree_indent_markers = true
@@ -59,6 +58,6 @@ nvim_tree.setup({
 	},
     filters = {
         dotfiles =false,
-        custom =  { ".git", "node_modules", ".cache", "__pycache__", "*.egg-info", ".venv"},
+        custom =  { ".git", ".dmypy.json", "node_modules", ".cache", "__pycache__", "*.egg-info", ".venv"},
     },
 })
