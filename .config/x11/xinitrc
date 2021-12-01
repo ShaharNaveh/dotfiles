@@ -62,3 +62,4 @@ fi
 
 picom -b --config $HOME/.config/picom/picom.conf &
 exec qtile start
+#exec xmonad
