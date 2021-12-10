@@ -1,6 +1,3 @@
-local nvim_lsp = require("lspconfig")
-local coq = require("coq")
-
 vim.g.coq_settings = ({
 	auto_start = "shut-up",
     clients ={
@@ -40,6 +37,9 @@ vim.g.coq_settings = ({
         },
     }
 })
+local nvim_lsp = require("lspconfig")
+local coq = require("coq")
+
 
 
 local on_attach = function(_, bufnr)
