@@ -45,6 +45,7 @@ vim.o.mat = 2 -- How many tenths of a second to blink matches
 
 -- Line numbers
 vim.opt.number = true
+--[[
 vim.cmd([[
     augroup relativenumber
         autocmd!
@@ -52,6 +53,7 @@ vim.cmd([[
         autocmd BufLeave,FocusLost,InsertEnter,ToggleTerm * setl norelativenumber
     augroup END
 ]])
+--]]
 
 -- No backups
 vim.g.backup = false
