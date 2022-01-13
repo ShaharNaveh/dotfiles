@@ -1,7 +1,14 @@
 #!/bin/zsh
 
-export PATH="$PATH:${$(find ~/.local/bin -type d -printf %p:)%%:}"
-export PATH="$PATH:${$(find ~/.local/share/cargo/bin -type d -printf %p:)%%:}"
+
+DIR_LOC="$HOME/.local/bin"
+[[ -d "${DIR_LOC}" && ":${PATH}:" != *":${DIR_LOC}:"* ]] && PATH="${DIR_LOC}:${PATH}"
+
+DIR_LOC="$HOME/.local/share/cargo/bin"
+[[ -d "${DIR_LOC}" && ":${PATH}:" != *":${DIR_LOC}:"* ]] && PATH="${DIR_LOC}:${PATH}"
+
+DIR_LOC="$HOME/.local/opt/mongo-tools/bin"
+[[ -d "${DIR_LOC}" && ":${PATH}:" != *":${DIR_LOC}:"* ]] && PATH="${DIR_LOC}:${PATH}"
 
 
 export EDITOR="nvim"
