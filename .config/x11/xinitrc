@@ -60,6 +60,6 @@ fi
 #xterm -geometry 80x20+494-0 &
 #exec xterm -geometry 80x66+0+0 -name login
 
-picom -b --config $HOME/.config/picom/picom.conf &
-exec qtile start
-#exec xmonad
+#picom -b --config $HOME/.config/picom/picom.conf &
+#exec qtile start
+exec xmonad
