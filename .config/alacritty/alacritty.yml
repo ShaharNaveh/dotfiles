@@ -71,8 +71,8 @@ mouse:
   double_click: { threshold: 300 }
   triple_click: { threshold: 300 }
 
-#shell:
-#  program: /usr/bin/zsh
+shell:
+  program: /usr/bin/zsh
 
 scrolling:
   history: 5000

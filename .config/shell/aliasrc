@@ -1,23 +1,30 @@
 #!/bin/sh
 
-# Use neovim for vim if present.
-[ -x "$(command -v nvim)" ] && alias vi="nvim" vim="nvim" vimdiff="nvim -d"
-
 # Use $XINITRC variable if file exists.
 [ -f "$XINITRC" ] && alias startx="startx $XINITRC"
 
-alias cp="cp -iv"
-alias mv="mv -iv"
-alias rm="rm -vI"
-alias mkdir="mkdir -v"
 
-alias la="exa -a --color=always --group-directories-first"
-alias ll="exa -l --color=always --group-directories-first"
-alias ls="exa -a -l --color=always --group-directories-first"
-alias lt="exa -a -T --color=always --group-directories-first"
+# Use neovim for vim if present.
+if [ -x "$(command -v nvim)" ]; then
+	alias vim="nvim"
+	alias vimdiff="nvim -d"
+fi
+
+# Use exa for vim if present.
+if [ -x "$(command -v exa)" ]; then
+	alias la="exa -a --color=always --group-directories-first"
+	alias ll="exa -l --color=always --group-directories-first"
+	alias ls="exa -a -l --color=always --group-directories-first"
+	alias lt="exa -a -T --color=always --group-directories-first"
+fi
 
 alias config="/usr/bin/git --git-dir=$HOME/.local/.dotfiles/ --work-tree=$HOME"
+alias cp="cp -i -v"
 
 alias mirrors="/usr/bin/sudo /usr/bin/reflector --protocol=https --age=6 --latest=50 --number=20 --sort=score --verbose --save=/etc/pacman.d/mirrorlist"
+alias mkdir="mkdir -v"
+alias mv="mv -i -v"
 
 alias pacsyu="/usr/bin/sudo /usr/bin/pacman -Syyu"
+
+alias rm="rm -I -v"

@@ -17,8 +17,8 @@ def status_bar(widgets):
 
 screens = [
     Screen(
-        #wallpaper=wallpaper.as_posix(),
-        #wallpaper_mode="fill",
+        wallpaper=wallpaper.as_posix(),
+        wallpaper_mode="fill",
         top=status_bar(primary_widgets),
         # bottom=bar.Gap(1),
         # left=bar.Gap(1),
@@ -26,7 +26,6 @@ screens = [
     ),
 ]
 
-"""
 connected_monitors = (
     subprocess.run(
         "xrandr | grep 'connected' | cut -d ' ' -f 2",
@@ -49,4 +48,3 @@ if connected_monitors > 1:
                 right=bar.Gap(1),
             )
         )
-"""
