@@ -1,6 +1,5 @@
 #!/bin/zsh
 
-
 DIR_LOC="$HOME/.local/bin"
 [[ -d "${DIR_LOC}" && ":${PATH}:" != *":${DIR_LOC}:"* ]] && PATH="${DIR_LOC}:${PATH}"
 
@@ -12,23 +11,28 @@ DIR_LOC="$HOME/.local/opt/mongo-tools/bin"
 
 
 export EDITOR="nvim"
+export TERMINAL="alacritty"
+export BROWSER="firefox"
 
 # Home dir cleanup
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
+
+
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.sock"
 export XINITRC="${XDG_CONFIG_HOME:-$HOME/.config}/x11/xinitrc"
-export PYTHONSTARTUP="${XDG_CONFIG_HOME:-$HOME/.config}/python/pythonrc"
 
-export LESSHISTFILE="-"
-export WGETRC="${XDG_CONFIG_HOME:-$HOME/.config}/wget/wgetrc"
-export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
-export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
-
+export ANSIBLE_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/ansible/ansible.cfg"
 export CARGO_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/cargo"
 export GOPATH="${XDG_DATA_HOME:-$HOME/.local/share}/go"
-export ANSIBLE_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/ansible/ansible.cfg"
 export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/history"
+export LESSHISTFILE="-"
+export PYTHONSTARTUP="${XDG_CONFIG_HOME:-$HOME/.config}/python/pythonrc"
+export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
+export WGETRC="${XDG_CONFIG_HOME:-$HOME/.config}/wget/wgetrc"
+export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
+
 
 : <<"END"
 export LESS="-F -X $LESS"

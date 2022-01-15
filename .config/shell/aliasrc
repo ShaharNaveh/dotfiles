@@ -3,14 +3,10 @@
 # Use $XINITRC variable if file exists.
 [ -f "$XINITRC" ] && alias startx="startx $XINITRC"
 
-
-# Use neovim for vim if present.
-if [ -x "$(command -v nvim)" ]; then
-	alias vim="nvim"
-	alias vimdiff="nvim -d"
+if [ -x "$(command -v bat)" ]; then
+	alias cat="bat"
 fi
 
-# Use exa for vim if present.
 if [ -x "$(command -v exa)" ]; then
 	alias la="exa -a --color=always --group-directories-first"
 	alias ll="exa -l --color=always --group-directories-first"
@@ -18,13 +14,32 @@ if [ -x "$(command -v exa)" ]; then
 	alias lt="exa -a -T --color=always --group-directories-first"
 fi
 
+if [ -x "$(command -v rg)" ]; then
+	alias grep="rg"
+fi
+
+if [ -x "$(command -v nvim)" ]; then
+	alias vi="nvim"
+	alias vim="nvim"
+	alias vimdiff="nvim -d"
+fi
+
+
+
+alias cleanup="/usr/bin/sudo /usr/bin/pacman -Rns $(pacman -Qtdq)"
 alias config="/usr/bin/git --git-dir=$HOME/.local/.dotfiles/ --work-tree=$HOME"
 alias cp="cp -i -v"
 
-alias mirrors="/usr/bin/sudo /usr/bin/reflector --protocol=https --age=6 --latest=50 --number=20 --sort=score --verbose --save=/etc/pacman.d/mirrorlist"
+alias mirror="/usr/bin/sudo /usr/bin/reflector --protocol=https --age=6 --latest=50 --number=20 --sort=score --verbose --save=/etc/pacman.d/mirrorlist"
 alias mkdir="mkdir -v"
 alias mv="mv -i -v"
 
+alias pip_env_base_upgrade='for package in "wheel" "setuptools" "pip"; do python -m pip install --upgrade --upgrade-strategy="eager" $package ; done'
+alias pip_env_req_upgrade='python -m pip install --upgrade --upgrade-strategy="eager" --requirement'
+
 alias pacsyu="/usr/bin/sudo /usr/bin/pacman -Syyu"
 
+alias reboot="systemctl reboot"
 alias rm="rm -I -v"
+
+alias shutdown="systemctl shutdown"

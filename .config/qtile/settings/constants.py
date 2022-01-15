@@ -1,9 +1,10 @@
 import pathlib
+import os
 
-browser = "firefox"
+browser = os.getenv("BROWSER", "")
 font = "FiraCode Nerd Font"
 mod = "mod4"
-terminal = "alacritty"
+terminal = os.getenv("TERMINAL", "")
 theme = "custom"
 keyboard_layouts = ["us", "il"]
 

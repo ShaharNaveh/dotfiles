@@ -10,8 +10,8 @@
 #fi
 
 ### EXPORT
-export TERM="screen-256color"
-export HISTCONTROL=ignoredups:erasedups
+#export TERM="screen-256color"
+#export HISTCONTROL=ignoredups:erasedups
 export HISTTIMEFORMAT="%h %d %H:%M:%S "
 export HISTSIZE=1000000
 export HISTFILESIZE=1000000
@@ -26,9 +26,9 @@ export HISTFILESIZE=1000000
 PS1='[\u@\h \W]\$ '
 
 ### PATH
-if [ -d "$HOME/.local/bin" ]; then
-	PATH="$HOME/.local/bin:$PATH"
-fi
+#if [ -d "$HOME/.local/bin" ]; then
+#	PATH="$HOME/.local/bin:$PATH"
+#fi
 
 export EDITOR="/usr/bin/nvim"
 
@@ -62,10 +62,10 @@ if ! shopt -oq posix; then
 	fi
 fi
 
-if [ -d "$HOME/Documents/Studies" ]; then
-	export study="$HOME/Documents/Studies"
-fi
+#if [ -d "$HOME/Documents/Studies" ]; then
+#	export study="$HOME/Documents/Studies"
+#fi
 
-if [ -f "$HOME/.local/bin/starship" ]; then
-	eval "$(starship init bash)"
-fi
+#if [ -f "$HOME/.local/bin/starship" ]; then
+#	eval "$(starship init bash)"
+#fi
