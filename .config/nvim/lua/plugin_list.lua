@@ -35,6 +35,11 @@ return packer.startup(function()
 		end,
 	})
 
+	use ({
+		"hashivim/vim-terraform",
+		ft = {"tf", "hcl", "terraform"},
+	})
+
 	use({
 		"akinsho/toggleterm.nvim",
 

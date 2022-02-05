@@ -30,6 +30,12 @@
             "python-lsp-server[rope]"
         ]
     },
+    "poetry": {
+        "bins": ["poetry"],
+        "requirements": [
+            "poetry"
+        ]
+    },
     "speedtest-cli": {
         "bins": ["speedtest-cli"],
         "requirements": [

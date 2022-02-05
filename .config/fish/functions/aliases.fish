@@ -33,7 +33,7 @@ else
 end
 
 alias cleanup='sudo pacman -Rns (pacman -Qtdq)'
-alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias config='/usr/bin/git --git-dir=$HOME/.local/.dotfiles/ --work-tree=$HOME'
 
 alias download_song='youtube-dl -f "bestaudio/best" -ciw -o "%(title)s.%(ext)s" --extract-audio --audio-quality 0 --audio-format mp3'
 alias download_video='youtube-dl -f "bestaudio/best" -ciw -o "%(title)s.%(ext)s" --audio-quality 0'
@@ -42,8 +42,6 @@ alias egrep="egrep --color=auto"
 
 alias fgrep="fgrep --color=auto"
 
-alias mirrorr="sudo reflector --protocol https --age 6 --latest 50 --number 20 --sort rate --verbose --save /etc/pacman.d/mirrorlist"
-alias mirrors="sudo reflector --protocol https --age 6 --latest 50 --number 20 --sort score --verbose --save /etc/pacman.d/mirrorlist"
 alias mv="mv -v -i"
 
 alias pacsyu="sudo pacman -Syyu"
@@ -55,3 +53,4 @@ alias reboot="systemctl reboot"
 alias rm="rm -v -I"
 
 alias shutdown="systemctl poweroff"
+alias mirror="/usr/bin/sudo /usr/bin/reflector --protocol=https --age=6 --latest=50 --number=20 --sort=score --verbose --save=/etc/pacman.d/mirrorlist"

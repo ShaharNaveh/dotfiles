@@ -26,7 +26,7 @@ layouts = [
         wrap_focus_columns=True,
         wrap_focus_rows=True,
         wrap_focus_stacks=True,
-        **layout_configuration
+        **layout_configuration,
     ),
     layout.Max(**layout_configuration),
     # layout.Matrix(**layout_configuration),
@@ -62,6 +62,9 @@ floating_layout = layout.Floating(
         Match(wm_type="toolbar"),
         Match(wm_type="utility"),
     ],
-    fullscreen_border_width=3,
+    fullscreen_border_width=0,
     max_border_width=3,
+    **layout_configuration,
+    # border_focus=colors["background_soft"][0],
+    # border_normal=colors["background_soft"][0],
 )

@@ -56,6 +56,9 @@ nvim_tree.setup({
 		side = "left",
 		--width = 25,
 	},
+	git = {
+		ignore=false
+	},
     filters = {
         dotfiles =false,
         custom =  { ".git", ".dmypy.json", "node_modules", ".cache", "__pycache__", "*.egg-info", ".venv"},

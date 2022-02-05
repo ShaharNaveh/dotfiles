@@ -15,6 +15,7 @@ vim.g.ale_linters = {
 	["*"] = { "remove_trailing_lines", "trim_whitespace" },
 	python = { "flake8", "isort" },
 	rust = { "cargo", "rls" },
+	terraform = { "tflint" },
 }
 
 vim.g.ale_fixers = {

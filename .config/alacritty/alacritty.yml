@@ -1,4 +1,3 @@
-background_opacity: 0.85
 
 colors:
   # Default colors
@@ -72,12 +71,14 @@ mouse:
   triple_click: { threshold: 300 }
 
 shell:
-  program: /usr/bin/zsh
+  program: /usr/bin/fish
 
 scrolling:
   history: 5000
 
 window:
+
+  opacity: 0.85
   padding:
     x: 0
     y: 0
