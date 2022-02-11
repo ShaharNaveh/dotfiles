@@ -37,8 +37,17 @@ vim.g.coq_settings = ({
         },
     }
 })
-local nvim_lsp = require("lspconfig")
-local coq = require("coq")
+
+local present, nvim_lsp = pcall(require, "lspconfig")
+if not present then
+	return
+end
+local present, coq = pcall(require, "coq")
+
+if not present then
+	return
+end
+
 
 
 

@@ -15,6 +15,7 @@ return packer.startup(function()
 		event = "VimEnter",
 	})
 
+
 	use({
 		"nvim-telescope/telescope.nvim",
 		requires = {
@@ -35,6 +36,7 @@ return packer.startup(function()
 		end,
 	})
 
+	--[[
 	use ({
 		"hashivim/vim-terraform",
 		ft = {"tf", "hcl", "terraform"},
@@ -47,6 +49,8 @@ return packer.startup(function()
 			require("plugins.toggleterm")
 		end,
 	})
+
+	--]]
 
 	-- Color scheme
 	use({

@@ -34,8 +34,9 @@ vim.opt.splitbelow = true
 
 -- Indentation
 vim.opt.smarttab = true
-vim.opt.shiftwidth = 4
-vim.opt.tabstop = 4
+vim.opt.smartindent = true
+--vim.opt.shiftwidth = 4
+--vim.opt.tabstop = 4
 vim.opt.expandtab = true
 
 -- Search
@@ -45,15 +46,6 @@ vim.o.mat = 2 -- How many tenths of a second to blink matches
 
 -- Line numbers
 vim.opt.number = true
---[[
-vim.cmd([[
-    augroup relativenumber
-        autocmd!
-        autocmd BufEnter,FocusGained,InsertLeave * setl relativenumber
-        autocmd BufLeave,FocusLost,InsertEnter,ToggleTerm * setl norelativenumber
-    augroup END
-]])
---]]
 
 -- No backups
 vim.g.backup = false
@@ -106,3 +98,4 @@ local disabled_built_ins = {
 for _, plugin in pairs(disabled_built_ins) do
 	vim.g["loaded_" .. plugin] = 1
 end
+
