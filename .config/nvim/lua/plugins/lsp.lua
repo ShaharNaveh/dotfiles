@@ -1,42 +1,42 @@
-vim.g.coq_settings = ({
+vim.g.coq_settings = {
 	auto_start = "shut-up",
-    clients ={
-        snippets = {
-            enabled = false,
-        }
-    },
-    display = {
-        ghost_text = {
-            enabled=true,
-        },
-        icons= {
-            mode = "short",
-        },
-               pum = {
-            fast_close = false,
-            x_max_len = 128,
-            y_max_len = 64,
-            y_ratio = 0.9,
-            ellipsis = "...",
-            kind_context = { "", "" },
-            source_context = { "", "" },
-        },
+	clients = {
+		snippets = {
+			enabled = false,
+		},
+	},
+	display = {
+		ghost_text = {
+			enabled = true,
+		},
+		icons = {
+			mode = "short",
+		},
+		pum = {
+			fast_close = false,
+			x_max_len = 128,
+			y_max_len = 64,
+			y_ratio = 0.9,
+			ellipsis = "...",
+			kind_context = { "", "" },
+			source_context = { "", "" },
+		},
 
-        preview = {
-            x_max_len = 128,
-            border = {
-                { "",  "NormalFloat" },
-                { "",  "NormalFloat" },
-                { "",  "NormalFloat" },
-                { " ", "NormalFloat" },
-                { "",  "NormalFloat" },
-                { "",  "NormalFloat" },
-                { "",  "NormalFloat" },
-                { " ", "NormalFloat" },
-            },
-        },
-    }
-})
+		preview = {
+			x_max_len = 128,
+			border = {
+				{ "", "NormalFloat" },
+				{ "", "NormalFloat" },
+				{ "", "NormalFloat" },
+				{ " ", "NormalFloat" },
+				{ "", "NormalFloat" },
+				{ "", "NormalFloat" },
+				{ "", "NormalFloat" },
+				{ " ", "NormalFloat" },
+			},
+		},
+	},
+}
 
 local present, nvim_lsp = pcall(require, "lspconfig")
 if not present then
@@ -47,9 +47,6 @@ local present, coq = pcall(require, "coq")
 if not present then
 	return
 end
-
-
-
 
 local on_attach = function(_, bufnr)
 	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
@@ -94,9 +91,6 @@ local on_attach = function(_, bufnr)
 	--vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
 end
 
-require'lspconfig'.terraformls.setup{}
-
-
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = false
 capabilities.textDocument.completion.completionItem.resolveSupport = {
@@ -140,6 +134,39 @@ nvim_lsp.pylsp.setup(coq.lsp_ensure_capabilities({
 	},
 }))
 nvim_lsp.rust_analyzer.setup(coq.lsp_ensure_capabilities({}))
+
+nvim_lsp.terraformls.setup(coq.lsp_ensure_capabilities({
+	on_attach = on_attach,
+	capabilities = capabilities,
+}))
+
+nvim_lsp.tflint.setup(coq.lsp_ensure_capabilities({
+	on_attach = on_attach,
+	capabilities = capabilities,
+}))
+
+--[[
+nvim_lsp.yamlls.setup(coq.lsp_ensure_capabilities({
+	on_attach = on_attach,
+	capabilities = capabilities,
+	settings = {
+		redhat = {
+			telemetry = {
+				enabled = false,
+			},
+		},
+		yaml = {
+			schemas = {
+				["http://json.schemastore.org/kustomization"] = "kustomization.yaml",
+				["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.23.1-standalone-strict/all.json"] = "*k8s.yaml",
+			},
+		},
+	},
+}))
+--]]
+
+vim.g.terraform_fmt_on_save = true
+vim.g.terraform_align = true
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
 	virtual_text = true,

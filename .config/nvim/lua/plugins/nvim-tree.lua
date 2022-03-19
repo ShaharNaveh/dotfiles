@@ -10,7 +10,6 @@ vim.o.termguicolors = true
 
 --nvimtree
 --vim.g.nvim_tree_auto_open = false
-vim.g.nvim_tree_quit_on_open = 0
 vim.g.nvim_tree_indent_markers = true
 vim.g.nvim_tree_git_hl = true
 vim.g.nvim_tree_root_folder_modifier = ":~"
@@ -51,16 +50,33 @@ vim.g.nvim_tree_icons = {
 nvim_tree.setup({
 	auto_close = true,
 	disable_netrw = true,
+	actions = {
+		open_file = {
+			quit_on_open = false,
+		},
+	},
 	view = {
 		auto_resize = true,
 		side = "left",
 		--width = 25,
 	},
 	git = {
-		ignore=false
+		ignore = false,
 	},
-    filters = {
-        dotfiles =false,
-        custom =  { ".git", ".dmypy.json", "node_modules", ".cache", "__pycache__", "*.egg-info", ".venv"},
-    },
+	filters = {
+		dotfiles = false,
+		custom = {
+			"*.egg-info",
+			".cache",
+			".dmypy.json",
+			".git",
+			".terraform",
+			".terraform.lock.hcl",
+			".venv",
+			"__pycache__",
+			"node_modules",
+			"terraform.tfstate",
+			"terraform.tfstate.backup",
+		},
+	},
 })

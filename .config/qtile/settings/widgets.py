@@ -1,4 +1,7 @@
-from libqtile import bar, widget
+from libqtile import (
+    bar,
+    widget,
+)
 
 from settings.constants import icons_dir
 from settings.theme import colors
@@ -91,13 +94,39 @@ primary_widgets = [
         # mouse_callbacks={"Button2": kill_window},
     ),
     widget.Spacer(),
+    # widget.TextBox(
+    #    text="",
+    #    foreground=colors["cyan"],
+    #    background=colors["background_hard"],
+    # ),
+    # widget.BatteryIcon(
+    # background=colors["background_hard"],
+    # ),
+    widget.Battery(
+        # text="A",
+        fmt="{}",
+        format="{char} {percent:2.0%} EST {hour:d}:{min:02d}",
+        foreground=colors["cyan"],
+        background=colors["background_hard"],
+        charge_char="",
+        discharge_char="",
+        empty_char="",
+        full_char="",
+        unknown_char="",
+    ),
+    widget.Sep(
+        linewidth=0,
+        foreground=colors["background_soft"],
+        padding=10,
+        size_percent=50,
+    ),
     widget.TextBox(
         text=" ",
-        foreground=colors["cyan"],
+        foreground=colors["magenta"],
         background=colors["background_hard"],
     ),
     widget.PulseVolume(
-        foreground=colors["cyan"],
+        foreground=colors["magenta"],
         background=colors["background_hard"],
         limit_max_volume="True",
         # mouse_callbacks={"Button3": open_pavu},

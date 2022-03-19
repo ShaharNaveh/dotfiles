@@ -1,16 +1,21 @@
 vim.o.background = "dark"
 local nightfox = require("nightfox")
 
-nightfox.setup({
-
-	fox = "nightfox", -- nightfox/nordfox/palefox/randfox
+local options = {
 	transparent = true,
+	terminal_colors = false,
 	styles = {
-		comments = "italic", -- change style of comments to be italic
-		keywords = "bold", -- change style of keywords to be bold
-		functions = "italic,bold", -- styles can be a comma separated list
+		comments = "italic",
+		functions = "italic,bold",
+                keywords = "bold",
 	},
+}
+
+nightfox.clean()
+nightfox.setup({
+	options = options,
 })
 
--- Load the configuration set above and apply the colorscheme
-nightfox.load()
+nightfox.compile()
+
+vim.cmd("colorscheme nightfox")

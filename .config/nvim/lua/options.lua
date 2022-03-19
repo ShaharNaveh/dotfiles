@@ -68,7 +68,7 @@ vim.g.loaded_perl_provider = false
 vim.g.loaded_node_provider = false
 
 -- Set the python3 environment to be inside venv
-vim.g.python3_host_prog = os.getenv("HOME") .. "/.local/opt/venvs/neovim-venv/bin/python3"
+vim.g.python3_host_prog = os.getenv("HOME") .. "/.local/opt/pybins/.venv/bin/python3"
 
 if vim.fn.executable("rg") == 1 then
 	vim.g.rg_derive_root = "true"
@@ -98,4 +98,3 @@ local disabled_built_ins = {
 for _, plugin in pairs(disabled_built_ins) do
 	vim.g["loaded_" .. plugin] = 1
 end
-

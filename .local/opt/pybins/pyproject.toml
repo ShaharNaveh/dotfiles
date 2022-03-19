@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "pybins"
+version = "0.1.0"
+description = ""
+authors = ["None"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+black = "*"
+flake8 = "*"
+isort = "*"
+python-lsp-server = {extras = ["flake8", "rope"], version = "*"}
+pynvim = "*"
+pyls-flake8 = "*"
+pyls-isort = "*"
+pylsp-mypy = "*"
+python-lsp-black = "*"
+speedtest-cli = "*"
+youtube_dl = "*"
+spotdl = "*"
+ipython = "*"
+pymongo = {extras = ["srv"], version = "*"}
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

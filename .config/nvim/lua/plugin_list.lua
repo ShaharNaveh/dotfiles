@@ -15,7 +15,6 @@ return packer.startup(function()
 		event = "VimEnter",
 	})
 
-
 	use({
 		"nvim-telescope/telescope.nvim",
 		requires = {
@@ -36,11 +35,11 @@ return packer.startup(function()
 		end,
 	})
 
-	--[[
-	use ({
+	use({
 		"hashivim/vim-terraform",
-		ft = {"tf", "hcl", "terraform"},
+		ft = { "tf", "hcl", "terraform" },
 	})
+	--[[
 
 	use({
 		"akinsho/toggleterm.nvim",
@@ -67,17 +66,17 @@ return packer.startup(function()
 		config = function()
 			require("plugins.lsp")
 		end,
-        requires = {
-		"ms-jpq/coq_nvim",
-		branch = "coq",
-		run = ":COQdeps",
 		requires = {
-			{
-				"ms-jpq/coq.thirdparty",
-				branch = "3p",
+			"ms-jpq/coq_nvim",
+			branch = "coq",
+			run = ":COQdeps",
+			requires = {
+				{
+					"ms-jpq/coq.thirdparty",
+					branch = "3p",
+				},
 			},
 		},
-	}
 	})
 
 	-- colorful status line and theme
