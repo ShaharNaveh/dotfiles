@@ -16,6 +16,13 @@ return packer.startup(function()
 	})
 
 	use({
+		"Chiel92/vim-autoformat",
+		config = function()
+			require("plugins.autoformat")
+		end,
+	})
+
+	use({
 		"nvim-telescope/telescope.nvim",
 		requires = {
 			{ "nvim-lua/popup.nvim" },
@@ -36,23 +43,6 @@ return packer.startup(function()
 	})
 
 	use({
-		"hashivim/vim-terraform",
-		ft = { "tf", "hcl", "terraform" },
-	})
-	--[[
-
-	use({
-		"akinsho/toggleterm.nvim",
-
-		config = function()
-			require("plugins.toggleterm")
-		end,
-	})
-
-	--]]
-
-	-- Color scheme
-	use({
 		"EdenEast/nightfox.nvim",
 		config = function()
 			require("theme")
@@ -61,8 +51,6 @@ return packer.startup(function()
 
 	use({
 		"neovim/nvim-lspconfig",
-		--event = "VimEnter",
-		--after = "coq_nvim",
 		config = function()
 			require("plugins.lsp")
 		end,
@@ -79,7 +67,6 @@ return packer.startup(function()
 		},
 	})
 
-	-- colorful status line and theme
 	use({
 		"hoob3rt/lualine.nvim",
 		event = "VimEnter",
@@ -99,12 +86,6 @@ return packer.startup(function()
 		run = ":TSUpdate",
 		config = function()
 			require("plugins.nvim-treesitter")
-		end,
-	})
-	use({
-		"dense-analysis/ale",
-		config = function()
-			require("plugins.ale")
 		end,
 	})
 
