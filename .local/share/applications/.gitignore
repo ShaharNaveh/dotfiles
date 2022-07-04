@@ -3,7 +3,4 @@
 !.gitignore
 
 # Except for the files and folders we to track
-!fonts
-!cargo
-!icons
-!applications
+!*.example

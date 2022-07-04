@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=compass
+Icon=/home/user/.local/share/icons/compass-256x256.png
+Exec=bash -c "$HOME/.local/bin/compass"

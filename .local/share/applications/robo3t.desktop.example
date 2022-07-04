@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=robo3t
+Icon=/home/user/.local/share/icons/robo3t-128x128.png
+Exec=bash -c "$HOME/.local/bin/robo3t"
