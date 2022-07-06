@@ -1,8 +1,4 @@
-from libqtile import (
-    bar,
-    widget,
-)
-
+from libqtile import bar, widget
 from settings.constants import icons_dir
 from settings.theme import colors
 
@@ -182,15 +178,15 @@ secondary_widgets = [
         **GROUPBOX_SETTINGS,
     ),
     widget.GroupBox(
-        visible_groups=["VBOX"],
+        visible_groups=["VIRT_N_DB"],
         **GROUPBOX_SETTINGS,
     ),
     widget.GroupBox(
-        visible_groups=["ZOOM"],
+        visible_groups=["MEETING"],
         **GROUPBOX_SETTINGS,
     ),
     widget.GroupBox(
-        visible_groups=["TORRENT"],
+        visible_groups=["OTHER"],
         **GROUPBOX_SETTINGS,
     ),
     widget.GroupBox(
