@@ -1,6 +1,9 @@
 import json
 
-from settings.constants import qtile_config_dir, theme
+from settings.constants import (
+    qtile_config_dir,
+    theme,
+)
 
 
 def load_theme() -> dict:

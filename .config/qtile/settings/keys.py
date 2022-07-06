@@ -1,8 +1,15 @@
 from libqtile.command import lazy
 from libqtile.config import Key
 
-from settings.compat import LAUNCHER_SHOW, LAUNCHER_SHOW_DRUN
-from settings.constants import browser, mod, terminal
+from settings.compat import (
+    LAUNCHER_SHOW,
+    LAUNCHER_SHOW_DRUN,
+)
+from settings.constants import (
+    browser,
+    mod,
+    terminal,
+)
 from settings.helpers import switch_language
 
 keys = [

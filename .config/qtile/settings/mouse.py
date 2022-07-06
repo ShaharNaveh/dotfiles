@@ -1,4 +1,7 @@
-from libqtile.config import Click, Drag
+from libqtile.config import (
+    Click,
+    Drag,
+)
 from libqtile.lazy import lazy
 
 from settings.constants import mod

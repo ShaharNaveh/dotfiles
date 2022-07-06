@@ -4,7 +4,10 @@ from libqtile import bar
 from libqtile.config import Screen
 
 from settings.constants import wallpaper
-from settings.widgets import primary_widgets, secondary_widgets
+from settings.widgets import (
+    primary_widgets,
+    secondary_widgets,
+)
 
 
 def status_bar(widgets):

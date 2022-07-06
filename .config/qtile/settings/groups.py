@@ -1,6 +1,17 @@
 from libqtile.command import lazy
-from libqtile.config import DropDown, Group, Key, Match, ScratchPad
-from settings.constants import mod, terminal
+from libqtile.config import (
+    DropDown,
+    Group,
+    Key,
+    Match,
+    ScratchPad,
+)
+
+from settings.constants import (
+    mod,
+    terminal,
+)
+
 from settings.keys import keys
 
 # NOTE: The icons are from https://www.nerdfonts.com/cheat-sheet
@@ -53,30 +64,31 @@ group_names = [
         },
     ),
     (
-        "VBOX",
+        "VIRT_N_DB",
         {
             "label": "",  # ICON: nf-mdi-layers
             "matches": [
                 Match(wm_class=["VirtualBox"]),
                 Match(wm_class=["VirtualBox Machine"]),
                 Match(wm_class=["VirtualBox Manager"]),
+                Match(wm_class=["mongodb compass", "MongoDB Compass", "robo3t"]),
             ],
         },
     ),
     (
-        "ZOOM",
+        "MEETING",
         {
             "label": "辶",  # ICON: nf-mdi-video
             "matches": [
                 Match(wm_class=["zoom"]),
-                # Match(wm_name=["Zoom Meeting"]),
+                Match(title=["Zoom Meeting"]),
             ],
         },
     ),
     (
-        "TORRENT",
+        "OTHER",
         {
-            "label": "",  # ICON: nf-mdi-magnet
+            "label": "ﬓ",  # ICON: nf-mdi-application
             "matches": [Match(wm_class=["qbittorrent", "qBittorrent"])],
         },
     ),
