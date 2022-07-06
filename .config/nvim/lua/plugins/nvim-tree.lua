@@ -48,7 +48,7 @@ vim.g.nvim_tree_icons = {
 }
 
 nvim_tree.setup({
-	auto_close = true,
+	--auto_close = true,
 	disable_netrw = true,
 	actions = {
 		open_file = {
@@ -69,14 +69,23 @@ nvim_tree.setup({
 			"*.egg-info",
 			".cache",
 			".dmypy.json",
-			".git",
-			".terraform",
+			".git$",
+			"\\.terraform",
 			".terraform.lock.hcl",
 			".venv",
 			"__pycache__",
 			"node_modules",
 			"terraform.tfstate",
 			"terraform.tfstate.backup",
+		},
+	},
+	update_focused_file = {
+		enable = true,
+	},
+	log = {
+		enable = true,
+		types = {
+			all = true,
 		},
 	},
 })

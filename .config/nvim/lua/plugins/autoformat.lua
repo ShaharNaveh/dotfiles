@@ -1,4 +1,8 @@
-vim.g.autoformat_verbosemode = 1
+vim.g.autoformat_verbosemode = 0
+
+vim.g.autoformat_autoindent = 0
+vim.g.autoformat_retab = 0
+vim.g.autoformat_remove_trailing_spaces = 0
 
 vim.g.formatdef_isort = '"isort -"'
 vim.g.formatdef_black = '"black -q -"'

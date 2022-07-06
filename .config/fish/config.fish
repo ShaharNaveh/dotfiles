@@ -1,6 +1,6 @@
 ### Exports ###
 set fish_greeting
-set TERM "screen-256color"
+set TERM screen-256color
 
 ### AUTOCOMPLETE AND HIGHLIGHT COLORS ###
 # Nightfox Color Palette
@@ -45,5 +45,5 @@ source "$HOME/.config/fish/functions/environment/init.fish"
 
 ### Starship prompt ###
 if type -q starship
-	starship init fish | source
+    starship init fish | source
 end

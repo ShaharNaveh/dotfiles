@@ -1,35 +1,37 @@
-if command -s btm > /dev/null
-	alias btm="btm --color nord --group"
+if command -s btm >/dev/null
+    alias btm="btm --color nord --group"
 end
 
-if command -s rsync > /dev/null
-	alias cp="rsync --archive --human-readable --progress --verbose --whole-file"
+#if command -s rsync > /dev/null
+#	alias cp="rsync --archive --human-readable --progress --verbose --whole-file"
+#else
+#	alias cp="cp -v -i"
+#end
+
+alias cp="cp -v -i"
+
+if command -s rg >/dev/null
+    alias grep="rg"
 else
-	alias cp="cp -v -i"
+    alias grep="grep --color=auto"
 end
 
-if command -s rg > /dev/null
-	alias grep="rg"
+if command -s exa >/dev/null
+    alias la="exa -a --color=always --group-directories-first"
+    alias ll="exa -l --color=always --group-directories-first"
+    alias ls="exa -a -l --color=always --group-directories-first"
+    alias lt="exa -a -T --color=always --group-directories-first"
 else
-	alias grep="grep --color=auto"
+    alias la="ls -A -h"
+    alias ll="ls -l -h"
+    alias lla="ls -A -l -h"
 end
 
-if command -s exa > /dev/null
-	alias la="exa -a --color=always --group-directories-first"
-	alias ll="exa -l --color=always --group-directories-first"
-	alias ls="exa -a -l --color=always --group-directories-first"
-	alias lt="exa -a -T --color=always --group-directories-first"
+if command -s nvim >/dev/null
+    alias vi="nvim"
+    alias vim="nvim"
 else
-	alias la="ls -A -h"
-	alias ll="ls -l -h"
-	alias lla="ls -A -l -h"
-end
-
-if command -s nvim > /dev/null
-	alias vi="nvim"
-	alias vim="nvim"
-else
-	alias vi="vim"
+    alias vi="vim"
 end
 
 alias cleanup='sudo pacman -Rns (pacman -Qtdq)'

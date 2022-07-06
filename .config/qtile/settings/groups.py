@@ -1,8 +1,6 @@
 from libqtile.command import lazy
 from libqtile.config import DropDown, Group, Key, Match, ScratchPad
-
 from settings.constants import mod, terminal
-
 from settings.keys import keys
 
 # NOTE: The icons are from https://www.nerdfonts.com/cheat-sheet
@@ -71,6 +69,7 @@ group_names = [
             "label": "辶",  # ICON: nf-mdi-video
             "matches": [
                 Match(wm_class=["zoom"]),
+                # Match(wm_name=["Zoom Meeting"]),
             ],
         },
     ),

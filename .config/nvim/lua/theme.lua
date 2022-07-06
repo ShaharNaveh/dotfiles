@@ -7,7 +7,7 @@ local options = {
 	styles = {
 		comments = "italic",
 		functions = "italic,bold",
-                keywords = "bold",
+		keywords = "bold",
 	},
 }
 

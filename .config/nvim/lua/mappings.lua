@@ -25,7 +25,10 @@ map("n", "<c-l>", [[<Cmd>wincmd l<CR>]], opt)
 -- ]]
 
 -- [[ NvimTree
-map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", opts)
+--map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", opts)
+-- ]]
+-- [[ NvimTree
+map("n", "<C-n>", "<cmd>Neotree toggle<CR>", opts)
 -- ]]
 
 -- [[ Telescope

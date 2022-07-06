@@ -7,19 +7,30 @@ authors = ["None"]
 [tool.poetry.dependencies]
 python = "^3.10"
 black = "*"
+certbot = [
+{version = "*"},
+#{version = "^1.0"},
+#{version = "<= 1.17.0"},
+]
+cryptography = [
+{version = "*"},
+{version = "!= 37.0.3"},
+]
+certbot-dns-route53 = "*"
 flake8 = "*"
+ipython = "*"
 isort = "*"
-python-lsp-server = {extras = ["flake8", "rope"], version = "*"}
-pynvim = "*"
 pyls-flake8 = "*"
 pyls-isort = "*"
 pylsp-mypy = "*"
-python-lsp-black = "*"
-speedtest-cli = "*"
-youtube_dl = "*"
-spotdl = "*"
-ipython = "*"
 pymongo = {extras = ["srv"], version = "*"}
+pynvim = "*"
+python-lsp-black = "*"
+python-lsp-server = {extras = ["flake8", "rope"], version = "*"}
+speedtest-cli = "*"
+spotdl = "*"
+youtube_dl = "*"
+ansible = "^5.7.0"
 
 [tool.poetry.dev-dependencies]
 

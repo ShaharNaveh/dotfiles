@@ -16,6 +16,28 @@ return packer.startup(function()
 	})
 
 	use({
+		"neovim/nvim-lspconfig",
+		config = function()
+			require("plugins.lsp")
+		end,
+		requires = {
+			"ms-jpq/coq_nvim",
+			branch = "coq",
+			run = ":COQdeps",
+			requires = {
+				{
+					"ms-jpq/coq.artifacts",
+					branch = "artifacts",
+				},
+				{
+					"ms-jpq/coq.thirdparty",
+					branch = "3p",
+				},
+			},
+		},
+	})
+
+	use({
 		"Chiel92/vim-autoformat",
 		config = function()
 			require("plugins.autoformat")
@@ -50,28 +72,6 @@ return packer.startup(function()
 	})
 
 	use({
-		"neovim/nvim-lspconfig",
-		config = function()
-			require("plugins.lsp")
-		end,
-		requires = {
-			"ms-jpq/coq_nvim",
-			branch = "coq",
-			run = ":COQdeps",
-			requires = {
-				{
-					"ms-jpq/coq.artifacts",
-					branch = "artifacts",
-				},
-				{
-					"ms-jpq/coq.thirdparty",
-					branch = "3p",
-				},
-			},
-		},
-	})
-
-	use({
 		"hoob3rt/lualine.nvim",
 		event = "VimEnter",
 		requires = {
@@ -86,7 +86,7 @@ return packer.startup(function()
 
 	use({
 		"nvim-treesitter/nvim-treesitter",
-		event = "BufRead",
+		--event = "BufRead",
 		run = ":TSUpdate",
 		config = function()
 			require("plugins.nvim-treesitter")
@@ -94,12 +94,15 @@ return packer.startup(function()
 	})
 
 	use({
-		"kyazdani42/nvim-tree.lua",
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v2.x",
 		requires = {
-			"kyazdani42/nvim-web-devicons",
+			"nvim-lua/plenary.nvim",
+			"kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+			"MunifTanjim/nui.nvim",
 		},
 		config = function()
-			require("plugins.nvim-tree")
+			require("plugins.neo-tree")
 		end,
 	})
 end)

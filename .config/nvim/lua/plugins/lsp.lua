@@ -119,7 +119,8 @@ nvim_lsp.pylsp.setup(coq.lsp_ensure_capabilities({
 					enabled = false,
 				},
 				jedi_completion = {
-					fuzzy = false,
+					--fuzzy = false,
+					fuzzy = true,
 				},
 				pyls_isort = {
 					enabled = true,
@@ -134,6 +135,9 @@ nvim_lsp.pylsp.setup(coq.lsp_ensure_capabilities({
 	},
 }))
 nvim_lsp.rust_analyzer.setup(coq.lsp_ensure_capabilities({}))
+
+vim.g.terraform_fmt_on_save = true
+vim.g.terraform_align = true
 
 nvim_lsp.terraformls.setup(coq.lsp_ensure_capabilities({
 	on_attach = on_attach,
@@ -164,9 +168,6 @@ nvim_lsp.yamlls.setup(coq.lsp_ensure_capabilities({
 	},
 }))
 --]]
-
-vim.g.terraform_fmt_on_save = true
-vim.g.terraform_align = true
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
 	virtual_text = true,

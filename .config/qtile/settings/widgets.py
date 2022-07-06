@@ -1,8 +1,4 @@
-from libqtile import (
-    bar,
-    widget,
-)
-
+from libqtile import bar, widget
 from settings.constants import icons_dir
 from settings.theme import colors
 
