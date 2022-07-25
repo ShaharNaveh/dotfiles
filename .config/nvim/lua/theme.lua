@@ -1,5 +1,13 @@
 vim.o.background = "dark"
-local nightfox = require("nightfox")
+
+local present, _ = pcall(require, "nightfox")
+local nightfox
+
+if present then
+	nightfox = require("nightfox")
+else
+	return false
+end
 
 local options = {
 	transparent = true,
