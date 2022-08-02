@@ -1,6 +1,6 @@
 local present, colorizer = pcall(require, "colorizer")
 if not present then
-	return
+	return false
 end
 
 colorizer.setup({

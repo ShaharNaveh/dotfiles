@@ -1,11 +1,8 @@
 vim.o.background = "dark"
 
-local present, _ = pcall(require, "nightfox")
-local nightfox
+local present, nightfox = pcall(require, "nightfox")
 
-if present then
-	nightfox = require("nightfox")
-else
+if not present then
 	return false
 end
 

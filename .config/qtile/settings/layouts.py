@@ -61,6 +61,18 @@ floating_layout = layout.Floating(
         Match(wm_type="splash"),
         Match(wm_type="toolbar"),
         Match(wm_type="utility"),
+        Match(
+            wm_instance_class=["zoom "],
+            title="Choose ONE of the audio conference options",
+        ),
+        Match(
+            wm_instance_class=["zoom "],
+            title="Meeting Alert",
+        ),
+        Match(
+            wm_instance_class=["zoom "],
+            title="Select a window or an application that you want to share",
+        ),
     ],
     fullscreen_border_width=0,
     max_border_width=3,

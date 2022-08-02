@@ -39,13 +39,15 @@ vim.g.coq_settings = {
 }
 
 local present, nvim_lsp = pcall(require, "lspconfig")
+
 if not present then
-	return
+	return false
 end
+
 local present, coq = pcall(require, "coq")
 
 if not present then
-	return
+	return false
 end
 
 local on_attach = function(_, bufnr)
@@ -134,6 +136,7 @@ nvim_lsp.pylsp.setup(coq.lsp_ensure_capabilities({
 		},
 	},
 }))
+
 nvim_lsp.rust_analyzer.setup(coq.lsp_ensure_capabilities({}))
 
 vim.g.terraform_fmt_on_save = true
@@ -149,61 +152,8 @@ nvim_lsp.tflint.setup(coq.lsp_ensure_capabilities({
 	capabilities = capabilities,
 }))
 
---[[
-nvim_lsp.yamlls.setup(coq.lsp_ensure_capabilities({
-	on_attach = on_attach,
-	capabilities = capabilities,
-	settings = {
-		redhat = {
-			telemetry = {
-				enabled = false,
-			},
-		},
-		yaml = {
-			schemas = {
-				["http://json.schemastore.org/kustomization"] = "kustomization.yaml",
-				["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.23.1-standalone-strict/all.json"] = "*k8s.yaml",
-			},
-		},
-	},
-}))
---]]
-
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
 	virtual_text = true,
 	signs = true,
 	update_in_insert = true,
 })
-
--- ]]
-
---[[
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-  vim.lsp.handlers.hover, {
-    border = {
-       {"┌", "Normal"},
-       {"─", "Normal"},
-       {"┐", "Normal"},
-       {"│", "Normal"},
-       {"┘", "Normal"},
-       {"─", "Normal"},
-       {"└", "Normal"},
-       {"│", "Normal"}
-     }
-    }
-)
-]]
-
--- Default config for those lsp
---[[
-local servers = {}
-for _, lsp in ipairs(servers) do
-	nvim_lsp[lsp].setup({
-		capabilities = capabilities,
-		flags = {
-			debounce_text_changes = 150,
-		},
-		on_attach = on_attach,
-	})
-end
---]]

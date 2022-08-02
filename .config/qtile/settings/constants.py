@@ -8,8 +8,7 @@ terminal = os.getenv("TERMINAL", "")
 theme = "custom"
 keyboard_layouts = ["us", "il"]
 
-wallpaper = pathlib.Path.home() / "Pictures" / "Wallpapers" / "dark_forest.png"
-
-qtile_config_dir = pathlib.Path.home() / ".config" / "qtile"
-
+_home = pathlib.Path.home()
+wallpaper = _home / "Pictures" / "Wallpapers" / "dark_forest.png"
+qtile_config_dir = _home / ".config" / "qtile"
 icons_dir = qtile_config_dir / "icons"

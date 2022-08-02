@@ -4,7 +4,11 @@ if not present then
 end
 
 local tree_cb = tree_c.nvim_tree_callback
-local nvim_tree = require("nvim-tree")
+
+local present, nvim_tree = pcall(require, "nvim-tree")
+if not present then
+	return
+end
 
 vim.o.termguicolors = true
 
