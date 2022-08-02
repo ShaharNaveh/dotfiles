@@ -25,10 +25,12 @@ return packer.startup(function()
 			branch = "coq",
 			run = ":COQdeps",
 			requires = {
+				--[[
 				{
 					"ms-jpq/coq.artifacts",
 					branch = "artifacts",
 				},
+                                --]]
 				{
 					"ms-jpq/coq.thirdparty",
 					branch = "3p",

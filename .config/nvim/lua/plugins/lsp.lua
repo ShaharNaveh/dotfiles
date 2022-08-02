@@ -3,6 +3,7 @@ vim.g.coq_settings = {
 	clients = {
 		snippets = {
 			enabled = false,
+			warn = {},
 		},
 	},
 	display = {
@@ -18,8 +19,8 @@ vim.g.coq_settings = {
 			y_max_len = 64,
 			y_ratio = 0.9,
 			ellipsis = "...",
-			kind_context = { "", "" },
-			source_context = { "", "" },
+			--kind_context = { "", "" },
+			--source_context = { "", "" },
 		},
 
 		preview = {
@@ -102,7 +103,7 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 -- [[ Specific Language-Server settings ]] --
 
 -- Pylsp
-nvim_lsp.pylsp.setup(coq.lsp_ensure_capabilities({
+nvim_lsp.pylsp.setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
 	flags = {
@@ -121,7 +122,6 @@ nvim_lsp.pylsp.setup(coq.lsp_ensure_capabilities({
 					enabled = false,
 				},
 				jedi_completion = {
-					--fuzzy = false,
 					fuzzy = true,
 				},
 				pyls_isort = {
@@ -135,22 +135,28 @@ nvim_lsp.pylsp.setup(coq.lsp_ensure_capabilities({
 			},
 		},
 	},
-}))
+})
 
-nvim_lsp.rust_analyzer.setup(coq.lsp_ensure_capabilities({}))
+nvim_lsp.pylsp.setup(coq.lsp_ensure_capabilities())
+
+nvim_lsp.rust_analyzer.setup({})
+nvim_lsp.rust_analyzer.setup(coq.lsp_ensure_capabilities())
 
 vim.g.terraform_fmt_on_save = true
 vim.g.terraform_align = true
 
-nvim_lsp.terraformls.setup(coq.lsp_ensure_capabilities({
+nvim_lsp.terraformls.setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
-}))
+})
 
-nvim_lsp.tflint.setup(coq.lsp_ensure_capabilities({
+nvim_lsp.terraformls.setup(coq.lsp_ensure_capabilities())
+
+nvim_lsp.tflint.setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
-}))
+})
+nvim_lsp.tflint.setup(coq.lsp_ensure_capabilities())
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
 	virtual_text = true,
