@@ -6,17 +6,10 @@ authors = ["None"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
+ansible = "*"
+awscli = "*"
 black = "*"
-certbot = [
-{version = "*"},
-#{version = "^1.0"},
-#{version = "<= 1.17.0"},
-]
-cryptography = [
-{version = "*"},
-{version = "!= 37.0.3"},
-]
-certbot-dns-route53 = "*"
+certbot = "*"
 flake8 = "*"
 ipython = "*"
 isort = "*"
@@ -30,7 +23,7 @@ python-lsp-server = {extras = ["flake8", "rope"], version = "*"}
 speedtest-cli = "*"
 spotdl = "*"
 youtube_dl = "*"
-ansible = "^5.7.0"
+weasyprint = "^56.1"
 
 [tool.poetry.dev-dependencies]
 
