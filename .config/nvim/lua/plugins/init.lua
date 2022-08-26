@@ -52,19 +52,35 @@ local function init()
 	use({ "Chiel92/vim-autoformat", config = [[require("..configs.autoformat")]] })
 
 	use({
-		"nvim-telescope/telescope.nvim",
-		requires = {
-			"nvim-lua/popup.nvim",
-			"nvim-lua/plenary.nvim",
+		{
+			"nvim-telescope/telescope.nvim",
+			requires = {
+				"nvim-lua/popup.nvim",
+				"nvim-lua/plenary.nvim",
+				"nvim-telescope/telescope-frecency.nvim",
+				"nvim-telescope/telescope-fzf-native.nvim",
+				"nvim-telescope/telescope-ui-select.nvim",
+			},
+			wants = {
+				"popup.nvim",
+				"plenary.nvim",
+				"telescope-frecency.nvim",
+				"telescope-fzf-native.nvim",
+			},
+			config = [[require("..configs.telescope")]],
+			setup = [[require("..configs.telescope_setup")]],
+			cmd = "Telescope",
+			module = "telescope",
 		},
-		wants = {
-			"popup.nvim",
-			"plenary.nvim",
+		{
+			"nvim-telescope/telescope-frecency.nvim",
+			after = "telescope.nvim",
+			requires = "kkharji/sqlite.lua",
 		},
-		config = [[require("..configs.telescope")]],
-		setup = [[require("..configs.telescope_setup")]],
-		cmd = "Telescope",
-		module = "telescope",
+		{
+			"nvim-telescope/telescope-fzf-native.nvim",
+			run = "make",
+		},
 	})
 
 	use({
