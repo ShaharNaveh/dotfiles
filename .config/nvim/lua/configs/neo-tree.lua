@@ -1,4 +1,4 @@
-vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
+vim.g.neo_tree_remove_legacy_commands = 1
 
 local present, neo_tree = pcall(require, "neo-tree")
 
