@@ -7,16 +7,6 @@ if not is_packer_installed then
 	require("packer") -- Making sure that packer is installed
 end
 
-vim.api.nvim_exec(
-	[[
-  augroup Packer
-    autocmd!
-    autocmd BufWritePost plugins.lua PackerCompile
-  augroup end
-]],
-	false
-)
-
 packer.init({
 	display = {
 		open_fn = function()
@@ -31,8 +21,19 @@ packer.init({
 local use = packer.use
 
 return packer.startup(function()
+	use({ "wbthomason/packer.nvim" })
+	use({ "lewis6991/gitsigns.nvim" })
 	use({
-		"wbthomason/packer.nvim",
+		"feline-nvim/feline.nvim",
+		event = "VimEnter",
+		config = function()
+			require("..configs.feline")
+		end,
+		after = "gitsigns.nvim",
+		requires = {
+			{ "kyazdani42/nvim-web-devicons", opt = true },
+			{ "lewis6991/gitsigns.nvim", opt = true },
+		},
 	})
 
 	use({
@@ -45,10 +46,7 @@ return packer.startup(function()
 			branch = "coq",
 			run = ":COQdeps",
 			requires = {
-				{
-					"ms-jpq/coq.thirdparty",
-					branch = "3p",
-				},
+				{ "ms-jpq/coq.thirdparty", branch = "3p" },
 			},
 		},
 	})
@@ -83,21 +81,9 @@ return packer.startup(function()
 	use({
 		"EdenEast/nightfox.nvim",
 		event = "VimEnter",
+		run = ":NightfoxCompile",
 		config = function()
 			require("..configs.nightfox")
-		end,
-	})
-
-	use({
-		"hoob3rt/lualine.nvim",
-		event = "VimEnter",
-		requires = {
-			"kyazdani42/nvim-web-devicons",
-			opt = true,
-		},
-		after = "nightfox.nvim",
-		config = function()
-			require("..configs.lualine")
 		end,
 	})
 
@@ -114,9 +100,9 @@ return packer.startup(function()
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "v2.x",
 		requires = {
-			"nvim-lua/plenary.nvim",
-			"kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
-			"MunifTanjim/nui.nvim",
+			{ "nvim-lua/plenary.nvim" },
+			{ "MunifTanjim/nui.nvim" },
+			{ "kyazdani42/nvim-web-devicons" },
 		},
 		config = function()
 			require("..configs.neo-tree")

@@ -1,11 +1,6 @@
 vim.o.background = "dark"
 
-local status, nightfox = pcall(require, "nightfox")
-
-if not status then
-	print("Error")
-	return false
-end
+local nightfox = require("nightfox")
 
 local options = {
 	transparent = true,
