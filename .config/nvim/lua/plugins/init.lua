@@ -1,24 +1,44 @@
-local present, _ = pcall(require, "packer_init")
-local packer
+vim.cmd("packadd packer.nvim")
+local is_packer_installed, packer = pcall(require, "packer")
 
-if present then
-	packer = require("packer")
-else
-	return false
+if not is_packer_installed then
+	print("Packer is not installed")
+	require("packer_init")
+	require("packer") -- Making sure that packer is installed
 end
+
+vim.api.nvim_exec(
+	[[
+  augroup Packer
+    autocmd!
+    autocmd BufWritePost plugins.lua PackerCompile
+  augroup end
+]],
+	false
+)
+
+packer.init({
+	display = {
+		open_fn = function()
+			return require("packer.util").float({ border = "single" })
+		end,
+	},
+	git = {
+		clone_timeout = 600, -- Timeout, in seconds, for git clones
+	},
+})
 
 local use = packer.use
 
 return packer.startup(function()
 	use({
 		"wbthomason/packer.nvim",
-		event = "VimEnter",
 	})
 
 	use({
 		"neovim/nvim-lspconfig",
 		config = function()
-			require("plugins.lsp")
+			require("..configs.lsp")
 		end,
 		requires = {
 			"ms-jpq/coq_nvim",
@@ -36,7 +56,7 @@ return packer.startup(function()
 	use({
 		"Chiel92/vim-autoformat",
 		config = function()
-			require("plugins.autoformat")
+			require("..configs.autoformat")
 		end,
 	})
 
@@ -47,7 +67,7 @@ return packer.startup(function()
 			{ "nvim-lua/plenary.nvim" },
 		},
 		config = function()
-			require("plugins.telescope")
+			require("..configs.telescope")
 		end,
 	})
 
@@ -56,14 +76,15 @@ return packer.startup(function()
 		ft = { "css", "html", "javascript" },
 		event = "BufRead",
 		config = function()
-			require("plugins.nvim-colorizer")
+			require("..configs.nvim-colorizer")
 		end,
 	})
 
 	use({
 		"EdenEast/nightfox.nvim",
+		event = "VimEnter",
 		config = function()
-			require("theme")
+			require("..configs.nightfox")
 		end,
 	})
 
@@ -76,7 +97,7 @@ return packer.startup(function()
 		},
 		after = "nightfox.nvim",
 		config = function()
-			require("plugins.lualine")
+			require("..configs.lualine")
 		end,
 	})
 
@@ -85,7 +106,7 @@ return packer.startup(function()
 		event = "BufRead",
 		run = ":TSUpdate",
 		config = function()
-			require("plugins.nvim-treesitter")
+			require("..configs.nvim-treesitter")
 		end,
 	})
 
@@ -98,7 +119,7 @@ return packer.startup(function()
 			"MunifTanjim/nui.nvim",
 		},
 		config = function()
-			require("plugins.neo-tree")
+			require("..configs.neo-tree")
 		end,
 	})
 end)

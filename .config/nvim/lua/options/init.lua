@@ -1,6 +1,3 @@
--- Don't write to the ShaDa file on startup
-vim.opt.shadafile = "NONE"
-
 -- Fish slows things down
 vim.opt.shell = "/bin/bash"
 

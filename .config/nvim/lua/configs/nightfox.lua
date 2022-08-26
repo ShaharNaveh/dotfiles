@@ -1,8 +1,9 @@
 vim.o.background = "dark"
 
-local present, nightfox = pcall(require, "nightfox")
+local status, nightfox = pcall(require, "nightfox")
 
-if not present then
+if not status then
+	print("Error")
 	return false
 end
 

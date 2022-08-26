@@ -1,5 +1,3 @@
-vim.cmd("packadd packer.nvim")
-
 local present, packer = pcall(require, "packer")
 
 if not present then
@@ -26,24 +24,3 @@ if not present then
 		error("Couldn't clone packer !\nPacker path: " .. packer_path)
 	end
 end
-
-vim.api.nvim_exec(
-	[[
-  augroup Packer
-    autocmd!
-    autocmd BufWritePost plugins.lua PackerCompile
-  augroup end
-]],
-	false
-)
-
-return packer.init({
-	display = {
-		open_fn = function()
-			return require("packer.util").float({ border = "single" })
-		end,
-	},
-	git = {
-		clone_timeout = 600, -- Timeout, in seconds, for git clones
-	},
-})
