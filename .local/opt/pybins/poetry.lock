@@ -77,14 +77,14 @@ python-versions = ">=3.6"
 
 [[package]]
 name = "awscli"
-version = "1.25.60"
+version = "1.25.61"
 description = "Universal Command Line Environment for AWS."
 category = "main"
 optional = false
 python-versions = ">= 3.7"
 
 [package.dependencies]
-botocore = "1.27.59"
+botocore = "1.27.60"
 colorama = ">=0.2.5,<0.4.5"
 docutils = ">=0.10,<0.17"
 PyYAML = ">=3.10,<5.5"
@@ -137,7 +137,7 @@ uvloop = ["uvloop (>=0.15.2)"]
 
 [[package]]
 name = "botocore"
-version = "1.27.59"
+version = "1.27.60"
 description = "Low-level, data-driven core of boto 3."
 category = "main"
 optional = false
@@ -1551,8 +1551,8 @@ async-timeout = [
     {file = "async_timeout-4.0.2-py3-none-any.whl", hash = "sha256:8ca1e4fcf50d07413d66d1a5e416e42cfdf5851c981d679a09851a6853383b3c"},
 ]
 awscli = [
-    {file = "awscli-1.25.60-py3-none-any.whl", hash = "sha256:37db2b9129a18205d986efe9a340c0a174de4f1e31fdc15ee0e834c823bea785"},
-    {file = "awscli-1.25.60.tar.gz", hash = "sha256:fa90a804cd295dfac60ff1f324dcc50744f7debdf1e25abbce75123da1023c0a"},
+    {file = "awscli-1.25.61-py3-none-any.whl", hash = "sha256:c9d6c772a73bfac9a00c233c0696330e1d003d9bee374bb6cbda6e7f33f0f6f9"},
+    {file = "awscli-1.25.61.tar.gz", hash = "sha256:9fbb7aa540b08a77b4a54af12594771f5cfffae9f7a82a7a6af25c635c21f56e"},
 ]
 backcall = [
     {file = "backcall-0.2.0-py2.py3-none-any.whl", hash = "sha256:fbbce6a29f263178a1f7915c1940bde0ec2b2a967566fe1c65c1dfb7422bd255"},
@@ -1588,8 +1588,8 @@ black = [
     {file = "black-22.6.0.tar.gz", hash = "sha256:6c6d39e28aed379aec40da1c65434c77d75e65bb59a1e1c283de545fb4e7c6c9"},
 ]
 botocore = [
-    {file = "botocore-1.27.59-py3-none-any.whl", hash = "sha256:69d756791fc024bda54f6c53f71ae34e695ee41bbbc1743d9179c4837a4929da"},
-    {file = "botocore-1.27.59.tar.gz", hash = "sha256:eda4aed6ee719a745d1288eaf1beb12f6f6448ad1fa12f159405db14ba9c92cf"},
+    {file = "botocore-1.27.60-py3-none-any.whl", hash = "sha256:5063d504698f379289249c5c27d9395ec72f445f0ac2ec4e0ed00135e76e5cac"},
+    {file = "botocore-1.27.60.tar.gz", hash = "sha256:5f9ddf144c7fe025a877dd31c9225563172769e9597013f50a226248f05ff6a8"},
 ]
 brotli = [
     {file = "Brotli-1.0.9-cp27-cp27m-macosx_10_9_x86_64.whl", hash = "sha256:268fe94547ba25b58ebc724680609c8ee3e5a843202e9a381f6f9c5e8bdb5c70"},
