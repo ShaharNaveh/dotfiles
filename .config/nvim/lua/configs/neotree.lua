@@ -1,12 +1,8 @@
+local neotree = require("neo-tree")
+
 vim.g.neo_tree_remove_legacy_commands = 1
 
-local present, neo_tree = pcall(require, "neo-tree")
-
-if not present then
-	return false
-end
-
-neo_tree.setup({
+neotree.setup({
 	enable_git_status = true,
 	enable_diagnostics = true,
 	filesystem = {

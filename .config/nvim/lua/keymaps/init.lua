@@ -1,48 +1,41 @@
-local function map(mode, lhs, rhs, opts)
-	local options = { noremap = true, silent = true }
-	if opts then
-		options = vim.tbl_extend("force", options, opts)
-	end
-	vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-end
+local create_cmd = vim.api.nvim_create_user_command
 
-local cmd = vim.cmd
-local opt = {}
+create_cmd("PackerInstall", function()
+	vim.cmd([[packadd packer.nvim]])
+	require("plugins").install()
+end, {})
+create_cmd("PackerUpdate", function()
+	vim.cmd([[packadd packer.nvim]])
+	require("plugins").update()
+end, {})
+create_cmd("PackerSync", function()
+	vim.cmd([[packadd packer.nvim]])
+	require("plugins").sync()
+end, {})
+create_cmd("PackerClean", function()
+	vim.cmd([[packadd packer.nvim]])
+	require("plugins").clean()
+end, {})
+create_cmd("PackerCompile", function()
+	vim.cmd([[packadd packer.nvim]])
+	require("plugins").compile()
+end, {})
 
--- Remap space as leader key
---map("", "<Space>", "<Nop>", { noremap = true, silent = true })
+local map = vim.api.nvim_set_keymap
+local silent = { silent = true, noremap = true }
+
 vim.g.mapleader = " "
 
--- [[ Toggle numbers
-map("n", "<leader>n", [[ <Cmd> set nu!<CR>]], opt) -- TODO: Fix with relativenumbers
--- ]]
+-- Yank to clipboard
+map("n", "y+", "<cmd>set opfunc=util#clipboard_yank<cr>g@", silent)
+map("v", "y+", "<cmd>set opfunc=util#clipboard_yank<cr>g@", silent)
 
--- [[ <C-{hjkl}> to navigate splits
-map("n", "<c-k>", [[<Cmd>wincmd k<CR>]], opt)
-map("n", "<c-j>", [[<Cmd>wincmd j<CR>]], opt)
-map("n", "<c-h>", [[<Cmd>wincmd h<CR>]], opt)
-map("n", "<c-l>", [[<Cmd>wincmd l<CR>]], opt)
--- ]]
+-- Window movement
+map("n", "<c-h>", "<c-w>h", silent)
+map("n", "<c-j>", "<c-w>j", silent)
+map("n", "<c-k>", "<c-w>k", silent)
+map("n", "<c-l>", "<c-w>l", silent)
 
--- [[ NvimTree
---map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", opts)
--- ]]
--- [[ NvimTree
-map("n", "<C-n>", "<cmd>Neotree toggle<CR>", opts)
--- ]]
-
--- [[ Telescope
-map("n", "<Leader>ff", "<cmd>Telescope find_files<CR>", { noremap = true, silent = true })
-map("n", "<Leader>fg", "<cmd>Telescope live_grep<CR>", { noremap = true, silent = true })
-map("n", "<Leader>fb", "<cmd>Telescope buffers<CR>", { noremap = true, silent = true })
-map("n", "<Leader>fh", "<cmd>Telescope help_tags<CR>", { noremap = true, silent = true })
--- ]]
-
--- Packer commands here because we are not loading it at startup
---[[
-vim.cmd("silent! command PackerCompile lua require '..plugins' require('packer').compile()")
-vim.cmd("silent! command PackerInstall lua require '..plugins' require('packer').install()")
-vim.cmd("silent! command PackerStatus lua require '..plugins' require('packer').status()")
-vim.cmd("silent! command PackerSync lua require '..plugins' require('packer').sync()")
-vim.cmd("silent! command PackerUpdate lua require '..plugins' require('packer').update()")
---]]
+-- Tab movement
+map("n", "<c-Left>", "<cmd>tabpre<cr>", silent)
+map("n", "<c-Right>", "<cmd>tabnext<cr>", silent)

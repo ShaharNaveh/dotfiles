@@ -4,31 +4,31 @@ local is_packer_installed, packer = pcall(require, "packer")
 if not is_packer_installed then
 	print("Packer is not installed")
 	require("packer_init")
-	require("packer") -- Making sure that packer is installed
 end
 
-packer.init({
-	display = {
-		open_fn = function()
-			return require("packer.util").float({ border = "single" })
-		end,
-	},
-	git = {
-		clone_timeout = 600, -- Timeout, in seconds, for git clones
-	},
-})
+local packer = nil
+local function init()
+	if packer == nil then
+		packer = require("packer")
+		packer.init({ disable_commands = true })
+	end
 
-local use = packer.use
+	local use = packer.use
+	packer.reset()
 
-return packer.startup(function()
-	use({ "wbthomason/packer.nvim" })
-	use({ "lewis6991/gitsigns.nvim" })
+	use("wbthomason/packer.nvim")
+
+	use("lewis6991/impatient.nvim")
+
+	use({
+		"lewis6991/gitsigns.nvim",
+		requires = { "nvim-lua/plenary.nvim" },
+	})
+
 	use({
 		"feline-nvim/feline.nvim",
 		event = "VimEnter",
-		config = function()
-			require("..configs.feline")
-		end,
+		config = [[require("..configs.feline")]],
 		after = "gitsigns.nvim",
 		requires = {
 			{ "kyazdani42/nvim-web-devicons", opt = true },
@@ -38,9 +38,7 @@ return packer.startup(function()
 
 	use({
 		"neovim/nvim-lspconfig",
-		config = function()
-			require("..configs.lsp")
-		end,
+		config = [[require("..configs.lsp")]],
 		requires = {
 			"ms-jpq/coq_nvim",
 			branch = "coq",
@@ -51,61 +49,63 @@ return packer.startup(function()
 		},
 	})
 
-	use({
-		"Chiel92/vim-autoformat",
-		config = function()
-			require("..configs.autoformat")
-		end,
-	})
+	use({ "Chiel92/vim-autoformat", config = [[require("..configs.autoformat")]] })
 
 	use({
 		"nvim-telescope/telescope.nvim",
 		requires = {
-			{ "nvim-lua/popup.nvim" },
-			{ "nvim-lua/plenary.nvim" },
+			"nvim-lua/popup.nvim",
+			"nvim-lua/plenary.nvim",
 		},
-		config = function()
-			require("..configs.telescope")
-		end,
+		wants = {
+			"popup.nvim",
+			"plenary.nvim",
+		},
+		config = [[require("..configs.telescope")]],
+		setup = [[require("..configs.telescope_setup")]],
+		cmd = "Telescope",
+		module = "telescope",
 	})
 
 	use({
 		"norcalli/nvim-colorizer.lua",
 		ft = { "css", "html", "javascript" },
 		event = "BufRead",
-		config = function()
-			require("..configs.nvim-colorizer")
-		end,
+		config = [[require("..configs.nvim-colorizer")]],
 	})
 
 	use({
 		"EdenEast/nightfox.nvim",
 		event = "VimEnter",
 		run = ":NightfoxCompile",
-		config = function()
-			require("..configs.nightfox")
-		end,
+		config = [[require("..configs.nightfox")]],
 	})
 
 	use({
 		"nvim-treesitter/nvim-treesitter",
 		event = "BufRead",
 		run = ":TSUpdate",
-		config = function()
-			require("..configs.nvim-treesitter")
-		end,
+		config = [[require("..configs.nvim-treesitter")]],
 	})
 
 	use({
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "v2.x",
 		requires = {
-			{ "nvim-lua/plenary.nvim" },
-			{ "MunifTanjim/nui.nvim" },
-			{ "kyazdani42/nvim-web-devicons" },
+			"nvim-lua/plenary.nvim",
+			"MunifTanjim/nui.nvim",
+			"kyazdani42/nvim-web-devicons",
 		},
-		config = function()
-			require("..configs.neo-tree")
-		end,
+		config = [[require("..configs.neotree")]],
+		setup = [[require("..configs.neotree_setup")]],
 	})
-end)
+end
+
+local plugins = setmetatable({}, {
+	__index = function(_, key)
+		init()
+		return packer[key]
+	end,
+})
+
+return plugins

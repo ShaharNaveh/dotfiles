@@ -7,6 +7,8 @@ local main_config = {
 -- Don't write to the ShaDa file on startup
 vim.opt.shadafile = "NONE"
 
+require("impatient")
+
 for _, config_file in ipairs(main_config) do
 	local status, _ = pcall(require, config_file)
 	if not status then
