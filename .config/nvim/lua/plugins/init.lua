@@ -49,7 +49,7 @@ local function init()
 		},
 	})
 
-	use({ "Chiel92/vim-autoformat", config = [[require("..configs.autoformat")]] })
+	use({ "mhartington/formatter.nvim", config = [[require("..configs.formatter")]] })
 
 	use({
 		{
