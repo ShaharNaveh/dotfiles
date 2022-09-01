@@ -115,6 +115,8 @@ local function init()
 		config = [[require("..configs.neotree")]],
 		setup = [[require("..configs.neotree_setup")]],
 	})
+
+	use("NoahTheDuke/vim-just")
 end
 
 local plugins = setmetatable({}, {
