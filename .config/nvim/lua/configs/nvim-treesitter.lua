@@ -9,6 +9,7 @@ nvim_treesitter.setup({
 		"css",
 		"dockerfile",
 		"fish",
+		"hcl",
 		"html",
 		"json",
 		"latex",
@@ -19,7 +20,6 @@ nvim_treesitter.setup({
 		"rust",
 		"toml",
 		"yaml",
-		"hcl",
 	},
 	ignore_install = {}, -- List of parsers to ignore installing
 	highlight = {
