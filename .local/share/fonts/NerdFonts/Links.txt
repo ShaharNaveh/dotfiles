@@ -1,5 +1,5 @@
 Fira Code:
-	https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
+	https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.1/FiraCode.zip
 Mononoki:
 	https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Mononoki.zip
 Ubuntu Mono:
