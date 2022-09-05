@@ -6,8 +6,6 @@ authors = ["None"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-#pyls-isort = "*"
-#python-lsp-black = "*"
 ansible = "*"
 awscli = "*"
 black = "*"
@@ -16,6 +14,7 @@ flake8 = "*"
 ipython = "*"
 isort = "*"
 jedi = "*"
+mypy = "*"
 pyls-flake8 = "*"
 pylsp-mypy = "*"
 pymongo = {extras = ["srv"], version = "*"}

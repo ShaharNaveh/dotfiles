@@ -1524,7 +1524,7 @@ test = ["pytest"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "b97748aba372f4c829303f7ceec4b28cf46ec65415bc321c887fb36fd3bae23a"
+content-hash = "d4a89d6db19ffc8cb9d8c690ade6da1461453e98ea459c7adb553be7383a0973"
 
 [metadata.files]
 acme = [
