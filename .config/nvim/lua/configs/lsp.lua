@@ -163,3 +163,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
 	signs = true,
 	update_in_insert = true,
 })
+
+vim.diagnostic.config({
+	update_in_insert = true,
+})

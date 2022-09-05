@@ -22,6 +22,7 @@ local function init()
 
 	use({
 		"lewis6991/gitsigns.nvim",
+		event = "BufRead",
 		requires = { "nvim-lua/plenary.nvim" },
 	})
 
@@ -32,7 +33,11 @@ local function init()
 		after = "gitsigns.nvim",
 		requires = {
 			{ "kyazdani42/nvim-web-devicons", opt = true },
-			{ "lewis6991/gitsigns.nvim", opt = true },
+			{
+				"lewis6991/gitsigns.nvim",
+				event = "BufRead",
+				opt = true,
+			},
 		},
 	})
 
@@ -101,7 +106,7 @@ local function init()
 		"nvim-treesitter/nvim-treesitter",
 		event = "BufRead",
 		run = ":TSUpdate",
-		config = [[require("..configs.nvim-treesitter")]],
+		config = [[require("..configs.treesitter")]],
 	})
 
 	use({
