@@ -839,18 +839,6 @@ flake8 = ">=3.6.0"
 python-lsp-server = "*"
 
 [[package]]
-name = "pyls-isort"
-version = "0.2.2"
-description = "Isort plugin for python-lsp-server"
-category = "main"
-optional = false
-python-versions = "*"
-
-[package.dependencies]
-isort = "*"
-python-lsp-server = "*"
-
-[[package]]
 name = "pylsp-mypy"
 version = "0.6.2"
 description = "Mypy linter for the Python LSP Server"
@@ -961,22 +949,6 @@ python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,>=2.7"
 
 [package.dependencies]
 six = ">=1.5"
-
-[[package]]
-name = "python-lsp-black"
-version = "1.2.1"
-description = "Black plugin for the Python LSP Server"
-category = "main"
-optional = false
-python-versions = ">=3.7"
-
-[package.dependencies]
-black = ">=22.3.0"
-python-lsp-server = ">=1.4.0"
-toml = "*"
-
-[package.extras]
-dev = ["flake8", "isort (>=5.0)", "mypy", "pre-commit", "pytest", "types-pkg-resources", "types-setuptools", "types-toml"]
 
 [[package]]
 name = "python-lsp-jsonrpc"
@@ -1552,7 +1524,7 @@ test = ["pytest"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "889fa259da618fecb847051d871b977e5c40660d23e7b450764b647416e8d9f2"
+content-hash = "b97748aba372f4c829303f7ceec4b28cf46ec65415bc321c887fb36fd3bae23a"
 
 [metadata.files]
 acme = [
@@ -2374,9 +2346,6 @@ pyls-flake8 = [
     {file = "pyls-flake8-0.4.0.tar.gz", hash = "sha256:630cec96e494c0f3bffa381451d71a05f46b4f4e6d9b897ad6377e81cc4f8f70"},
     {file = "pyls_flake8-0.4.0-py2.py3-none-any.whl", hash = "sha256:ca8051e53ee0e06e621abfa7bdc72c9a7f56d5bede51fa7c17caba166b7101a2"},
 ]
-pyls-isort = [
-    {file = "pyls-isort-0.2.2.tar.gz", hash = "sha256:2192bd2203db00459f85eb329521feba58af63075d2dd10a051a4eccd000bba0"},
-]
 pylsp-mypy = [
     {file = "pylsp-mypy-0.6.2.tar.gz", hash = "sha256:e709a244eb56768765f334de550bd9101d2312fa2a6dd077c7bbf939b7b3fba1"},
     {file = "pylsp_mypy-0.6.2-py3-none-any.whl", hash = "sha256:473bf16027c3a69d8052c184ba72f049ce137b10eeefea0b1414c9e589ec79a9"},
@@ -2471,10 +2440,6 @@ pyRFC3339 = [
 python-dateutil = [
     {file = "python-dateutil-2.8.2.tar.gz", hash = "sha256:0123cacc1627ae19ddf3c27a5de5bd67ee4586fbdd6440d9748f8abb483d3e86"},
     {file = "python_dateutil-2.8.2-py2.py3-none-any.whl", hash = "sha256:961d03dc3453ebbc59dbdea9e4e11c5651520a876d0f4db161e8674aae935da9"},
-]
-python-lsp-black = [
-    {file = "python-lsp-black-1.2.1.tar.gz", hash = "sha256:d7eaeab2a377e96a82cc26afe2f8f2e1cf7c6eaefdcdeab026343e2e559dcce9"},
-    {file = "python_lsp_black-1.2.1-py3-none-any.whl", hash = "sha256:9793e69122f7ab51dffa980f026e456b4be62a3400df5c89b6ecf9278b74913a"},
 ]
 python-lsp-jsonrpc = [
     {file = "python-lsp-jsonrpc-1.0.0.tar.gz", hash = "sha256:7bec170733db628d3506ea3a5288ff76aa33c70215ed223abdb0d95e957660bd"},

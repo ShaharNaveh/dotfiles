@@ -6,6 +6,8 @@ authors = ["None"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
+#pyls-isort = "*"
+#python-lsp-black = "*"
 ansible = "*"
 awscli = "*"
 black = "*"
@@ -13,17 +15,16 @@ certbot = "*"
 flake8 = "*"
 ipython = "*"
 isort = "*"
+jedi = "*"
 pyls-flake8 = "*"
-pyls-isort = "*"
 pylsp-mypy = "*"
 pymongo = {extras = ["srv"], version = "*"}
 pynvim = "*"
-python-lsp-black = "*"
 python-lsp-server = {extras = ["flake8", "rope"], version = "*"}
 speedtest-cli = "*"
 spotdl = "*"
-youtube_dl = "*"
 weasyprint = "^56.1"
+youtube_dl = "*"
 
 [tool.poetry.dev-dependencies]
 
