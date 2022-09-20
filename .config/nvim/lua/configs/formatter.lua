@@ -4,6 +4,9 @@ local formatter = require("formatter")
 
 formatter.setup({
 	filetype = {
+		css = {
+			require("formatter.filetypes.css").cssbeautify,
+		},
 		lua = {
 			require("formatter.filetypes.lua").stylua,
 		},
@@ -12,7 +15,16 @@ formatter.setup({
 			require("formatter.filetypes.python").isort,
 		},
 		rust = {
-			require("formatter.filetypes.rust").rustfmt,
+			--require("formatter.filetypes.rust").rustfmt,
+			function()
+				return {
+					exe = "rustfmt",
+					args = {
+						"--edition 2021",
+					},
+					stdin = true,
+				}
+			end,
 		},
 		["*"] = {
 			require("formatter.filetypes.any").remove_trailing_whitespace,
