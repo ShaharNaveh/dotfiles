@@ -15,7 +15,6 @@ formatter.setup({
 			require("formatter.filetypes.python").isort,
 		},
 		rust = {
-			--require("formatter.filetypes.rust").rustfmt,
 			function()
 				return {
 					exe = "rustfmt",

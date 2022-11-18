@@ -25,7 +25,6 @@ local function init()
 		event = "BufRead",
 		requires = { "nvim-lua/plenary.nvim" },
 	})
-
 	use({
 		"feline-nvim/feline.nvim",
 		event = "VimEnter",
@@ -104,7 +103,7 @@ local function init()
 
 	use({
 		"nvim-treesitter/nvim-treesitter",
-		event = "BufRead",
+		--event = "BufRead",
 		run = ":TSUpdate",
 		config = [[require("..configs.treesitter")]],
 	})
@@ -122,6 +121,7 @@ local function init()
 	})
 
 	use("NoahTheDuke/vim-just")
+	use("martinda/Jenkinsfile-vim-syntax")
 end
 
 local plugins = setmetatable({}, {

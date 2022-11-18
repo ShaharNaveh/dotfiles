@@ -12,7 +12,6 @@ local options = {
 	},
 }
 
-nightfox.clean()
 nightfox.setup({
 	options = options,
 })

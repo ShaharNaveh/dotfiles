@@ -2,6 +2,8 @@ if command -s btm >/dev/null
     alias btm="btm --color nord --group"
 end
 
+alias emacs="emacs -nw"
+
 #if command -s rsync > /dev/null
 #	alias cp="rsync --archive --human-readable --progress --verbose --whole-file"
 #else

@@ -1,6 +1,12 @@
 -- Fish slows things down
 vim.opt.shell = "/bin/bash"
 
+-- use filetype.lua instead of filetype.vim. it's enabled by default in neovim 0.8 (nightly)
+if vim.version().minor < 8 then
+	vim.g.did_load_filetypes = 0
+	vim.g.do_filetype_lua = 1
+end
+
 -- Navigation
 vim.opt.ttyfast = true
 
@@ -12,6 +18,8 @@ vim.opt.wildignore:append("*_build/*")
 vim.opt.wildignore:append("*.pyc")
 vim.opt.wildignore:append("**/__pycache__/*")
 vim.opt.wildignore:append("**/.mypy_cache/*")
+
+vim.opt.mouse = "a"
 
 -- Scrolloff
 vim.opt.scrolloff = 10
