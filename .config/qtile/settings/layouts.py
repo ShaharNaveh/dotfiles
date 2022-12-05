@@ -73,6 +73,10 @@ floating_layout = layout.Floating(
             wm_instance_class=["zoom "],
             title="Select a window or an application that you want to share",
         ),
+        Match(
+            wm_instance_class="telegram-desktop",
+            title="Media viewer",
+        ),
     ],
     fullscreen_border_width=0,
     max_border_width=3,
