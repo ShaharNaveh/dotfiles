@@ -1,0 +1,1 @@
+/home/snaveh/.config/shell/profile

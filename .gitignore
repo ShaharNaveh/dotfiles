@@ -16,3 +16,5 @@
 !.tmux.conf
 !.venvs
 !.xmonad/
+!.xprofile
+!.zprofile
