@@ -2,26 +2,27 @@ local create_cmd = vim.api.nvim_create_user_command
 
 create_cmd("PackerInstall", function()
 	vim.cmd([[packadd packer.nvim]])
-	require("plugins").install()
+	require("snaveh.plugins").install()
 end, {})
 create_cmd("PackerUpdate", function()
 	vim.cmd([[packadd packer.nvim]])
-	require("plugins").update()
+	require("snaveh.plugins").update()
 end, {})
 create_cmd("PackerSync", function()
 	vim.cmd([[packadd packer.nvim]])
-	require("plugins").sync()
+	require("snaveh.plugins").sync()
 end, {})
 create_cmd("PackerClean", function()
 	vim.cmd([[packadd packer.nvim]])
-	require("plugins").clean()
+	require("snaveh.plugins").clean()
 end, {})
 create_cmd("PackerCompile", function()
 	vim.cmd([[packadd packer.nvim]])
-	require("plugins").compile()
+	require("snaveh.plugins").compile()
 end, {})
 
 local map = vim.api.nvim_set_keymap
+
 local silent = { silent = true, noremap = true }
 
 vim.g.mapleader = " "

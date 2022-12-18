@@ -1,0 +1,35 @@
+local disabled_built_ins = {
+	"2html_plugin",
+	"bugreport",
+	"compiler",
+	"getscript",
+	"getscriptPlugin",
+	"gzip",
+	"logipat",
+	"man",
+	"netrw",
+	"netrwFileHandlers",
+	"netrwPlugin",
+	"netrwSettings",
+	"spellfile_plugin",
+	"tar",
+	"tarPlugin",
+	"tutor",
+	"vimball",
+	"vimballPlugin",
+	"zip",
+	"zipPlugin",
+	--"ftplugin",
+	--"matchit",
+	--"matchparen",
+	--"optwin",
+	--"rplugin",
+	--"rrhelper",
+	--"shada_plugin",
+	--"synmenu",
+	--"syntax",
+}
+
+for _, plugin in pairs(disabled_built_ins) do
+	vim.g["loaded_" .. plugin] = 1
+end

@@ -57,4 +57,6 @@ alias reboot="systemctl reboot"
 alias rm="rm -v -I"
 
 alias shutdown="systemctl poweroff"
-alias mirror="/usr/bin/sudo /usr/bin/reflector --protocol=https --age=6 --latest=50 --number=20 --sort=score --verbose --save=/etc/pacman.d/mirrorlist"
+alias mirror="/usr/bin/sudo /usr/bin/reflector --protocol=https --age=6 --latest=50 --number=20 --exclude 'archmirror\.it' --sort=score --verbose --save=/etc/pacman.d/mirrorlist"
+
+alias pybins_update="cd $HOME/.local/opt/pybins/ && poetry update && cd -"

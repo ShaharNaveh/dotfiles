@@ -1,4 +1,6 @@
 [submodule "Pictures/Wallpapers"]
 	path = Pictures/Wallpapers
-	#url = ssh://git@github.com/ShaharNaveh/Wallpapers.git
-	url = https://github.com/ShaharNaveh/Wallpapers.git
+	url = ssh://git@github.com/ShaharNaveh/Wallpapers.git
+[submodule ".config/zsh/zsh-autosuggestions"]
+	path = .config/zsh/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions.git

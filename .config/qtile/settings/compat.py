@@ -1,4 +1,4 @@
-from libqtile import qtile  # type: ignore
+from libqtile import qtile
 
 match qtile.core.name:
     case "x11":

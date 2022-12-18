@@ -7,7 +7,6 @@ authors = ["None"]
 [tool.poetry.dependencies]
 python = "^3.10"
 ansible = "*"
-awscli = "*"
 black = "*"
 certbot = "*"
 certbot-dns-route53 = "*"

@@ -1,7 +1,7 @@
 import re
 
-from libqtile.command import lazy  # type: ignore
-from libqtile.config import (  # type: ignore
+from libqtile.command import lazy
+from libqtile.config import (
     DropDown,
     Group,
     Key,
@@ -9,15 +9,14 @@ from libqtile.config import (  # type: ignore
     ScratchPad,
 )
 
-from settings.constants import (  # type: ignore
+from settings.constants import (
     mod,
     terminal,
 )
 
-from settings.keys import keys  # type: ignore
+from settings.keys import keys
 
 # NOTE: The icons are from https://www.nerdfonts.com/cheat-sheet
-
 
 group_names = [
     (
@@ -87,10 +86,10 @@ group_names = [
         {
             "label": "辶",  # ICON: nf-mdi-video
             "matches": [
-                Match(wm_instance_class=["zoom "], wm_class=["zoom"]),
                 Match(title=["Zoom Meeting"]),
                 Match(title=[re.compile("zoom Meeting", re.IGNORECASE)]),
-                Match(title=[re.compile("zoom Meeting", re.IGNORECASE)]),
+                Match(wm_class=["zoom"]),
+                Match(wm_instance_class=["zoom "]),
                 Match(wm_instance_class=[re.compile(r"^join\?action=", re.IGNORECASE)]),
             ],
         },

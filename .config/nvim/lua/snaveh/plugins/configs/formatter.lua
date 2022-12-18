@@ -1,6 +1,5 @@
-local util = require("formatter.util")
-
 local formatter = require("formatter")
+local util = require("formatter.util")
 
 formatter.setup({
 	filetype = {
@@ -33,7 +32,7 @@ formatter.setup({
 
 local augroup = vim.api.nvim_create_augroup("FormatAutogroup", { clear = true })
 
-vim.api.nvim_create_autocmd("BufWritePost", {
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 	pattern = "*",
 	group = augroup,
 	command = "FormatWrite",

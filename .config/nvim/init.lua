@@ -1,21 +1,9 @@
-local main_config = {
-	"options",
-	"keymaps",
-	"plugins",
-}
+vim.opt.shadafile = "NONE" -- Don't write to the ShaDa file on startup
 
--- Don't write to the ShaDa file on startup
-vim.opt.shadafile = "NONE"
+require("snaveh.options")
+require("snaveh.keymaps")
+require("snaveh.plugins")
+--require("snaveh.colorscheme")
 
-require("impatient")
-
-for _, config_file in ipairs(main_config) do
-	local status, _ = pcall(require, config_file)
-	if not status then
-		print("Error loading: " .. config_file)
-		require(config_file)
-	end
-end
-
--- We can load shada now
 vim.opt.shadafile = ""
+
