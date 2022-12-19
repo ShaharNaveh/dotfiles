@@ -27,6 +27,7 @@ local function init()
 	})
 
 	use({ "hrsh7th/cmp-nvim-lsp" })
+
 	use({
 		"hrsh7th/nvim-cmp",
 		transitive_opt = true,
@@ -54,6 +55,7 @@ local function init()
 
 	use({
 		"nvim-telescope/telescope.nvim",
+		after = "nvim-cmp",
 		requires = {
 			{ "kyazdani42/nvim-web-devicons", opt = true },
 			{ "nvim-lua/plenary.nvim" },
@@ -95,21 +97,6 @@ local function init()
 			vim.cmd([[ColorizerAttachToBuffer]])
 		end,
 	})
-	use({
-		"nvim-lua/plenary.nvim",
-		module = "plenary",
-		module_pattern = "plenary.*",
-	})
-
-	use({
-		"kyazdani42/nvim-web-devicons",
-		module = "nvim-web-devicons",
-	})
-
-	use({
-		"L3MON4D3/LuaSnip",
-		module = "luasnip",
-	})
 
 	use({
 		"mhartington/formatter.nvim",
@@ -128,6 +115,21 @@ local function init()
 	})
 
 	use("NoahTheDuke/vim-just")
+
+	use({
+		"folke/noice.nvim",
+		after = {
+			"nvim-cmp",
+			"nvim-lspconfig",
+		},
+		config = function()
+			require("snaveh.plugins.configs.noice")
+		end,
+		requires = {
+			"MunifTanjim/nui.nvim",
+			{ "rcarriga/nvim-notify", opt = true },
+		},
+	})
 end
 
 local plugins = setmetatable({}, {
