@@ -11,6 +11,13 @@ telescope.setup({
 		scroll_strategy = "cycle",
 		theme = "dropdown",
 	},
+	history = {
+		path = vim.fn.stdpath("cache") .. "/telescope/history",
+	},
+	preview = {
+		check_mime_type = true,
+		timeout = 250,
+	},
 	pickers = {
 		find_files = {
 			theme = "dropdown",
@@ -25,6 +32,30 @@ telescope.setup({
 		file_browser = {
 			theme = "ivy",
 			hijack_netrw = true,
+
+			--[[
+			mappings = {
+				n = {
+					C = file_browser.change_cwd,
+					D = file_browser.remove,
+					M = file_browser.move,
+					n = file_browser.create,
+					R = file_browser.rename,
+					S = file_browser.create,
+					["~"] = file_browser.goto_home_dir,
+					["."] = file_browser.toggle_hidden,
+					-- ["<BS>"] = file_browser.actions.move,
+				},
+				i = {
+					["<C-a>"] = file_browser.toggle_hidden,
+					["<C-d>"] = file_browser.remove,
+					["<C-h>"] = file_browser.goto_home_dir,
+					["<C-m>"] = file_browser.move,
+					["<C-r>"] = file_browser.rename,
+					["<C-y>"] = file_browser.copy,
+				},
+			},
+                        --]]
 		},
 	},
 })
