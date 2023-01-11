@@ -57,5 +57,8 @@ local function set_options()
 	end
 end
 
+-- Is there nvim api for that?
+vim.cmd([[filetype plugin indent on]])
+
 set_globals()
 set_options()

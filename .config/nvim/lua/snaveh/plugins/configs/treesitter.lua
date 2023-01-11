@@ -38,10 +38,23 @@ treesitter.setup({
 	},
 	highlight = {
 		enable = true,
-		use_languagetree = false,
-		disable = { "json" },
+		additional_vim_regex_highlighting = false,
+		disable = {},
 	},
+	autopairs = { enable = true },
+	autotag = { enable = true },
+	indent = { enable = true, disable = {} },
 	indent = {
+		enable = true,
+	},
+	refactor = {
+		highlight_definitions = {
+			enable = true,
+			clear_on_cursor_move = true,
+		},
+		highlight_current_scope = { enable = false },
+	},
+	playground = {
 		enable = true,
 	},
 })

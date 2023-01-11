@@ -1,8 +1,6 @@
-local present, telescope = pcall(require, "telescope")
-
-if not present then
-	return
-end
+local telescope = require("telescope")
+local actions = require("telescope.actions")
+local theme = require("telescope.themes")
 
 telescope.setup({
 	defaults = {
@@ -10,6 +8,7 @@ telescope.setup({
 		layout_config = { anchor = "N" },
 		scroll_strategy = "cycle",
 		theme = "dropdown",
+		mappings = { i = { ["<esc>"] = actions.close } },
 	},
 	history = {
 		path = vim.fn.stdpath("cache") .. "/telescope/history",
@@ -21,6 +20,12 @@ telescope.setup({
 	pickers = {
 		find_files = {
 			theme = "dropdown",
+			hidden = true,
+		},
+		live_grep = {
+			additional_args = function(opts)
+				return { "--hidden" }
+			end,
 		},
 		buffers = {
 			ignore_current_buffer = true,
@@ -29,38 +34,18 @@ telescope.setup({
 		},
 	},
 	extensions = {
-		file_browser = {
-			theme = "ivy",
-			hijack_netrw = true,
-
-			--[[
-			mappings = {
-				n = {
-					C = file_browser.change_cwd,
-					D = file_browser.remove,
-					M = file_browser.move,
-					n = file_browser.create,
-					R = file_browser.rename,
-					S = file_browser.create,
-					["~"] = file_browser.goto_home_dir,
-					["."] = file_browser.toggle_hidden,
-					-- ["<BS>"] = file_browser.actions.move,
-				},
-				i = {
-					["<C-a>"] = file_browser.toggle_hidden,
-					["<C-d>"] = file_browser.remove,
-					["<C-h>"] = file_browser.goto_home_dir,
-					["<C-m>"] = file_browser.move,
-					["<C-r>"] = file_browser.rename,
-					["<C-y>"] = file_browser.copy,
-				},
-			},
-                        --]]
+		fzf = {
+			fuzzy = true,
+			override_generic_sorter = true,
+			override_file_sorter = true,
+			case_mode = "smart_case",
+		},
+		["ui-select"] = {
+			theme.get_dropdown({}),
 		},
 	},
 })
 
-telescope.load_extension("file_browser")
 telescope.load_extension("fzf")
 telescope.load_extension("ui-select")
 
@@ -74,4 +59,3 @@ vim.keymap.set("n", "<leader>fg", builtin.live_grep, opts)
 vim.keymap.set("n", "<leader>fb", builtin.buffers, opts)
 vim.keymap.set("n", "<leader>fh", builtin.help_tags, opts)
 vim.keymap.set("n", "<leader>km", builtin.keymaps, opts)
-vim.keymap.set("n", "<c-n>", telescope.extensions.file_browser.file_browser, opts)

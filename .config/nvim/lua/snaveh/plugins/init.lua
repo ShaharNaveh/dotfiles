@@ -20,82 +20,106 @@ local function init()
 
 	use({
 		"nvim-treesitter/nvim-treesitter",
-		run = ":TSUpdate",
 		config = function()
 			require("snaveh.plugins.configs.treesitter")
 		end,
-	})
-
-	use({ "hrsh7th/cmp-nvim-lsp" })
-
-	use({
-		"hrsh7th/nvim-cmp",
-		transitive_opt = true,
-		opt = true,
 		requires = {
-			{ "hrsh7th/cmp-nvim-lsp" },
-			{ "hrsh7th/cmp-nvim-lsp-document-symbol" },
-			{ "hrsh7th/cmp-buffer" },
-			{ "hrsh7th/cmp-path" },
-			{ "saadparwaiz1/cmp_luasnip", requires = "L3MON4D3/LuaSnip" },
+			{ "nvim-treesitter/nvim-treesitter-refactor", after = "nvim-treesitter" },
+			{ "nvim-treesitter/nvim-treesitter-context", after = "nvim-treesitter" },
 		},
-		event = "VimEnter",
-		config = function()
-			require("snaveh.plugins.configs.cmp")
-		end,
+		run = ":TSUpdate",
 	})
 
 	use({
-		"neovim/nvim-lspconfig",
-		after = "cmp-nvim-lsp",
-		config = function()
-			require("snaveh.plugins.configs.lsp")
-		end,
-	})
-
-	use({
-		"nvim-telescope/telescope.nvim",
-		after = "nvim-cmp",
+		"jose-elias-alvarez/null-ls.nvim",
 		requires = {
-			{ "kyazdani42/nvim-web-devicons", opt = true },
-			{ "nvim-lua/plenary.nvim" },
-			{ "nvim-lua/popup.nvim", opt = true },
-			{ "nvim-telescope/telescope-file-browser.nvim" },
-			{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
-			{ "nvim-telescope/telescope-ui-select.nvim" },
+			"nvim-lua/plenary.nvim",
+		},
+		wants = {
+			"plenary.nvim",
 		},
 		config = function()
-			require("snaveh.plugins.configs.telescope")
+			require("snaveh.plugins.configs.null-ls")
 		end,
+	})
+
+	use({
+		{
+			"neovim/nvim-lspconfig",
+			after = "coq_nvim",
+			config = function()
+				require("snaveh.plugins.configs.lsp")
+			end,
+		},
+		{
+
+			"ms-jpq/coq_nvim",
+			branch = "coq",
+			cmd = "COQnow --shut-up",
+			run = ":COQdeps",
+		},
+	})
+
+	use({
+		{
+			"nvim-telescope/telescope.nvim",
+			config = function()
+				require("snaveh.plugins.configs.telescope")
+			end,
+			cmd = "Telescope",
+			module = "telescope",
+			requires = {
+				"nvim-lua/popup.nvim",
+				"nvim-lua/plenary.nvim",
+				"telescope-frecency.nvim",
+				"telescope-fzf-native.nvim",
+				"nvim-telescope/telescope-ui-select.nvim",
+			},
+			wants = {
+				"popup.nvim",
+				"plenary.nvim",
+				"telescope-frecency.nvim",
+				"telescope-fzf-native.nvim",
+			},
+		},
+		{
+			"nvim-telescope/telescope-frecency.nvim",
+			after = "telescope.nvim",
+			requires = "tami5/sqlite.lua",
+		},
+		{
+			"nvim-telescope/telescope-fzf-native.nvim",
+			run = "make",
+		},
 	})
 
 	use({
 		"lewis6991/gitsigns.nvim",
-		event = "BufRead",
-		requires = "nvim-lua/plenary.nvim",
 		config = function()
 			require("gitsigns").setup({})
 		end,
+		requires = "nvim-lua/plenary.nvim",
 	})
 
+	use("nvim-tree/nvim-web-devicons")
 	use({
 		"feline-nvim/feline.nvim",
-		--event = "BufWinEnter",
 		config = function()
 			require("feline").setup()
 		end,
+		requires = { "nvim-tree/nvim-web-devicons", opt = true },
 	})
 
 	use({
 		"norcalli/nvim-colorizer.lua",
-		event = "BufRead",
 		config = function()
 			require("colorizer").setup({
 				css = { mode = "background" },
 				html = { mode = "foreground" },
 			})
-			vim.cmd([[ColorizerAttachToBuffer]])
 		end,
+		cmd = "ColorizerAttachToBuffer",
+		event = "BufRead",
 	})
 
 	use({
@@ -107,29 +131,26 @@ local function init()
 
 	use({
 		"EdenEast/nightfox.nvim",
-		event = "VimEnter",
 		run = ":NightfoxCompile",
 		config = function()
 			require("snaveh.plugins.configs.nightfox")
 		end,
 	})
 
-	use("NoahTheDuke/vim-just")
-
 	use({
-		"folke/noice.nvim",
-		after = {
-			"nvim-cmp",
-			"nvim-lspconfig",
-		},
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v2.x",
 		config = function()
-			require("snaveh.plugins.configs.noice")
+			require("snaveh.plugins.configs.neo-tree")
 		end,
 		requires = {
-			"MunifTanjim/nui.nvim",
-			{ "rcarriga/nvim-notify", opt = true },
+			{ "nvim-lua/plenary.nvim" },
+			{ "nvim-tree/nvim-web-devicons" },
+			{ "MunifTanjim/nui.nvim" },
 		},
 	})
+
+	use("NoahTheDuke/vim-just")
 end
 
 local plugins = setmetatable({}, {
